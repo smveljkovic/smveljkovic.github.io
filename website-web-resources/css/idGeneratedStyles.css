@@ -1,0 +1,222 @@
+body, div, dl, dt, dd, h1, h2, h3, h4, h5, h6, p, pre, code, blockquote {
+    background-color: black;
+	margin: 0.33em;
+    tab-size: 10;
+}
+
+a:link {
+    color: inherit;
+    text-decoration: none;
+}
+
+a:hover {
+    color: hsla(213,78%,58%,1.00);	
+}
+
+a:visited {
+    color: hsla(213,78%,58%,1.00);
+    margin-bottom: 0px;	
+}
+body {
+	-epub-hyphens:auto;
+}
+div.Basic-Text-Frame {
+    border-style: solid;
+	background-color: black;
+}
+
+p.Details {
+    color: #FFFFFF;
+    font-family: "MetaSerifPro-Book", serif;
+    font-size: 3.5vw;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: normal;
+    line-height: 1.15;
+    orphans: 1;
+    page-break-after: auto;
+    page-break-before: auto;
+    text-align: center;
+    text-decoration: none;
+    text-indent: 0;
+    text-transform: none;
+    widows: 1;
+    margin-top: 0em;
+    margin-right: 0em;
+    margin-left: 0em;
+    margin-bottom: 0em;
+}
+p.Headings {
+    color: #FFFFFF;
+    font-family: "Case Medium", sans-serif;
+    font-size: 4.66vw;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 700;
+    line-height: 1.35;
+    orphans: 1;
+    page-break-after: auto;
+    page-break-before: auto;
+    text-align: center;
+    text-decoration: none;
+    text-indent: 0;
+    text-transform: none;
+    widows: 1;
+	tab-size: 10;
+	padding: 0;
+	margin: 0;
+}
+p.Name {
+    color: #FFFFFF;
+    font-family: "Case Medium", sans-serif;
+    font-size: 7vw;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 700;
+    line-height: 1.15;
+    orphans: 1;
+    page-break-after: auto;
+    page-break-before: auto;
+    text-align: center;
+    text-decoration: none;
+    text-indent: 0;
+    text-transform: none;
+    widows: 1;
+    margin-bottom: 0.33em;
+}
+.pronunciation {
+	color: #FFFFFF;
+    font-family: "MetaSerifPro-Book";
+    font-size: 1.55vw;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 350;
+    line-height: 4.05;
+    orphans: 1;
+    page-break-after: auto;
+    page-break-before: auto;
+    text-align: center;
+    text-decoration: none;
+    text-indent: 0;
+    text-transform: none;
+    widows: 1;
+	tab-size: 10;
+	padding: 0;
+	margin: 0;
+	
+}
+p.BibHeading {
+    color: #FFFFFF;
+    font-family: "Case Medium", sans-serif;
+    font-size: 4vw;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 700;
+    line-height: 1.15;
+    orphans: 1;
+    page-break-after: auto;
+    page-break-before: auto;
+    text-align: center;
+    text-decoration: none;
+    text-indent: 0;
+    text-transform: none;
+    widows: 1;
+    margin-bottom: 0.33em;
+}
+p.BibEntry {
+	color: white;
+	font-family: "MetaSerifPro-Book", serif;
+	font-size: 2vw;
+	padding-left: 36px;
+	text-indent: -36px;
+	padding-top: 1.5vh;
+		
+}
+p.BibNote {
+	color: white;
+	font-family: "MetaSerifPro-Book", serif;
+	text-indent: 36px;
+	font-size: 2vw;
+	
+}
+div.review_text {
+	color: white;
+	font-family: "MetaSerifPro-Book", serif;
+	font-size: 2vw;
+	margin-left: 2vw;
+}
+div.control {
+	color:white;
+	font-family: "Case Text", sans-serif;
+	font-size:1.5vw;
+	text-align:right;
+	margin-top:3vh;
+}
+p.review_par {
+	margin-top: 3vh;
+}
+div.byline {
+	text-align: right;
+}
+div.review_intro {
+	color: white;
+	font-family: "Case Text", sans-serif;
+	font-size: 1.5vw;
+	border: thick solid white;
+    margin: auto;
+	position: relative;
+	padding: 18px;
+	width: fit-content;
+}
+
+#_idContainer000 {
+	display:inline-block;
+	height:1008px;
+	position:relative;
+	width:1848px;
+}
+#_idContainer003 {
+	display:inline-block;
+	height:316px;
+	width:1368px;
+}
+#_idContainer002 {
+	margin-top: 1.33em;
+	margin-bottom: 1.33em;
+
+}
+
+div._idGenObjectStyleOverride-1 {
+	background-color:#000000;
+	border-width:0px;
+}
+div._idGenObjectLayout-1 {
+	text-align:center;
+}
+
+div.test {
+    border: thick solid white;
+    margin: auto;
+	position: relative;
+	padding: 18px;
+	width: fit-content;
+}
+.resume {
+	height: 0.56em;
+	width: auto;
+}
+.email {
+	height: 0.56em;
+	width: auto;
+}
+.pub {
+	height: 0.56em;
+	width: auto;
+	
+}
+.bottom {
+
+}
+.contact {
+
+}

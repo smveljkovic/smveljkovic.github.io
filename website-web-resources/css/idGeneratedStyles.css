@@ -154,6 +154,8 @@ div.control {
 }
 p.review_par {
 	margin-top: 3vh;
+    /* hanging-punctuation is currently only supported in Safari. */
+    hanging-punctuation: first last;
 }
 div.byline {
 	text-align: right;

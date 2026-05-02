@@ -4,13 +4,6 @@ body, div, dl, dt, dd, h1, h2, h3, h4, h5, h6, p, pre, code, blockquote {
     tab-size: 10;
 }
 
-@media screen and (max-width: 600px) {
-  div.review_text, div.control, div.review_intro {
-    width:90%;
-	max-width: none;
-  }
-}
-
 a:link {
 	color: hsla(213,78%,65%,1);
 	text-decoration-color: #FFFFFF;
@@ -252,4 +245,11 @@ div.test {
 }
 .contact {
 
+}
+
+@media screen and (max-width: 600px) {
+  div.review_text, div.control, div.review_intro {
+    width:90%;
+	max-width: none;
+  }
 }

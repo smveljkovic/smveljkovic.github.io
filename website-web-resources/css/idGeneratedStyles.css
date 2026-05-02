@@ -9,6 +9,7 @@ a:link {
     text-decoration: underline;
 	text-decoration-thickness: 0.2vw;
 	text-decoration-color: hsla(213,78%,58%,1);
+	text-decoration-skip-ink: auto;
 }
 
 a:hover {
@@ -20,6 +21,7 @@ a:visited {
     color: hsla(270,50%,70%,1);
     margin-bottom: 0px;
 	text-decoration: none;
+	
 }
 body {
 	-epub-hyphens:auto;
@@ -153,7 +155,7 @@ div.review_text {
 	font-size: 2vw;
 	margin-left: 3%;
 	margin-right:3%;
-	max-width:750px;
+	max-width:70ch;
 }
 div.control {
 	color:white;
@@ -161,7 +163,7 @@ div.control {
 	font-size:1.5vw;
 	text-align:right;
 	margin-top:3vh;
-	max-width:750px;
+	max-width:70ch;
 	align-self:stretch;
 }
 p.review_par {
@@ -181,7 +183,7 @@ div.review_intro {
 	border: thick solid white;
 	position: relative;
 	padding: 2vw;
-	max-width: 750px;
+	max-width: 70ch;
 }
 
 #_idContainer000 {

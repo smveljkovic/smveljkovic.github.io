@@ -12,22 +12,24 @@ a:link {
 	text-decoration-skip-ink: auto;
 }
 
+a:visited {
+    color: hsla(270,50%,70%,1);
+    margin-bottom: 0px;
+	text-decoration: none !important;
+
 a:hover {
     color: hsla(213,78%,58%,1);
 	text-decoration: none;
 }
 
-a:visited {
-    color: hsla(270,50%,70%,1);
-    margin-bottom: 0px;
-	text-decoration: none !important;
 	
 }
 body {
 	-epub-hyphens:auto;
 	display:flex;
 	flex-direction: column;
-	align-items: center;
+	align-items: left;
+	padding-left:7%;
 }
 
 div.Basic-Text-Frame {
@@ -166,7 +168,7 @@ div.control {
 	margin-top:3vh;
 	max-width:70ch;
 	width:90%;
-	align-self:stretch;
+	align-self:right;
 }
 p.review_par {
 	margin-top: 3vh;

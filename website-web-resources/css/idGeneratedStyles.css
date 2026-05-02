@@ -16,14 +16,13 @@ a:visited {
     color: hsla(270,50%,70%,1);
     margin-bottom: 0px;
 	text-decoration: none !important;
+}
 
 a:hover {
     color: hsla(213,78%,58%,1);
 	text-decoration: none;
 }
 
-	
-}
 body {
 	-epub-hyphens:auto;
 	display:flex;

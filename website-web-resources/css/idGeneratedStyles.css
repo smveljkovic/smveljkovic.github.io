@@ -5,20 +5,21 @@ body, div, dl, dt, dd, h1, h2, h3, h4, h5, h6, p, pre, code, blockquote {
 }
 
 a:link {
-	color: hsla(213,78%,58%,1);
-	text-decoration: none;
+	color: hsla(213,78%,65%,1);
+	text-decoration-color: #FFFFFF;
   
 }
 
 a:visited {
     color: hsla(270,50%,70%,1);
+	text-decoration-color: #FFFFFF;
 }
 
 a:hover {
     color: inherit;
 	text-decoration: underline;
 	text-decoration-thickness: 12%;
-	text-decoration-color: hsla(213,78%,58%,1);
+	text-decoration-color: hsla(213,78%,65%,1);
 	text-decoration-skip-ink: auto;
 }
 

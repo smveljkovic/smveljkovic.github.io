@@ -7,6 +7,7 @@ body, div, dl, dt, dd, h1, h2, h3, h4, h5, h6, p, pre, code, blockquote {
 a:link {
 	color: hsla(213,78%,65%,1);
 	text-decoration-color: #FFFFFF;
+	text-decoration-thickness: 10%;
   
 }
 
@@ -18,7 +19,7 @@ a:visited {
 a:hover {
     color: inherit;
 	text-decoration: underline;
-	text-decoration-thickness: 12%;
+	text-decoration-thickness: 10%;
 	text-decoration-color: hsla(213,78%,65%,1);
 	text-decoration-skip-ink: auto;
 }
@@ -44,7 +45,7 @@ div.Basic-Text-Frame {
 p.Details {
     color: #FFFFFF;
     font-family: "MetaSerifPro-Book", serif;
-    font-size: clamp(1rem, 3.5vw, 2rem);
+    font-size: clamp(1rem, 3vw, 2.5rem);
     font-style: normal;
     font-variant: normal;
     font-weight: normal;
@@ -65,7 +66,7 @@ p.Details {
 p.Headings {
     color: #FFFFFF;
     font-family: "Case Medium", sans-serif;
-    font-size: 4.66vw;
+    font-size: clamp(1.5rem, 6.5vw, 2.5rem);
     font-style: normal;
     font-variant: normal;
     font-weight: 700;
@@ -85,7 +86,7 @@ p.Headings {
 p.Name {
     color: #FFFFFF;
     font-family: "Case Medium", sans-serif;
-    font-size: 7vw;
+    font-size: clamp(2rem, 7vw, 3rem);
     font-style: normal;
     font-variant: normal;
     font-weight: 700;
@@ -158,7 +159,7 @@ p.BibNote {
 div.review_text {
 	color: white;
 	font-family: "MetaSerifPro-Book", serif;
-	font-size: 2vw;
+	font-size: clamp(1rem, 2vw, 3.5rem);
 	margin-left: 3%;
 	margin-right:3%;
 	max-width:70ch;
@@ -167,7 +168,7 @@ div.review_text {
 div.control {
 	color:white;
 	font-family: "Case Text", sans-serif;
-	font-size:1.5vw;
+	font-size: clamp(0.75rem, 1.5vw, 2rem);
 	text-align:right;
 	margin-top:3vh;
 	max-width:70ch;
@@ -187,8 +188,8 @@ div.byline {
 div.review_intro {
 	color: white;
 	font-family: "Case Text", sans-serif;
-	font-size: clamp(1rem, 1.5vw, 2rem);
-	border: thick solid white;
+	font-size: clamp(0.75rem, 1.5vw, 2rem);
+	border:medium solid white;
 	position: relative;
 	padding: 1vw;
 	max-width: 77ch;
@@ -207,7 +208,7 @@ div.review_intro {
 	width:1368px;
 }
 #_idContainer002 {
-	margin-top: 1.33em;
+	margin-top: 0;
 	margin-bottom: 1.33em;
 
 }

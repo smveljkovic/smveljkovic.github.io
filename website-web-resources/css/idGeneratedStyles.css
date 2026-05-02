@@ -7,7 +7,7 @@ body, div, dl, dt, dd, h1, h2, h3, h4, h5, h6, p, pre, code, blockquote {
 a:link {
 	color: inherit;
     text-decoration: underline;
-	text-decoration-thickness: 0.2vw;
+	text-decoration-thickness: 12%;
 	text-decoration-color: hsla(213,78%,58%,1);
 	text-decoration-skip-ink: auto;
 }
@@ -20,7 +20,7 @@ a:hover {
 a:visited {
     color: hsla(270,50%,70%,1);
     margin-bottom: 0px;
-	text-decoration: none;
+	text-decoration: none !important;
 	
 }
 body {
@@ -185,7 +185,7 @@ div.review_intro {
 	border: thick solid white;
 	position: relative;
 	padding: 2vw;
-	max-width: 70ch;
+	max-width: 77ch;
 	width:90%;
 }
 

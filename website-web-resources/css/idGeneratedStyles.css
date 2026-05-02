@@ -5,22 +5,26 @@ body, div, dl, dt, dd, h1, h2, h3, h4, h5, h6, p, pre, code, blockquote {
 }
 
 a:link {
-	color: inherit;
-    text-decoration: underline;
+	color: hsla(213,78%,58%,1);
+	text-decoration: none;
+  
+}
+
+a:visited {
+    color: hsla(270,50%,70%,1);
+}
+
+a:hover {
+    color: inherit;
+	text-decoration: underline;
 	text-decoration-thickness: 12%;
 	text-decoration-color: hsla(213,78%,58%,1);
 	text-decoration-skip-ink: auto;
 }
 
-a:visited {
-    color: hsla(270,50%,70%,1);
-    margin-bottom: 0px;
-	text-decoration: none !important;
-}
-
-a:hover {
-    color: hsla(213,78%,58%,1);
-	text-decoration: none;
+a:active {
+	color: hsla(45, 100%, 70%, 1);
+	text-decoration: inherit;
 }
 
 body {

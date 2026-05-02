@@ -156,6 +156,7 @@ div.review_text {
 	margin-left: 3%;
 	margin-right:3%;
 	max-width:70ch;
+	width:90%;
 }
 div.control {
 	color:white;
@@ -164,6 +165,7 @@ div.control {
 	text-align:right;
 	margin-top:3vh;
 	max-width:70ch;
+	width:90%;
 	align-self:stretch;
 }
 p.review_par {
@@ -184,6 +186,7 @@ div.review_intro {
 	position: relative;
 	padding: 2vw;
 	max-width: 70ch;
+	width:90%;
 }
 
 #_idContainer000 {

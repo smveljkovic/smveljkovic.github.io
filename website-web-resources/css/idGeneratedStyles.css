@@ -225,12 +225,3 @@ div.test {
 .contact {
 
 }
-
-aside, .aside {
- display: inline;
- float: left;
- position: relative;
- width: 20vw;
- margin-left: -50vw;
- font-size: 16px;
-}

@@ -44,7 +44,7 @@ div.Basic-Text-Frame {
 p.Details {
     color: #FFFFFF;
     font-family: "MetaSerifPro-Book", serif;
-    font-size: 3.5vw;
+    font-size: clamp(1rem, 3.5vw, 2rem);
     font-style: normal;
     font-variant: normal;
     font-weight: normal;
@@ -187,10 +187,10 @@ div.byline {
 div.review_intro {
 	color: white;
 	font-family: "Case Text", sans-serif;
-	font-size: 1.5vw;
+	font-size: clamp(1rem, 1.5vw, 2rem);
 	border: thick solid white;
 	position: relative;
-	padding: 2vw;
+	padding: 1vw;
 	max-width: 77ch;
 	width:90%;
 }
@@ -250,7 +250,7 @@ div.test {
 @media screen and (max-width: 600px) {
   div.review_text, div.control, div.review_intro {
     width:90%;
-	max-width: none;
+	max-width:none;
 	margin-left: 0;
 	margin-right: 0;
 	padding-left: 0;

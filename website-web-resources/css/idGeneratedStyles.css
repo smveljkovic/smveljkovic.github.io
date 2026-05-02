@@ -251,5 +251,8 @@ div.test {
   div.review_text, div.control, div.review_intro {
     width:90%;
 	max-width: none;
+	margin-left: 0;
+	margin-right: 0;
+	padding-left: 0;
   }
 }

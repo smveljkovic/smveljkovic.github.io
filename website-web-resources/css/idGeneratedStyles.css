@@ -179,10 +179,20 @@ div.control {
 	font-family: "Case Text", sans-serif;
 	font-size: clamp(0.75rem, 1.5vw, 2rem);
 	text-align:right;
-	margin-top:3vh;
-	max-width:70ch;
-	width:90%;
-	align-self:right;
+	margin-top:2vh;
+	display:inline-block;
+	padding-right:2%;
+	flex:1;
+}
+div.countercontrol {
+	color:white;
+	font-family: "Case Text", sans-serif;
+	font-size: clamp(0.75rem, 1.5vw, 2rem);
+	text-align:left;
+	margin-top:2vh;
+	display:inline-block;
+	padding-left:2%;
+	flex:1;
 }
 p.review_par {
 	margin-top: 3vh;
@@ -201,7 +211,7 @@ div.review_intro {
 	border:medium solid white;
 	position: relative;
 	padding: 2vw;
-	max-width: 77ch;
+	max-width: 75ch;
 	width:90%;
 }
 

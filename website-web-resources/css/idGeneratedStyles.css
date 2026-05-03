@@ -174,7 +174,7 @@ div.control {
 	font-family: "Case Text", sans-serif;
 	font-size: clamp(0.8rem, 2.4vw, 1.1rem);
 	text-align:right;
-	margin-top:2vh;
+	padding-top:3vh;
 	display:inline-block;
 	align-self:flex-end;
 	float:right;
@@ -186,7 +186,7 @@ div.countercontrol {
 	font-family: "Case Text", sans-serif;
 	font-size: clamp(0.8rem, 2.4vw, 1.1rem);
 	text-align:left;
-	margin-top:2vh;
+	padding-top:3vh;
 	display:inline-block;
 	align-self:flex-start;
 	float:left;

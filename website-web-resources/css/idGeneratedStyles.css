@@ -164,15 +164,16 @@ p.BibNote {
 div.review_text {
 	color: white;
 	font-family: "MetaSerifPro-Book", serif;
-	font-size: clamp(1rem, 2.5vw, 1.4rem);
-	padding-left: 7%;
+	font-size: clamp(1.125rem, 2.5vmin, 1.5rem);
+	padding-left: 10%;
 	max-width:70ch;
-	width:90%;
+	align-items:center;
+	display:flex;
 }
 div.control {
 	color:white;
 	font-family: "Case Text", sans-serif;
-	font-size: clamp(0.8rem, 2.4vw, 1.1rem);
+	font-size: clamp(1.125rem, 2.5vmin, 1.5rem);
 	text-align:right;
 	padding-top:3vh;
 	display:inline-block;
@@ -184,7 +185,7 @@ div.control {
 div.countercontrol {
 	color:white;
 	font-family: "Case Text", sans-serif;
-	font-size: clamp(0.8rem, 2.4vw, 1.1rem);
+	font-size: clamp(1.125rem, 2.5vmin, 1.5rem);
 	text-align:left;
 	padding-top:3vh;
 	display:inline-block;
@@ -209,10 +210,10 @@ div.byline {
 div.review_intro {
 	color: white;
 	font-family: "Case Text", sans-serif;
-	font-size: clamp(0.8rem, 2.4vw, 1.1rem);
+	font-size: clamp(1.125rem, 2.5vmin, 1.5rem);
 	border:medium solid white;
 	padding: 2vw;
-	max-width: 77ch;
+	max-width: 80ch;
 	margin: 0.33rem;
 }
 

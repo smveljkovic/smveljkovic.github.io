@@ -1,6 +1,6 @@
 body, div, dl, dt, dd, h1, h2, h3, h4, h5, h6, p, pre, code, blockquote {
     background-color: black;
-	margin: 0.33rem;
+	margin: 0;
     tab-size: 10;
 }
 
@@ -165,8 +165,7 @@ div.review_text {
 	color: white;
 	font-family: "MetaSerifPro-Book", serif;
 	font-size: clamp(1rem, 2.5vw, 1.4rem);
-	margin-left: 3%;
-	margin-right:3%;
+	padding-left: 7%;
 	max-width:70ch;
 	width:90%;
 }
@@ -177,8 +176,10 @@ div.control {
 	text-align:right;
 	margin-top:2vh;
 	display:inline-block;
-	padding-right:2%;
-	flex:1;
+	align-self:flex-end;
+	float:right;
+	padding-right:1.5vmin;
+	margin:0.33rem;
 }
 div.countercontrol {
 	color:white;
@@ -187,15 +188,20 @@ div.countercontrol {
 	text-align:left;
 	margin-top:2vh;
 	display:inline-block;
-	padding-left:2%;
-	flex:1;
+	align-self:flex-start;
+	float:left;
+	padding-left:1.5vmin;
+	margin:0.33rem;
 }
 p.review_par {
-	margin-top: 3vh;
     /* hanging-punctuation is currently only supported in Safari. */
     hanging-punctuation: first last;
-    leading-trim: both;
-    text-edge: cap;
+	bottom-padding:3vh;
+	counter-increment: para;
+	position: relative;
+	padding-bottom: clamp(3vh, 2vh, 1vh);
+	
+	
 }
 div.byline {
 	text-align: right;
@@ -205,10 +211,9 @@ div.review_intro {
 	font-family: "Case Text", sans-serif;
 	font-size: clamp(0.8rem, 2.4vw, 1.1rem);
 	border:medium solid white;
-	position: relative;
 	padding: 2vw;
-	max-width: 75ch;
-	width:90%;
+	max-width: 77ch;
+	margin: 0.33rem;
 }
 
 #_idContainer000 {
@@ -263,7 +268,7 @@ div.test {
 
 }
 
-@media screen and (max-width: 600px) {
+/* @media screen and (max-width: 600px) {
   div.review_text, div.control, div.review_intro {
     width:90%;
 	max-width:none;

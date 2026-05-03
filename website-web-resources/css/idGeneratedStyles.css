@@ -113,7 +113,7 @@ p.Name {
 .pronunciation {
 	color: #FFFFFF;
     font-family: "MetaSerifPro-Book";
-    font-size: 1.55vw;
+    font-size: clamp(0.5rem, 2vw, 1.1rem);
     font-style: normal;
     font-variant: normal;
     font-weight: 350;

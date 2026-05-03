@@ -207,7 +207,7 @@ div.byline {
 div.review_intro {
 	color: white;
 	font-family: "Case Text", sans-serif;
-	font-size: clamp(1rem, 1.5vw, 2rem);
+	font-size: clamp(0.7rem, 1.7vw, 2.7rem);
 	border:medium solid white;
 	position: relative;
 	padding: 2vw;

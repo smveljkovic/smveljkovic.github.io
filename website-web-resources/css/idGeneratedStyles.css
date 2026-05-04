@@ -225,7 +225,6 @@ div.review_intro {
 	font-family: "Case Text", sans-serif;
 	font-size: clamp(0.9rem, 2vmin, 1.2rem);
 	border:medium solid white;
-<<<<<<< HEAD
 	padding: 2vw;
 	margin: 0.33rem;
 	min-width: 45ch;
@@ -235,13 +234,6 @@ div.review_intro {
 p.intro {
 	
 	width: clamp(45ch, 50vw, 75ch);
-=======
-	position: relative;
-	padding: 1.5rem;
-	max-width: 75ch;
-	width:90%;
-	text-overflow:clip;
->>>>>>> 5df0969 (Final figures for consistent scaling on index)
 }
 
 #_idContainer000 {

@@ -171,7 +171,8 @@ p.counter {
 	text-align: center;
 	width: clamp(7%, 6%, 5%);
 	color: white;
-	padding-top: clamp(0.20rem, 0.25rem, 0.40rem);
+	/* padding-top: clamp(0.20rem, 0.25rem, 0.40rem);*/
+	line-height: clamp(1.8, 2, 2.2);
 }
 div.review_text {
 	color: white;
@@ -179,8 +180,6 @@ div.review_text {
 	font-size: clamp(1.125rem, 2.5vmin, 1.5rem);
 	padding-left: 7%;
 	width: clamp(45ch, 50%, 75ch);
-	align-items:center;
-	display:flex;
 }
 div.control {
 	color:white;
@@ -213,6 +212,7 @@ p.review_par {
 	counter-increment: para;
 	position: relative;
 	padding-bottom: clamp(3vh, 2vh, 1vh);
+	alignment-baseline: baseline;
 	
 	
 }

@@ -161,19 +161,31 @@ p.BibNote {
 	font-size: 2vw;
 	
 }
+
+p.counter {
+	font-family: "Case Text", sans-serif;
+	font-size: clamp(0.9rem, 2vmin, 1.2rem);
+	display:inline;
+	position: absolute;
+	left: 0;
+	text-align: center;
+	width: clamp(7%, 6%, 5%);
+	color: white;
+	padding-top: clamp(0.20rem, 0.25rem, 0.40rem);
+}
 div.review_text {
 	color: white;
 	font-family: "MetaSerifPro-Book", serif;
 	font-size: clamp(1.125rem, 2.5vmin, 1.5rem);
-	padding-left: 10%;
-	max-width:70ch;
+	padding-left: 7%;
+	width: clamp(45ch, 50%, 75ch);
 	align-items:center;
 	display:flex;
 }
 div.control {
 	color:white;
 	font-family: "Case Text", sans-serif;
-	font-size: clamp(1.125rem, 2.5vmin, 1.5rem);
+	font-size: clamp(0.9rem, 2vmin, 1.2rem);
 	text-align:right;
 	padding-top:3vh;
 	display:inline-block;
@@ -185,7 +197,7 @@ div.control {
 div.countercontrol {
 	color:white;
 	font-family: "Case Text", sans-serif;
-	font-size: clamp(1.125rem, 2.5vmin, 1.5rem);
+	font-size: clamp(0.9rem, 2vmin, 1.2rem);
 	text-align:left;
 	padding-top:3vh;
 	display:inline-block;
@@ -210,11 +222,17 @@ div.byline {
 div.review_intro {
 	color: white;
 	font-family: "Case Text", sans-serif;
-	font-size: clamp(1.125rem, 2.5vmin, 1.5rem);
+	font-size: clamp(0.9rem, 2vmin, 1.2rem);
 	border:medium solid white;
 	padding: 2vw;
-	max-width: 80ch;
 	margin: 0.33rem;
+	min-width: 45ch;
+	max-width: 80ch;
+}
+
+p.intro {
+	
+	width: clamp(45ch, 50vw, 75ch);
 }
 
 #_idContainer000 {

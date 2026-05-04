@@ -7,7 +7,7 @@ body, div, dl, dt, dd, h1, h2, h3, h4, h5, h6, p, pre, code, blockquote {
 a:link {
 	color: hsla(213,78%,65%,1);
 	text-decoration-color: #FFFFFF;
-	text-decoration-thickness: 10%;
+	text-decoration-thickness: 7%;
   
 }
 
@@ -19,7 +19,7 @@ a:visited {
 a:hover {
     color: inherit;
 	text-decoration: underline;
-	text-decoration-thickness: 10%;
+	text-decoration-thickness: 7%;
 	text-decoration-color: hsla(213,78%,65%,1);
 	text-decoration-skip-ink: auto;
 }
@@ -27,7 +27,7 @@ a:hover {
 a:visited:hover {
 	color: inherit;
 	text-decoration: underline;
-	text-decoration-thickness: 10%;
+	text-decoration-thickness: 7%;
 	text-decoration-color: hsla(270,50%,70%,1);
 	text-decoration-skip-ink: auto;
 	

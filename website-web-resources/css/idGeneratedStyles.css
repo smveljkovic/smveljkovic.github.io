@@ -340,6 +340,7 @@ div.test {
 	
 	div.review_intro{
 	border: thin solid white;
+	padding-top: 0.5rem;
 	/*margin-left: 0.5rem;*/
   }
 	p.counter {

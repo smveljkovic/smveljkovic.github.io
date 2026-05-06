@@ -271,13 +271,12 @@ div.review_intro {
 	border:medium solid white;
 	padding: 2vw;
 	margin: 0.33rem;
-	min-width: 45ch;
 	max-width: 80ch;
 }
 
 p.intro {
 	
-	width: clamp(45ch, 50vw, 75ch);
+	width: clamp(40ch, 50vw, 75ch);
 }
 
 #_idContainer000 {

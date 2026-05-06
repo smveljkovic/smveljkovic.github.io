@@ -351,4 +351,14 @@ div.test {
 	p.counter, p.review_intro, div.control, div.countercontrol {
 		font-size: 0.8rem;
 	}
+	
+	div.control {
+		padding-right: 2vmin;
+		
+	}
+	
+	div.countercontrol {
+		padding-left: 2vmin;
+		
+	}
 }

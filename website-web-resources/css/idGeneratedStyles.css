@@ -276,7 +276,7 @@ div.review_intro {
 
 p.intro {
 	
-	width: clamp(45ch, 50vw, 75ch);
+	width: clamp(42ch, 50vw, 75ch);
 }
 
 #_idContainer000 {

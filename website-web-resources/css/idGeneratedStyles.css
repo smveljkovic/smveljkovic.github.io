@@ -334,16 +334,14 @@ div.test {
 
 @media screen and (max-width: 600px) {
   div.review_text, div.control, div.review_intro {
-    width:95%;
-	max-width:none;
+    max-width:100%;
 	margin-left: 0;
-	margin-right: 0;
-	padding-left: 0;
-	  
+	margin-right: 0;  
 	}
+	
 	div.review_intro{
 	border: thin solid white;
-		padding-left: 0.5rem;
+	margin-left: 0.5rem;
   }
 	p.counter {
 		display: none;

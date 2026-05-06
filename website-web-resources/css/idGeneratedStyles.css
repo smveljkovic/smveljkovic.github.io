@@ -171,7 +171,7 @@ p.counter {
 	/*margin-left: clamp(-10dvmin, -10%, -7dvmin);*/
 	color: hsla(45, 100%, 70%, 1);
 	/* padding-top: clamp(0.20rem, 0.25rem, 0.40rem);*/
-	line-height: clamp(1.8, 2, 2.2);
+	line-height: calc(1.5em + 0.5rem);
 	/*padding-right: 0.25rem;*/
 	grid-column: 1;
 	/*margin-left: auto;*/
@@ -185,7 +185,7 @@ p.title {
 	padding-top:2vh;
 	padding-left:2em;
 	text-indent:-2em;
-	padding-bottom: 2vh;
+	padding-bottom: 1.2em;
 	width: max-width;
 	/*width: clamp(45ch, 50%, 75ch);*/
 	/*text-align: left;*/
@@ -209,6 +209,7 @@ div.review_text {
   	column-gap: 1rem;
 	margin: 0 auto; 
 	width: min(100%, 70ch);
+	line-height: clamp(1.4, 1.5, 1.6)
 }
 	
 div.control {
@@ -240,11 +241,11 @@ div.countercontrol {
 p.review_par {
     /* hanging-punctuation is currently only supported in Safari. */
     hanging-punctuation: first last;
-	padding-bottom: clamp(3vh, 2vh, 1vh);
+	padding-bottom: 1.2em;
 	/*width: clamp(45ch, 50%, 75ch);*/
 	grid-column: 2;
 	margin: 0;
-	display: inline-block;
+	display: block;
 	width: max-width;
 	/*width: clamp(40ch, 50%, 75ch);*/
 	/*margin: auto;*/
@@ -269,14 +270,16 @@ div.review_intro {
 	font-family: "Case Text", sans-serif;
 	font-size: clamp(0.9rem, 2vmin, 1.2rem);
 	border:medium solid white;
-	padding: 2vw;
+	padding: 1em;
 	margin: 0.33rem;
 	max-width: 80ch;
+	line-height: clamp(1.5, 1.6, 1.7);
 }
 
 p.intro {
 	
 	width: clamp(42ch, 50vw, 75ch);
+	padding-bottom: 1.2em;
 }
 
 #_idContainer000 {
@@ -332,7 +335,14 @@ div.test {
 }
 
 @media screen and (max-width: 600px) {
-  div.review_text, div.control, div.review_intro {
+
+body {
+  padding-left: 0.25rem;
+  padding-right: 0.25rem;
+}
+
+  
+	div.review_text, div.control, div.review_intro {
     max-width:100%;
 	margin-left: 0;
 	margin-right: 0;  
@@ -340,17 +350,33 @@ div.test {
 	
 	div.review_intro{
 	border: thin solid white;
-	padding-top: 0.5rem;
+	padding: 1em 0.5em 1em;
+		margin-top: 1em;
+
 	/*margin-left: 0.5rem;*/
   }
-	p.counter {
-		display: none;
-	}
-	p.review_text {
+	
+	div.review_text {
+		grid-template-columns: 1fr;
 		font-size: 1rem;
 	}
+	p.counter {
+		/*display: none;*/
+		display: block;
+		width: auto;
+		whhite-space: normal;
+		text-align: left;
+		margin: 0 0 0.5rem;
+	}
+	
 	p.counter, p.review_intro, div.control, div.countercontrol {
-		font-size: 0.8rem;
+		font-size: 0.85rem;
+	}
+	div.review_text {
+		
+		display:grid;
+		grid-column: 1;
+		line-height: 1.6;
 	}
 	
 	div.control {
@@ -360,6 +386,21 @@ div.test {
 	
 	div.countercontrol {
 		padding-left: 2vmin;
+		
+	}
+	
+	p.review_par, p.title, div.byline {
+		display:block;
+		grid-column: 1;
+		width: auto;
+		max-width: 100%;
+		white-space: normal;
+		padding-bottom: 0 0 1.5em;
+		
+	}
+	div.byline {
+		padding-top: 1.5em;
+		padding-right: 1em;
 		
 	}
 }

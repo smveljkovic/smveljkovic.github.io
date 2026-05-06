@@ -167,21 +167,50 @@ p.BibNote {
 p.counter {
 	font-family: "Case Text", sans-serif;
 	font-size: clamp(0.9rem, 2vmin, 1.2rem);
-	float: left;
-	text-align: right;
-	margin-left: clamp(-10dvmin, -10%, -7dvmin);
-	width: fit-content;
+	/*float: left;*/
+	/*margin-left: clamp(-10dvmin, -10%, -7dvmin);*/
 	color: hsla(45, 100%, 70%, 1);
 	/* padding-top: clamp(0.20rem, 0.25rem, 0.40rem);*/
 	line-height: clamp(1.8, 2, 2.2);
+	/*padding-right: 0.25rem;*/
+	grid-column: 1;
+	/*margin-left: auto;*/
+	display: inline-block;
+	text-align: right;
+	white-space: nowrap;
+}
+
+p.title {
+	grid-column:2;
+	padding-top:2vh;
+	padding-left:2em;
+	text-indent:-2em;
+	padding-bottom: 2vh;
+	width: max-width;
+	/*width: clamp(45ch, 50%, 75ch);*/
+	/*text-align: left;*/
+	/*display: inline-block;*/
+	/*width: calc(clamp(40ch, 50%, 75ch) - 2em);*/
+	display: inline-block;
+	margin: 0;
+	/*margin: auto;*/
 }
 div.review_text {
 	color: white;
 	font-family: "MetaSerifPro-Book", serif;
 	font-size: clamp(1.125rem, 2.5vmin, 1.5rem);
-	padding-left: 4%;
-	width: clamp(45ch, 50%, 75ch);
+	/*margin-left: 4%;*/;
+	display: inline-grid;
+	/*justify-items: center;*/
+	/*grid-template-columns: max-content minmax(40ch, 75ch);*/
+	/*width: clamp(45ch, 50%, 80ch);*/
+ 	justify-content: center;
+  	grid-template-columns: max-content minmax(40ch, 1fr);
+  	column-gap: 1rem;
+	margin: 0 auto; 
+	width: min(100%, 70ch);
 }
+	
 div.control {
 	color:white;
 	font-family: "Case Text", sans-serif;
@@ -209,17 +238,31 @@ div.countercontrol {
 p.review_par {
     /* hanging-punctuation is currently only supported in Safari. */
     hanging-punctuation: first last;
-	bottom-padding:3vh;
-	counter-increment: para;
-	position: relative;
 	padding-bottom: clamp(3vh, 2vh, 1vh);
-	alignment-baseline: baseline;
-	flex:1;
+	/*width: clamp(45ch, 50%, 75ch);*/
+	grid-column: 2;
+	width: 100%;
+	margin: 0;
+	display: inline-block;
+	width: max-width;
+	/*width: clamp(40ch, 50%, 75ch);*/
+	/*margin: auto;*/
 	
 }
+
 div.byline {
-	text-align: right;
+	grid-column: 2;
+	/*width: clamp(40ch, 50%, 75ch);*/
+	display: inline-block;
+	width: max-width;
+	margin: 0;
+	/*margin: auto;*/
 }
+p.byline {
+	text-align: right;
+
+}
+
 div.review_intro {
 	color: white;
 	font-family: "Case Text", sans-serif;

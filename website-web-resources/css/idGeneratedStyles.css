@@ -222,6 +222,7 @@ div.control {
 	float:right;
 	padding-right:1.5vmin;
 	margin:0.33rem;
+	width:fit-content;
 }
 div.countercontrol {
 	color:white;
@@ -234,6 +235,7 @@ div.countercontrol {
 	float:left;
 	padding-left:1.5vmin;
 	margin:0.33rem;
+	width:fit-content;
 }
 p.review_par {
     /* hanging-punctuation is currently only supported in Safari. */
@@ -241,7 +243,6 @@ p.review_par {
 	padding-bottom: clamp(3vh, 2vh, 1vh);
 	/*width: clamp(45ch, 50%, 75ch);*/
 	grid-column: 2;
-	width: 100%;
 	margin: 0;
 	display: inline-block;
 	width: max-width;
@@ -331,12 +332,26 @@ div.test {
 
 }
 
-/* @media screen and (max-width: 600px) {
+@media screen and (max-width: 600px) {
   div.review_text, div.control, div.review_intro {
-    width:90%;
+    width:95%;
 	max-width:none;
 	margin-left: 0;
 	margin-right: 0;
 	padding-left: 0;
+	  
+	}
+	div.review_intro{
+	border: thin solid white;
+		padding-left: 0.5rem;
   }
+	p.counter {
+		display: none;
+	}
+	p.review_text {
+		font-size: 1rem;
+	}
+	p.counter, p.review_intro, div.control, div.countercontrol {
+		font-size: 0.8rem;
+	}
 }

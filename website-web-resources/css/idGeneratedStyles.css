@@ -186,7 +186,7 @@ p.title {
 	padding-left:2em;
 	text-indent:-2em;
 	padding-bottom: 1.2em;
-	width: max-width;
+	width: auto;
 	/*width: clamp(45ch, 50%, 75ch);*/
 	/*text-align: left;*/
 	/*display: inline-block;*/
@@ -246,7 +246,7 @@ p.review_par {
 	grid-column: 2;
 	margin: 0;
 	display: block;
-	width: max-width;
+	width: auto;
 	/*width: clamp(40ch, 50%, 75ch);*/
 	/*margin: auto;*/
 	
@@ -256,7 +256,7 @@ div.byline {
 	grid-column: 2;
 	/*width: clamp(40ch, 50%, 75ch);*/
 	display: inline-block;
-	width: max-width;
+	width: auto;
 	margin: 0;
 	/*margin: auto;*/
 }
@@ -280,6 +280,20 @@ p.intro {
 	
 	width: clamp(42ch, 50vw, 75ch);
 	padding-bottom: 1.2em;
+}
+
+/*.trigger:before
+{
+	color: black;
+	display: inline-block;
+}
+.trigger:hover:before
+{
+    content: "please use correspondence@stevanveljkovic.com";
+	color: white;
+	display:block;
+	position: relative;
+	left: -40rem;
 }
 
 /*p.hidden {
@@ -377,7 +391,7 @@ body {
 		/*display: none;*/
 		display: block;
 		width: auto;
-		whhite-space: normal;
+		white-space: normal;
 		text-align: left;
 		margin: 0 0 0.5rem;
 	}
@@ -408,7 +422,6 @@ body {
 		width: auto;
 		max-width: 100%;
 		white-space: normal;
-		padding-bottom: 0 0 1.5em;
 		
 	}
 	div.byline {

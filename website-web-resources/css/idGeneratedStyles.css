@@ -260,7 +260,7 @@ div.byline {
 	margin: 0;
 	/*margin: auto;*/
 }
-p.byline {
+p.byline, p.trigger {
 	text-align: right;
 
 }
@@ -282,6 +282,19 @@ p.intro {
 	padding-bottom: 1.2em;
 }
 
+/*p.hidden {
+	
+	display: none;
+}
+
+p.trigger:hover + p.hidden {
+	display: inline-block;
+	font-size: 1rem;
+	grid-column: 1;
+	margin-left: -20rem;
+	width: 10%;
+	
+}*/
 #_idContainer000 {
 	display:inline-block;
 	height:1008px;

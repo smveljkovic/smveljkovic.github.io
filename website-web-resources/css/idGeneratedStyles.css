@@ -158,6 +158,11 @@ p.BibEntry {
 	/*padding-bottom: 1em;*/
 		
 }
+
+#strange {
+		padding-left: 0;
+		text-indent: 0;
+}
 p.BibNote {
 	color: white;
 	font-family: "MetaSerifPro-Book", serif;
@@ -166,7 +171,7 @@ p.BibNote {
 	
 }
 
-p.counter {
+p.counter, p.counter_bib {
 	font-family: "Case Text", sans-serif;
 	font-size: clamp(0.9rem, 2vmin, 1.2rem);
 	/*float: left;*/
@@ -405,7 +410,7 @@ body {
 		grid-template-columns: 1fr;
 		font-size: 1rem;
 	}
-	p.counter {
+	p.counter, p.counter_bib {
 		/*display: none;*/
 		display: block;
 		width: auto;
@@ -414,7 +419,7 @@ body {
 		margin: 0 0 0.5rem;
 	}
 	
-	p.counter, p.review_intro, div.control, div.countercontrol {
+	p.counter, p.review_intro, div.control, div.countercontrol, p.counter_bib {
 		font-size: 0.85rem;
 	}
 	div.review_text, #writings {
@@ -458,12 +463,17 @@ body {
 	color: white;
 	font-family: "MetaSerifPro-Book", serif;
 	font-size: 2vw;*/
-	padding-left: 1.75em;
-	text-indent: -1.75em;
+	padding-left: 2.25;
+	text-indent: -2.25;
 	}
+	
 	#writings {
 		grid-template-columns: minmax(32ch, 1fr);
 		word-wrap: break-word;
+	}
+	
+	p.counter_bib {
+		font-weight: 600;
 	}
 	
 }

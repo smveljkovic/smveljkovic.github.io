@@ -131,12 +131,11 @@ p.Name {
 }
 p.BibHeading {
     color: #FFFFFF;
-    font-family: "Case Medium", sans-serif;
-    font-size: 4vw;
+    font-family: "Case Text", sans-serif;
+    font-size: clamp(1.35rem, 3.2vmin, 2rem);
     font-style: normal;
     font-variant: normal;
     font-weight: 700;
-    line-height: 1.15;
     orphans: 1;
     page-break-after: auto;
     page-break-before: auto;
@@ -146,14 +145,17 @@ p.BibHeading {
     text-transform: none;
     widows: 1;
     margin-bottom: 0.33em;
+	display: inline-block;
+	padding-top: 2em;
 }
 p.BibEntry {
+	/*display: inline-block;
 	color: white;
 	font-family: "MetaSerifPro-Book", serif;
-	font-size: 2vw;
-	padding-left: 36px;
-	text-indent: -36px;
-	padding-top: 1.5vh;
+	font-size: 2vw;*/
+	padding-left: 2em;
+	text-indent: -2em;
+	/*padding-bottom: 1em;*/
 		
 }
 p.BibNote {
@@ -180,6 +182,7 @@ p.counter {
 	white-space: nowrap;
 }
 
+
 p.title {
 	grid-column:2;
 	padding-top:2vh;
@@ -195,12 +198,12 @@ p.title {
 	margin: 0;
 	/*margin: auto;*/
 }
-div.review_text {
+div.review_text, #writings {
 	color: white;
 	font-family: "MetaSerifPro-Book", serif;
 	font-size: clamp(1.125rem, 2.5vmin, 1.5rem);
 	/*margin-left: 4%;*/;
-	display: inline-grid;
+	display: grid;
 	/*justify-items: center;*/
 	/*grid-template-columns: max-content minmax(40ch, 75ch);*/
 	/*width: clamp(45ch, 50%, 80ch);*/
@@ -209,8 +212,11 @@ div.review_text {
   	column-gap: 1rem;
 	margin: 0 auto; 
 	width: min(100%, 70ch);
-	line-height: clamp(1.4, 1.5, 1.6)
+	line-height: clamp(1.4, 1.5, 1.6);
+		border:none;
 }
+
+
 	
 div.control {
 	color:white;
@@ -238,7 +244,7 @@ div.countercontrol {
 	margin:0.33rem;
 	width:fit-content;
 }
-p.review_par {
+p.review_par, p.BibEntry {
     /* hanging-punctuation is currently only supported in Safari. */
     hanging-punctuation: first last;
 	padding-bottom: 1.2em;
@@ -341,6 +347,17 @@ div.test {
 	padding: 18px;
 	width: fit-content;
 }
+/*#writings {
+	font-size: clamp(1.125rem, 2.5vmin, 1.5rem);
+	display: inline-grid;
+	justify-content: center;
+  	grid-template-columns: max-content minmax(40ch, 1fr);
+	column-gap: 1rem;
+	margin: 0 auto; 
+	width: min(100%, 70ch);
+	line-height: clamp(1.4, 1.5, 1.6);
+}*/
+	
 .resume {
 	height: 0.56em;
 	width: auto;
@@ -366,10 +383,11 @@ div.test {
 body {
   padding-left: 0.25rem;
   padding-right: 0.25rem;
+	align-items: left;
 }
 
   
-	div.review_text, div.control, div.review_intro {
+	div.review_text, div.control, div.review_intro, #writings {
     max-width:100%;
 	margin-left: 0;
 	margin-right: 0;  
@@ -383,7 +401,7 @@ body {
 	/*margin-left: 0.5rem;*/
   }
 	
-	div.review_text {
+	div.review_text, #writings {
 		grid-template-columns: 1fr;
 		font-size: 1rem;
 	}
@@ -399,7 +417,7 @@ body {
 	p.counter, p.review_intro, div.control, div.countercontrol {
 		font-size: 0.85rem;
 	}
-	div.review_text {
+	div.review_text, #writings {
 		
 		display:grid;
 		grid-column: 1;
@@ -416,7 +434,7 @@ body {
 		
 	}
 	
-	p.review_par, p.title, div.byline {
+	p.review_par, p.title, div.byline, p.BibEntry, p.BibHeading {
 		display:block;
 		grid-column: 1;
 		width: auto;
@@ -424,9 +442,28 @@ body {
 		white-space: normal;
 		
 	}
+	
 	div.byline {
 		padding-top: 1.5em;
 		padding-right: 1em;
 		
+	}	
+	p.BibHeading {
+		text-align: left;
+		padding-top: 1em;
+		
 	}
+	p.BibEntry {
+	/*display: inline-block;
+	color: white;
+	font-family: "MetaSerifPro-Book", serif;
+	font-size: 2vw;*/
+	padding-left: 1.75em;
+	text-indent: -1.75em;
+	}
+	#writings {
+		grid-template-columns: minmax(32ch, 1fr);
+		word-wrap: break-word;
+	}
+	
 }

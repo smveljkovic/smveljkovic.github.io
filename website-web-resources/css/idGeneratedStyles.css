@@ -148,7 +148,7 @@ p.BibHeading {
 	display: inline-block;
 	padding-top: 2em;
 }
-p.BibEntry {
+p.BibEntry, p.CVEntry {
 	/*display: inline-block;
 	color: white;
 	font-family: "MetaSerifPro-Book", serif;
@@ -203,7 +203,7 @@ p.title {
 	margin: 0;
 	/*margin: auto;*/
 }
-div.review_text, #writings {
+div.review_text, #writings, #cv {
 	color: white;
 	font-family: "MetaSerifPro-Book", serif;
 	font-size: clamp(1.125rem, 2.5vmin, 1.5rem);
@@ -249,7 +249,7 @@ div.countercontrol {
 	margin:0.33rem;
 	width:fit-content;
 }
-p.review_par, p.BibEntry {
+p.review_par, p.BibEntry, p.CVEntry {
     /* hanging-punctuation is currently only supported in Safari. */
     hanging-punctuation: first last;
 	padding-bottom: 1.2em;
@@ -392,7 +392,7 @@ body {
 }
 
   
-	div.review_text, div.control, div.review_intro, #writings {
+	div.review_text, div.control, div.review_intro, #writings, #cv {
     max-width:100%;
 	margin-left: 0;
 	margin-right: 0;  
@@ -406,7 +406,7 @@ body {
 	/*margin-left: 0.5rem;*/
   }
 	
-	div.review_text, #writings {
+	div.review_text, #writings, #cv {
 		grid-template-columns: 1fr;
 		font-size: 1rem;
 	}
@@ -422,7 +422,7 @@ body {
 	p.counter, p.review_intro, div.control, div.countercontrol, p.counter_bib {
 		font-size: 0.85rem;
 	}
-	div.review_text, #writings {
+	div.review_text, #writings, #cv {
 		
 		display:grid;
 		grid-column: 1;
@@ -439,7 +439,7 @@ body {
 		
 	}
 	
-	p.review_par, p.title, div.byline, p.BibEntry, p.BibHeading {
+	p.review_par, p.title, div.byline, p.BibEntry, p.BibHeading, CVEntry {
 		display:block;
 		grid-column: 1;
 		width: auto;
@@ -458,7 +458,7 @@ body {
 		padding-top: 1em;
 		
 	}
-	p.BibEntry {
+	p.BibEntry, p.CVEntry {
 	/*display: inline-block;
 	color: white;
 	font-family: "MetaSerifPro-Book", serif;
@@ -467,7 +467,7 @@ body {
 	text-indent: -2.25;
 	}
 	
-	#writings {
+	#writings, #cv {
 		grid-template-columns: minmax(32ch, 1fr);
 		word-wrap: break-word;
 	}

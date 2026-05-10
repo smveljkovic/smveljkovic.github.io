@@ -107,7 +107,9 @@ h1.Name {
     text-transform: none;
     widows: 1;
 }
-
+header {
+	padding-bottom: 0.5em;
+}
 .nav-list {
    list-style: none;
    padding: 0;
@@ -118,7 +120,7 @@ h1.Name {
 	color: #FFFFFF;
     font-family: "MetaSerifPro-Book";
 	/* minus 40% base .name */
-    font-size: clamp(1.35rem, 4.8vmin, 1.725rem);
+    font-size: calc(clamp(1.35rem, 4.8vmin, 1.725rem) - 20%);
     font-style: normal;
     font-variant: normal;
     font-weight: 350;
@@ -136,7 +138,7 @@ h1.Name {
 	margin: 0;
 	
 }
-p.BibHeading {
+h1.BibHeading {
     color: #FFFFFF;
     font-family: "Case Text", sans-serif;
     font-size: clamp(1.35rem, 3.2vmin, 2rem);
@@ -329,14 +331,14 @@ p.trigger:hover + p.hidden {
 }*/
 #_idContainer000 {
 	display:inline-block;
-	height:1008px;
-	position:relative;
-	width:1848px;
+	/*height:1008px;
+	*position:relative;
+	width:1848px;*/
 }
 #_idContainer003 {
 	display:inline-block;
-	height:316px;
-	width:1368px;
+	/*height:316px;
+	width:1368px;*/
 }
 #_idContainer002 {
 	margin-top: 0;
@@ -447,7 +449,7 @@ body {
 		
 	}
 	
-	p.review_par, p.title, div.byline, p.BibEntry, p.BibHeading, CVEntry {
+	p.review_par, p.title, div.byline, p.BibEntry, h1.BibHeading, CVEntry {
 		display:block;
 		grid-column: 1;
 		width: auto;
@@ -461,7 +463,7 @@ body {
 		padding-right: 1em;
 		
 	}	
-	p.BibHeading {
+	h1.BibHeading {
 		text-align: left;
 		padding-top: 1em;
 		

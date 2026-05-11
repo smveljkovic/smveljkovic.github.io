@@ -1,17 +1,17 @@
 body, div, dl, dt, dd, h1, h2, h3, h4, h5, h6, p, pre, code, blockquote {
-    background-color: black;
+    background-color: hsl(0, 0%, 7%);
 	margin: 0;
     tab-size: 10;
 }
 
-a:link {
+a:link, button {
 	color: hsla(213,78%,65%,1);
 	text-decoration-color: #FFFFFF;
 	text-decoration-thickness: 7%;
   
 }
 
-a:visited {
+a:visited, button {
     color: hsla(270,50%,70%,1);
 	text-decoration-color: #FFFFFF;
 }
@@ -45,7 +45,7 @@ body {
 
 div.Basic-Text-Frame {
     border-style: solid;
-	background-color: black;
+	background-color: hsl(0, 0%, 7%);
 }
 
 p.Details {
@@ -342,7 +342,7 @@ p.trigger:hover + p.hidden {
 }
 
 div._idGenObjectStyleOverride-1 {
-	background-color:#000000;
+	background-color:hsl(0, 0%, 7%);
 	border-width:0px;
 }
 div._idGenObjectLayout-1 {

@@ -44,7 +44,7 @@ body {
 }
 
 div.Basic-Text-Frame {
-    border-style: solid;
+    border-style: thin;
 	background-color: hsl(0, 0%, 7%);
 }
 

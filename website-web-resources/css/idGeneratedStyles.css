@@ -40,6 +40,7 @@ a:active {
 
 body {
 	-epub-hyphens:auto;
+	hyphens: manual;
 }
 
 div.Basic-Text-Frame {
@@ -238,22 +239,18 @@ div.control {
 	font-size: clamp(0.9rem, 2vmin, 1.2rem);
 	text-align:right;
 	padding-top:3vh;
-	display:inline-block;
-	align-self:flex-end;
-	float:right;
+	float: right;
 	padding-right:1.5vmin;
 	margin:0.33rem;
 	width:fit-content;
 }
+
 div.countercontrol {
 	color:white;
 	font-family: "Case Text", sans-serif;
 	font-size: clamp(0.9rem, 2vmin, 1.2rem);
-	text-align:left;
+	float: left;
 	padding-top:3vh;
-	display:inline-block;
-	align-self:flex-start;
-	float:left;
 	padding-left:1.5vmin;
 	margin:0.33rem;
 	width:fit-content;
@@ -386,12 +383,6 @@ div.test {
 	width: auto;
 	
 }*/
-.bottom {
-
-}
-.contact {
-
-}
 
 @media screen and (max-width: 600px) {
 

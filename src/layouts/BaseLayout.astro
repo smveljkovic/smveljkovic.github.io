@@ -1,0 +1,47 @@
+---
+import '../styles/global.css'
+import SeoHead from "../components/SeoHead.astro";
+import { site } from "../data/site";
+
+interface Props {
+  title: string;
+  description?: string;
+  canonicalPath: string;
+  ogType?: string;
+  image?: string;
+  jsonLd?: unknown;
+  bodyClass?: string;
+  bodyStyle?: string;
+}
+
+const {
+  title,
+  description,
+  canonicalPath,
+  ogType,
+  image,
+  jsonLd,
+  bodyClass,
+  bodyStyle,
+} = Astro.props;
+---
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang={site.language}>
+  <head>
+    <SeoHead
+      title={title}
+      description={description}
+      canonicalPath={canonicalPath}
+      ogType={ogType}
+      image={image}
+      jsonLd={jsonLd}
+    />
+
+    <slot name="head" />
+  </head>
+
+  <body class={bodyClass} style={bodyStyle}>
+    <slot />
+  </body>
+</html>

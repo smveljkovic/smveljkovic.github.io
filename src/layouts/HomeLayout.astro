@@ -1,0 +1,15 @@
+---
+import BaseLayout from "./BaseLayout.astro";
+
+const { title, description, canonicalPath, jsonLd } = Astro.props;
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  canonicalPath={canonicalPath}
+  jsonLd={jsonLd}
+  bodyStyle="display:block; padding-top: clamp(2%,7%,10%)">
+
+  <slot />
+</BaseLayout>

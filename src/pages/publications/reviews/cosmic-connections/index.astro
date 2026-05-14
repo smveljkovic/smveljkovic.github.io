@@ -1,24 +1,77 @@
 ---
-import '../../../../styles/global.css'
+import ReviewLayout from "../../../../layouts/ReviewLayout.astro";
+import { cosmicConnectionsSchema } from
+"../../../../data/schema/reviews/cosmic-connections/cosmic-connections";
 ---
-<body style="display:inline-flex; flex-direction: column; justify-content: center; align-items: center; hyphens:manual; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;">
-<div>
-				<div class="review_intro">
-				  <p class="intro">The following text is the Original Submission (2 April 2024) for</p>
-					<p class="intro" style="margin-left: 2em; text-indent: -2em;">Veljkovic, Stevan. Review of <i>Cosmic Connections: Poetry in the Age of Disenchantment</i>, by Charles Taylor.  <i>European Journal of Social Theory</i> 28, no. 2 (2025): 339–42. <a href="https://doi.org/10.1177/13684310241249684">https://doi.org/10.1177/13684310241249684</a>.</p>
-					<p class="intro" style="text-indent: 2em">First published online 24 May 2024.</p>
-					<p class="intro">This unabridged original is significantly longer than the text of the Final Published PDF, and is made available here according to the <a href="https://uk.sagepub.com/en-gb/eur/journal-author-archiving-policies-and-re-use">publisher’s policy</a> on author reuse.</p>
-					<p class="intro" style="padding-bottom: 0">Errors have been corrected silently. <span style="white-space:nowrap">© 2024 Stevan Veljkovic</span></p>
-</div>
-	<div class="countercontrol">[&#8201;<a href="../../../publications/">previous page</a>&#8201;]</div>
-		<div class="control"><a href="veljkovic-review-cosmic-connections.pdf">View as PDF</a></div>
-		</div>
-			
-<div class="review_text">
-	<p class="title">Charles Taylor, <i>Cosmic Connections: Poetry in the Age of Disenchantment</i>. Cambridge, MA: The Belknap Press of Harvard University Press, 2024. 640 pp, £31.95 US$37.95 ISBN 9780674296084 (hbk)</p>
-							
- <p class="counter" id="1">[&#8239;1&#8239;]</p>
-			<p class="review_par">In the closing paragraphs of this colossal new work by Charles Taylor, readers are reminded that the book ‘was conceived as a companion study to my <i>The Language Animal</i> [2016]’ (p.&nbsp;597). As <i>Cosmic Connections</i> was adumbrated in notes and remarks throughout that earlier book, many readers will now have been looking forward to its release for the better part of a decade. In many respects, <i>Connections</i> is akin to those major works of Taylor’s, <i>Sources of the Self</i> (1989) and <i>A Secular Age</i> (2007), giving <i>Language Animal</i> somewhat the air of a prolegomenon. In picking up the genealogical approach of <i>Sources</i> and <i>Secular Age</i> – of which it has been customary to use the word ‘magisterial’, with reference both to masterfulness and topics of cultural and social ‘magisteria’ – <i>Connections</i> is a return to form for Taylor. With 60 years having now passed since the publication of Taylor’s first book, <i>The Explanation of Behaviour</i> (1964), <i>Connections</i> is a worthy milestone in an extraordinary career.</p>
+
+<ReviewLayout
+  title="Cosmic Connections by Charles Taylor | Book review"
+  description="A book which bids fair to be Taylor’s culminating output joins up
+the facets of an extraordinary career."
+  canonicalPath="/publications/reviews/cosmic-connections/"
+  ogType="article"
+  jsonLd={cosmicConnectionsSchema}>
+
+  <Fragment slot="head">
+    <meta name="search_reviewers" content="Stevan Veljkovic" />
+    <meta name="search_authors" content="Charles Taylor" />
+    <meta name="search_title" content="Cosmic Connections: Poetry in the Age of
+Disenchantment" />
+  </Fragment>
+
+  <div>
+    <div class="review_intro">
+      <p class="intro">The following text is the Original Submission (2 April
+2024) for</p>
+
+      <p class="intro" style="margin-left: 2em; text-indent: -2em;">
+        Veljkovic, Stevan. Review of <i>Cosmic Connections: Poetry in the Age of
+Disenchantment</i>,
+        by Charles Taylor. <i>European Journal of Social Theory</i> 28, no. 2
+(2025): 339–42.
+        <a
+href="https://doi.org/10.1177/13684310241249684">https://doi.org/10.1177/
+13684310241249684</a>.
+      </p>
+
+      <p class="intro" style="text-indent: 2em">First published online 24 May
+2024.</p>
+
+      <p class="intro">
+        This unabridged original is significantly longer than the text of the
+Final Published PDF,
+        and is made available here according to the
+        <a
+href="https://uk.sagepub.com/en-gb/eur/journal-author-archiving-policies-and-re-
+use">publisher’s policy</a>
+        on author reuse.
+      </p>
+
+      <p class="intro" style="padding-bottom: 0">
+        Errors have been corrected silently. <span style="white-space:nowrap">©
+2024 Stevan Veljkovic</span>
+      </p>
+    </div>
+
+    <div class="countercontrol">[&#8201;<a href="/publications/">previous
+page</a>&#8201;]</div>
+    <div class="control">
+      <a
+href="/publications/reviews/cosmic-connections/veljkovic-review-cosmic-
+connections.pdf">View as PDF</a>
+    </div>
+  </div>
+
+  <div class="review_text">
+    <p class="title">
+      Charles Taylor, <i>Cosmic Connections: Poetry in the Age of
+Disenchantment</i>.
+      Cambridge, MA: The Belknap Press of Harvard University Press, 2024.
+      640 pp, £31.95 US$37.95 ISBN 9780674296084 (hbk)
+    </p>
+
+    <p class="counter" id="1">[&#8239;1&#8239;]</p>
+    <p class="review_par">In the closing paragraphs of this colossal new work by Charles Taylor, readers are reminded that the book ‘was conceived as a companion study to my <i>The Language Animal</i> [2016]’ (p.&nbsp;597). As <i>Cosmic Connections</i> was adumbrated in notes and remarks throughout that earlier book, many readers will now have been looking forward to its release for the better part of a decade. In many respects, <i>Connections</i> is akin to those major works of Taylor’s, <i>Sources of the Self</i> (1989) and <i>A Secular Age</i> (2007), giving <i>Language Animal</i> somewhat the air of a prolegomenon. In picking up the genealogical approach of <i>Sources</i> and <i>Secular Age</i> – of which it has been customary to use the word ‘magisterial’, with reference both to masterfulness and topics of cultural and social ‘magisteria’ – <i>Connections</i> is a return to form for Taylor. With 60 years having now passed since the publication of Taylor’s first book, <i>The Explanation of Behaviour</i> (1964), <i>Connections</i> is a worthy milestone in an extraordinary career.</p>
 	
 	 
 
@@ -71,4 +124,4 @@ import '../../../../styles/global.css'
 	
 	
 </div>
-</body>
+</ReviewLayout>

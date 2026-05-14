@@ -1,4 +1,9 @@
-{
+import { site } from "../site";
+
+const siteUrl = site.url;
+const imageUrl = `${siteUrl}/images/headshot-1200x630.png`;
+
+export const cvSchema = {
   "@context": "https://schema.org",
   "@graph": [
     {
@@ -21,7 +26,6 @@
       "url": "https://www.stx.ox.ac.uk/",
       "parentOrganization": { "@id": "https://www.ox.ac.uk/" }
     },
-
     {
       "@id": "https://www.cam.ac.uk/",
       "@type": "CollegeOrUniversity",
@@ -49,14 +53,12 @@
       "url": "https://www.divinity.cam.ac.uk/",
       "parentOrganization": { "@id": "https://www.cam.ac.uk/" }
     },
-
     {
       "@id": "https://www.rochester.edu/",
       "@type": "CollegeOrUniversity",
       "name": "University of Rochester",
       "url": "https://www.rochester.edu/"
     },
-
     {
       "@id": "https://stevanveljkovic.com/thesis/religious-atavism-climate-crisis/",
       "@type": "Thesis",
@@ -75,7 +77,6 @@
       "publisher": { "@id": "https://www.ox.ac.uk/" },
       "author": { "@id": "https://orcid.org/0000-0002-2599-3227" }
     },
-
     {
       "@id": "https://stevanveljkovic.com/cv/#cambridge-mphil-program",
       "@type": "EducationalOccupationalProgram",
@@ -94,12 +95,12 @@
       "name": "BA in History",
       "provider": { "@id": "https://www.rochester.edu/" }
     },
-
     {
       "@id": "https://orcid.org/0000-0002-2599-3227",
       "@type": "Person",
       "name": "Stevan Veljkovic",
       "url": "https://stevanveljkovic.com/",
+      "image": imageUrl,
       "identifier": {
         "@type": "PropertyValue",
         "propertyID": "ORCID",
@@ -119,7 +120,6 @@
         { "@id": "https://www.cam.ac.uk/" },
         { "@id": "https://www.rochester.edu/" }
       ],
-
       "hasCredential": [
         {
           "@id": "https://stevanveljkovic.com/cv/#dphil",
@@ -160,11 +160,9 @@
           "recognizedBy": { "@id": "https://www.rochester.edu/" }
         }
       ],
-
       "subjectOf": [
         { "@id": "https://stevanveljkovic.com/thesis/religious-atavism-climate-crisis/" }
       ],
-
       "affiliation": [
         {
           "@id": "https://stevanveljkovic.com/cv/#oxford-dphil-candidate",
@@ -179,7 +177,6 @@
             { "@id": "https://www.stx.ox.ac.uk/" }
           ]
         },
-
         {
           "@id": "https://stevanveljkovic.com/cv/#cambridge-mphil-role",
           "@type": "Role",
@@ -217,7 +214,6 @@
             { "@id": "https://www.rochester.edu/" }
           ]
         },
-
         {
           "@id": "https://stevanveljkovic.com/cv/#rochester-zen-center-role",
           "@type": "OrganizationRole",
@@ -238,7 +234,6 @@
         }
       ]
     },
-
     {
       "@id": "https://stevanveljkovic.com/cv/veljkovic-cv.pdf",
       "@type": "MediaObject",
@@ -247,7 +242,6 @@
       "contentUrl": "https://stevanveljkovic.com/cv/veljkovic-cv.pdf",
       "about": { "@id": "https://orcid.org/0000-0002-2599-3227" }
     },
-
     {
       "@id": "https://stevanveljkovic.com/cv/",
       "@type": "ProfilePage",
@@ -258,4 +252,4 @@
       "subjectOf": { "@id": "https://stevanveljkovic.com/cv/veljkovic-cv.pdf" }
     }
   ]
-}
+};

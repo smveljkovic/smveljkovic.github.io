@@ -1,19 +1,26 @@
 ---
-import '../../styles/global.css'
+import TextPageLayout from "../../layouts/TextPageLayout.astro";
+import { cvSchema } from "../../data/schema/cv";
 ---
-<html>
-<head>
-</head>
-<body style="hyphens:manual; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; display:inline-flex; flex-direction: column; align-items: center">
-		<div style="display:inline-block; width:fit-content;">
-			<h1 class="BibHeading">Stevan Veljkovic – curriculum vitae</h1>
-			<div><div class="countercontrol">[&#8201;<a href="../">previous page</a>&#8201;]</div>
-		<div class="control"><a href="veljkovic-cv.pdf">pdf</a> | updated May 2026</div></div> </div>
-			
-			<div class="test" id="cv">
-			<p class="counter_bib">&#8239;&#8239;</p>
-				<p class="CVEntry"></p>
-			
-		</div>
-    </body>
-</html>
+
+<TextPageLayout
+  title="S. Veljkovic curriculum vitae"
+  description="Curriculum vitae of Dr Stevan Veljkovic."
+  canonicalPath="/cv/"
+  jsonLd={cvSchema}>
+
+  <div style="display:inline-block; width:fit-content;">
+    <h1 class="BibHeading">Stevan Veljkovic – curriculum vitae</h1>
+    <div>
+      <div class="countercontrol">[&#8201;<a href="/">previous
+page</a>&#8201;]</div>
+      <div class="control"><a href="/cv/veljkovic-cv.pdf">pdf</a> | updated May
+2026</div>
+    </div>
+  </div>
+
+  <div class="test" id="cv">
+    <p class="counter_bib">&#8239;&#8239;</p>
+    <p class="CVEntry"></p>
+  </div>
+</TextPageLayout>

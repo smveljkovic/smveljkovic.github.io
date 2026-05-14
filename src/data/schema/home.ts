@@ -1,88 +1,93 @@
-{
+import { site } from "../site";
+
+const siteUrl = site.url;
+const imageUrl = `${siteUrl}/images/headshot-1200x630.png`;
+
+export const homeSchema = {
   "@context": "https://schema.org",
   "@graph": [
     {
-      "@id": "https://stevanveljkovic.com/images/headshot-1200x630.png",
+      "@id": imageUrl,
       "@type": "ImageObject",
-      "url": "https://stevanveljkovic.com/images/headshot-1200x630.png",
-      "contentUrl": "https://stevanveljkovic.com/images/headshot-1200x630.png",
-      "width": 1200,
-      "height": 630
+      url: imageUrl,
+      contentUrl: imageUrl,
+      width: 1200,
+      height: 630,
     },
     {
-      "@id": "https://orcid.org/0000-0002-2599-3227",
+      "@id": site.orcid,
       "@type": "Person",
-      "name": "Stevan Veljkovic",
-      "additionalName": "M.",
-	  "alternateName": "Stevan M. Veljkovic",
-      "url": "https://stevanveljkovic.com/",
-      "email": "mailto:hello@stevanveljkovic.com",
-      "image": { "@id": "https://stevanveljkovic.com/images/headshot-1200x630.png" },
-      "identifier": {
+      name: "Stevan Veljkovic",
+      additionalName: "M.",
+      alternateName: "Stevan M. Veljkovic",
+      url: `${siteUrl}/`,
+      email: `mailto:${site.email}`,
+      image: { "@id": imageUrl },
+      identifier: {
         "@type": "PropertyValue",
-        "propertyID": "ORCID",
-        "value": "0000-0002-2599-3227",
-        "url": "https://orcid.org/0000-0002-2599-3227"
+        propertyID: "ORCID",
+        value: "0000-0002-2599-3227",
+        url: site.orcid,
       },
-      "sameAs": [
-        "https://orcid.org/0000-0002-2599-3227",
-        "https://scholar.google.com/citations?user=e42TN4UAAAAJ",
-        "https://github.com/smveljkovic"
-      ],
-      "homeLocation": {
+      sameAs: [site.orcid, site.scholar, site.github],
+      homeLocation: {
         "@type": "Place",
-        "name": "Oxford, England"
+        name: "Oxford, England",
       },
-      "knowsAbout": [
+      knowsAbout: [
         "Religious studies",
         "Modern history",
         "Social theory",
         "Secularism",
         "Climate change",
-        "Liberalism"
-      ]
+        "Liberalism",
+      ],
     },
     {
-      "@id": "https://stevanveljkovic.com/#website",
+      "@id": `${siteUrl}/#website`,
       "@type": "WebSite",
-      "url": "https://stevanveljkovic.com/",
-      "name": "Dr Stevan Veljkovic – theorist and editor",
-	  "alternateName": ["Dr Stevan Veljkovic", "S. Veljkovic – theorist and editor", "Dr S. Veljkovic"],
-      "inLanguage": "en-GB",
-      "publisher": { "@id": "https://orcid.org/0000-0002-2599-3227" }
+      url: `${siteUrl}/`,
+      name: site.name,
+      alternateName: [
+        "Dr Stevan Veljkovic",
+        "S. Veljkovic – theorist and editor",
+        "Dr S. Veljkovic",
+      ],
+      inLanguage: site.language,
+      publisher: { "@id": site.orcid },
     },
     {
-      "@id": "https://stevanveljkovic.com/",
+      "@id": `${siteUrl}/`,
       "@type": "AboutPage",
-      "url": "https://stevanveljkovic.com/",
-      "name": "Stevan Veljkovic",
-      "description": "Personal website of Dr Stevan Veljkovic.",
-      "inLanguage": "en-GB",
-      "isPartOf": { "@id": "https://stevanveljkovic.com/#website" },
-      "mainEntity": { "@id": "https://orcid.org/0000-0002-2599-3227" },
-      "about": { "@id": "https://orcid.org/0000-0002-2599-3227" },
-      "author": { "@id": "https://orcid.org/0000-0002-2599-3227" },
-      "primaryImageOfPage": { "@id": "https://stevanveljkovic.com/images/headshot-1200x630.png" },
-      "hasPart": [
+      url: `${siteUrl}/`,
+      name: "Stevan Veljkovic",
+      description: "Personal website of Dr Stevan Veljkovic.",
+      inLanguage: site.language,
+      isPartOf: { "@id": `${siteUrl}/#website` },
+      mainEntity: { "@id": site.orcid },
+      about: { "@id": site.orcid },
+      author: { "@id": site.orcid },
+      primaryImageOfPage: { "@id": imageUrl },
+      hasPart: [
         {
-          "@id": "https://stevanveljkovic.com/cv/",
+          "@id": `${siteUrl}/cv/`,
           "@type": "ProfilePage",
-          "url": "https://stevanveljkovic.com/cv/",
-          "name": "Curriculum Vitae | Dr Stevan Veljkovic"
+          url: `${siteUrl}/cv/`,
+          name: "Curriculum Vitae | Dr Stevan Veljkovic",
         },
         {
-          "@id": "https://stevanveljkovic.com/publications/",
+          "@id": `${siteUrl}/publications/`,
           "@type": "CollectionPage",
-          "url": "https://stevanveljkovic.com/publications/",
-          "name": "Publications | Dr Stevan Veljkovic"
+          url: `${siteUrl}/publications/`,
+          name: "Publications | Dr Stevan Veljkovic",
         },
         {
           "@id": "https://seminars.stevanveljkovic.com/",
           "@type": "WebSite",
-          "url": "https://seminars.stevanveljkovic.com/",
-          "name": "Seminars | Dr Stevan Veljkovic"
-        }
-      ]
-    }
-  ]
-}
+          url: "https://seminars.stevanveljkovic.com/",
+          name: "Seminars | Dr Stevan Veljkovic",
+        },
+      ],
+    },
+  ],
+};

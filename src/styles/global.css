@@ -1,0 +1,478 @@
+body, div, dl, dt, dd, h1, h2, h3, h4, h5, h6, p, pre, code, blockquote {
+    background-color: hsl(0, 0%, 7%);
+	margin: 0;
+    tab-size: 10;
+}
+
+a:link, button {
+	color: hsla(213,78%,65%,1);
+	text-decoration-color: #FFFFFF;
+	text-decoration-thickness: 7%;
+  
+}
+
+a:visited, button {
+    color: hsla(270,50%,70%,1);
+	text-decoration-color: #FFFFFF;
+}
+
+a:hover {
+    color: inherit;
+	text-decoration: underline;
+	text-decoration-thickness: 7%;
+	text-decoration-color: hsla(213,78%,65%,1);
+	text-decoration-skip-ink: auto;
+}
+
+a:visited:hover {
+	color: inherit;
+	text-decoration: underline;
+	text-decoration-thickness: 7%;
+	text-decoration-color: hsla(270,50%,70%,1);
+	text-decoration-skip-ink: auto;
+	
+}
+
+a:active {
+	color: hsla(45, 100%, 70%, 1);
+	text-decoration: inherit;
+}
+
+body {
+	-epub-hyphens:auto;
+	hyphens: manual;
+}
+
+div.Basic-Text-Frame {
+    border-style: thin;
+	background-color: hsl(0, 0%, 7%);
+}
+
+p.Details {
+    color: #FFFFFF;
+    font-family: "MetaSerifPro-Book", serif;
+	/* minus 30% base .name */
+    font-size: clamp(1.575rem, 5.6vmin, 2.0125rem);
+    font-style: normal;
+    font-variant: normal;
+    font-weight: normal;
+    line-height: clamp(1.4, 1.5, 1.6);
+    orphans: 1;
+    page-break-after: auto;
+    page-break-before: auto;
+    text-align: center;
+    text-decoration: none;
+    text-indent: 0;
+    text-transform: none;
+    widows: 1;
+    margin-top: 0em;
+    margin-right: 0em;
+    margin-left: 0em;
+    margin-bottom: 0em;
+}
+p.Headings {
+    color: #FFFFFF;
+    font-family: "Case Medium", sans-serif;
+	/* minus 20% base .name */
+    font-size: clamp(1.8rem, 6.4vmin, 2.3rem);
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 700;
+    line-height: clamp(1.4,1.5,1.6);
+    orphans: 1;
+    page-break-after: auto;
+    page-break-before: auto;
+    text-align: center;
+    text-decoration: none;
+    text-indent: 0;
+    text-transform: none;
+    widows: 1;
+	tab-size: 10;
+	padding: 0;
+	margin: 0;
+}
+h1.Name {
+    color: #FFFFFF;
+    font-family: "Case Medium", sans-serif;
+    font-size: clamp(2.25rem, 8vmin, 2.875rem);
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 700;
+    line-height: clamp(1.4,1.5,1.6);
+    orphans: 1;
+    page-break-after: auto;
+    page-break-before: auto;
+    text-align: center;
+    text-decoration: none;
+    text-indent: 0;
+    text-transform: none;
+    widows: 1;
+}
+header {
+	padding-bottom: 0.5em;
+}
+.nav-list {
+   list-style: none;
+   padding: 0;
+   margin: 0;
+ }
+ .nav-list li { margin: 0; }
+.pronunciation {
+	color: #FFFFFF;
+    font-family: "MetaSerifPro-Book";
+	/* minus 40% base .name */
+    font-size: calc(clamp(1.35rem, 4.8vmin, 1.725rem) - 20%);
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 350;
+    line-height: 1.5;
+    orphans: 1;
+    page-break-after: auto;
+    page-break-before: auto;
+    text-align: center;
+    text-decoration: none;
+    text-indent: 0;
+    text-transform: none;
+    widows: 1;
+	tab-size: 10;
+	padding: 0;
+	margin: 0;
+	
+}
+h1.BibHeading {
+    color: #FFFFFF;
+    font-family: "Case Text", sans-serif;
+    font-size: clamp(1.35rem, 3.2vmin, 2rem);
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 700;
+    orphans: 1;
+    page-break-after: auto;
+    page-break-before: auto;
+    text-align: center;
+    text-decoration: none;
+    text-indent: 0;
+    text-transform: none;
+    widows: 1;
+    margin-bottom: 0.33em;
+	display: inline-block;
+	padding-top: 2em;
+}
+p.BibEntry, p.CVEntry {
+	/*display: inline-block;
+	color: white;
+	font-family: "MetaSerifPro-Book", serif;
+	font-size: 2vw;*/
+	padding-left: 2em;
+	text-indent: -2em;
+	/*padding-bottom: 1em;*/
+		
+}
+
+#strange {
+		padding-left: 0;
+		text-indent: 0;
+}
+p.BibNote {
+	color: white;
+	font-family: "MetaSerifPro-Book", serif;
+	text-indent: 36px;
+	font-size: 2vw;
+	
+}
+
+p.counter, p.counter_bib {
+	font-family: "Case Text", sans-serif;
+	font-size: clamp(0.9rem, 2vmin, 1.2rem);
+	/*float: left;*/
+	/*margin-left: clamp(-10dvmin, -10%, -7dvmin);*/
+	color: hsla(45, 100%, 70%, 1);
+	/* padding-top: clamp(0.20rem, 0.25rem, 0.40rem);*/
+	line-height: calc(1.5em + 0.5rem);
+	/*padding-right: 0.25rem;*/
+	grid-column: 1;
+	/*margin-left: auto;*/
+	display: inline-block;
+	text-align: right;
+	white-space: nowrap;
+}
+
+
+p.title {
+	grid-column:2;
+	padding-top:2vh;
+	padding-left:2em;
+	text-indent:-2em;
+	padding-bottom: 1.2em;
+	width: auto;
+	/*width: clamp(45ch, 50%, 75ch);*/
+	/*text-align: left;*/
+	/*display: inline-block;*/
+	/*width: calc(clamp(40ch, 50%, 75ch) - 2em);*/
+	display: inline-block;
+	margin: 0;
+	/*margin: auto;*/
+}
+div.review_text, #writings, #cv {
+	color: white;
+	font-family: "MetaSerifPro-Book", serif;
+	font-size: clamp(1.125rem, 2.5vmin, 1.5rem);
+	/*margin-left: 4%;*/;
+	display: grid;
+	/*justify-items: center;*/
+	/*grid-template-columns: max-content minmax(40ch, 75ch);*/
+	/*width: clamp(45ch, 50%, 80ch);*/
+ 	justify-content: center;
+  	grid-template-columns: max-content minmax(40ch, 1fr);
+  	column-gap: 1rem;
+	margin: 0 auto; 
+	width: min(100%, 70ch);
+	line-height: clamp(1.4, 1.5, 1.6);
+		border:none;
+}
+
+
+	
+div.control {
+	color:white;
+	font-family: "Case Text", sans-serif;
+	font-size: clamp(0.9rem, 2vmin, 1.2rem);
+	text-align:right;
+	padding-top:3vh;
+	float: right;
+	padding-right:1.5vmin;
+	margin:0.33rem;
+}
+
+div.countercontrol {
+	color:white;
+	font-family: "Case Text", sans-serif;
+	font-size: clamp(0.9rem, 2vmin, 1.2rem);
+	float: left;
+	padding-top:3vh;
+	padding-left:1.5vmin;
+	margin:0.33rem;
+}
+p.review_par, p.BibEntry, p.CVEntry {
+    /* hanging-punctuation is currently only supported in Safari. */
+    hanging-punctuation: first last;
+	padding-bottom: 1.2em;
+	/*width: clamp(45ch, 50%, 75ch);*/
+	grid-column: 2;
+	margin: 0;
+	display: block;
+	width: auto;
+	/*width: clamp(40ch, 50%, 75ch);*/
+	/*margin: auto;*/
+	
+}
+
+div.byline {
+	grid-column: 2;
+	/*width: clamp(40ch, 50%, 75ch);*/
+	display: inline-block;
+	width: auto;
+	margin: 0;
+	/*margin: auto;*/
+}
+p.byline, p.trigger {
+	text-align: right;
+
+}
+
+div.review_intro {
+	color: white;
+	font-family: "Case Text", sans-serif;
+	font-size: clamp(0.9rem, 2vmin, 1.2rem);
+	border:medium solid white;
+	padding: 1em;
+	margin: 0.33rem;
+	max-width: 80ch;
+	line-height: clamp(1.5, 1.6, 1.7);
+}
+
+p.intro {
+	
+	width: clamp(42ch, 50vw, 75ch);
+	padding-bottom: 1.2em;
+}
+
+/*.trigger:before
+{
+	color: black;
+	display: inline-block;
+}
+.trigger:hover:before
+{
+    content: "please use correspondence@stevanveljkovic.com";
+	color: white;
+	display:block;
+	position: relative;
+	left: -40rem;
+}
+
+/*p.hidden {
+	
+	display: none;
+}
+
+p.trigger:hover + p.hidden {
+	display: inline-block;
+	font-size: 1rem;
+	grid-column: 1;
+	margin-left: -20rem;
+	width: 10%;
+	
+}*/
+#_idContainer000 {
+	display:inline-block;
+	/*height:1008px;
+	*position:relative;
+	width:1848px;*/
+}
+#_idContainer003 {
+	display:inline-block;
+	/*height:316px;
+	width:1368px;*/
+}
+#_idContainer002 {
+	margin-top: 0;
+	margin-bottom: 1.33em;
+
+}
+
+div._idGenObjectStyleOverride-1 {
+	background-color:hsl(0, 0%, 7%);
+	border-width:0px;
+}
+div._idGenObjectLayout-1 {
+	text-align:center;
+}
+
+div.test {
+    border: thick solid white;
+    margin: auto;
+	position: relative;
+	padding: 18px;
+	width: max-content;
+	max-width: 100%;
+}
+/*#writings {
+	font-size: clamp(1.125rem, 2.5vmin, 1.5rem);
+	display: inline-grid;
+	justify-content: center;
+  	grid-template-columns: max-content minmax(40ch, 1fr);
+	column-gap: 1rem;
+	margin: 0 auto; 
+	width: min(100%, 70ch);
+	line-height: clamp(1.4, 1.5, 1.6);
+}*/
+	
+.resume, .email, .pub {
+	height: 0.56em;
+	width: auto;
+}
+/*.email {
+	height: 0.56em;
+	width: auto;
+}
+.pub {
+	height: 0.56em;
+	width: auto;
+	
+}*/
+
+@media screen and (max-width: 600px) {
+
+body {
+  padding-left: 0.25rem;
+  padding-right: 0.25rem;
+	align-items: left;
+}
+
+  
+	div.review_text, div.control, div.review_intro, #writings, #cv {
+    max-width:100%;
+	margin-left: 0;
+	margin-right: 0;  
+	}
+	
+	div.review_intro{
+	border: thin solid white;
+	padding: 1em 0.5em 1em;
+		margin-top: 1em;
+
+	/*margin-left: 0.5rem;*/
+  }
+	
+	div.review_text, #writings, #cv {
+		grid-template-columns: 1fr;
+		font-size: 1rem;
+	}
+	p.counter, p.counter_bib {
+		/*display: none;*/
+		display: block;
+		width: auto;
+		white-space: normal;
+		text-align: left;
+		margin: 0 0 0.5rem;
+	}
+	
+	p.counter, p.review_intro, div.control, div.countercontrol, p.counter_bib {
+		font-size: 0.85rem;
+	}
+	div.review_text, #writings, #cv {
+		
+		display:grid;
+		grid-column: 1;
+		line-height: 1.6;
+	}
+	
+	div.control {
+		padding-right: 2vmin;
+		
+	}
+	
+	div.countercontrol {
+		padding-left: 2vmin;
+		
+	}
+	
+	p.review_par, p.title, div.byline, p.BibEntry, h1.BibHeading, CVEntry {
+		display:block;
+		grid-column: 1;
+		width: auto;
+		max-width: 100%;
+		white-space: normal;
+		
+	}
+	
+	div.byline {
+		padding-top: 1.5em;
+		padding-right: 1em;
+		
+	}	
+	h1.BibHeading {
+		text-align: left;
+		padding-top: 1em;
+		
+	}
+	p.BibEntry, p.CVEntry {
+	/*display: inline-block;
+	color: white;
+	font-family: "MetaSerifPro-Book", serif;
+	font-size: 2vw;*/
+	padding-left: 2.25;
+	text-indent: -2.25;
+	}
+	
+	#writings, #cv {
+		grid-template-columns: minmax(32ch, 1fr);
+		word-wrap: break-word;
+	}
+	
+	p.counter_bib, p.counter {
+		font-weight: 600;
+	}
+	
+}

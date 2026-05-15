@@ -20,6 +20,8 @@ const { Content } = await render(entry);
 
 const review = entry.data;
 const jsonLd = buildReviewSchema(review);
+   console.log("Dynamic review route rendering:", review.id,
+Astro.url.pathname);
 ---
 
 <ReviewLayout

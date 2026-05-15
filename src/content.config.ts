@@ -1,7 +1,12 @@
 import { defineCollection, z } from "astro:content";
+import { glob } from "astro/loaders";
 
 const reviews = defineCollection({
-  type: "content",
+  loader: glob({
+    base: "./src/content/reviews",
+    pattern: "**/*.md",
+  }),
+
   schema: z.object({
     draft: z.boolean().default(false),
 
@@ -34,7 +39,7 @@ const reviews = defineCollection({
       isbn: z.array(z.string()).optional(),
       doi: z.string().optional(),
       url: z.string().url().optional(),
-      image: z.string().url().optional(),
+      image: z.string().optional(),
     }),
 
     publishedReview: z

@@ -1,0 +1,51 @@
+---
+import { getCollection } from "astro:content";
+import ReviewLayout from "../../../../layouts/ReviewLayout.astro";
+import ReviewIntro from "../../../../components/ReviewIntro.astro";
+import ReviewByLine from "../../../../components/ReviewByLine.astro";
+import { buildReviewSchema } from "../../../../lib/schema/review";
+import { render } from "astro:content";
+
+export async function getStaticPaths() {
+  const reviews = await getCollection("reviews", ({ data }) => !data.draft);
+
+  return reviews.map((entry) => ({
+    params: { slug: entry.data.slug },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+
+const review = entry.data;
+const jsonLd = buildReviewSchema(review);
+---
+
+<ReviewLayout
+  title={`${review.shortTitle} by ${review.reviewedWork.author} | Book review`}
+  description={review.description}
+  canonicalPath={review.canonicalPath}
+  ogType="article"
+  jsonLd={jsonLd}
+>
+  <Fragment slot="head">
+    {review.searchMeta?.reviewers && (
+      <meta name="search_reviewers" content={review.searchMeta.reviewers} />
+    )}
+    {review.searchMeta?.authors && (
+      <meta name="search_authors" content={review.searchMeta.authors} />
+    )}
+    {review.searchMeta?.title && (
+      <meta name="search_title" content={review.searchMeta.title} />
+    )}
+  </Fragment>
+
+  <ReviewIntro review={review} />
+
+  <div class="review_text">
+    <Content />
+
+    <ReviewByLine />
+  </div>
+</ReviewLayout>

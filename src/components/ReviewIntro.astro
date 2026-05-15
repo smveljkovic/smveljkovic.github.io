@@ -1,0 +1,42 @@
+---
+const { review } = Astro.props;
+---
+
+<div>
+  <div class="review_intro">
+    <p class="intro">The following text is the Original Submission for</p>
+
+    <p class="intro" style="margin-left: 2em; text-indent: -2em;"
+set:html={review.citationHtml} />
+
+    {review.publishedReview?.datePublished && (
+      <p class="intro" style="text-indent: 2em">
+        First published online {new
+Date(review.publishedReview.datePublished).toLocaleDateString("en-GB", {
+          day: "numeric",
+          month: "long",
+          year: "numeric",
+        })}.
+      </p>
+    )}
+
+    {review.originalSubmissionNote && (
+      <p class="intro">{review.originalSubmissionNote}</p>
+    )}
+
+    <p class="intro" style="padding-bottom: 0">
+      Errors have been corrected silently.
+      <span style="white-space:nowrap">© {new
+Date(review.datePublished).getFullYear()} Stevan Veljkovic</span>
+    </p>
+  </div>
+
+  <div class="countercontrol">[&#8201;<a href="/publications/">previous
+page</a>&#8201;]</div>
+
+  {review.pdf && (
+    <div class="control">
+      <a href={review.pdf}>View as PDF</a>
+    </div>
+  )}
+</div>

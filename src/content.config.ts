@@ -1,5 +1,6 @@
-import { defineCollection, z } from "astro:content";
+import { defineCollection } from "astro:content";
 import { glob } from "astro/loaders";
+import { z } from "astro/zod";
 
 const reviews = defineCollection({
   loader: glob({
@@ -26,7 +27,7 @@ const reviews = defineCollection({
 
     reviewer: z.object({
       name: z.string(),
-      orcid: z.string().url(),
+      orcid: z.url(),
     }),
 
     reviewedWork: z.object({
@@ -38,7 +39,7 @@ const reviews = defineCollection({
       year: z.string().optional(),
       isbn: z.array(z.string()).optional(),
       doi: z.string().optional(),
-      url: z.string().url().optional(),
+      url: z.url().optional(),
       image: z.string().optional(),
     }),
 
@@ -46,9 +47,9 @@ const reviews = defineCollection({
       .object({
         title: z.string(),
         journal: z.string(),
-        journalUrl: z.string().url().optional(),
+        journalUrl: z.url().optional(),
         doi: z.string(),
-        url: z.string().url(),
+        url: z.url(),
         volume: z.string().optional(),
         issue: z.string().optional(),
         year: z.string().optional(),

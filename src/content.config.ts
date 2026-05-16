@@ -2,6 +2,24 @@ import { defineCollection } from "astro:content";
 import { glob } from "astro/loaders";
 import { z } from "astro/zod";
 
+const hrefSchema = z.string().refine(
+  (value) =>
+    value.startsWith("/") ||
+    value.startsWith("http://") ||
+    value.startsWith("https://"),
+  {
+    message: "Expected a root-relative path or an absolute http(s) URL",
+  }
+);
+
+const inlineNotePartSchema = z.union([
+  z.string(),
+  z.object({
+    text: z.string(),
+    href: hrefSchema,
+  }),
+]);
+
 const reviews = defineCollection({
   loader: glob({
     base: "./src/content/reviews",
@@ -40,6 +58,7 @@ const reviews = defineCollection({
       isbn: z.array(z.string()).optional(),
       doi: z.string().optional(),
       url: z.url().optional(),
+      sameAs: z.array(z.url()).optional(),
       image: z.string().optional(),
     }),
 
@@ -62,7 +81,9 @@ const reviews = defineCollection({
 
     citationHtml: z.string(),
 
-    originalSubmissionNote: z.string().optional(),
+    originalSubmissionNote: z.array(inlineNotePartSchema),
+
+    openingVersionNote: z.string(),
 
     searchMeta: z
       .object({
@@ -71,6 +92,8 @@ const reviews = defineCollection({
         title: z.string().optional(),
       })
       .optional(),
+
+    bylineHtml: z.string().optional(),
   }),
 });
 

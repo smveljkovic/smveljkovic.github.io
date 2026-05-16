@@ -1,4 +1,10 @@
-<div class="byline">
+---
+const { bylineHtml } = Astro.props;
+---
+
+<div class="byline" set:html={bylineHtml} />
+
+<!--<div class="byline">
   <p class="byline">Stevan Veljkovic</p>
   <p class="byline">University of Oxford</p>
   <p class="trigger">

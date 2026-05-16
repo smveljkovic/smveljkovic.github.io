@@ -1,8 +1,8 @@
 ---
 draft: false
 
-title: "Stevan Veljkovic reviews <i>Cosmic Connections: Poetry in the Age of Disenchantment</i> by Charles Taylor"
-shortTitle: "Veljkovic review of <i>Cosmic Connections</i>"
+title: "Stevan Veljkovic reviews Cosmic Connections: Poetry in the Age of Disenchantment by Charles Taylor"
+shortTitle: "Veljkovic review of Cosmic Connections"
 slug: "cosmic-connections"
 
 description: "In a book which bids fair to become his culminating output, Taylor joins up the facets of an extraordinary career."
@@ -54,9 +54,20 @@ Theory</i> 28, no. 2 (2025): 339–42. <a
 href="https://doi.org/10.1177/13684310241249684">https://doi.org/10.1177/
 13684310241249684</a>.'
 
-originalSubmissionNote: "This unabridged original is significantly longer than
-the text of the Final Published PDF, and is made available here according to the
-publisher’s policy on author reuse."
+openingVersionNote: 'the Original Submission'
+
+originalSubmissionNote:
+    - "This unabridged original is significantly longer than
+the text of the Final Published PDF, and is made available here according to the "
+    - text: "publisher’s policy"
+      href: "https://www.sagepub.com/journals/permissions/sages-author-archiving-and-re-use-guidelines"
+    - " on author reuse."
+    
+bylineHtml: >-
+  <p class="byline">Stevan Veljkovic</p>
+  <p class="byline"> University of Oxford</p>
+  <p class="byline"><a href="mailto:stevanveljkovic@theology.ox.ac.uk">stevanveljkovic@theology.ox.ac.uk</a></p>
+  <p class="byline" style="padding-bottom: 3vh;">ORCID: <a href="https://orcid.org/0000-0002-2599-3227">https://orcid.org/0000-0002-2599-3227</a></p>
 
 ---
 
@@ -109,4 +120,5 @@ Disenchantment</i>.
 
   <p class="counter">[&#8239;14&#8239;]</p>     
   <p class="review_par">Those who know Taylor for his graciousness of tone and openness to different viewpoints will find those qualities undiminished in <i>Connections</i>. Readers altogether unfamiliar with Taylor’s work will not necessarily benefit from beginning here. The supposition that ‘the “landscapes” of meaning we live by are never fully explicable by features of the world beyond our experience but have to be explained and justified hermeneutically’ (p.&nbsp;598) will be regarded by naturalist critics as little more than a sophisticated instance of the pathetic fallacy (the human propensity to see faces in the clouds). Readers wishing to get a handle on this sort of challenge will not find here any sustained rebuttal of it. In a sense, that’s all to the better. Taylor has spent a lifetime producing such rebuttals. <i>Connections</i> is, rather, the author’s own positive vision: a robust counterproposal to the post-Cartesian philosophical anthropology which is, as he sees it, deleteriously enmeshed with the Western mindset. Leaving to one side the originary link to <i>Language Animal</i>, there’s a strong case – on grounds of themes, scope, approach, and aims – for regarding <i>Connections</i> as the third instalment in a trilogy with <i>Sources</i> and <i>Secular Age</i>.</p>
+
   

@@ -1,7 +1,7 @@
 export const site = {
   url: "https://stevanveljkovic.com/",
-  name: "Stevan Veljkovic – theorist and editor",
-  shortName: "Stevan Veljkovic",
+  name: "SM Veljkovic. Nor is this all.",
+  shortName: "SM Veljkovic",
   author: "Stevan Veljkovic",
   email: "hello@stevanveljkovic.com",
   analyticsId: "G-7VMGXMNZZ0",

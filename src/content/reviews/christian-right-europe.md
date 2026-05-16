@@ -66,8 +66,8 @@ bylineHtml: >-
 
 ---
 
-  <p class="title">
-      <span style="font-weight:bolder">The Christian Right in Europe: Movements, Networks, and Denominations</span>. Edited by Gionathan Lo Mascolo. Bielefeld: transcript Verlag, 2023. 386pp. $55.00 paper.
+  <p class="title" style="padding-left: 0; text-indent: 0">
+      <span style="font-weight:bolder;">The Christian Right in Europe: Movements, Networks, and Denominations</span>. Edited by Gionathan Lo Mascolo. Bielefeld: transcript Verlag, 2023. 386pp. $55.00 paper.
     </p>
     <p class="counter" id="1">[&#8239;1&#8239;]</p>
     <p class="review_par">It was only after religious voters had a decisive role in consecutive US presidential elections, mobilizing first for Jimmy Carter in 1976 and then for Ronald Reagan in 1980, that some notion of a unified Christian Right entered the vernacular of American politics. Electoral outcomes of a lesser magnitude in European and post-Soviet countries now prompt scholars to observe an analogous, <i>supranational</i> development across the Atlantic. Gionathan Lo Mascolo and Kristina Stoeckl argue that “sophisticated networks&nbsp;.&nbsp;.&nbsp;. between think tanks, non-governmental organizations, oil and gas companies, dubious financiers, state-funded charities and associations, extremist parties and groups, church leaders, and other initiatives” constitute a loose but nonetheless unitary phenomenon (pp.&nbsp;12–13), one which links Evangelicals, Catholics, and Eastern Orthodox over a continent, in the EU and beyond.</p>

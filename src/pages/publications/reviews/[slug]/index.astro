@@ -1,10 +1,9 @@
 ---
-import { getCollection } from "astro:content";
+import { getCollection, render } from "astro:content";
 import ReviewLayout from "../../../../layouts/ReviewLayout.astro";
 import ReviewIntro from "../../../../components/ReviewIntro.astro";
 import ReviewByLine from "../../../../components/ReviewByLine.astro";
-import { buildReviewSchema } from "../../../../lib/schema/review";
-import { render } from "astro:content";
+import { createReviewSchema } from "../../../../data/schema/reviews/createReviewSchema";
 
 export async function getStaticPaths() {
   const reviews = await getCollection("reviews", ({ data }) => !data.draft);
@@ -19,7 +18,7 @@ const { entry } = Astro.props;
 const { Content } = await render(entry);
 
 const review = entry.data;
-const jsonLd = buildReviewSchema(review);
+const jsonLd = createReviewSchema(review);
    console.log("Dynamic review route rendering:", review.slug,
 Astro.url.pathname);
 ---

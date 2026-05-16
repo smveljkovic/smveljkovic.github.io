@@ -46,7 +46,7 @@ publishedReview:
   identifier: "csaf039"
   datePublished: "2025-07-25T00:00:00+01:00"
 
-citationHtml: 'Veljkovic, Stevan. Review of <i>The Christian Right in Europe: Movements Networks, and Denominations</i>, edited by Charles Taylor. <i>European Journal of Social
+citationHtml: 'Veljkovic, Stevan. Review of <i>The Christian Right in Europe: Movements Networks, and Denominations</i>, edited by Gionathan Lo Mascolo. <i>European Journal of Social
 Theory</i> 28, no. 2 (2025): 339–42. <a
 href="https://doi.org/10.1177/13684310241249684">https://doi.org/10.1177/
 13684310241249684</a>.'

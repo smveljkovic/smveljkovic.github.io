@@ -48,7 +48,7 @@ div.Basic-Text-Frame {
 	background-color: hsl(0, 0%, 7%);
 }
 
-h1.Details {
+p.Details {
     color: #FFFFFF;
     font-family: "MetaSerifPro-Book", serif;
 	/* minus 30% base .name */

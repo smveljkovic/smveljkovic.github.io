@@ -5,7 +5,7 @@ title: "Stevan Veljkovic reviews The Christian Right in Europe: Movements, Netwo
 shortTitle: "Veljkovic review of The Christian Right in Europe"
 slug: "christian-right-europe"
 
-description: "A compendium of rich and useful scholarship bound together by a tendentious thesis."
+description: "This respository of rich and useful scholarship is bound together by a tendentious thesis, writes Stevan Veljkovic."
 
 dateCreated: "2024-10-29T18:22:00+00:00"
 datePublished: "2025-07-25T12:00:00+01:00"
@@ -22,42 +22,61 @@ reviewedWork:
   type: "Book"
   title: "The Christian Right in Europe: Movements, Networks, and Denominations"
   author: "Gionathan Lo Mascolo (ed.)"
+  editor:
+    name: "Gionathan Lo Mascolo"
+  doi: "10.1515/9783839460382"
+  url: "https://www.degruyterbrill.com/document/doi/10.1515/9783839460382/html/"
+  sameAs:
+    - "https://www.transcript-publishing.com/978-3-8376-6038-8/the-christian-right-in-europe/"
   publisher: "transcript Verlag"
   place: "Bielefeld"
   year: "2023"
   isbn:
     - "9783839460382"
     - "3839460387"
-  doi: "10.1515/9783839460382"
-  sameAs: 
-    - "https://www.transcript-publishing.com/978-3-8376-6038-8/the-christian-right-in-europe/"
-  url: "https://www.degruyterbrill.com/document/doi/10.1515/9783839460382/html/"
+
+
+
   image: "https://www.degruyterbrill.com/document/cover/isbn/9783839460382/product_pages/"
 
 publishedReview:
   title: "The Christian Right in Europe: Movements, Networks, and Denominations. Edited By Gionathan Lo Mascolo"
-  journal: "Journal of Church and State"
-  journalUrl: "https://academic.oup.com/jcs"
-  doi: "https://doi.org/10.1093/jcs/csaf039"
-  url: "https://academic.oup.com/jcs/article/67/3/csaf039/8213591"
-  volume: "67"
-  issue: "3"
-  year: "2025"
-  identifier: "csaf039"
+  doi: "10.1093/jcs/csaf039"
+  url: "https://doi.org/10.1093/jcs/csaf039"
+  sameAs:
+    - "https://academic.oup.com/jcs/article/67/3/csaf039/8213591"
   datePublished: "2025-07-25T00:00:00+01:00"
+  pagination: "csaf039"
+  
+  journal:
+    name: "Journal of Church and State"
+    url: "https://academic.oup.com/jcs"
+    publisher: "Oxford University Press"
+    issn:
+      - "0021-969X"
+      - "2040-4867"
+      
+  volume:
+    number: "67"
+    url: "https://academic.oup.com/jcs/issue/67/3"
+    
+  issue:
+    number: "3"
+    url: "https://academic.oup.com/jcs/issue/67/3/"
+    datePublished: "2025-07-01"
+    image: "https://oup.silverchair-cdn.com/oup/backfile/Content_public/Journal/jcs/Issue/67/3/15/m_jcs_67_3cover.jpeg"
+  
+    
+version: "Version of Record"
 
-citationHtml: 'Veljkovic, Stevan. Review of <i>The Christian Right in Europe: Movements Networks, and Denominations</i>, edited by Gionathan Lo Mascolo. <i>European Journal of Social
-Theory</i> 28, no. 2 (2025): 339–42. <a
-href="https://doi.org/10.1177/13684310241249684">https://doi.org/10.1177/
-13684310241249684</a>.'
 
-openingVersionNote: "the Author Accepted Manuscript (AAM)"
+
+citationHtml: 'Veljkovic, Stevan. Review of <i>The Christian Right in Europe: Movements Networks, and Denominations</i>, edited by Gionathan Lo Mascolo. <i>Journal of Church and State</i> 67, no. 3 (Summer 2025): csaf039. <a href="https://doi.org/10.1093/jcs/csaf039">https://doi.org/10.1093/jcs/csaf039</a>.'
+
+# openingVersionNote: "the Author Accepted Manuscript (AAM)"
 
 originalSubmissionNote:
-  - "This AAM is made available here according to the "
-  - text: "publisher’s policy"
-    href: "https://academic.oup.com/pages/self_archiving_policy_b"
-  - " on author reuse."
+  - "Reproduced here by permission of Oxford University Press."
   
 bylineHtml: >-
   <p class="byline" style="text-align:left">Stevan Veljkovic</p>

@@ -22,6 +22,9 @@ reviewedWork:
   type: "Book"
   title: "Cosmic Connections: Poetry in the Age of Disenchantment"
   author: "Charles Taylor"
+  doi: "10.4159/9780674297074"
+  sameAs:
+  - "https://www.degruyterbrill.com/document/doi/10.4159/9780674297074/html"
   publisher: "The Belknap Press of Harvard University Press"
   place: "Cambridge, MA"
   year: "2024"
@@ -30,23 +33,37 @@ reviewedWork:
     - "9780674297067"
     - "0674297075"
     - "0674297067"
-  doi: "10.4159/9780674297074"
-  url: "https://www.degruyterbrill.com/document/doi/10.4159/9780674297074/html"
   image: "https://www.degruyterbrill.com/document/cover/isbn/9780674297074/product_pages"
 
 publishedReview:
   title: "Book Review: Cosmic Connections: Poetry in the Age of Disenchantment"
-  journal: "European Journal of Social Theory"
-  journalUrl: "https://journals.sagepub.com/home/EST"
   doi: "10.1177/13684310241249684"
-  url: "https://journals.sagepub.com/doi/10.1177/13684310241249684"
-  volume: "28"
-  issue: "2"
-  year: "2025"
-  pages: "339–42"
+  url: "https://doi.org/10.1177/13684310241249684"
+  sameAs:
+  - "https://journals.sagepub.com/doi/10.1177/13684310241249684"
+  datePublished: "2024-05-24T12:00:00+01:00"
+  pagination: "339–42"
   pageStart: "339"
   pageEnd: "342"
-  datePublished: "2024-05-24T12:00:00+01:00"
+  image: "https://journals.sagepub.com/cms/asset/e55d45ab-8419-4908-b935-0563c55874fa/esta_28_2.cover.png"
+  journal:
+    name: "European Journal of Social Theory"
+    url: "https://journals.sagepub.com/home/EST"
+    issn:
+       - "1368-4310"
+       - "1461-7137"
+    publisher: "Sage Publications"
+    
+  volume:
+    number: "28"
+    url: "https://journals.sagepub.com/toc/esta/28"
+    
+  issue: 
+    number: "2"
+    url: "https://journals.sagepub.com/toc/esta/28/2"
+    datePublished: "2025-05"
+    
+image: "https://www.degruyterbrill.com/document/cover/isbn/9780674297074/product_pages"
 
 citationHtml: 'Veljkovic, Stevan. Review of <i>Cosmic Connections: Poetry in the
 Age of Disenchantment</i>, by Charles Taylor. <i>European Journal of Social
@@ -55,7 +72,7 @@ href="https://doi.org/10.1177/13684310241249684">https://doi.org/10.1177/
 13684310241249684</a>.'
 
 openingVersionNote: 'the Original Submission'
-
+version: "Author’s Original Manuscript"
 originalSubmissionNote:
     - "This unabridged original is significantly longer than
 the text of the Final Published PDF, and is made available here according to the "

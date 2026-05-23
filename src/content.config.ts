@@ -31,6 +31,7 @@ const reviews = defineCollection({
 
     title: z.string(),
     shortTitle: z.string(),
+    version: z.string().optional(),
     slug: z.string(),
 
     description: z.string(),
@@ -62,17 +63,18 @@ const reviews = defineCollection({
       image: z.string().optional(),
     }),
 
-    publishedReview: z
-      .object({
+    publishedReview: z.object({
         title: z.string(),
-        journal: z.string(),
-        journalUrl: z.url().optional(),
-        doi: z.string(),
-        url: z.url(),
-        volume: z.string().optional(),
-        issue: z.string().optional(),
-        year: z.string().optional(),
-        pages: z.string().optional(),
+        doi: z.string().optional(),
+        url: z.url().optional(),
+        sameAs: z.array(z.url()).optional(),
+        // journal: z.string(),
+        // journalUrl: z.url().optional(),
+        image: z.url().optional(),
+        // volume: z.string().optional(),
+        // issue: z.string().optional(),
+        // year: z.string().optional(),
+        pagination: z.string().optional(),
         pageStart: z.string().optional(),
         pageEnd: z.string().optional(),
         datePublished: z.string(),
@@ -83,7 +85,7 @@ const reviews = defineCollection({
 
     originalSubmissionNote: z.array(inlineNotePartSchema),
 
-    openingVersionNote: z.string(),
+    openingVersionNote: z.string().optional(),
 
     searchMeta: z
       .object({

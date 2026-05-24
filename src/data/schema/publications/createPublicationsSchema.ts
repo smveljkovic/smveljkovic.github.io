@@ -70,10 +70,6 @@ function slugify(value: string) {
 
 function schemaTypeForItem(itemType: PublicationSchemaItemType) {
     switch (itemType) {
-        case "article":
-            return "ScholarlyArticle";
-        function schemaTypeForItem(itemType: PublicationSchemaItemType) {
-            switch (itemType) {
                 case "article":
                     return "ScholarlyArticle";
                 case "bookReview":
@@ -84,14 +80,6 @@ function schemaTypeForItem(itemType: PublicationSchemaItemType) {
                     return "Chapter";
                 default:
                     return "CreativeWork";
-            }
-        }
-        case "thesis":
-            return "Thesis";
-        case "chapter":
-            return "Chapter";
-        default:
-            return "CreativeWork";
     }
 }
 

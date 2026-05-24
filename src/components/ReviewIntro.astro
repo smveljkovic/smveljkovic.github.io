@@ -1,5 +1,10 @@
 ---
-const { review } = Astro.props;
+import type { CollectionEntry } from "astro:content";
+
+type ReviewData = CollectionEntry<"reviews">["data"];
+type OriginalSubmissionNotePart = ReviewData["originalSubmissionNote"][number];
+
+const review = Astro.props.review as ReviewData;
 ---
 
 <div>
@@ -22,7 +27,7 @@ Date(review.publishedReview.datePublished).toLocaleDateString("en-GB", {
 
     {review.originalSubmissionNote && (
   <p class="intro">
-    {review.originalSubmissionNote.map((part) =>
+    {review.originalSubmissionNote.map((part: OriginalSubmissionNotePart) =>
       typeof part === "string" ? (
         part
       ) : (

@@ -1,5 +1,6 @@
 import type { CollectionEntry } from "astro:content";
 import { site } from "../../site";
+import { doiIdentifier, doiUrl } from "../../../lib/doi";
 
 type ReviewData = CollectionEntry<"reviews">["data"];
 
@@ -7,31 +8,17 @@ export function absoluteUrl(path: string) {
     return new URL(path, site.url).toString();
 }
 
+function firstString(value: unknown): string | undefined {
+    if (typeof value === "string") return value;
+    if (Array.isArray(value)) {
+        return value.find((item): item is string => typeof item === "string");
+    }
+    return undefined;
+}
+
 function dateValue(date: string | Date | undefined) {
     if (!date) return undefined;
     return date instanceof Date ? date.toISOString() : date;
-}
-
-function doiUrl(doi: string | undefined) {
-    if (!doi) return undefined;
-    return doi.startsWith("http") ? doi : `https://doi.org/${doi}`;
-}
-
-function cleanDoi(doi: string | undefined) {
-    if (!doi) return undefined;
-    return doi.replace(/^https?:\/\/doi\.org\//, "");
-}
-
-function doiIdentifier(doi: string | undefined) {
-    const value = cleanDoi(doi);
-
-    if (!value) return undefined;
-
-    return {
-        "@type": "PropertyValue",
-        propertyID: "DOI",
-        value,
-    };
 }
 
 function compactObject(object: Record<string, unknown>) {
@@ -50,7 +37,7 @@ export function createReviewSchema(review: ReviewData) {
     const reviewedWorkId =
         doiUrl(review.reviewedWork.doi) ??
         review.reviewedWork.url ??
-        review.reviewedWork.sameAs ??
+        firstString(review.reviewedWork.sameAs) ??
         `${pageUrl}#reviewed-work`;
 
     const publishedReviewId =
@@ -82,7 +69,10 @@ export function createReviewSchema(review: ReviewData) {
                 name: review.reviewedWork.author,
             },
             isbn: review.reviewedWork.isbn,
-            url: review.reviewedWork.url,
+            url:
+                doiUrl(review.reviewedWork.doi) ??
+                review.reviewedWork.url ??
+                firstString(review.reviewedWork.sameAs),
             sameAs: review.reviewedWork.sameAs,
             image: review.reviewedWork.image,
             identifier: doiIdentifier(review.reviewedWork.doi),
@@ -93,7 +83,7 @@ export function createReviewSchema(review: ReviewData) {
         compactObject({
             "@id": publishedReviewId,
             "@type": ["ScholarlyArticle", "Review"],
-            url: review.publishedReview.url ?? publishedReviewId,
+            url: doiUrl(review.publishedReview.doi) ?? review.publishedReview.url ?? publishedReviewId,
             sameAs: review.publishedReview.sameAs,
             name: review.publishedReview.title,
             headline: review.publishedReview.title,

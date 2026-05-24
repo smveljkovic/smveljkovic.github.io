@@ -1,4 +1,5 @@
 import { site } from "../../site";
+import { doiIdentifier, doiUrl } from "../../../lib/doi";
 
 export type PublicationSchemaItemType =
     | "article"
@@ -24,27 +25,6 @@ function absoluteUrl(pathOrUrl: string) {
     return new URL(pathOrUrl, site.url).toString();
 }
 
-function doiUrl(doi: string | undefined) {
-    if (!doi) return undefined;
-    return doi.startsWith("http") ? doi : `https://doi.org/${doi}`;
-}
-
-function cleanDoi(doi: string | undefined) {
-    if (!doi) return undefined;
-    return doi.replace(/^https?:\/\/(?:dx\.)?doi\.org\//, "");
-}
-
-function doiIdentifier(doi: string | undefined) {
-    const value = cleanDoi(doi);
-
-    if (!value) return undefined;
-
-    return {
-        "@type": "PropertyValue",
-        propertyID: "DOI",
-        value,
-    };
-}
 
 function dateValue(date: string | Date | undefined) {
     if (!date) return undefined;
@@ -94,8 +74,8 @@ function publicationId(item: PublicationSchemaItem) {
 
 function publicationUrl(item: PublicationSchemaItem) {
     return (
-        (item.url ? absoluteUrl(item.url) : undefined) ??
         doiUrl(item.doi) ??
+        (item.url ? absoluteUrl(item.url) : undefined) ??
         (item.localPath ? absoluteUrl(item.localPath) : undefined)
     );
 }

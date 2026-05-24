@@ -1,6 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import TextPageLayout from "../../layouts/TextPageLayout.astro";
+import { createPublicationsSchema } from "../../data/schema/publications/createPublicationsSchema";
 
 const reviews = await getCollection("reviews", ({ data }) => !data.draft);
 const listOnlyPublicationItems = await getCollection(
@@ -13,6 +14,8 @@ const reviewPublicationItems = reviews.map((entry) => {
 
     return {
         id: `review:${entry.id}`,
+        title: review.publishedReview?.title ?? review.title,
+        itemType: "bookReview" as const,
         year:
             review.publicationList?.year ??
             new Date(review.datePublished).getFullYear(),
@@ -24,6 +27,10 @@ const reviewPublicationItems = reviews.map((entry) => {
         citationHtml: review.citationHtml,
         noteHtml: review.publicationList?.noteHtml,
         noteId: review.publicationList?.noteId,
+        doi: review.publishedReview?.doi,
+        url: review.publishedReview?.url,
+        localPath: review.canonicalPath,
+        datePublished: review.publishedReview?.datePublished ?? review.datePublished,
     };
 });
 
@@ -32,12 +39,17 @@ const bibliographyPublicationItems = listOnlyPublicationItems.map((entry) => {
 
   return {
     id: `publicationItem:${entry.id}`,
+    title: publicationItem.title,
+    itemType: publicationItem.itemType,
     year: publicationItem.publicationList.year,
     sortDate: publicationItem.publicationList.sortDate ?? `${publicationItem.publicationList.year}-01-01`,
     order: publicationItem.publicationList.order ?? 0,
     citationHtml: publicationItem.citationHtml,
     noteHtml: publicationItem.publicationList.noteHtml,
     noteId: publicationItem.publicationList.noteId,
+    doi: publicationItem.doi,
+    url: publicationItem.url,
+    datePublished: publicationItem.publicationList.sortDate,
   };
 });
 
@@ -57,6 +69,13 @@ const sortedPublicationItems = publicationItems.sort((a, b) => {
     return a.order - b.order;
 })
 
+const jsonLd = createPublicationsSchema(
+    sortedPublicationItems.map((item, index) => ({
+      ...item,
+      position: index + 1,
+    }))
+);
+
 const publicationsGroups = Array.from(
     sortedPublicationItems.reduce((groups, item) => {
         const group = groups.get(item.year) ?? [];
@@ -69,7 +88,8 @@ const publicationsGroups = Array.from(
 <TextPageLayout
   title="Publications of Dr Stevan Veljkovic"
   description="Publications of Dr Stevan Veljkovic."
-  canonicalPath="/publications/">
+  canonicalPath="/publications/"
+  jsonLd={jsonLd}>
 
   <div style="display:inline-block; width:fit-content;">
     <h1 class="BibHeading">Publications and PhD thesis</h1>

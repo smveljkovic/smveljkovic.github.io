@@ -79,7 +79,13 @@ the text of the Final Published PDF, and is made available here according to the
     - text: "publisher’s policy"
       href: "https://www.sagepub.com/journals/permissions/sages-author-archiving-and-re-use-guidelines"
     - " on author reuse."
-    
+publicationList:
+  year: 2024
+  sortDate: "2025-05-01"
+  order: 40
+  noteId: "strange"
+  noteHtml: 'The preprint of this review is available in the following formats: <a href="reviews/cosmic-connections/">html</a> | <a href="reviews/cosmic-connections/veljkovic-review-cosmic-connections.pdf">pdf</a>.'
+
 bylineHtml: >-
   <p class="byline">Stevan Veljkovic</p>
   <p class="byline"> University of Oxford</p>

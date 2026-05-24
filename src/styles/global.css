@@ -1,7 +1,12 @@
+
 body, div, dl, dt, dd, h1, h2, h3, h4, h5, h6, p, pre, code, blockquote {
     background-color: hsl(0, 0%, 7%);
 	margin: 0;
     tab-size: 10;
+}
+
+:root {
+	--bib-indent: 2em;
 }
 
 a:link, button {
@@ -163,16 +168,19 @@ p.BibEntry, p.CVEntry {
 	color: white;
 	font-family: "MetaSerifPro-Book", serif;
 	font-size: 2vw;*/
-	padding-left: 2em;
-	text-indent: -2em;
+	padding-left: var(--bib-indent);
+	text-indent: calc(var(--bib-indent) * -1);
 	/*padding-bottom: 1em;*/
 		
 }
 
 #strange {
+		margin-left: var(--bib-indent);
 		padding-left: 0;
 		text-indent: 0;
 }
+
+
 p.BibNote {
 	color: white;
 	font-family: "MetaSerifPro-Book", serif;
@@ -384,6 +392,10 @@ div.test {
 
 @media screen and (max-width: 600px) {
 
+:root {
+	--bib-indent: 2em;
+}
+
 body {
   padding-left: 0.25rem;
   padding-right: 0.25rem;
@@ -457,13 +469,25 @@ body {
 		padding-top: 1em;
 		
 	}
+
+/*	#strange {
+		margin-left: 2em;
+	}
+
+	@supports (text-indent: 2em each-line) {
+		#strange {
+			padding-left: 0;
+			text-indent: 2em each-line;
+		}
+	}*/
+
 	p.BibEntry, p.CVEntry {
 	/*display: inline-block;
 	color: white;
 	font-family: "MetaSerifPro-Book", serif;
 	font-size: 2vw;*/
-	padding-left: 2.25;
-	text-indent: -2.25;
+	padding-left: var(--bib-indent);
+	text-indent: calc(var(--bib-indent) * -1);
 	}
 	
 	#writings, #cv {
@@ -474,5 +498,7 @@ body {
 	p.counter_bib, p.counter {
 		font-weight: 600;
 	}
+
+
 	
 }

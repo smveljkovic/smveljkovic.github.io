@@ -20,6 +20,14 @@ const inlineNotePartSchema = z.union([
   }),
 ]);
 
+const publicationListSchema = z.object({
+    year: z.number(),
+    sortDate: z.string().optional(),
+    order: z.number().optional(),
+    noteHtml: z.string().optional(),
+    noteId: z.string().optional(),
+})
+
 const reviews = defineCollection({
   loader: glob({
     base: "./src/content/reviews",
@@ -83,6 +91,8 @@ const reviews = defineCollection({
 
     citationHtml: z.string(),
 
+    publicationList: publicationListSchema.optional(),
+
     originalSubmissionNote: z.array(inlineNotePartSchema),
 
     openingVersionNote: z.string().optional(),
@@ -99,6 +109,30 @@ const reviews = defineCollection({
   }),
 });
 
+const publicationItems = defineCollection({
+    loader: glob({
+        base: "./src/content/publication-items",
+        pattern: "**/*.md",
+    }),
+
+    schema: z.object({
+        draft: z.boolean().default(false),
+
+        title: z.string(),
+        itemType: z
+            .enum(["article", "bookReview", "thesis", "chapter", "other"])
+            .default("other"),
+
+        citationHtml: z.string(),
+
+        publicationList: publicationListSchema,
+
+        doi: z.string().optional(),
+        url: hrefSchema.optional(),
+    }),
+});
+
 export const collections = {
-  reviews,
+    reviews,
+    publicationItems,
 };

@@ -1,5 +1,5 @@
 ---
-import { site } from "../data/site";
+import { absoluteUrl, formatTitle, site } from "../data/site";
 import Analytics from "./Analytics.astro";
 import FaviconLinks from "./FaviconLinks.astro";
 import JsonLd from "./JsonLd.astro";
@@ -7,23 +7,30 @@ import JsonLd from "./JsonLd.astro";
 interface Props {
   title: string;
   description?: string;
-  canonicalPath: string;
-  ogType?: string;
+  canonicalPath?: string;
+  ogType?: "website" | "article";
   image?: string;
   jsonLd?: unknown;
+  bodyClass?: string;
+  bodyStyle?: string;
 }
 
 const {
   title,
-  description = "Personal website of Dr Stevan Veljkovic.",
-  canonicalPath,
+  description = site.description,
+  canonicalPath = "/",
   ogType = "website",
   image = site.image,
   jsonLd,
 } = Astro.props;
 
-const canonicalUrl = new URL(canonicalPath, site.url).toString();
-const imageUrl = new URL(image, site.url).toString();
+const fullTitle = formatTitle(title);
+
+const canonicalUrl = absoluteUrl(canonicalPath);
+const imageUrl = absoluteUrl(image);
+
+const objectTitle = title ?? site.siteName;
+
 ---
 
 <meta charset="utf-8" />
@@ -31,21 +38,22 @@ const imageUrl = new URL(image, site.url).toString();
 
 <Analytics />
 
-<title>{title}</title>
+<title>{fullTitle}</title>
 <meta name="description" content={description} />
 <meta name="author" content={site.author} />
 
 <link rel="canonical" href={canonicalUrl} />
 
-<meta property="og:title" content={title} />
+<meta property="og:title" content={objectTitle} />
 <meta property="og:description" content={description} />
 <meta property="og:url" content={canonicalUrl} />
 <meta property="og:type" content={ogType} />
 <meta property="og:image" content={imageUrl} />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
+<meta property="og:site_name" content={site.siteName} />
 
-<meta name="twitter:title" content={title} />
+<meta name="twitter:title" content={objectTitle} />
 <meta name="twitter:description" content={description} />
 <meta name="twitter:image" content={imageUrl} />
 <meta name="twitter:card" content="summary_large_image" />

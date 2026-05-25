@@ -19,13 +19,17 @@ const { Content } = await render(entry);
 
 const review = entry.data;
 const jsonLd = createReviewSchema(review);
+
+const title = review.seoTitle ?? review.title;
+
 ---
 
 <ReviewLayout
-  title={`${review.shortTitle} by ${review.reviewedWork.author} | Book review`}
+  title={title}
   description={review.description}
   canonicalPath={review.canonicalPath}
   ogType="article"
+  image={review.image}
   jsonLd={jsonLd}
 >
   <Fragment slot="head">

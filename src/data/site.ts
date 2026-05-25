@@ -1,8 +1,17 @@
 export const site = {
   url: "https://stevanveljkovic.com/",
-  name: "SM Veljkovic. Nor is this all.",
+  siteName: "Stevan Veljkovic",
+  personName: "Stevan Veljkovic",
+  displayname: "Dr Stevan M. Veljkovic",
+  tagline: "Theory and design",
+  description:
+      "Online home of Dr Stevan M. Veljkovic, Oxford-based scholar, builder, and editor. Publications, résumé, contact. Verve and sangfroid. Nor is this all.",
+
+  // Backwards-compatible aliases for existing code.
+  name: "Stevan Veljkovic",
   shortName: "SM Veljkovic",
   author: "Stevan Veljkovic",
+
   email: "hello@stevanveljkovic.com",
   analyticsId: "G-7VMGXMNZZ0",
   language: "en-GB",
@@ -10,4 +19,16 @@ export const site = {
   orcid: "https://orcid.org/0000-0002-2599-3227",
   scholar: "https://scholar.google.com/citations?user=e42TN4UAAAAJ",
   github: "https://github.com/smveljkovic",
-};
+} as const;
+
+export function absoluteUrl(path: string): string {
+  return new URL(path, site.url).toString();
+}
+
+export function formatTitle(pageTitle?: string): string {
+  if (!pageTitle || pageTitle === site.siteName) {
+    return site.siteName;
+  }
+
+  return `${pageTitle} | ${site.siteName}`;
+}

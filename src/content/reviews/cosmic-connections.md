@@ -4,7 +4,7 @@ draft: false
 title: "Stevan Veljkovic reviews Cosmic Connections: Poetry in the Age of Disenchantment by Charles Taylor"
 shortTitle: "Veljkovic review of Cosmic Connections"
 slug: "cosmic-connections"
-
+seoTitle: "Review of Cosmic Connections"
 description: "In a book which bids fair to become his culminating output, Taylor joins up the facets of an extraordinary career."
 
 dateCreated: "2024-04-02T17:09:00+01:00"

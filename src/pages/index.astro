@@ -1,12 +1,16 @@
 ---
 import HomeLayout from "../layouts/HomeLayout.astro";
 import { homeSchema } from "../data/schema/home";
+import { pageMeta } from "../data/pageMeta"
+
+const meta = pageMeta.home;
 ---
 
 <HomeLayout
-  title="Stevan Veljkovic – theorist and editor"
-  description="Personal website of Dr Stevan Veljkovic."
-  canonicalPath="/"
+  title={meta.title}
+  description={meta.description}
+  canonicalPath={meta.path}
+  ogType={meta.ogType}
   jsonLd={homeSchema}>
 
   <div class="test">

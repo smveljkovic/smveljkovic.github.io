@@ -39,6 +39,7 @@ const reviews = defineCollection({
 
     title: z.string(),
     shortTitle: z.string(),
+    seoTitle: z.string().optional(),
     version: z.string().optional(),
     slug: z.string(),
 
@@ -51,6 +52,8 @@ const reviews = defineCollection({
     canonicalPath: z.string(),
 
     pdf: z.string().optional(),
+
+    image: z.string().optional(),
 
     reviewer: z.object({
       name: z.string(),

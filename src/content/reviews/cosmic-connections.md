@@ -5,7 +5,13 @@ title: "Stevan Veljkovic reviews Cosmic Connections: Poetry in the Age of Disenc
 shortTitle: "Veljkovic review of Cosmic Connections"
 slug: "cosmic-connections"
 seoTitle: "Review of Cosmic Connections"
+pageHeading: "Review of Cosmic Connections"
 description: "In a book which bids fair to become his culminating output, Taylor joins up the facets of an extraordinary career."
+reviewDek:
+  workTitle: "Cosmic Connections"
+  creatorRole: "author"
+  creatorName: "Charles Taylor"
+
 
 dateCreated: "2024-04-02T17:09:00+01:00"
 datePublished: "2024-05-24T12:00:00+01:00"

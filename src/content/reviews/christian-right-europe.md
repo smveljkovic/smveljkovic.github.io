@@ -4,6 +4,12 @@ draft: false
 title: "Stevan Veljkovic reviews The Christian Right in Europe: Movements, Networks, and Denominations by Gionathan Lo Mascolo (ed.)"
 shortTitle: "Veljkovic review of The Christian Right in Europe"
 slug: "christian-right-europe"
+seoTitle: "Review of The Christian Right in Europe"
+pageHeading: "Review of The Christian Right in Europe"
+reviewDek:
+  workTitle: "The Christian Right in Europe"
+  creatorRole: "editor"
+  creatorName: "Gionathan Lo Mascolo"
 
 description: "This respository of rich and useful scholarship is bound together by a tendentious thesis, writes Stevan Veljkovic."
 
@@ -12,7 +18,7 @@ datePublished: "2025-07-25T12:00:00+01:00"
 
 canonicalPath: "/publications/reviews/christian-right-europe/"
 
-pdf: "/publications/reviews/cosmic-connections/veljkovic-review-cosmic-connections.pdf"
+pdf: "/publications/reviews/christian-right-europe/christian-right-europe.pdf"
 
 reviewer:
   name: "Stevan Veljkovic"
@@ -69,7 +75,7 @@ publishedReview:
     
 version: "Version of Record"
 
-
+image: "https://www.degruyterbrill.com/document/cover/isbn/9783839460382/product_pages/"
 
 citationHtml: 'Veljkovic, Stevan. Review of <i>The Christian Right in Europe: Movements Networks, and Denominations</i>, edited by Gionathan Lo Mascolo. <i>Journal of Church and State</i> 67, no. 3 (Summer 2025): csaf039. <a href="https://doi.org/10.1093/jcs/csaf039">https://doi.org/10.1093/jcs/csaf039</a>.'
 

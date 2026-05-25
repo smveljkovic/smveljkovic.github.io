@@ -44,6 +44,7 @@ const reviews = defineCollection({
     slug: z.string(),
 
     description: z.string(),
+    pageHeading: z.string().optional(),
 
     dateCreated: z.string(),
     datePublished: z.string(),
@@ -59,6 +60,14 @@ const reviews = defineCollection({
       name: z.string(),
       orcid: z.url(),
     }),
+
+    reviewDek: z
+      .object({
+          workTitle: z.string(),
+          creatorRole: z.enum(["author", "editor"]).default("author"),
+          creatorName: z.string(),
+      })
+      .optional(),
 
     reviewedWork: z.object({
       type: z.literal("Book"),

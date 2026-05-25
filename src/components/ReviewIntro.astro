@@ -5,10 +5,57 @@ type ReviewData = CollectionEntry<"reviews">["data"];
 type OriginalSubmissionNotePart = ReviewData["originalSubmissionNote"][number];
 
 const review = Astro.props.review as ReviewData;
+
+const heading =
+    review.pageHeading ??
+    review.seoTitle ??
+    `Review of ${review.title}`;
+
+const reviewedWorkShortTitle =
+    review.reviewDek?.workTitle ??
+    review.title;
+
+const reviewedWorkCreatorName =
+    review.reviewDek?.creatorName;
+
+const reviewedWorkCreatorRole =
+    review.reviewDek?.creatorRole ?? "author";
+
+const reviewedWorkCreatorPhrase =
+    reviewedWorkCreatorRole === "editor" ? "edited by" : "by";
+
+const showReviewDek = Boolean(reviewedWorkCreatorName);
 ---
 
 <div>
   <div class="review_intro">
+    <h1 class="review_heading">{heading}</h1>
+
+    {showReviewDek && reviewedWorkCreatorRole === "editor" && (
+        <p class="review_dek">
+          Stevan Veljkovic reviews <cite>{reviewedWorkShortTitle}</cite>, edited by{" "}
+    {reviewedWorkCreatorName}.
+          </p>
+          )}
+
+          {showReviewDek && reviewedWorkCreatorRole !== "editor" && (
+              <p class="review_dek">
+                Stevan Veljkovic reviews <cite>{reviewedWorkShortTitle}</cite> by{" "}
+                {reviewedWorkCreatorName}.
+              </p>
+          )}
+    <hr class="review_intro_rule" />
+
+    <style>
+      .review_intro_rule {
+        width: min(18rem, 58%);
+        margin: 1.25rem auto 1.45rem 0;
+        border: 0;
+        border-top: 1px solid rgba(255, 255, 255, 0.62);
+      }
+    </style>
+
+
     <p class="intro">The following text is the {review.version} for</p>
 
     <p class="intro" style="margin-left: 2em; text-indent: -2em;"

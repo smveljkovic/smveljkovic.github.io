@@ -53,6 +53,17 @@ div.Basic-Text-Frame {
 	background-color: hsl(0, 0%, 7%);
 }
 
+.review_heading {
+	font: inherit;
+	font-weight: 600;
+	margin: 0 0 0.5rem;
+}
+
+.review_dek {
+	margin: 0 0 1rem;
+}
+
+
 p.Details {
     color: #FFFFFF;
     font-family: "MetaSerifPro-Book", serif;

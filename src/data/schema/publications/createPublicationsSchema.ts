@@ -8,6 +8,12 @@ export type PublicationSchemaItemType =
     | "chapter"
     | "other";
 
+export interface PublicationIdentifier {
+    propertyID: string;
+    value: string;
+    url?: string;
+}
+
 export interface PublicationSchemaItem {
     id: string;
     title: string;
@@ -20,6 +26,7 @@ export interface PublicationSchemaItem {
     localPath?: string;
     datePublished?: string;
     firstPublishedOnline?: string;
+    identifiers?: PublicationIdentifier[];
     periodical?: {
         name: string;
         issn?: string[];
@@ -161,6 +168,14 @@ function publicationIdentifiers(item: PublicationSchemaItem) {
                 value: item.articleId,
             }
             : undefined,
+        ...(item.identifiers ?? []).map((identifier) =>
+            compactObject({
+                "@type": "PropertyValue",
+                propertyID: identifier.propertyID,
+                value: identifier.value,
+                url: identifier.url,
+            })
+        ),
     ]);
 
     if (identifiers.length === 1) return identifiers[0];

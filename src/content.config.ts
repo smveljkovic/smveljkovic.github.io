@@ -60,6 +60,12 @@ const publicationContainerSchema = z.object({
     pagination: z.string().optional(),
 });
 
+const publicationIdentifierSchema = z.object({
+    propertyID: z.string(),
+    value: z.string(),
+    url: z.string().url().optional(),
+});
+
 const reviews = defineCollection({
   loader: glob({
     base: "./src/content/reviews",
@@ -200,6 +206,7 @@ const publicationItems = defineCollection({
         pagination: z.string().optional(),
         pageStart: z.string().optional(),
         pageEnd: z.string().optional(),
+        identifiers: z.array(publicationIdentifierSchema).optional(),
     }),
 });
 

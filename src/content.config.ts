@@ -46,6 +46,7 @@ const publicationIssueSchema = z.object({
     number: z.string(),
     url: z.string().url().optional(),
     datePublished: z.string().optional(),
+    dateLabel: z.string().optional(),
     image: z.string().url().optional(),
 }).optional();
 
@@ -126,6 +127,7 @@ const reviews = defineCollection({
         sameAs: z.array(z.url()).optional(),
         image: z.url().optional(),
         datePublished: z.string(),
+        firstPublishedOnline: z.string().optional(),
 
         periodical: periodicalSchema.optional(),
         volume: publicationVolumeSchema,
@@ -143,6 +145,7 @@ const reviews = defineCollection({
 
     doi: z.string().optional(),
     url: hrefSchema.optional(),
+    firstPublishedOnline: z.string().optional(),
 
     periodical: periodicalSchema.optional(),
     volume: publicationVolumeSchema,
@@ -188,6 +191,7 @@ const publicationItems = defineCollection({
 
         doi: z.string().optional(),
         url: hrefSchema.optional(),
+        firstPublishedOnline: z.string().optional(),
 
         periodical: periodicalSchema.optional(),
         volume: publicationVolumeSchema,

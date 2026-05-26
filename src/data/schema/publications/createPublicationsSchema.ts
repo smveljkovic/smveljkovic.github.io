@@ -19,6 +19,7 @@ export interface PublicationSchemaItem {
     url?: string;
     localPath?: string;
     datePublished?: string;
+    firstPublishedOnline?: string;
     periodical?: {
         name: string;
         issn?: string[];
@@ -35,6 +36,7 @@ export interface PublicationSchemaItem {
         number: string;
         url?: string;
         datePublished?: string;
+        dateLabel?: string;
         image?: string;
     };
     articleId?: string;
@@ -245,7 +247,10 @@ export function createPublicationsSchema(items: PublicationSchemaItem[]) {
                     ? url
                     : undefined,
             author: { "@id": site.orcid },
-            datePublished: dateValue(item.datePublished ?? item.sortDate),
+            datePublished: dateValue(
+                item.firstPublishedOnline ??
+                item.datePublished ??
+                item.sortDate),
             inLanguage: site.language,
             identifier: publicationIdentifiers(item),
             isPartOf: mostSpecificPublicationContainerReference(item),

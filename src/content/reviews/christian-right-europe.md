@@ -51,6 +51,7 @@ publishedReview:
   sameAs:
     - "https://academic.oup.com/jcs/article/67/3/csaf039/8213591"
   datePublished: "2025-07-25"
+  firstPublishedOnline: "2025-07-25"
   
   periodical:
     name: "Journal of Church and State"
@@ -67,6 +68,7 @@ publishedReview:
     number: "3"
     url: "https://academic.oup.com/jcs/issue/67/3/"
     datePublished: "2025-07-01"
+    dateLabel: "Summer 2025"
     image: "https://oup.silverchair-cdn.com/oup/backfile/Content_public/Journal/jcs/Issue/67/3/15/m_jcs_67_3cover.jpeg"
 
   articleId: "csaf039"

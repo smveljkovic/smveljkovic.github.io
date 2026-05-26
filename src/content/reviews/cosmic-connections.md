@@ -14,7 +14,7 @@ reviewDek:
 
 
 dateCreated: "2024-04-02T17:09:00+01:00"
-datePublished: "2024-05-24T12:00:00+01:00"
+datePublished: "2024-05-24"
 
 canonicalPath: "/publications/reviews/cosmic-connections/"
 
@@ -47,11 +47,12 @@ publishedReview:
   url: "https://doi.org/10.1177/13684310241249684"
   sameAs:
   - "https://journals.sagepub.com/doi/10.1177/13684310241249684"
-  datePublished: "2024-05-24T12:00:00+01:00"
+  datePublished: "2024-05-24"
+  firstPublishedOnline: "2024-05-24"
+  
   pagination: "339–42"
   pageStart: "339"
   pageEnd: "342"
-  image: "https://journals.sagepub.com/cms/asset/e55d45ab-8419-4908-b935-0563c55874fa/esta_28_2.cover.png"
   
   periodical:
     name: "European Journal of Social Theory"
@@ -69,6 +70,8 @@ publishedReview:
     number: "2"
     url: "https://journals.sagepub.com/toc/esta/28/2"
     datePublished: "2025-05"
+    dateLabel: "May 2025"
+    image: "https://journals.sagepub.com/cms/asset/e55d45ab-8419-4908-b935-0563c55874fa/esta_28_2.cover.png"
     
 image: "https://www.degruyterbrill.com/document/cover/isbn/9780674297074/product_pages"
 

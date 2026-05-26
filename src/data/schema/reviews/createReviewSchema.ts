@@ -261,7 +261,9 @@ export function createReviewSchema(review: ReviewData) {
             headline: review.publishedReview.title,
             image: review.publishedReview.image,
             author: { "@id": site.orcid },
-            datePublished: dateValue(review.publishedReview.datePublished),
+            datePublished: dateValue(
+                review.publishedReview.firstPublishedOnline ??
+                review.publishedReview.datePublished),
             pagination: review.publishedReview.pagination,
             pageStart: review.publishedReview.pageStart,
             pageEnd: review.publishedReview.pageEnd,

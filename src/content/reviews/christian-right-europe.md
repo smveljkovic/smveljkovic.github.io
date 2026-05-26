@@ -11,10 +11,10 @@ reviewDek:
   creatorRole: "editor"
   creatorName: "Gionathan Lo Mascolo"
 
-description: "This respository of rich and useful scholarship is bound together by a tendentious thesis, writes Stevan Veljkovic."
+description: "This repository of rich and useful scholarship is bound together by a tendentious thesis, writes Stevan Veljkovic."
 
 dateCreated: "2024-10-29T18:22:00+00:00"
-datePublished: "2025-07-25T12:00:00+01:00"
+datePublished: "2025-07-25"
 
 canonicalPath: "/publications/reviews/christian-right-europe/"
 
@@ -27,7 +27,6 @@ reviewer:
 reviewedWork:
   type: "Book"
   title: "The Christian Right in Europe: Movements, Networks, and Denominations"
-  author: "Gionathan Lo Mascolo (ed.)"
   editor:
     name: "Gionathan Lo Mascolo"
   doi: "10.1515/9783839460382"
@@ -51,10 +50,9 @@ publishedReview:
   url: "https://doi.org/10.1093/jcs/csaf039"
   sameAs:
     - "https://academic.oup.com/jcs/article/67/3/csaf039/8213591"
-  datePublished: "2025-07-25T00:00:00+01:00"
-  pagination: "csaf039"
+  datePublished: "2025-07-25"
   
-  journal:
+  periodical:
     name: "Journal of Church and State"
     url: "https://academic.oup.com/jcs"
     publisher: "Oxford University Press"
@@ -64,15 +62,15 @@ publishedReview:
       
   volume:
     number: "67"
-    url: "https://academic.oup.com/jcs/issue/67/3"
     
   issue:
     number: "3"
     url: "https://academic.oup.com/jcs/issue/67/3/"
     datePublished: "2025-07-01"
     image: "https://oup.silverchair-cdn.com/oup/backfile/Content_public/Journal/jcs/Issue/67/3/15/m_jcs_67_3cover.jpeg"
+
+  articleId: "csaf039"
   
-    
 version: "Version of Record"
 
 image: "https://www.degruyterbrill.com/document/cover/isbn/9783839460382/product_pages/"

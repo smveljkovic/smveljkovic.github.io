@@ -1,7 +1,6 @@
-import { site } from "../site";
+import { absoluteUrl, site, siteId } from "../site";
 
-const siteUrl = site.url;
-const imageUrl = `${siteUrl}/images/headshot-1200x630.png`;
+const imageUrl = absoluteUrl("/images/headshot-1200x630.png");
 
 export const homeSchema = {
   "@context": "https://schema.org",
@@ -20,7 +19,7 @@ export const homeSchema = {
       name: "Stevan Veljkovic",
       additionalName: "M.",
       alternateName: "Stevan M. Veljkovic",
-      url: `${siteUrl}/`,
+      url: absoluteUrl("/"),
       email: `mailto:${site.email}`,
       image: { "@id": imageUrl },
       identifier: {
@@ -44,48 +43,44 @@ export const homeSchema = {
       ],
     },
     {
-      "@id": `${siteUrl}/#website`,
+      "@id": siteId("website"),
       "@type": "WebSite",
-      url: `${siteUrl}/`,
-      name: site.name,
-      alternateName: [
-        "Dr Stevan Veljkovic",
-        "S. Veljkovic – theorist and editor",
-        "Dr S. Veljkovic",
-      ],
+      url: absoluteUrl("/"),
+      name: site.siteName,
+      alternateName: "Dr Stevan M. Veljkovic",
       inLanguage: site.language,
       publisher: { "@id": site.orcid },
     },
     {
-      "@id": `${siteUrl}/`,
+      "@id": siteId("homepage"),
       "@type": "AboutPage",
-      url: `${siteUrl}/`,
+      url: absoluteUrl("/"),
       name: "Stevan Veljkovic",
       description: "Personal website of Dr Stevan Veljkovic.",
       inLanguage: site.language,
-      isPartOf: { "@id": `${siteUrl}/#website` },
+      isPartOf: { "@id": siteId("website") },
       mainEntity: { "@id": site.orcid },
       about: { "@id": site.orcid },
       author: { "@id": site.orcid },
       primaryImageOfPage: { "@id": imageUrl },
       hasPart: [
         {
-          "@id": `${siteUrl}/cv/`,
+          "@id": absoluteUrl("/cv/"),
           "@type": "ProfilePage",
-          url: `${siteUrl}/cv/`,
-          name: "Curriculum Vitae | Dr Stevan Veljkovic",
+          url: absoluteUrl("/cv/"),
+          name: "CV",
         },
         {
-          "@id": `${siteUrl}/publications/`,
+          "@id": absoluteUrl("/publications/"),
           "@type": "CollectionPage",
-          url: `${siteUrl}/publications/`,
-          name: "Publications | Dr Stevan Veljkovic",
+          url: absoluteUrl("/publications/"),
+          name: "Publications",
         },
         {
           "@id": "https://seminars.stevanveljkovic.com/",
           "@type": "WebSite",
           url: "https://seminars.stevanveljkovic.com/",
-          name: "Seminars | Dr Stevan Veljkovic",
+          name: "Seminars",
         },
       ],
     },

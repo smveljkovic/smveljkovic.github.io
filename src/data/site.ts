@@ -1,5 +1,5 @@
 export const site = {
-  url: "https://stevanveljkovic.com/",
+  url: "https://stevanveljkovic.com",
   siteName: "Stevan Veljkovic",
   personName: "Stevan Veljkovic",
   displayname: "Dr Stevan M. Veljkovic",
@@ -21,8 +21,16 @@ export const site = {
   github: "https://github.com/smveljkovic",
 } as const;
 
-export function absoluteUrl(path: string): string {
+export function absoluteUrl(path = "/"): string {
   return new URL(path, site.url).toString();
+}
+
+export function siteId(fragment: string): string {
+  return `${absoluteUrl("/")}#${fragment}`;
+}
+
+export function nodeId(path: string, fragment: string): string {
+  return `${absoluteUrl(path)}#${fragment}`;
 }
 
 export function formatTitle(pageTitle?: string): string {

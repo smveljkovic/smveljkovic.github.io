@@ -28,6 +28,37 @@ const publicationListSchema = z.object({
     noteId: z.string().optional(),
 })
 
+const periodicalSchema = z.object({
+    name: z.string(),
+    issn: z.array(z.string()).optional(),
+    printIssn: z.string().optional(),
+    electronicIssn: z.string().optional(),
+    url: z.string().url().optional(),
+    publisher: z.string().optional(),
+});
+
+const publicationVolumeSchema = z.object({
+    number: z.string(),
+    url: z.string().url().optional(),
+}).optional();
+
+const publicationIssueSchema = z.object({
+    number: z.string(),
+    url: z.string().url().optional(),
+    datePublished: z.string().optional(),
+    image: z.string().url().optional(),
+}).optional();
+
+const publicationContainerSchema = z.object({
+    periodical: periodicalSchema.optional(),
+    volume: publicationVolumeSchema,
+    issue: publicationIssueSchema,
+    articleId: z.string().optional(),
+    pageStart: z.string().optional(),
+    pageEnd: z.string().optional(),
+    pagination: z.string().optional(),
+});
+
 const reviews = defineCollection({
   loader: glob({
     base: "./src/content/reviews",
@@ -45,6 +76,8 @@ const reviews = defineCollection({
 
     description: z.string(),
     pageHeading: z.string().optional(),
+    schemaName: z.string().optional(),
+    schemaHeadline: z.string().optional(),
 
     dateCreated: z.string(),
     datePublished: z.string(),
@@ -72,7 +105,10 @@ const reviews = defineCollection({
     reviewedWork: z.object({
       type: z.literal("Book"),
       title: z.string(),
-      author: z.string(),
+      author: z.string().optional(),
+      editor: z.object({
+          name: z.string(),
+      }).optional(),
       publisher: z.string().optional(),
       place: z.string().optional(),
       year: z.string().optional(),
@@ -88,22 +124,33 @@ const reviews = defineCollection({
         doi: z.string().optional(),
         url: z.url().optional(),
         sameAs: z.array(z.url()).optional(),
-        // journal: z.string(),
-        // journalUrl: z.url().optional(),
         image: z.url().optional(),
-        // volume: z.string().optional(),
-        // issue: z.string().optional(),
-        // year: z.string().optional(),
+        datePublished: z.string(),
+
+        periodical: periodicalSchema.optional(),
+        volume: publicationVolumeSchema,
+        issue: publicationIssueSchema,
+        articleId: z.string().optional(),
         pagination: z.string().optional(),
         pageStart: z.string().optional(),
         pageEnd: z.string().optional(),
-        datePublished: z.string(),
-      })
-      .optional(),
+    }).optional(),
+
 
     citationHtml: z.string(),
 
-    publicationList: publicationListSchema.optional(),
+    publicationList: publicationListSchema,
+
+    doi: z.string().optional(),
+    url: hrefSchema.optional(),
+
+    periodical: periodicalSchema.optional(),
+    volume: publicationVolumeSchema,
+    issue: publicationIssueSchema,
+    articleId: z.string().optional(),
+    pagination: z.string().optional(),
+    pageStart: z.string().optional(),
+    pageEnd: z.string().optional(),
 
     originalSubmissionNote: z.array(inlineNotePartSchema),
 
@@ -141,6 +188,14 @@ const publicationItems = defineCollection({
 
         doi: z.string().optional(),
         url: hrefSchema.optional(),
+
+        periodical: periodicalSchema.optional(),
+        volume: publicationVolumeSchema,
+        issue: publicationIssueSchema,
+        articleId: z.string().optional(),
+        pagination: z.string().optional(),
+        pageStart: z.string().optional(),
+        pageEnd: z.string().optional(),
     }),
 });
 

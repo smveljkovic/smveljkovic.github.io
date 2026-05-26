@@ -1,5 +1,5 @@
-import { site } from "../../site";
-import { doiIdentifier, doiUrl } from "../../../lib/doi";
+import { absoluteUrl, site, siteId } from "../../site";
+import { doiUrl, normalizeDoi } from "../../../lib/doi";
 
 export type PublicationSchemaItemType =
     | "article"
@@ -19,10 +19,28 @@ export interface PublicationSchemaItem {
     url?: string;
     localPath?: string;
     datePublished?: string;
-}
-
-function absoluteUrl(pathOrUrl: string) {
-    return new URL(pathOrUrl, site.url).toString();
+    periodical?: {
+        name: string;
+        issn?: string[];
+        printIssn?: string;
+        electronicIssn?: string;
+        url?: string;
+        publisher?: string;
+    };
+    volume?: {
+        number: string;
+        url?: string;
+    };
+    issue?: {
+        number: string;
+        url?: string;
+        datePublished?: string;
+        image?: string;
+    };
+    articleId?: string;
+    pagination?: string;
+    pageStart?: string;
+    pageEnd?: string;
 }
 
 
@@ -39,6 +57,10 @@ function compactObject(object: Record<string, unknown>) {
             return true;
         })
     );
+}
+
+function compactArray<T>(array: Array<T | undefined | null | false>): T[] {
+    return array.filter(Boolean) as T[];
 }
 
 function slugify(value: string) {
@@ -80,9 +102,123 @@ function publicationUrl(item: PublicationSchemaItem) {
     );
 }
 
+function publicationContainerBaseId(item: PublicationSchemaItem) {
+    return `${absoluteUrl("/publications/")}#${slugify(item.id)}`;
+}
+
+function publicationContainerIds(item: PublicationSchemaItem) {
+    const baseId = publicationContainerBaseId(item);
+
+    return {
+        periodicalId: `${baseId}-periodical`,
+        volumeId: `${baseId}-volume`,
+        issueId: `${baseId}-issue`,
+    };
+}
+
+function periodicalIssns(item: PublicationSchemaItem): string[] | undefined {
+    if (!item.periodical) return undefined;
+
+    const values = compactArray([
+        ...(item.periodical.issn ?? []),
+        item.periodical.printIssn,
+        item.periodical.electronicIssn,
+    ]);
+
+    return values.length > 0 ? values : undefined;
+}
+
+function mostSpecificPublicationContainerReference(item: PublicationSchemaItem) {
+    if (!item.periodical) return undefined;
+
+    const { periodicalId, volumeId, issueId } = publicationContainerIds(item);
+
+    if (item.issue) return { "@id": issueId };
+    if (item.volume) return { "@id": volumeId };
+
+    return { "@id": periodicalId };
+}
+
+function publicationIdentifiers(item: PublicationSchemaItem) {
+    const normalizedDoi = normalizeDoi(item.doi);
+    const normalizedDoiUrl = doiUrl(item.doi);
+
+    const identifiers = compactArray([
+        normalizedDoi
+            ? {
+                "@type": "PropertyValue",
+                propertyID: "DOI",
+                value: normalizedDoi,
+                url: normalizedDoiUrl,
+            }
+            : undefined,
+        item.articleId
+            ? {
+                "@type": "PropertyValue",
+                propertyID: "Article ID",
+                value: item.articleId,
+            }
+            : undefined,
+    ]);
+
+    if (identifiers.length === 1) return identifiers[0];
+    if (identifiers.length > 1) return identifiers;
+
+    return undefined;
+}
+
+function createPublicationContainerNodes(item: PublicationSchemaItem) {
+    if (!item.periodical) return [];
+
+    const { periodicalId, volumeId, issueId } = publicationContainerIds(item);
+
+    const periodicalNode = compactObject({
+        "@id": periodicalId,
+        "@type": "Periodical",
+        name: item.periodical.name,
+        url: item.periodical.url,
+        issn: periodicalIssns(item),
+        publisher: item.periodical.publisher
+            ? {
+                "@type": "Organization",
+                name: item.periodical.publisher,
+            }
+            : undefined,
+    });
+
+    const volumeNode =
+        item.volume &&
+        compactObject({
+            "@id": volumeId,
+            "@type": "PublicationVolume",
+            volumeNumber: item.volume.number,
+            url: item.volume.url,
+            isPartOf: { "@id": periodicalId },
+        });
+
+    const issueNode =
+        item.issue &&
+        compactObject({
+            "@id": issueId,
+            "@type": "PublicationIssue",
+            issueNumber: item.issue.number,
+            url: item.issue.url,
+            datePublished: dateValue(item.issue.datePublished),
+            image: item.issue.image,
+            isPartOf: item.volume
+                ? { "@id": volumeId }
+                : { "@id": periodicalId },
+
+
+        });
+
+
+    return compactArray([periodicalNode, volumeNode, issueNode]);
+}
+
 export function createPublicationsSchema(items: PublicationSchemaItem[]) {
     const pageUrl = absoluteUrl("/publications/");
-    const websiteId = absoluteUrl("/#website");
+    const websiteId = siteId("website");
     const itemListId = `${pageUrl}#publication-list`;
 
     const itemListElements = items.map((item, index) => ({
@@ -111,16 +247,24 @@ export function createPublicationsSchema(items: PublicationSchemaItem[]) {
             author: { "@id": site.orcid },
             datePublished: dateValue(item.datePublished ?? item.sortDate),
             inLanguage: site.language,
-            identifier: doiIdentifier(item.doi),
+            identifier: publicationIdentifiers(item),
+            isPartOf: mostSpecificPublicationContainerReference(item),
+            pagination: item.pagination,
+            pageStart: item.pageStart,
+            pageEnd: item.pageEnd,
         });
     });
+
+    const publicationContainerNodes = items.flatMap((item) =>
+        createPublicationContainerNodes(item)
+    );
 
     const graph = [
         {
             "@id": websiteId,
             "@type": "WebSite",
             url: absoluteUrl("/"),
-            name: site.name,
+            name: site.siteName,
             inLanguage: site.language,
             publisher: { "@id": site.orcid },
         },
@@ -158,6 +302,7 @@ export function createPublicationsSchema(items: PublicationSchemaItem[]) {
             itemListElement: itemListElements,
         },
         ...publicationNodes,
+        ...publicationContainerNodes,
     ];
 
     return {

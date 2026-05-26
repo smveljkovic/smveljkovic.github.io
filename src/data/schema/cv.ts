@@ -1,7 +1,9 @@
-import { site } from "../site";
+import { absoluteUrl } from "../site";
 
-const siteUrl = site.url;
-const imageUrl = `${siteUrl}/images/headshot-1200x630.png`;
+const imageUrl = absoluteUrl("/images/headshot-1200x630.png");
+const thesisUrl = absoluteUrl("/thesis/religious-atavism-climate-crisis/");
+const cvPdfUrl = absoluteUrl("/cv/veljkovic-cv.pdf");
+const cvUrl = absoluteUrl("/cv/");
 
 export const cvSchema = {
   "@context": "https://schema.org",
@@ -60,9 +62,9 @@ export const cvSchema = {
       "url": "https://www.rochester.edu/"
     },
     {
-      "@id": "https://stevanveljkovic.com/thesis/religious-atavism-climate-crisis/",
+      "@id": thesisUrl,
       "@type": "Thesis",
-      "url": "https://stevanveljkovic.com/thesis/religious-atavism-climate-crisis/",
+      "url": thesisUrl,
       "name": "Religious atavism and the climate crisis, with reference to Taylor and Rorty on liberalism",
       "datePublished": "2024-02",
       "sameAs": [
@@ -78,19 +80,19 @@ export const cvSchema = {
       "author": { "@id": "https://orcid.org/0000-0002-2599-3227" }
     },
     {
-      "@id": "https://stevanveljkovic.com/cv/#cambridge-mphil-program",
+      "@id": `${cvUrl}#cambridge-mphil-program`,
       "@type": "EducationalOccupationalProgram",
       "name": "MPhil in Early Modern History",
       "provider": { "@id": "https://www.cam.ac.uk/" }
     },
     {
-      "@id": "https://stevanveljkovic.com/cv/#cambridge-pgdip-program",
+      "@id": `${cvUrl}#cambridge-pgdip-program`,
       "@type": "EducationalOccupationalProgram",
       "name": "PGDip in Divinity",
       "provider": { "@id": "https://www.cam.ac.uk/" }
     },
     {
-      "@id": "https://stevanveljkovic.com/cv/#rochester-ba-program",
+      "@id": `${cvUrl}#rochester-ba-program`,
       "@type": "EducationalOccupationalProgram",
       "name": "BA in History",
       "provider": { "@id": "https://www.rochester.edu/" }
@@ -99,7 +101,7 @@ export const cvSchema = {
       "@id": "https://orcid.org/0000-0002-2599-3227",
       "@type": "Person",
       "name": "Stevan Veljkovic",
-      "url": "https://stevanveljkovic.com/",
+      "url": absoluteUrl("/"),
       "image": imageUrl,
       "identifier": {
         "@type": "PropertyValue",
@@ -122,16 +124,16 @@ export const cvSchema = {
       ],
       "hasCredential": [
         {
-          "@id": "https://stevanveljkovic.com/cv/#dphil",
+          "@id": `${cvUrl}#dphil`,
           "@type": "EducationalOccupationalCredential",
           "name": "DPhil",
           "credentialCategory": "Doctor of Philosophy",
           "educationalLevel": "Doctoral",
           "recognizedBy": { "@id": "https://www.ox.ac.uk/" },
-          "about": { "@id": "https://stevanveljkovic.com/thesis/religious-atavism-climate-crisis/" }
+          "about": { "@id": thesisUrl }
         },
         {
-          "@id": "https://stevanveljkovic.com/cv/#mphil-cambridge-history",
+          "@id": `${cvUrl}#mphil-cambridge-history`,
           "@type": "EducationalOccupationalCredential",
           "name": "MPhil in Early Modern History",
           "credentialCategory": "MPhil",
@@ -142,7 +144,7 @@ export const cvSchema = {
           ]
         },
         {
-          "@id": "https://stevanveljkovic.com/cv/#pgdip-cambridge-divinity",
+          "@id": `${cvUrl}#pgdip-cambridge-divinity`,
           "@type": "EducationalOccupationalCredential",
           "name": "PGDip in Divinity",
           "credentialCategory": "Postgraduate Diploma",
@@ -153,7 +155,7 @@ export const cvSchema = {
           ]
         },
         {
-          "@id": "https://stevanveljkovic.com/cv/#ba-rochester-history",
+          "@id": `${cvUrl}#ba-rochester-history`,
           "@type": "EducationalOccupationalCredential",
           "name": "BA in History",
           "credentialCategory": "BA",
@@ -161,11 +163,11 @@ export const cvSchema = {
         }
       ],
       "subjectOf": [
-        { "@id": "https://stevanveljkovic.com/thesis/religious-atavism-climate-crisis/" }
+        { "@id": thesisUrl }
       ],
       "affiliation": [
         {
-          "@id": "https://stevanveljkovic.com/cv/#oxford-dphil-candidate",
+          "@id": `${cvUrl}#oxford-dphil-candidate`,
           "@type": "Role",
           "roleName": "DPhil candidate",
           "startDate": "2016-10",
@@ -178,7 +180,7 @@ export const cvSchema = {
           ]
         },
         {
-          "@id": "https://stevanveljkovic.com/cv/#cambridge-mphil-role",
+          "@id": `${cvUrl}#cambridge-mphil-role`,
           "@type": "Role",
           "roleName": "Graduate student",
           "startDate": "2013",
@@ -191,7 +193,7 @@ export const cvSchema = {
           ]
         },
         {
-          "@id": "https://stevanveljkovic.com/cv/#cambridge-pgdip-role",
+          "@id": `${cvUrl}#cambridge-pgdip-role`,
           "@type": "Role",
           "roleName": "Graduate student",
           "startDate": "2014",
@@ -204,7 +206,7 @@ export const cvSchema = {
           ]
         },
         {
-          "@id": "https://stevanveljkovic.com/cv/#rochester-ba-role",
+          "@id": `${cvUrl}#rochester-ba-role`,
           "@type": "Role",
           "roleName": "Undergraduate student",
           "startDate": "2009",
@@ -215,7 +217,7 @@ export const cvSchema = {
           ]
         },
         {
-          "@id": "https://stevanveljkovic.com/cv/#rochester-zen-center-role",
+          "@id": `${cvUrl}#rochester-zen-center-role`,
           "@type": "OrganizationRole",
           "roleName": "Residential trainee",
           "startDate": "2002-11",
@@ -235,21 +237,21 @@ export const cvSchema = {
       ]
     },
     {
-      "@id": "https://stevanveljkovic.com/cv/veljkovic-cv.pdf",
+      "@id": cvPdfUrl,
       "@type": "MediaObject",
       "name": "Curriculum Vitae (PDF) — Stevan Veljkovic",
       "encodingFormat": "application/pdf",
-      "contentUrl": "https://stevanveljkovic.com/cv/veljkovic-cv.pdf",
+      "contentUrl": cvPdfUrl,
       "about": { "@id": "https://orcid.org/0000-0002-2599-3227" }
     },
     {
-      "@id": "https://stevanveljkovic.com/cv/",
+      "@id": cvUrl,
       "@type": "ProfilePage",
-      "url": "https://stevanveljkovic.com/cv/",
+      "url": cvUrl,
       "name": "Curriculum Vitae — Stevan Veljkovic",
       "about": { "@id": "https://orcid.org/0000-0002-2599-3227" },
       "mainEntity": { "@id": "https://orcid.org/0000-0002-2599-3227" },
-      "subjectOf": { "@id": "https://stevanveljkovic.com/cv/veljkovic-cv.pdf" }
+      "subjectOf": { "@id": cvPdfUrl }
     }
   ]
 };

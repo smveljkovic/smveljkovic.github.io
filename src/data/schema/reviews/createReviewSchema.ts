@@ -1,11 +1,43 @@
 import type { CollectionEntry } from "astro:content";
-import { site } from "../../site";
-import { doiIdentifier, doiUrl } from "../../../lib/doi";
+import { absoluteUrl, site, nodeId, siteId } from "../../site";
+import { doiIdentifier, doiUrl, normalizeDoi } from "../../../lib/doi";
 
 type ReviewData = CollectionEntry<"reviews">["data"];
 
-export function absoluteUrl(path: string) {
-    return new URL(path, site.url).toString();
+
+function getReviewPageName(review: ReviewData): string {
+    return (
+        review.schemaName ??
+        review.pageHeading ??
+        review.seoTitle ??
+        `Review of ${review.reviewedWork.title}`
+    );
+}
+
+function getReviewPageHeadline(review: ReviewData): string {
+    return review.schemaHeadline ?? getReviewPageName(review);
+}
+
+function reviewedWorkCreator(review: ReviewData) {
+    if (review.reviewedWork.editor) {
+        return {
+            editor: {
+                "@type": "Person",
+                name: review.reviewedWork.editor.name,
+            },
+        };
+    }
+
+    if (review.reviewedWork.author) {
+        return {
+            author: {
+                "@type": "Person",
+                name: review.reviewedWork.author,
+            },
+        };
+    }
+
+    return {};
 }
 
 function firstString(value: unknown): string | undefined {
@@ -31,14 +63,135 @@ function compactObject(object: Record<string, unknown>) {
     );
 }
 
+function compactArray<T>(array: Array<T | undefined | null | false>): T[] {
+    return array.filter(Boolean) as T[];
+}
+
+function periodicalIssns(
+    periodical: NonNullable<NonNullable<ReviewData["publishedReview"]>["periodical"]>
+): string[] | undefined {
+    const values = compactArray([
+        ...(periodical.issn ?? []),
+        periodical.printIssn,
+        periodical.electronicIssn,
+    ]);
+
+    return values.length > 0 ? values : undefined;
+}
+
+function publicationContainerIds(review: ReviewData) {
+    return {
+        periodicalId: nodeId(review.canonicalPath, "periodical"),
+        volumeId: nodeId(review.canonicalPath, "volume"),
+        issueId: nodeId(review.canonicalPath, "issue"),
+    };
+}
+
+function mostSpecificPublicationContainerReference(review: ReviewData) {
+    const publishedReview = review.publishedReview;
+    if (!publishedReview?.periodical) return undefined;
+
+    const { periodicalId, volumeId, issueId } = publicationContainerIds(review);
+
+    if (publishedReview.issue) return { "@id": issueId };
+    if (publishedReview.volume) return { "@id": volumeId };
+
+    return { "@id": periodicalId };
+}
+
+function createPublicationContainerNodes(review: ReviewData) {
+    const publishedReview = review.publishedReview;
+    if (!publishedReview?.periodical) return [];
+
+    const { periodicalId, volumeId, issueId } = publicationContainerIds(review);
+    const periodical = publishedReview.periodical;
+
+    const periodicalNode = compactObject({
+        "@id": periodicalId,
+        "@type": "Periodical",
+        name: periodical.name,
+        url: periodical.url,
+        issn: periodicalIssns(periodical),
+        publisher: periodical.publisher
+            ? {
+                "@type": "Organization",
+                name: periodical.publisher,
+            }
+            : undefined,
+    });
+
+    const volumeNode =
+        publishedReview.volume &&
+        compactObject({
+            "@id": volumeId,
+            "@type": "PublicationVolume",
+            volumeNumber: publishedReview.volume.number,
+            url: publishedReview.volume.url,
+            isPartOf: { "@id": periodicalId },
+        });
+
+    const issueNode =
+        publishedReview.issue &&
+        compactObject({
+            "@id": issueId,
+            "@type": "PublicationIssue",
+            issueNumber: publishedReview.issue.number,
+            url: publishedReview.issue.url,
+            datePublished: dateValue(publishedReview.issue.datePublished),
+            image: publishedReview.issue.image,
+            isPartOf: publishedReview.volume
+                ? { "@id": volumeId }
+                : { "@id": periodicalId },
+        });
+
+    return compactArray([periodicalNode, volumeNode, issueNode]);
+}
+
+function publishedReviewIdentifiers(review: ReviewData) {
+    const publishedReview = review.publishedReview;
+    if (!publishedReview) return undefined;
+
+    const normalizedDoi = normalizeDoi(publishedReview.doi);
+    const normalizedDoiUrl = doiUrl(publishedReview.doi);
+
+    const identifiers = compactArray([
+        normalizedDoi
+            ? {
+                "@type": "PropertyValue",
+                propertyID: "DOI",
+                value: normalizedDoi,
+                url: normalizedDoiUrl,
+            }
+            : undefined,
+        publishedReview.articleId
+            ? {
+                "@type": "PropertyValue",
+                propertyID: "Article ID",
+                value: publishedReview.articleId,
+            }
+            : undefined,
+    ]);
+
+    if (identifiers.length === 1) return identifiers[0];
+    if (identifiers.length > 1) return identifiers;
+
+    return undefined;
+}
+
 export function createReviewSchema(review: ReviewData) {
-    const pageUrl = absoluteUrl(review.canonicalPath);
+    const reviewPageUrl = absoluteUrl(review.canonicalPath);
+    const reviewWebPageId = nodeId(review.canonicalPath, "webpage");
+    const localReviewId = nodeId(review.canonicalPath, "review");
+    const websiteId = siteId("website");
+
+    const localReviewName = getReviewPageName(review);
+    const localReviewHeadline = getReviewPageHeadline(review);
 
     const reviewedWorkId =
         doiUrl(review.reviewedWork.doi) ??
         review.reviewedWork.url ??
         firstString(review.reviewedWork.sameAs) ??
-        `${pageUrl}#reviewed-work`;
+        nodeId(review.canonicalPath, "reviewed-work");
 
     const publishedReviewId =
         doiUrl(review.publishedReview?.doi) ??
@@ -61,13 +214,32 @@ export function createReviewSchema(review: ReviewData) {
         }),
 
         compactObject({
+            "@id": websiteId,
+            "@type": "WebSite",
+            url: absoluteUrl("/"),
+            name: site.siteName,
+            inLanguage: site.language,
+            publisher: { "@id": site.orcid },
+        }),
+
+        compactObject({
+            "@id": reviewWebPageId,
+            "@type": "WebPage",
+            url: reviewPageUrl,
+            name: localReviewName,
+            description: review.description,
+            inLanguage: site.language,
+            isPartOf: { "@id": websiteId },
+            author: { "@id": site.orcid },
+            about: { "@id": reviewedWorkId },
+            mainEntity: { "@id": localReviewId },
+        }),
+
+        compactObject({
             "@id": reviewedWorkId,
             "@type": review.reviewedWork.type ?? "Book",
             name: review.reviewedWork.title,
-            author: {
-                "@type": "Person",
-                name: review.reviewedWork.author,
-            },
+            ...reviewedWorkCreator(review),
             isbn: review.reviewedWork.isbn,
             url:
                 doiUrl(review.reviewedWork.doi) ??
@@ -94,15 +266,19 @@ export function createReviewSchema(review: ReviewData) {
             pageStart: review.publishedReview.pageStart,
             pageEnd: review.publishedReview.pageEnd,
             itemReviewed: { "@id": reviewedWorkId },
-            identifier: doiIdentifier(review.publishedReview.doi),
+            isPartOf: mostSpecificPublicationContainerReference(review),
+            identifier: publishedReviewIdentifiers(review),
         }),
 
+        ...createPublicationContainerNodes(review),
+
             compactObject({
-            "@id": pageUrl,
+            "@id": localReviewId,
             "@type": ["ScholarlyArticle", "Review"],
-            url: pageUrl,
-            headline: review.title,
-            name: review.title,
+            url: reviewPageUrl,
+            mainEntityOfPage: { "@id": reviewWebPageId },
+            headline: localReviewHeadline,
+            name: localReviewName,
             description: review.description,
             version: reviewVersion,
             inLanguage: "en",

@@ -34,6 +34,13 @@ const reviewPublicationItems = reviews.map((entry) => {
         url: review.publishedReview?.url,
         localPath: review.canonicalPath,
         datePublished: review.publishedReview?.datePublished ?? review.datePublished,
+        periodical: review.publishedReview?.periodical,
+        volume: review.publishedReview?.volume,
+        issue: review.publishedReview?.issue,
+        articleId: review.publishedReview?.articleId,
+        pagination: review.publishedReview?.pagination,
+        pageStart: review.publishedReview?.pageStart,
+        pageEnd: review.publishedReview?.pageEnd,
     };
 });
 
@@ -53,6 +60,13 @@ const bibliographyPublicationItems = listOnlyPublicationItems.map((entry) => {
     doi: publicationItem.doi,
     url: publicationItem.url,
     datePublished: publicationItem.publicationList.sortDate,
+    periodical: publicationItem.periodical,
+    volume: publicationItem.volume,
+    issue: publicationItem.issue,
+    articleId: publicationItem.articleId,
+    pagination: publicationItem.pagination,
+    pageStart: publicationItem.pageStart,
+    pageEnd: publicationItem.pageEnd,
   };
 });
 

@@ -52,7 +52,8 @@ publishedReview:
   pageStart: "339"
   pageEnd: "342"
   image: "https://journals.sagepub.com/cms/asset/e55d45ab-8419-4908-b935-0563c55874fa/esta_28_2.cover.png"
-  journal:
+  
+  periodical:
     name: "European Journal of Social Theory"
     url: "https://journals.sagepub.com/home/EST"
     issn:

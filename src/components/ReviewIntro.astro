@@ -1,8 +1,7 @@
 ---
 import type { CollectionEntry } from "astro:content";
-
+import { site } from "../data/site";
 type ReviewData = CollectionEntry<"reviews">["data"];
-type OriginalSubmissionNotePart = ReviewData["originalSubmissionNote"][number];
 
 const review = Astro.props.review as ReviewData;
 
@@ -11,85 +10,88 @@ const heading =
     review.seoTitle ??
     `Review of ${review.title}`;
 
-const reviewedWorkShortTitle =
-    review.reviewDek?.workTitle ??
-    review.title;
+const firstPublishedOnline =
+    review.firstPublishedOnline ??
+    review.publishedReview?.firstPublishedOnline;
 
-const reviewedWorkCreatorName =
-    review.reviewDek?.creatorName;
+const showFirstPublishedOnlineNote =
+    review.showFirstPublishedOnlineNote === true &&
+    Boolean(firstPublishedOnline);
 
-const reviewedWorkCreatorRole =
-    review.reviewDek?.creatorRole ?? "author";
+const formattedFirstPublishedOnline = showFirstPublishedOnlineNote
+    ? new Date(firstPublishedOnline as string).toLocaleDateString("en-GB", {
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+    })
+    : null;
 
-const reviewedWorkCreatorPhrase =
-    reviewedWorkCreatorRole === "editor" ? "edited by" : "by";
+function preventFinalWordWidow(value: string): string {
+  return value.replace(/\s+([^\s]+)$/, "&nbsp;$1");
+}
 
-const showReviewDek = Boolean(reviewedWorkCreatorName);
+const copyrightNotice = review.rights?.copyrightYear &&
+review.rights?.copyrightHolder
+    ? `© ${review.rights.copyrightYear} ${preventFinalWordWidow(review.rights.copyrightHolder.name)}.`
+    : null;
+
+const shouldGroupReuseWithRights = Boolean(review.rights?.license) || review.version === "Reproduction of the Version of Record";
+
+const rightsParagraphHtml = [
+  shouldGroupReuseWithRights ? review.reuseNoteHtml : null,
+  review.modificationNote,
+  copyrightNotice,
+].filter(Boolean).join(" ");
+
 ---
 
 <div>
   <div class="review_intro">
     <h1 class="review_heading">{heading}</h1>
+    <p class="review_dek">By
+      {site.personName} &emsp;·&emsp;
+      <a href={`mailto:${site.email}`}>{site.email}</a>
+    </p>
 
-    {showReviewDek && reviewedWorkCreatorRole === "editor" && (
-        <p class="review_dek">
-          Stevan Veljkovic reviews <cite>{reviewedWorkShortTitle}</cite>, edited by{" "}
-    {reviewedWorkCreatorName}.
-          </p>
-          )}
+    <!--<hr class="review_intro_rule" />-->
 
-          {showReviewDek && reviewedWorkCreatorRole !== "editor" && (
-              <p class="review_dek">
-                Stevan Veljkovic reviews <cite>{reviewedWorkShortTitle}</cite> by{" "}
-                {reviewedWorkCreatorName}.
-              </p>
-          )}
-    <hr class="review_intro_rule" />
+    {review.version && (
+        <p class="intro">The following text reproduces the {review.version} for</p>
+    )}
+
+    <p
+        class="intro"
+        style="margin-left: 2em; text-indent: -2em;"
+        set:html={review.citationHtml}
+    />
+
+    {showFirstPublishedOnlineNote && (
+        <p class="intro">
+          First published online {formattedFirstPublishedOnline}.
+        </p>
+    )}
+
+    {review.reuseNoteHtml && !shouldGroupReuseWithRights && (
+        <p class="intro" set:html={review.reuseNoteHtml} />
+    )}
+
+    {rightsParagraphHtml && (
+        <p
+            class="intro"
+            style="padding-bottom: 0"
+            set:html={rightsParagraphHtml}
+        />
+    )}
+  </div>
 
     <style>
       .review_intro_rule {
         width: min(18rem, 58%);
         margin: 1.25rem auto 1.45rem 0;
         border: 0;
-        border-top: 1px solid rgba(255, 255, 255, 0.62);
+        border-top: 1px solid rgba(255, 255, 255, 0.70);
       }
     </style>
-
-
-    <p class="intro">The following text is the {review.version} for</p>
-
-    <p class="intro" style="margin-left: 2em; text-indent: -2em;"
-set:html={review.citationHtml} />
-
-    {review.publishedReview?.datePublished && (
-      <p class="intro" style="text-indent: 2em">
-        First published online {new
-Date(review.publishedReview.datePublished).toLocaleDateString("en-GB", {
-          day: "numeric",
-          month: "long",
-          year: "numeric",
-        })}.
-      </p>
-    )}
-
-    {review.originalSubmissionNote && (
-  <p class="intro">
-    {review.originalSubmissionNote.map((part: OriginalSubmissionNotePart) =>
-      typeof part === "string" ? (
-        part
-      ) : (
-        <a href={part.href}>{part.text}</a>
-      )
-    )}
-  </p>
-)}
-
-    <p class="intro" style="padding-bottom: 0">
-      Errors have been corrected silently.
-      <span style="white-space:nowrap">© {new
-Date(review.datePublished).getFullYear()} Stevan Veljkovic</span>
-    </p>
-  </div>
 
   <div class="countercontrol">[&#8201;<a href="/publications/">previous
 page</a>&#8201;]</div>

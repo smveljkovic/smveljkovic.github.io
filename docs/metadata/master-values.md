@@ -120,23 +120,21 @@ Descriptive phrases such as `Theory and editing`, `theorist and editor`,
 
 ## JSON-LD stable node IDs
 
-| Node | Canonical ID |
-|---|---|
-| Person | `https://orcid.org/0000-0002-2599-3227` |
-| WebSite | `https://stevanveljkovic.com/#website` |
-| Homepage WebPage | `https://stevanveljkovic.com/#webpage` |
-| Publications WebPage | `https://stevanveljkovic.com/publications/#webpage` |
-| CV WebPage | `https://stevanveljkovic.com/cv/#webpage` |
-| Cosmic Connections review WebPage |
-`https://stevanveljkovic.com/publications/reviews/cosmic-connections/#webpage` |
-| Cosmic Connections local review |
-`https://stevanveljkovic.com/publications/reviews/cosmic-connections/#review` |
-| Christian Right review WebPage |
-`https://stevanveljkovic.com/publications/reviews/christian-right-europe/#
-webpage` |
-| Christian Right local review |
-`https://stevanveljkovic.com/publications/reviews/christian-right-europe/#review
-` |
+| Node                                                                               | Canonical ID |
+|------------------------------------------------------------------------------------|---|
+| Person                                                                             | `https://orcid.org/0000-0002-2599-3227` |
+| WebSite                                                                            | `https://stevanveljkovic.com/#website` |
+| Homepage WebPage                                                                   | `https://stevanveljkovic.com/#webpage` |
+| Publications WebPage                                                               | `https://stevanveljkovic.com/publications/#webpage` |
+| CV WebPage                                                                         | `https://stevanveljkovic.com/cv/#webpage` |
+| Cosmic Connections review WebPage                                                  |
+| `https://stevanveljkovic.com/publications/reviews/cosmic-connections/#webpage`     |
+| Cosmic Connections local review                                                    |
+| `https://stevanveljkovic.com/publications/reviews/cosmic-connections/#review`      |
+| Christian Right review WebPage                                                     |
+| `https://stevanveljkovic.com/publications/reviews/christian-right-europe/#webpage` |
+| Christian Right local review                                                       |
+| `https://stevanveljkovic.com/publications/reviews/christian-right-europe/#review`  |
 
 ## Homepage metadata
 

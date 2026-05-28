@@ -1,24 +1,16 @@
 ---
 draft: false
-
-title: "Stevan Veljkovic reviews Cosmic Connections: Poetry in the Age of Disenchantment by Charles Taylor"
-shortTitle: "Veljkovic review of Cosmic Connections"
 slug: "cosmic-connections"
-seoTitle: "Review of Cosmic Connections"
-pageHeading: "Review of Cosmic Connections"
-description: "In a book which bids fair to become his culminating output, Taylor joins up the facets of an extraordinary career."
-reviewDek:
-  workTitle: "Cosmic Connections"
-  creatorRole: "author"
-  creatorName: "Charles Taylor"
 
+title: "Review of Cosmic Connections"
+shortTitle: "Cosmic Connections"
+pageHeading: "Review of Cosmic Connections"
+seoTitle: "Review of Cosmic Connections"
+description: "A book which bids fair to be Taylor's culminating output joins up the facets of an extraordinary career, writes Stevan Veljkovic."
 
 dateCreated: "2024-04-02T17:09:00+01:00"
 datePublished: "2024-05-24"
-
 canonicalPath: "/publications/reviews/cosmic-connections/"
-
-pdf: "/publications/reviews/cosmic-connections/veljkovic-review-cosmic-connections.pdf"
 
 reviewer:
   name: "Stevan Veljkovic"
@@ -27,11 +19,14 @@ reviewer:
 reviewedWork:
   type: "Book"
   title: "Cosmic Connections: Poetry in the Age of Disenchantment"
-  author: "Charles Taylor"
+  shortTitle: "Cosmic Connections"
+  author:
+    name: "Charles Taylor"
   doi: "10.4159/9780674297074"
   sameAs:
-  - "https://www.degruyterbrill.com/document/doi/10.4159/9780674297074/html"
-  publisher: "The Belknap Press of Harvard University Press"
+    - "https://www.degruyterbrill.com/document/doi/10.4159/9780674297074/html"
+  publisher:
+    name: "The Belknap Press of Harvard University Press"
   place: "Cambridge, MA"
   year: "2024"
   isbn:
@@ -46,32 +41,56 @@ publishedReview:
   doi: "10.1177/13684310241249684"
   url: "https://doi.org/10.1177/13684310241249684"
   sameAs:
-  - "https://journals.sagepub.com/doi/10.1177/13684310241249684"
+    - "https://journals.sagepub.com/doi/10.1177/13684310241249684"
   datePublished: "2024-05-24"
   firstPublishedOnline: "2024-05-24"
-  
+
   pagination: "339–42"
   pageStart: "339"
   pageEnd: "342"
-  
+
   periodical:
     name: "European Journal of Social Theory"
     url: "https://journals.sagepub.com/home/EST"
     issn:
-       - "1368-4310"
-       - "1461-7137"
-    publisher: "Sage Publications"
-    
+      - "1368-4310"
+      - "1461-7137"
+    publisher:
+        name: "Sage Publications"
+        url: "https://www.sagepub.com/"
+
   volume:
     number: "28"
     url: "https://journals.sagepub.com/toc/esta/28"
-    
-  issue: 
+
+  issue:
     number: "2"
     url: "https://journals.sagepub.com/toc/esta/28/2"
     datePublished: "2025-05"
     dateLabel: "May 2025"
     image: "https://journals.sagepub.com/cms/asset/e55d45ab-8419-4908-b935-0563c55874fa/esta_28_2.cover.png"
+
+  publisher:
+    name: "Sage Publications"
+    url: "https://www.sagepub.com/"
+    
+showFirstPublishedOnlineNote: true
+
+rights:
+  copyrightYear: 2024
+  copyrightHolder:
+    type: "Person"
+    name: "Stevan Veljkovic"
+    id: "https://orcid.org/0000-0002-2599-3227"
+    orcid: "https://orcid.org/0000-0002-2599-3227"
+    
+
+reviewDek:
+  workTitle: "Cosmic Connections"
+  creatorRole: "author"
+  creatorName: "Charles Taylor"
+
+pdf: "/publications/reviews/cosmic-connections/veljkovic-review-cosmic-connections.pdf"
     
 image: "https://www.degruyterbrill.com/document/cover/isbn/9780674297074/product_pages"
 
@@ -81,20 +100,18 @@ Theory</i> 28, no. 2 (2025): 339–42. <a
 href="https://doi.org/10.1177/13684310241249684">https://doi.org/10.1177/
 13684310241249684</a>.'
 
-openingVersionNote: 'the Original Submission'
 version: "Author’s Original Manuscript"
-originalSubmissionNote:
-    - "This unabridged original is significantly longer than
-the text of the Final Published PDF, and is made available here according to the "
-    - text: "publisher’s policy"
-      href: "https://www.sagepub.com/journals/permissions/sages-author-archiving-and-re-use-guidelines"
-    - " on author reuse."
+openingVersionNote: "the Author’s Original Manuscript"
+
+reuseNoteHtml: "This unabridged original is significantly longer than the Version of Record and is made available here under the <a href='https://www.sagepub.com/journals/permissions/sages-author-archiving-and-re-use-guidelines/'>publisher’s policy</a> on author reuse."
 publicationList:
   year: 2024
   sortDate: "2025-05-01"
   order: 40
   noteId: "strange"
   noteHtml: 'The preprint of this review is available in the following formats: <a href="reviews/cosmic-connections/">html</a> | <a href="reviews/cosmic-connections/veljkovic-review-cosmic-connections.pdf">pdf</a>.'
+
+modificationNote: "Errors have been corrected silently."
 
 bylineHtml: >-
   <p class="byline">Stevan Veljkovic</p>
@@ -119,7 +136,7 @@ Disenchantment</i>.
   <p class="review_par">Though difficult to precis, <i>Connections</i> continues Taylor’s long-standing project of philosophical anthropology, posing the question ‘whether [the] aspiration to connection is not a human constant&nbsp;.&nbsp;.&nbsp;. albeit taking very different forms in different epochs and cultures’ (p. &nbsp;257). Taylor’s concern here is connection in the modern era, and his starting point is German Romanticism, by which he means a literary movement of the 1790s, ‘when the previously viable form of cosmic connection became unviable’ (p.&nbsp;x). Taylor sees the German Romantics as contending with modern disenchantment at its onset; for them, Taylor thinks, poetry was a means of <i>re</i>connecting with an extant but occluded cosmic order. <i>Connections</i> pursues this theme through a synthesis of social thought and philosophy of language, in which Taylor brings his concept of ‘subtler languages’ (a borrowing from the literary scholar Earl Wasserman [pp.&nbsp;30–31]) together with a fuller and more nuanced articulation of what he once termed the ‘malaise of modernity’ (the titular subject of his 1991 Massey Lectures). As mentioned above, the method here is a genealogical itinerary a la Secular Age, but one in which the waypoints are poets and poetry. As Taylor puts it, he is ‘following the poetic discoveries / inventions of epiphanic languages, which have come in the wake of the Romantic period’ (p.&nbsp;137). For Taylor, tracing these developments can reveal something about the nature of human being.</p> 
 
   <p class="counter">[&#8239;3&#8239;]</p>
-  <p class="review_par"> In Taylor’s genealogy, connection was ‘originally framed [i.e., with the German Romantics] as recovering contact with a continuing cosmic order’ (p.&nbsp;494). But over decades and across different national contexts, the felt sense of ‘cosmic order’ fades while the longing for reconnection remains. Thus, while the worldview of the Romantics is radically different from our own, Taylor supposes that ‘[the] distinction between dead, “blind” uses of language, and truly revelatory, insightful ones which restore contact, continues after the Romantic period, and up to our time’ (p.&nbsp;41). Accordingly, the first three chapters of Connections (Part I) are largely an overview of German Romanticism and, as Taylor sees it, its aim of restoring connection with cosmic order. These 100-odd pages read like classic Taylor, but what follows is something quite new, with Parts II–V organized according to thematic analysis of particular poets. The poetry here is English, French, and German (French and German texts appear in the original followed by English translation, which is one factor in the book’s considerable length). The trajectory that Taylor traces connects German Romanticism, French Symbolism, and literary modernism, with reference along the way to figures who defy easy classification, such as the English poet and Jesuit priest Gerard Manley Hopkins (1844–1889) and luminaries like German landscape painter Caspar David Friedrich (1774–1840) and the Romantic composer Ludwig van Beethoven (1770–1827). Although the focus here is poetry, Taylor uses the leitmotifs of connection and disenchantment to comment on topics throughout the sweep of Western art, culture, and thought since the early-nineteenth century.</p>
+  <p class="review_par">In Taylor’s genealogy, connection was ‘originally framed [i.e., with the German Romantics] as recovering contact with a continuing cosmic order’ (p.&nbsp;494). But over decades and across different national contexts, the felt sense of ‘cosmic order’ fades while the longing for reconnection remains. Thus, while the worldview of the Romantics is radically different from our own, Taylor supposes that ‘[the] distinction between dead, “blind” uses of language, and truly revelatory, insightful ones which restore contact, continues after the Romantic period, and up to our time’ (p.&nbsp;41). Accordingly, the first three chapters of Connections (Part I) are largely an overview of German Romanticism and, as Taylor sees it, its aim of restoring connection with cosmic order. These 100-odd pages read like classic Taylor, but what follows is something quite new, with Parts II–V organized according to thematic analysis of particular poets. The poetry here is English, French, and German (French and German texts appear in the original followed by English translation, which is one factor in the book’s considerable length). The trajectory that Taylor traces connects German Romanticism, French Symbolism, and literary modernism, with reference along the way to figures who defy easy classification, such as the English poet and Jesuit priest Gerard Manley Hopkins (1844–1889) and luminaries like German landscape painter Caspar David Friedrich (1774–1840) and the Romantic composer Ludwig van Beethoven (1770–1827). Although the focus here is poetry, Taylor uses the leitmotifs of connection and disenchantment to comment on topics throughout the sweep of Western art, culture, and thought since the early-nineteenth century.</p>
   
   <p class="counter">[&#8239;4&#8239;]</p>
   <p class="review_par">Taylor’s poets are on the whole familiar names. The poetry chapters (from Part II) begin with Friedrich Hölderlin (1770–1843) and Novalis (1772–1801) in Germany, alongside William Wordsworth (1770–1850) in England, and a poetry that ‘offers the experience of order without claiming the confirmation of its truth that an underlying story (theistic or other) would give it’ (p.&nbsp;138). Moving through the second-generation English Romantics Percy Bysshe Shelley (1792–1822) and John Keats (1795–1821), Taylor outlines a fissiparous development by which the Romantics’ conception of cosmic order undergoes a metamorphosis in two directions – into the recognisably contemporary ideas of both ‘history’ and ‘Nature’ as access points to transcendence. The late-nineteenth century (Part III), with Hopkins and Rainer Maria Rilke (1875–1926), marks a kind of caesura at the maturation of ‘epistemic retreat’ (on which, more below). The itinerary then reverses chronologically, picking up (in Part IV) with French poets Charles Baudelaire (1821–1867) and Stéphane Mallarmé (1842–1898) before concluding (Part V) with the modernism of Anglo-American poet and critic T. S. Eliot (1888–1965) and the post-war reflections of Polish-American Nobel laureate Czesław Miłosz (1911–2004). From here the two concluding chapters (Part VI) deal with contemporary possibilities – and foreclosures – of connection.</p>

@@ -55,12 +55,12 @@ div.Basic-Text-Frame {
 
 .review_heading {
 	font: inherit;
-	font-weight: 600;
-	margin: 0 0 0.5rem;
+	font-weight: 700;
+	margin: 0 0 0 0;
 }
 
 .review_dek {
-	margin: 0 0 1rem;
+	margin: 0 0 1.7rem;
 }
 
 
@@ -314,6 +314,11 @@ p.intro {
 	
 	width: clamp(42ch, 50vw, 75ch);
 	padding-bottom: 1.2em;
+}
+
+p.intro a {
+	overflow-wrap: anywhere;
+	word-break: break-word;
 }
 
 /*.trigger:before

@@ -60,7 +60,7 @@ const bibliographyPublicationItems = listOnlyPublicationItems.map((entry) => {
     noteId: publicationItem.publicationList.noteId,
     doi: publicationItem.doi,
     url: publicationItem.url,
-    datePublished: publicationItem.publicationList.sortDate,
+    datePublished: publicationItem.firstPublishedOnline,
     firstPublishedOnline: publicationItem.firstPublishedOnline,
     periodical: publicationItem.periodical,
     volume: publicationItem.volume,

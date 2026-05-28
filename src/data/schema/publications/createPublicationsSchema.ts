@@ -8,6 +8,13 @@ export type PublicationSchemaItemType =
     | "chapter"
     | "other";
 
+type OrganizationLike =
+    | string
+    | {
+    name: string;
+    url?: string;
+};
+
 export interface PublicationIdentifier {
     propertyID: string;
     value: string;
@@ -33,14 +40,16 @@ export interface PublicationSchemaItem {
         printIssn?: string;
         electronicIssn?: string;
         url?: string;
-        publisher?: string;
+        publisher?: OrganizationLike;
+        image?: string;
     };
     volume?: {
         number: string;
         url?: string;
     };
     issue?: {
-        number: string;
+        number?: string;
+        name?: string;
         url?: string;
         datePublished?: string;
         dateLabel?: string;
@@ -72,6 +81,23 @@ function compactArray<T>(array: Array<T | undefined | null | false>): T[] {
     return array.filter(Boolean) as T[];
 }
 
+function schemaOrganization(value: OrganizationLike | undefined) {
+    if (!value) return undefined;
+
+    if (typeof value === "string") {
+        return {
+            "@type": "Organization",
+            name: value,
+        };
+    }
+
+    return compactObject({
+        "@type": "Organization",
+        name: value.name,
+        url: value.url,
+    });
+}
+
 function slugify(value: string) {
     return value
         .toLowerCase()
@@ -84,7 +110,7 @@ function schemaTypeForItem(itemType: PublicationSchemaItemType) {
                 case "article":
                     return "ScholarlyArticle";
                 case "bookReview":
-                    return "ScholarlyArticle";
+                    return ["ScholarlyArticle", "Review"];
                 case "thesis":
                     return "Thesis";
                 case "chapter":
@@ -195,12 +221,8 @@ function createPublicationContainerNodes(item: PublicationSchemaItem) {
         name: item.periodical.name,
         url: item.periodical.url,
         issn: periodicalIssns(item),
-        publisher: item.periodical.publisher
-            ? {
-                "@type": "Organization",
-                name: item.periodical.publisher,
-            }
-            : undefined,
+        image: item.periodical.image,
+        publisher: schemaOrganization(item.periodical.publisher),
     });
 
     const volumeNode =
@@ -218,6 +240,7 @@ function createPublicationContainerNodes(item: PublicationSchemaItem) {
         compactObject({
             "@id": issueId,
             "@type": "PublicationIssue",
+            name: item.issue.name,
             issueNumber: item.issue.number,
             url: item.issue.url,
             datePublished: dateValue(item.issue.datePublished),
@@ -225,8 +248,6 @@ function createPublicationContainerNodes(item: PublicationSchemaItem) {
             isPartOf: item.volume
                 ? { "@id": volumeId }
                 : { "@id": periodicalId },
-
-
         });
 
 
@@ -264,8 +285,8 @@ export function createPublicationsSchema(items: PublicationSchemaItem[]) {
             author: { "@id": site.orcid },
             datePublished: dateValue(
                 item.firstPublishedOnline ??
-                item.datePublished ??
-                item.sortDate),
+                item.datePublished
+            ),
             inLanguage: site.language,
             identifier: publicationIdentifiers(item),
             isPartOf: mostSpecificPublicationContainerReference(item),
@@ -305,8 +326,8 @@ export function createPublicationsSchema(items: PublicationSchemaItem[]) {
             "@id": pageUrl,
             "@type": "CollectionPage",
             url: pageUrl,
-            name: "Publications | Dr Stevan Veljkovic",
-            description: "Publications of Dr Stevan Veljkovic.",
+            name: "Publications | Stevan Veljkovic",
+            description: "Publications of Stevan Veljkovic.",
             inLanguage: site.language,
             isPartOf: { "@id": websiteId },
             author: { "@id": site.orcid },
@@ -316,7 +337,7 @@ export function createPublicationsSchema(items: PublicationSchemaItem[]) {
         {
             "@id": itemListId,
             "@type": "ItemList",
-            name: "Publications of Dr Stevan Veljkovic",
+            name: "Publications of Stevan Veljkovic",
             numberOfItems: items.length,
             itemListOrder: "https://schema.org/ItemListOrderDescending",
             itemListElement: itemListElements,

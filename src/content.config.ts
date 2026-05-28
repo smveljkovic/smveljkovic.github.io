@@ -2,6 +2,41 @@ import { defineCollection } from "astro:content";
 import { glob } from "astro/loaders";
 import { z } from "astro/zod";
 
+const personLikeSchema = z.union([
+    z.string(),
+    z.object({
+        name: z.string(),
+        alternateName: z.string().optional(),
+        url: z.string().url().optional(),
+        orcid: z.string().url().optional(),
+    }),
+]);
+
+const organizationLikeSchema = z.union([
+    z.string(),
+    z.object({
+        name: z.string(),
+        url: z.string().url().optional(),
+    }),
+]);
+
+const rightsSchema = z.object({
+    license: z.object({
+        name: z.string(),
+        fullName: z.string().optional(),
+        url: z.string().url(),
+    }).optional(),
+
+    copyrightYear: z.number().optional(),
+
+    copyrightHolder: z.object({
+        type: z.enum(["Organization", "Person"]).optional(),
+        name: z.string(),
+        url: z.string().url().optional(),
+        orcid: z.string().url().optional(),
+    }).optional(),
+}).optional();
+
 const hrefSchema = z.string().refine(
   (value) =>
     value.startsWith("/") ||
@@ -11,14 +46,6 @@ const hrefSchema = z.string().refine(
     message: "Expected a root-relative path or an absolute http(s) URL",
   }
 );
-
-const inlineNotePartSchema = z.union([
-  z.string(),
-  z.object({
-    text: z.string(),
-    href: hrefSchema,
-  }),
-]);
 
 const publicationListSchema = z.object({
     year: z.number(),
@@ -34,7 +61,8 @@ const periodicalSchema = z.object({
     printIssn: z.string().optional(),
     electronicIssn: z.string().optional(),
     url: z.string().url().optional(),
-    publisher: z.string().optional(),
+    publisher: organizationLikeSchema.optional(),
+    image: z.string().url().optional(),
 });
 
 const publicationVolumeSchema = z.object({
@@ -43,7 +71,8 @@ const publicationVolumeSchema = z.object({
 }).optional();
 
 const publicationIssueSchema = z.object({
-    number: z.string(),
+    number: z.string().optional(),
+    name: z.string().optional(),
     url: z.string().url().optional(),
     datePublished: z.string().optional(),
     dateLabel: z.string().optional(),
@@ -86,14 +115,13 @@ const reviews = defineCollection({
     schemaName: z.string().optional(),
     schemaHeadline: z.string().optional(),
 
-    dateCreated: z.string(),
+    dateCreated: z.string().optional(),
     datePublished: z.string(),
     dateModified: z.string().optional(),
 
     canonicalPath: z.string(),
 
     pdf: z.string().optional(),
-
     image: z.string().optional(),
 
     reviewer: z.object({
@@ -112,11 +140,10 @@ const reviews = defineCollection({
     reviewedWork: z.object({
       type: z.literal("Book"),
       title: z.string(),
-      author: z.string().optional(),
-      editor: z.object({
-          name: z.string(),
-      }).optional(),
-      publisher: z.string().optional(),
+      shortTitle: z.string().optional(),
+      author: personLikeSchema.optional(),
+      editor: personLikeSchema.optional(),
+      publisher: organizationLikeSchema.optional(),
       place: z.string().optional(),
       year: z.string().optional(),
       isbn: z.array(z.string()).optional(),
@@ -128,12 +155,15 @@ const reviews = defineCollection({
 
     publishedReview: z.object({
         title: z.string(),
+        shortTitle: z.string().optional(),
         doi: z.string().optional(),
         url: z.url().optional(),
         sameAs: z.array(z.url()).optional(),
         image: z.url().optional(),
         datePublished: z.string(),
         firstPublishedOnline: z.string().optional(),
+        publicationStatus: z.string().optional(),
+        publisher: organizationLikeSchema.optional(),
 
         periodical: periodicalSchema.optional(),
         volume: publicationVolumeSchema,
@@ -153,6 +183,13 @@ const reviews = defineCollection({
     url: hrefSchema.optional(),
     firstPublishedOnline: z.string().optional(),
 
+    showFirstPublishedOnlineNote: z.boolean().optional(),
+    rights: rightsSchema.optional(),
+    reuseNoteHtml: z.string().optional(),
+    modificationNote: z.string().optional(),
+
+/*  I’m not sure about getting rid of these . . .
+
     periodical: periodicalSchema.optional(),
     volume: publicationVolumeSchema,
     issue: publicationIssueSchema,
@@ -161,9 +198,7 @@ const reviews = defineCollection({
     pageStart: z.string().optional(),
     pageEnd: z.string().optional(),
 
-    originalSubmissionNote: z.array(inlineNotePartSchema),
-
-    openingVersionNote: z.string().optional(),
+    openingVersionNote: z.string().optional(),*/
 
     searchMeta: z
       .object({

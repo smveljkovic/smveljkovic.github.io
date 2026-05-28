@@ -1,6 +1,91 @@
 import type { CollectionEntry } from "astro:content";
 import { absoluteUrl, site, nodeId, siteId } from "../../site";
-import { doiIdentifier, doiUrl, normalizeDoi } from "../../../lib/doi";
+import { doiUrl, normalizeDoi } from "../../../lib/doi";
+
+type PersonLike = | string | { name: string; alternateName?: string; url?: string; orcid?: string; };
+type OrganizationLike = | string | { name: string; url?: string };
+
+function reviewedWorkIdentifier(review: ReviewData) {
+    const normalizedDoi = normalizeDoi(review.reviewedWork.doi);
+    if (!normalizedDoi) return undefined;
+
+    return {
+        "@type": "PropertyValue",
+        propertyID: "DOI",
+        value: normalizedDoi,
+        url: doiUrl(review.reviewedWork.doi),
+    };
+}
+
+function schemaPerson(value: PersonLike | undefined) {
+    if (!value) return undefined;
+
+    if (typeof value === "string") {
+        return {
+            "@type": "Person",
+            name: value,
+        };
+    }
+
+    return compactObject({
+        "@type": "Person",
+        name: value.name,
+        alternateName: value.alternateName,
+        url: value.url ?? value.orcid,
+        identifier: value.orcid
+            ? {
+                "@type": "PropertyValue",
+                propertyID: "ORCID",
+                value: value.orcid.replace("https://orcid.org/", ""),
+                url: value.orcid,
+            }
+            : undefined,
+    });
+}
+
+function schemaOrganization(value: OrganizationLike | undefined) {
+    if (!value) return undefined;
+
+    if (typeof value === "string") {
+        return {
+            "@type": "Organization",
+            name: value,
+        };
+    }
+
+    return compactObject({
+        "@type": "Organization",
+        name: value.name,
+        url: value.url,
+    });
+}
+
+function schemaCopyrightHolder(
+    holder:
+        | {
+        type?: "Organization" | "Person";
+        name: string;
+        url?: string;
+        orcid?: string;
+    }
+        | undefined
+) {
+    if (!holder) return undefined;
+
+    return compactObject({
+        "@type": holder.type ?? "Organization",
+        name: holder.name,
+        url: holder.url ?? holder.orcid,
+        identifier: holder.orcid
+            ? {
+                "@type": "PropertyValue",
+                propertyID: "ORCID",
+                value: holder.orcid.replace("https://orcid.org/", ""),
+                url: holder.orcid,
+            }
+            : undefined,
+    });
+}
 
 type ReviewData = CollectionEntry<"reviews">["data"];
 
@@ -21,19 +106,13 @@ function getReviewPageHeadline(review: ReviewData): string {
 function reviewedWorkCreator(review: ReviewData) {
     if (review.reviewedWork.editor) {
         return {
-            editor: {
-                "@type": "Person",
-                name: review.reviewedWork.editor.name,
-            },
+            editor: schemaPerson(review.reviewedWork.editor),
         };
     }
 
     if (review.reviewedWork.author) {
         return {
-            author: {
-                "@type": "Person",
-                name: review.reviewedWork.author,
-            },
+            author: schemaPerson(review.reviewedWork.author),
         };
     }
 
@@ -112,12 +191,8 @@ function createPublicationContainerNodes(review: ReviewData) {
         name: periodical.name,
         url: periodical.url,
         issn: periodicalIssns(periodical),
-        publisher: periodical.publisher
-            ? {
-                "@type": "Organization",
-                name: periodical.publisher,
-            }
-            : undefined,
+        image: periodical.image,
+        publisher: schemaOrganization(periodical.publisher),
     });
 
     const volumeNode =
@@ -135,6 +210,7 @@ function createPublicationContainerNodes(review: ReviewData) {
         compactObject({
             "@id": issueId,
             "@type": "PublicationIssue",
+            name: publishedReview.issue.name,
             issueNumber: publishedReview.issue.number,
             url: publishedReview.issue.url,
             datePublished: dateValue(publishedReview.issue.datePublished),
@@ -231,6 +307,7 @@ export function createReviewSchema(review: ReviewData) {
             inLanguage: site.language,
             isPartOf: { "@id": websiteId },
             author: { "@id": site.orcid },
+            publisher: { "@id": site.orcid },
             about: { "@id": reviewedWorkId },
             mainEntity: { "@id": localReviewId },
         }),
@@ -240,6 +317,7 @@ export function createReviewSchema(review: ReviewData) {
             "@type": review.reviewedWork.type ?? "Book",
             name: review.reviewedWork.title,
             ...reviewedWorkCreator(review),
+            publisher: schemaOrganization(review.reviewedWork.publisher),
             isbn: review.reviewedWork.isbn,
             url:
                 doiUrl(review.reviewedWork.doi) ??
@@ -247,7 +325,7 @@ export function createReviewSchema(review: ReviewData) {
                 firstString(review.reviewedWork.sameAs),
             sameAs: review.reviewedWork.sameAs,
             image: review.reviewedWork.image,
-            identifier: doiIdentifier(review.reviewedWork.doi),
+            identifier: reviewedWorkIdentifier(review),
         }),
 
         review.publishedReview &&
@@ -261,9 +339,14 @@ export function createReviewSchema(review: ReviewData) {
             headline: review.publishedReview.title,
             image: review.publishedReview.image,
             author: { "@id": site.orcid },
+            publisher: schemaOrganization(review.publishedReview.publisher),
+            license: review.rights?.license?.url,
+            copyrightYear: review.rights?.copyrightYear,
+            copyrightHolder: schemaCopyrightHolder(review.rights?.copyrightHolder),
             datePublished: dateValue(
                 review.publishedReview.firstPublishedOnline ??
-                review.publishedReview.datePublished),
+                review.publishedReview.datePublished
+            ),
             pagination: review.publishedReview.pagination,
             pageStart: review.publishedReview.pageStart,
             pageEnd: review.publishedReview.pageEnd,
@@ -288,6 +371,9 @@ export function createReviewSchema(review: ReviewData) {
             itemReviewed: { "@id": reviewedWorkId },
             isBasedOn: publishedReviewId ? { "@id": publishedReviewId } : undefined,
             citation: publishedReviewId ? { "@id": publishedReviewId } : undefined,
+            license: review.rights?.license?.url,
+            copyrightYear: review.rights?.copyrightYear,
+            copyrightHolder: schemaCopyrightHolder(review.rights?.copyrightHolder),
             datePublished: dateValue(review.datePublished),
             dateCreated: dateValue(review.dateCreated),
             dateModified: dateValue(review.dateModified),

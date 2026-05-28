@@ -12,7 +12,7 @@ export const site = {
   shortName: "SM Veljkovic",
   author: "Stevan Veljkovic",
 
-  email: "hello@stevanveljkovic.com",
+  email: "contact@stevanveljkovic.com",
   analyticsId: "G-7VMGXMNZZ0",
   language: "en-GB",
   image: "/images/headshot-1200x630.png",

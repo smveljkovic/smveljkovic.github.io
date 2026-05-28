@@ -1,24 +1,20 @@
 ---
 draft: false
-
-title: "Stevan Veljkovic reviews The Christian Right in Europe: Movements, Networks, and Denominations by Gionathan Lo Mascolo (ed.)"
-shortTitle: "Veljkovic review of The Christian Right in Europe"
 slug: "christian-right-europe"
-seoTitle: "Review of The Christian Right in Europe"
+
+title: "Review of The Christian Right in Europe"
+shortTitle: "The Christian Right in Europe"
 pageHeading: "Review of The Christian Right in Europe"
+seoTitle: "Review of The Christian Right in Europe"
+description: "This repository of rich and useful scholarship is bound together by a tendentious thesis, writes Stevan Veljkovic."
+
 reviewDek:
   workTitle: "The Christian Right in Europe"
   creatorRole: "editor"
   creatorName: "Gionathan Lo Mascolo"
 
-description: "This repository of rich and useful scholarship is bound together by a tendentious thesis, writes Stevan Veljkovic."
-
-dateCreated: "2024-10-29T18:22:00+00:00"
 datePublished: "2025-07-25"
-
 canonicalPath: "/publications/reviews/christian-right-europe/"
-
-pdf: "/publications/reviews/christian-right-europe/christian-right-europe.pdf"
 
 reviewer:
   name: "Stevan Veljkovic"
@@ -27,62 +23,96 @@ reviewer:
 reviewedWork:
   type: "Book"
   title: "The Christian Right in Europe: Movements, Networks, and Denominations"
+  shortTitle: "The Christian Right in Europe"
   editor:
     name: "Gionathan Lo Mascolo"
   doi: "10.1515/9783839460382"
-  url: "https://www.degruyterbrill.com/document/doi/10.1515/9783839460382/html/"
+  url: "https://doi.org/10.1515/9783839460382/"
   sameAs:
+    - "https://www.transcript-open.de/isbn/6038/"
+    - "https://www.degruyterbrill.com/document/doi/10.1515/9783839460382/html/"
     - "https://www.transcript-publishing.com/978-3-8376-6038-8/the-christian-right-in-europe/"
-  publisher: "transcript Verlag"
+  publisher: 
+    name: "transcript Verlag"
+    url: "https://www.transcript-publishing.com/"
   place: "Bielefeld"
   year: "2023"
   isbn:
     - "9783839460382"
     - "3839460387"
-
-
-
   image: "https://www.degruyterbrill.com/document/cover/isbn/9783839460382/product_pages/"
 
+pdf: "/publications/reviews/christian-right-europe/veljkovic-christian-right-europe.pdf"
+
 publishedReview:
-  title: "The Christian Right in Europe: Movements, Networks, and Denominations. Edited By Gionathan Lo Mascolo"
+  title: "The Christian Right in Europe: Movements, Networks, and Denominations. Edited by Gionathan Lo Mascolo"
   doi: "10.1093/jcs/csaf039"
-  url: "https://doi.org/10.1093/jcs/csaf039"
+  url: "https://doi.org/10.1093/jcs/csaf039/"
   sameAs:
-    - "https://academic.oup.com/jcs/article/67/3/csaf039/8213591"
+    - "https://academic.oup.com/jcs/article-abstract/67/3/csaf039/8213591/"
   datePublished: "2025-07-25"
   firstPublishedOnline: "2025-07-25"
+  articleId: "csaf039"
   
+  publisher:
+    name: "Oxford University Press"
+    url: "https://academic.oup.com/"
+    
+  publishedOnBehalfOf:
+    name: "J.M. Dawson Institute of Church-State Studies"
+    url: "https://churchstate.artsandsciences.baylor.edu/"
+    parentOrganization:
+      name: "Baylor University"
+      url: "https://www.baylor.edu/"
+      
   periodical:
     name: "Journal of Church and State"
-    url: "https://academic.oup.com/jcs"
-    publisher: "Oxford University Press"
+    url: "https://academic.oup.com/jcs/"
     issn:
       - "0021-969X"
       - "2040-4867"
-      
+    publisher:
+      name: "Oxford University Press"
+      url: "https://academic.oup.com/"
+    publishedOnBehalfOf:
+      name: "J.M. Dawson Institute of Church-State Studies"
+      url: "https://churchstate.artsandsciences.baylor.edu/"
+      parentOrganization:
+          name: "Baylor University"
+          url: "https://www.baylor.edu/"
+          
   volume:
     number: "67"
-    
+
   issue:
     number: "3"
     url: "https://academic.oup.com/jcs/issue/67/3/"
-    datePublished: "2025-07-01"
-    dateLabel: "Summer 2025"
+    datePublished: "2025-07"
+    issueDateLabel: "Summer 2025"
     image: "https://oup.silverchair-cdn.com/oup/backfile/Content_public/Journal/jcs/Issue/67/3/15/m_jcs_67_3cover.jpeg"
-
-  articleId: "csaf039"
   
-version: "Version of Record"
+
+
+showFirstPublishedOnlineNote: true
+
+rights:
+  copyrightYear: 2025
+  copyrightHolder:
+    type: "Person"
+    name: "Stevan Veljkovic"
+    id: "https://orcid.org/0000-0002-2599-3227"
+    orcid: "https://orcid.org/0000-0002-2599-3227"
+  
+version: "Reproduction of the Version of Record"
+openingVersionNote: "the Version of Record"
 
 image: "https://www.degruyterbrill.com/document/cover/isbn/9783839460382/product_pages/"
 
-citationHtml: 'Veljkovic, Stevan. Review of <i>The Christian Right in Europe: Movements Networks, and Denominations</i>, edited by Gionathan Lo Mascolo. <i>Journal of Church and State</i> 67, no. 3 (Summer 2025): csaf039. <a href="https://doi.org/10.1093/jcs/csaf039">https://doi.org/10.1093/jcs/csaf039</a>.'
+citationHtml: 'Veljkovic, Stevan. Review of <i>The Christian Right in Europe: Movements, Networks, and Denominations</i>, edited by Gionathan Lo Mascolo. <i>Journal of Church and State</i> 67, no. 3 (Summer 2025): csaf039. <a href="https://doi.org/10.1093/jcs/csaf039">https://doi.org/10.1093/jcs/csaf039</a>.'
 
 # openingVersionNote: "the Author Accepted Manuscript (AAM)"
 
-originalSubmissionNote:
-  - "Reproduced here by permission of Oxford University Press."
+reuseNoteHtml: "By permission of Oxford University Press on behalf of the J. M. Dawson Institute of Church-State Studies."
 
 publicationList:
   year: 2025

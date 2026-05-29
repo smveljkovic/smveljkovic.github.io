@@ -118,7 +118,6 @@ publicationList:
   year: 2025
   sortDate: "2025-07-01"
   noteId: "strange"
-  noteHtml: 'The version of record for this review is reproduced here: <a href="reviews/christian-right-europe/">html</a>.  '
 
 bylineHtml: >-
   <p class="byline" style="text-align:left">Stevan Veljkovic</p>

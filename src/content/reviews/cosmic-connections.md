@@ -109,7 +109,7 @@ publicationList:
   sortDate: "2025-05-01"
   order: 40
   noteId: "strange"
-  noteHtml: 'The preprint of this review is available in the following formats: <a href="reviews/cosmic-connections/">html</a> | <a href="reviews/cosmic-connections/veljkovic-review-cosmic-connections.pdf">pdf</a>.'
+  pdfPath: "/publications/reviews/cosmic-connections/veljkovic-review-cosmic-connections.pdf"
 
 modificationNote: "Errors have been corrected silently."
 

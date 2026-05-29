@@ -60,6 +60,7 @@ const publicationListSchema = z.object({
     order: z.number().optional(),
     noteHtml: z.string().optional(),
     noteId: z.string().optional(),
+    pdfPath: hrefSchema.optional(),
 })
 
 const periodicalSchema = z.object({

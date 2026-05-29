@@ -4,6 +4,12 @@ import TextPageLayout from "../../layouts/TextPageLayout.astro";
 import { pageMeta } from "../../data/pageMeta";
 import { createPublicationsSchema } from "../../data/schema/publications/createPublicationsSchema";
 
+function compactArray<T>(array: Array<T | undefined | null | false>): T[] {
+  return array.filter(Boolean) as T[];
+}
+
+
+
 const meta = pageMeta.publications;
 
 const reviews = await getCollection("reviews", ({ data }) => !data.draft);
@@ -14,6 +20,23 @@ const listOnlyPublicationItems = await getCollection(
 
 const reviewPublicationItems = reviews.map((entry) => {
     const review = entry.data;
+
+  const links = compactArray([
+    review.canonicalPath
+      ? {
+        href: review.canonicalPath,
+        label: "webpage",
+      }
+      : undefined,
+    review.publicationList.pdfPath
+      ? {
+          href: review.publicationList.pdfPath,
+          label: "pdf",
+      }
+        : undefined,
+  ]);
+
+
 
     return {
         id: `review:${entry.id}`,
@@ -42,6 +65,7 @@ const reviewPublicationItems = reviews.map((entry) => {
         pagination: review.publishedReview?.pagination,
         pageStart: review.publishedReview?.pageStart,
         pageEnd: review.publishedReview?.pageEnd,
+        links,
     };
 });
 
@@ -58,6 +82,7 @@ const bibliographyPublicationItems = listOnlyPublicationItems.map((entry) => {
     citationHtml: publicationItem.citationHtml,
     noteHtml: publicationItem.publicationList.noteHtml,
     noteId: publicationItem.publicationList.noteId,
+    links: [],
     doi: publicationItem.doi,
     url: publicationItem.url,
     datePublished: publicationItem.firstPublishedOnline,
@@ -129,13 +154,24 @@ const publicationsGroups = Array.from(
                     <>
                         <p class="BibEntry" set:html={item.citationHtml} />
 
-                        {item.noteHtml && (
-                            <p
-                                    class="BibEntry"
-                                    id={item.noteId}
-                                    set:html={item.noteHtml}
-                            />
-                        )}
+                      {(item.noteHtml || item.links.length > 0) && (
+                          <p
+                              class:list={[
+                                "BibEntry",
+                                "pub-note",
+                                !item.noteHtml && "pub-note--links-only",
+                              ]}
+                              id={item.noteId}
+                          >
+                            {item.noteHtml && <span set:html={item.noteHtml} />}
+
+                            {item.noteHtml && item.links.length > 0 && <span> </span>}
+
+                            {item.links.map((link) => (
+                                <a class="pub-link" href={link.href}><span class="pub-link__label">{link.label}</span></a>
+                            ))}
+                          </p>
+                      )}
                     </>
             ))}
         </>

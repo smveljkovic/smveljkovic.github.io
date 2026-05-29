@@ -63,6 +63,85 @@ div.Basic-Text-Frame {
 	margin: 0 0 1.7rem;
 }
 
+p.review_par, p.BibEntry, p.CVEntry {
+	hanging-punctuation: first last;
+	padding-bottom: 1.2em;
+	grid-column: 2;
+	margin: 0;
+	display: block;
+	width: auto;
+}
+
+p.BibEntry.pub-note {
+	margin-left: var(--bib-indent);
+	margin-top: -0.85rem;
+	margin-bottom: 1.2em;
+	padding-left: 0;
+	padding-bottom: 0;
+	text-indent: 0;
+	line-height: 1;
+}
+
+p.BibEntry.pub-note--links-only > a.pub-link:first-child {
+	margin-left: calc(-0.75em - 1px);
+}
+
+p.BibEntry.pub-note > a.pub-link {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 1.6em;
+	box-sizing: border-box;
+	margin-left: 0.35rem;
+	padding: 0 0.75em;
+	border: 1px solid #fff;
+	border-radius: 999px;
+	font-family: "Case Text", sans-serif;
+	font-variant-caps: all-small-caps;
+	font-feature-settings: "smcp" 1, "c2sc" 2;
+	font-size: 0.80em;
+	letter-spacing: 0.04em;
+	line-height: 1;
+	white-space: nowrap;
+	text-indent: 0;
+	text-decoration: none;
+	vertical-align: baseline;
+}
+
+p.BibEntry.pub-note > a.pub-link:hover {
+	text-decoration: underline;
+	text-decoration-thickness: 7%;
+	text-decoration-color: hsla(213,78%,65%,1);
+	text-decoration-skip-ink: auto;
+}
+
+p.BibEntry.pub-note > a.pub-link > .pub-link__label {
+	display: inline-block;
+	line-height: 1;
+	transform: translateY(-0.03em);
+}
+
+@supports (-webkit-hyphens: none) {
+	p.BibEntry.pub-note > a.pub-link > .pub-link__label {
+		transform: translateY(-0.07em);
+	}
+}
+
+@-moz-document url-prefix() {
+	p.BibEntry.pub-note > a.pub-link > .pub-link__label {
+		transform: translateY(0.02em);
+	}
+}
+
+p.BibEntry.pub-note > a.pub-link:visited:hover {
+	text-decoration-color: hsla(270,50%,70%,1);
+}
+
+p.BibEntry.pub-note > a.pub-link:active {
+	color: hsla(45, 100%, 70%, 1);
+	text-decoration: underline;
+	text-decoration-color: hsla(45, 100%, 70%, 1);
+}
 
 p.Details {
     color: #FFFFFF;
@@ -432,7 +511,9 @@ body {
 
 	/*margin-left: 0.5rem;*/
   }
-	
+
+
+
 	div.review_text, #writings, #cv {
 		grid-template-columns: 1fr;
 		font-size: 1rem;
@@ -505,12 +586,27 @@ body {
 	padding-left: var(--bib-indent);
 	text-indent: calc(var(--bib-indent) * -1);
 	}
-	
+
+	p.BibEntry.pub-links {
+		justify-content: flex-start;
+	}
+
 	#writings, #cv {
 		grid-template-columns: minmax(32ch, 1fr);
 		word-wrap: break-word;
 	}
-	
+
+	p.BibEntry.pub-note {
+		margin-top: -0.35rem;
+	}
+
+	@-moz-document url-prefix() {
+		p.BibEntry.pub-note > a.pub-link > .pub-link__label {
+			transform: translateY(0.09em);
+		}
+	}
+}
+
 	p.counter_bib, p.counter {
 		font-weight: 600;
 	}

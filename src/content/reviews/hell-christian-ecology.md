@@ -95,6 +95,7 @@ publicationList:
   year: 2025
   sortDate: "2025-01-20"
   order: 20
+  pdfPath: "/publications/reviews/hell-christian-ecology/hell-christian-ecology.pdf"
 
 reviewDek:
   workTitle: "Hell: In Search of a Christian Ecology"

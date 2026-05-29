@@ -5,8 +5,33 @@ body, div, dl, dt, dd, h1, h2, h3, h4, h5, h6, p, pre, code, blockquote {
     tab-size: 10;
 }
 
+@font-face {
+	font-family: "Case VAR SV";
+	src: url("/fonts/case/case-upright-var.woff2") format("woff2");
+	font-weight: 100 900; /* replace with actual range if different */
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: "Case VAR SV";
+	src: url("/fonts/case/case-italic-var.woff2") format("woff2");
+	font-weight: 100 900; /* replace with actual range if different */
+	font-style: italic;
+	font-display: swap;
+}
+
 :root {
-	--bib-indent: 2em;
+	--bib-indent: 2em; --font-sans: "Case VAR SV", Arial, Helvetica, sans-serif;
+}
+
+.Name,
+.Details,
+.nav-list,
+.counter,
+.publication-resource-pill {
+	font-family: var(--font-sans);
+	font-optical-sizing: auto;
 }
 
 a:link, button {
@@ -47,6 +72,16 @@ body {
 	-epub-hyphens:auto;
 	hyphens: manual;
 }
+
+.font-test {
+	font-size: 48px;
+	letter-spacing: 0;
+	font-weight: 400;
+	margin-bottom: 1rem;
+	color: #fff;
+}
+
+
 
 div.Basic-Text-Frame {
     border-style: thin;
@@ -93,19 +128,22 @@ p.BibEntry.pub-note > a.pub-link {
 	min-height: 1.6em;
 	box-sizing: border-box;
 	margin-left: 0.35rem;
-	padding: 0 0.75em;
+	padding: 0.08em 0.75em 0;
 	border: 1px solid #fff;
 	border-radius: 999px;
-	font-family: "Case Text", sans-serif;
+	font-family: "Case VAR SV", sans-serif;
 	font-variant-caps: all-small-caps;
 	font-feature-settings: "smcp" 1, "c2sc" 2;
-	font-size: 0.80em;
-	letter-spacing: 0.04em;
+	font-weight: 500;
+	font-size: 0.68em;
+	letter-spacing: 0.06em;
 	line-height: 1;
 	white-space: nowrap;
 	text-indent: 0;
 	text-decoration: none;
 	vertical-align: baseline;
+	font-optical-sizing: auto;
+
 }
 
 p.BibEntry.pub-note > a.pub-link:hover {
@@ -116,22 +154,11 @@ p.BibEntry.pub-note > a.pub-link:hover {
 }
 
 p.BibEntry.pub-note > a.pub-link > .pub-link__label {
-	display: inline-block;
+	display: block;
 	line-height: 1;
-	transform: translateY(-0.03em);
+	transform: none;
 }
 
-@supports (-webkit-hyphens: none) {
-	p.BibEntry.pub-note > a.pub-link > .pub-link__label {
-		transform: translateY(-0.07em);
-	}
-}
-
-@-moz-document url-prefix() {
-	p.BibEntry.pub-note > a.pub-link > .pub-link__label {
-		transform: translateY(0.02em);
-	}
-}
 
 p.BibEntry.pub-note > a.pub-link:visited:hover {
 	text-decoration-color: hsla(270,50%,70%,1);
@@ -143,9 +170,30 @@ p.BibEntry.pub-note > a.pub-link:active {
 	text-decoration-color: hsla(45, 100%, 70%, 1);
 }
 
+.home-card {
+	--home-tight-gap: 0;
+	--home-wide-gap: 1.5rem;
+}
+
+.home-card h1.Name {
+	margin-bottom: var(--home-tight-gap);
+}
+
+.home-card header {
+	padding-bottom: var(--home-wide-gap);
+}
+
+.home-card .nav-list {
+	margin-bottom: var(--home-wide-gap);
+}
+
+.home-card .pronunciation {
+	padding-top: 0;
+}
+
 p.Details {
     color: #FFFFFF;
-    font-family: "MetaSerifPro-Book", serif;
+    font-family: ff-meta-serif-web-pro, serif;
 	/* minus 30% base .name */
     font-size: clamp(1.575rem, 5.6vmin, 2.0125rem);
     font-style: normal;
@@ -160,19 +208,21 @@ p.Details {
     text-indent: 0;
     text-transform: none;
     widows: 1;
-    margin-top: 0em;
+    margin-top: -0.15em;
     margin-right: 0em;
     margin-left: 0em;
     margin-bottom: 0em;
 }
 p.Headings {
     color: #FFFFFF;
-    font-family: "Case Medium", sans-serif;
+    font-family: "Case VAR SV", sans-serif;
 	/* minus 20% base .name */
     font-size: clamp(1.8rem, 6.4vmin, 2.3rem);
     font-style: normal;
     font-variant: normal;
     font-weight: 700;
+	font-optical-sizing: none;
+	font-variation-settings: "opsz" 40;
     line-height: clamp(1.4,1.5,1.6);
     orphans: 1;
     page-break-after: auto;
@@ -188,11 +238,13 @@ p.Headings {
 }
 h1.Name {
     color: #FFFFFF;
-    font-family: "Case Medium", sans-serif;
+    font-family: "Case VAR SV", sans-serif;
     font-size: clamp(2.25rem, 8vmin, 2.875rem);
     font-style: normal;
     font-variant: normal;
     font-weight: 700;
+	font-optical-sizing: none;
+	font-variation-settings: "opsz" 45;
     line-height: clamp(1.4,1.5,1.6);
     orphans: 1;
     page-break-after: auto;
@@ -203,9 +255,7 @@ h1.Name {
     text-transform: none;
     widows: 1;
 }
-header {
-	padding-bottom: 0.5em;
-}
+
 .nav-list {
    list-style: none;
    padding: 0;
@@ -214,7 +264,7 @@ header {
  .nav-list li { margin: 0; }
 .pronunciation {
 	color: #FFFFFF;
-    font-family: "MetaSerifPro-Book";
+    font-family: ff-meta-serif-web-pro, serif;
 	/* minus 40% base .name */
     font-size: calc(clamp(1.35rem, 4.8vmin, 1.725rem) - 20%);
     font-style: normal;
@@ -236,7 +286,7 @@ header {
 }
 h1.BibHeading {
     color: #FFFFFF;
-    font-family: "Case Text", sans-serif;
+    font-family: "Case VAR SV", sans-serif;
     font-size: clamp(1.35rem, 3.2vmin, 2rem);
     font-style: normal;
     font-variant: normal;
@@ -256,7 +306,7 @@ h1.BibHeading {
 p.BibEntry, p.CVEntry {
 	/*display: inline-block;
 	color: white;
-	font-family: "MetaSerifPro-Book", serif;
+	font-family: ff-meta-serif-web-pro, serif;
 	font-size: 2vw;*/
 	padding-left: var(--bib-indent);
 	text-indent: calc(var(--bib-indent) * -1);
@@ -273,14 +323,16 @@ p.BibEntry, p.CVEntry {
 
 p.BibNote {
 	color: white;
-	font-family: "MetaSerifPro-Book", serif;
+	font-family: ff-meta-serif-web-pro, serif;
 	text-indent: 36px;
 	font-size: 2vw;
 	
 }
 
 p.counter, p.counter_bib {
-	font-family: "Case Text", sans-serif;
+	font-family: "Case VAR SV", sans-serif;
+	font-weight: 600;
+	font-feature-settings: "ss01" on;
 	font-size: clamp(0.9rem, 2vmin, 1.2rem);
 	/*float: left;*/
 	/*margin-left: clamp(-10dvmin, -10%, -7dvmin);*/
@@ -313,7 +365,7 @@ p.title {
 }
 div.review_text, #writings, #cv {
 	color: white;
-	font-family: "MetaSerifPro-Book", serif;
+	font-family: ff-meta-serif-web-pro, serif;
 	font-size: clamp(1.125rem, 2.5vmin, 1.5rem);
 	/*margin-left: 4%;*/;
 	display: grid;
@@ -333,23 +385,25 @@ div.review_text, #writings, #cv {
 	
 div.control {
 	color:white;
-	font-family: "Case Text", sans-serif;
+	font-family: "Case VAR SV", sans-serif;
 	font-size: clamp(0.9rem, 2vmin, 1.2rem);
 	text-align:right;
 	padding-top:3vh;
 	float: right;
 	padding-right:1.5vmin;
 	margin:0.33rem;
+	font-weight: 550;
 }
 
 div.countercontrol {
 	color:white;
-	font-family: "Case Text", sans-serif;
+	font-family: "Case VAR SV", sans-serif;
 	font-size: clamp(0.9rem, 2vmin, 1.2rem);
 	float: left;
 	padding-top:3vh;
 	padding-left:1.5vmin;
 	margin:0.33rem;
+	font-weight: 550;
 }
 p.review_par, p.BibEntry, p.CVEntry {
     /* hanging-punctuation is currently only supported in Safari. */
@@ -380,7 +434,8 @@ p.byline, p.trigger {
 
 div.review_intro {
 	color: white;
-	font-family: "Case Text", sans-serif;
+	font-family: "Case VAR SV", sans-serif;
+	font-weight: 500;
 	font-size: clamp(0.9rem, 2vmin, 1.2rem);
 	border:medium solid white;
 	padding: 1em;
@@ -487,104 +542,108 @@ div.test {
 
 @media screen and (max-width: 600px) {
 
-:root {
-	--bib-indent: 2em;
-}
-
-body {
-  padding-left: 0.25rem;
-  padding-right: 0.25rem;
-	align-items: left;
-}
-
-  
-	div.review_text, div.control, div.review_intro, #writings, #cv {
-    max-width:100%;
-	margin-left: 0;
-	margin-right: 0;  
+	:root {
+		--bib-indent: 2em;
 	}
-	
-	div.review_intro{
-	border: thin solid white;
-	padding: 1em 0.5em 1em;
+
+	body {
+		padding-left: 0.25rem;
+		padding-right: 0.25rem;
+		align-items: left;
+	}
+
+
+	div.review_text, div.control, div.review_intro, #writings, #cv {
+		max-width: 100%;
+		margin-left: 0;
+		margin-right: 0;
+	}
+
+	div.review_intro {
+		border: thin solid white;
+		padding: 1em 0.5em 1em;
 		margin-top: 1em;
 
-	/*margin-left: 0.5rem;*/
-  }
-
+		/*margin-left: 0.5rem;*/
+	}
 
 
 	div.review_text, #writings, #cv {
 		grid-template-columns: 1fr;
 		font-size: 1rem;
 	}
+
 	p.counter, p.counter_bib {
 		/*display: none;*/
 		display: block;
 		width: auto;
+		font-weight: 600;
 		white-space: normal;
 		text-align: left;
 		margin: 0 0 0.5rem;
 	}
-	
+
 	p.counter, p.review_intro, div.control, div.countercontrol, p.counter_bib {
 		font-size: 0.85rem;
 	}
+
 	div.review_text, #writings, #cv {
-		
-		display:grid;
+
+		display: grid;
 		grid-column: 1;
 		line-height: 1.6;
 	}
-	
+
 	div.control {
 		padding-right: 2vmin;
-		
+		font-weight: 550;
+
 	}
-	
+
 	div.countercontrol {
 		padding-left: 2vmin;
-		
+		font-weight: 550;
+
 	}
-	
+
 	p.review_par, p.title, div.byline, p.BibEntry, h1.BibHeading, CVEntry {
-		display:block;
+		display: block;
 		grid-column: 1;
 		width: auto;
 		max-width: 100%;
 		white-space: normal;
-		
+
 	}
-	
+
 	div.byline {
 		padding-top: 1.5em;
 		padding-right: 1em;
-		
-	}	
+
+	}
+
 	h1.BibHeading {
 		text-align: left;
 		padding-top: 1em;
-		
+
 	}
 
-/*	#strange {
-		margin-left: 2em;
-	}
+	/*	#strange {
+            margin-left: 2em;
+        }
 
-	@supports (text-indent: 2em each-line) {
-		#strange {
-			padding-left: 0;
-			text-indent: 2em each-line;
-		}
-	}*/
-
+        @supports (text-indent: 2em each-line) {
+            #strange {
+                padding-left: 0;
+                text-indent: 2em each-line;
+            }
+        }*/
 	p.BibEntry, p.CVEntry {
-	/*display: inline-block;
-	color: white;
-	font-family: "MetaSerifPro-Book", serif;
-	font-size: 2vw;*/
-	padding-left: var(--bib-indent);
-	text-indent: calc(var(--bib-indent) * -1);
+		/*display: inline-block;
+        color: white;
+        font-family: ff-meta-serif-web-pro, serif;
+        font-size: 2vw;*/
+		padding-left: var(--bib-indent);
+		text-indent: calc(var(--bib-indent) * -1);
 	}
 
 	p.BibEntry.pub-links {
@@ -600,17 +659,12 @@ body {
 		margin-top: -0.35rem;
 	}
 
-	@-moz-document url-prefix() {
-		p.BibEntry.pub-note > a.pub-link > .pub-link__label {
-			transform: translateY(0.09em);
-		}
-	}
-}
+
+
 
 	p.counter_bib, p.counter {
 		font-weight: 600;
 	}
 
 
-	
 }

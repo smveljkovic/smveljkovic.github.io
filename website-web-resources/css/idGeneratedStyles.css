@@ -574,25 +574,25 @@ div.test {
     .review_text > p.counter,
     #writings > p.counter_bib,
     #cv > p.counter_bib {
-        font-size: 0.70em;
+        font-size: 0.80em;
         font-weight: 700;
         line-height: 1.2;
     }
 
     .review_text > p.counter {
-        transform: translateY(0.28em);
+        transform: translateY(0.22em);
     }
 
     #writings > p.counter_bib,
     #cv > p.counter_bib {
-        transform: translateY(0.25em);
+        transform: translateY(0.22em);
     }
 	
 	p.counter {
     padding-top: clamp(0.20rem, 0.25rem, 0.40rem);
 }
 
-p.counter_bib {
+	p.counter_bib {
     padding-top: clamp(0.20rem, 0.25rem, 0.40rem);
 }
 }

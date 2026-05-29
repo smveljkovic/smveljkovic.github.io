@@ -43,6 +43,35 @@ body {
 	hyphens: manual;
 }
 
+@font-face {
+	font-family: "Case VAR SV";
+	src: url("../fonts/Case_Upright_VAR_1.001.woff2") format("woff2");
+	font-weight: 100 900; /* replace with actual range if different */
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: "Case VAR SV";
+	src: url("../fonts/Case_Italic_VAR_1.001.woff2") format("woff2");
+	font-weight: 100 900; /* replace with actual range if different */
+	font-style: italic;
+	font-display: swap;
+}
+
+:root {
+	--font-sans: "Case VAR SV", Helvetica, Arial, sans-serif;
+}
+
+.Name,
+.Details,
+.nav-list,
+.counter,
+.publication-resource-pill {
+  font-family: var(--font-sans);
+  font-optical-sizing: auto;
+}
+
 div.Basic-Text-Frame {
     border-style: thin;
 	background-color: hsl(0, 0%, 7%);
@@ -50,7 +79,7 @@ div.Basic-Text-Frame {
 
 p.Details {
     color: #FFFFFF;
-    font-family: ff-meta-serif-web-pro, serif;
+    font-family: "ff-meta-serif-web-pro", serif;
 	/* minus 30% base .name */
     font-size: clamp(1.575rem, 5.6vmin, 2.0125rem);
     font-style: normal;
@@ -72,7 +101,7 @@ p.Details {
 }
 p.Headings {
     color: #FFFFFF;
-    font-family: "Case Medium", sans-serif;
+    font-family: "Case VAR SV", sans-serif;
 	/* minus 20% base .name */
     font-size: clamp(1.8rem, 6.4vmin, 2.3rem);
     font-style: normal;
@@ -93,7 +122,6 @@ p.Headings {
 }
 h1.Name {
     color: #FFFFFF;
-    font-family: "Case Medium", sans-serif;
     font-size: clamp(2.25rem, 8vmin, 2.875rem);
     font-style: normal;
     font-variant: normal;
@@ -119,7 +147,7 @@ header {
  .nav-list li { margin: 0; }
 .pronunciation {
 	color: #FFFFFF;
-    font-family: ff-meta-serif-web-pro, serif;
+    font-family: "ff-meta-serif-web-pro", serif;
 	/* minus 40% base .name */
     font-size: calc(clamp(1.35rem, 4.8vmin, 1.725rem) - 20%);
     font-style: normal;
@@ -141,7 +169,7 @@ header {
 }
 h1.BibHeading {
     color: #FFFFFF;
-    font-family: "Case Text", sans-serif;
+    font-family: "Case VAR SV", sans-serif;
     font-size: clamp(1.35rem, 3.2vmin, 2rem);
     font-style: normal;
     font-variant: normal;
@@ -161,7 +189,7 @@ h1.BibHeading {
 p.BibEntry, p.CVEntry {
 	/*display: inline-block;
 	color: white;
-	font-family: ff-meta-serif-web-pro, serif;
+	font-family: "ff-meta-serif-web-pro", serif;
 	font-size: 2vw;*/
 	padding-left: 2em;
 	text-indent: -2em;
@@ -175,15 +203,17 @@ p.BibEntry, p.CVEntry {
 }
 p.BibNote {
 	color: white;
-	font-family: ff-meta-serif-web-pro, serif;
+	font-family: "ff-meta-serif-web-pro", serif;
 	text-indent: 36px;
 	font-size: 2vw;
 	
 }
 
 p.counter, p.counter_bib {
-	font-family: "Case Text", sans-serif;
+	font-family: "Case VAR SV", sans-serif;
+	font-feature-settings: "ss01" on;
 	font-size: clamp(0.9rem, 2vmin, 1.2rem);
+	font-weight: 600;
 	/*float: left;*/
 	/*margin-left: clamp(-10dvmin, -10%, -7dvmin);*/
 	color: hsla(45, 100%, 70%, 1);
@@ -215,7 +245,7 @@ p.title {
 }
 div.review_text, #writings, #cv {
 	color: white;
-	font-family: ff-meta-serif-web-pro, serif;
+	font-family: "ff-meta-serif-web-pro", serif;
 	font-size: clamp(1.125rem, 2.5vmin, 1.5rem);
 	/*margin-left: 4%;*/;
 	display: grid;
@@ -235,7 +265,8 @@ div.review_text, #writings, #cv {
 	
 div.control {
 	color:white;
-	font-family: "Case Text", sans-serif;
+	font-family: "Case VAR SV", sans-serif;
+	font-weight: 550;
 	font-size: clamp(0.9rem, 2vmin, 1.2rem);
 	text-align:right;
 	padding-top:3vh;
@@ -246,7 +277,8 @@ div.control {
 
 div.countercontrol {
 	color:white;
-	font-family: "Case Text", sans-serif;
+	font-family: "Case VAR SV", sans-serif;
+	font-weight: 550;
 	font-size: clamp(0.9rem, 2vmin, 1.2rem);
 	float: left;
 	padding-top:3vh;
@@ -282,7 +314,8 @@ p.byline, p.trigger {
 
 div.review_intro {
 	color: white;
-	font-family: "Case Text", sans-serif;
+	font-family: "Case VAR SV", sans-serif;
+	font-weight: 500;
 	font-size: clamp(0.9rem, 2vmin, 1.2rem);
 	border:medium solid white;
 	padding: 1em;
@@ -460,7 +493,7 @@ body {
 	p.BibEntry, p.CVEntry {
 	/*display: inline-block;
 	color: white;
-	font-family: ff-meta-serif-web-pro, serif;
+	font-family: "ff-meta-serif-web-pro", serif;
 	font-size: 2vw;*/
 	padding-left: 2.25;
 	text-indent: -2.25;

@@ -50,7 +50,7 @@ div.Basic-Text-Frame {
 
 p.Details {
     color: #FFFFFF;
-    font-family: "MetaSerifPro-Book", serif;
+    font-family: ff-meta-serif-web-pro, serif;
 	/* minus 30% base .name */
     font-size: clamp(1.575rem, 5.6vmin, 2.0125rem);
     font-style: normal;
@@ -119,7 +119,7 @@ header {
  .nav-list li { margin: 0; }
 .pronunciation {
 	color: #FFFFFF;
-    font-family: "MetaSerifPro-Book";
+    font-family: ff-meta-serif-web-pro, serif;
 	/* minus 40% base .name */
     font-size: calc(clamp(1.35rem, 4.8vmin, 1.725rem) - 20%);
     font-style: normal;
@@ -161,7 +161,7 @@ h1.BibHeading {
 p.BibEntry, p.CVEntry {
 	/*display: inline-block;
 	color: white;
-	font-family: "MetaSerifPro-Book", serif;
+	font-family: ff-meta-serif-web-pro, serif;
 	font-size: 2vw;*/
 	padding-left: 2em;
 	text-indent: -2em;
@@ -175,7 +175,7 @@ p.BibEntry, p.CVEntry {
 }
 p.BibNote {
 	color: white;
-	font-family: "MetaSerifPro-Book", serif;
+	font-family: ff-meta-serif-web-pro, serif;
 	text-indent: 36px;
 	font-size: 2vw;
 	
@@ -215,7 +215,7 @@ p.title {
 }
 div.review_text, #writings, #cv {
 	color: white;
-	font-family: "MetaSerifPro-Book", serif;
+	font-family: ff-meta-serif-web-pro, serif;
 	font-size: clamp(1.125rem, 2.5vmin, 1.5rem);
 	/*margin-left: 4%;*/;
 	display: grid;
@@ -460,7 +460,7 @@ body {
 	p.BibEntry, p.CVEntry {
 	/*display: inline-block;
 	color: white;
-	font-family: "MetaSerifPro-Book", serif;
+	font-family: ff-meta-serif-web-pro, serif;
 	font-size: 2vw;*/
 	padding-left: 2.25;
 	text-indent: -2.25;

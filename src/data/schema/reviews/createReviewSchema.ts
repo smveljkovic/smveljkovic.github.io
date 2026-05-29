@@ -2,8 +2,12 @@ import type { CollectionEntry } from "astro:content";
 import { absoluteUrl, site, nodeId, siteId } from "../../site";
 import { doiUrl, normalizeDoi } from "../../../lib/doi";
 
-type PersonLike = | string | { name: string; alternateName?: string; url?: string; orcid?: string; };
+type PersonLike = | string | { name: string; alternateName?: string; url?: string; orcid?: string; sameAs?: string[];};
 type OrganizationLike = | string | { name: string; url?: string };
+
+function uniqueStrings(values: Array<string | undefined>): string[] {
+    return [...new Set(values.filter(Boolean) as string[])];
+}
 
 function reviewedWorkIdentifier(review: ReviewData) {
     const normalizedDoi = normalizeDoi(review.reviewedWork.doi);
@@ -26,12 +30,12 @@ function schemaPerson(value: PersonLike | undefined) {
             name: value,
         };
     }
-
     return compactObject({
         "@type": "Person",
         name: value.name,
         alternateName: value.alternateName,
         url: value.url ?? value.orcid,
+        sameAs: value.sameAs,
         identifier: value.orcid
             ? {
                 "@type": "PropertyValue",
@@ -41,6 +45,18 @@ function schemaPerson(value: PersonLike | undefined) {
             }
             : undefined,
     });
+}
+
+function schemaPeople(input?: PersonLike | PersonLike[]) {
+    if (!input) return undefined;
+
+    const people = Array.isArray(input) ? input : [input];
+    const nodes = people.map(schemaPerson).filter(Boolean);
+
+    if (nodes.length === 0) return undefined;
+    if (nodes.length === 1) return nodes[0];
+
+    return nodes;
 }
 
 function schemaOrganization(value: OrganizationLike | undefined) {
@@ -64,6 +80,7 @@ function schemaCopyrightHolder(
     holder:
         | {
         type?: "Organization" | "Person";
+        id?: string,
         name: string;
         url?: string;
         orcid?: string;
@@ -71,6 +88,12 @@ function schemaCopyrightHolder(
         | undefined
 ) {
     if (!holder) return undefined;
+
+    const id = holder.id ?? holder.orcid;
+
+    if (id) {
+        return { "@id": id };
+    }
 
     return compactObject({
         "@type": holder.type ?? "Organization",
@@ -103,21 +126,6 @@ function getReviewPageHeadline(review: ReviewData): string {
     return review.schemaHeadline ?? getReviewPageName(review);
 }
 
-function reviewedWorkCreator(review: ReviewData) {
-    if (review.reviewedWork.editor) {
-        return {
-            editor: schemaPerson(review.reviewedWork.editor),
-        };
-    }
-
-    if (review.reviewedWork.author) {
-        return {
-            author: schemaPerson(review.reviewedWork.author),
-        };
-    }
-
-    return {};
-}
 
 function firstString(value: unknown): string | undefined {
     if (typeof value === "string") return value;
@@ -149,10 +157,10 @@ function compactArray<T>(array: Array<T | undefined | null | false>): T[] {
 function periodicalIssns(
     periodical: NonNullable<NonNullable<ReviewData["publishedReview"]>["periodical"]>
 ): string[] | undefined {
-    const values = compactArray([
-        ...(periodical.issn ?? []),
+    const values = uniqueStrings([
         periodical.printIssn,
         periodical.electronicIssn,
+        ...(periodical.issn ?? []),
     ]);
 
     return values.length > 0 ? values : undefined;
@@ -214,7 +222,8 @@ function createPublicationContainerNodes(review: ReviewData) {
             issueNumber: publishedReview.issue.number,
             url: publishedReview.issue.url,
             datePublished: dateValue(publishedReview.issue.datePublished),
-            image: publishedReview.issue.image,
+            image: publishedReview.issue.image ? absoluteUrl(publishedReview.issue.image) : undefined,
+            editor: schemaPeople(publishedReview.issue?.editor),
             isPartOf: publishedReview.volume
                 ? { "@id": volumeId }
                 : { "@id": periodicalId },
@@ -316,7 +325,9 @@ export function createReviewSchema(review: ReviewData) {
             "@id": reviewedWorkId,
             "@type": review.reviewedWork.type ?? "Book",
             name: review.reviewedWork.title,
-            ...reviewedWorkCreator(review),
+            author: schemaPeople(review.reviewedWork.author),
+            editor: schemaPeople(review.reviewedWork.editor),
+            contributor: schemaPeople(review.reviewedWork.contributor),
             publisher: schemaOrganization(review.reviewedWork.publisher),
             isbn: review.reviewedWork.isbn,
             url:
@@ -366,7 +377,7 @@ export function createReviewSchema(review: ReviewData) {
             name: localReviewName,
             description: review.description,
             version: reviewVersion,
-            inLanguage: "en",
+            inLanguage: site.language,
             author: { "@id": site.orcid },
             itemReviewed: { "@id": reviewedWorkId },
             isBasedOn: publishedReviewId ? { "@id": publishedReviewId } : undefined,

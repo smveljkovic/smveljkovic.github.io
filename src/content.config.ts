@@ -9,8 +9,14 @@ const personLikeSchema = z.union([
         alternateName: z.string().optional(),
         url: z.string().url().optional(),
         orcid: z.string().url().optional(),
+        sameAs: z.array(z.string().url()).optional(),
     }),
 ]);
+
+const personOrPeopleLikeSchema = z.union ([
+    personLikeSchema,
+    z.array(personLikeSchema),
+])
 
 const organizationLikeSchema = z.union([
     z.string(),
@@ -31,6 +37,7 @@ const rightsSchema = z.object({
 
     copyrightHolder: z.object({
         type: z.enum(["Organization", "Person"]).optional(),
+        id: z.string().url().optional(),
         name: z.string(),
         url: z.string().url().optional(),
         orcid: z.string().url().optional(),
@@ -76,7 +83,8 @@ const publicationIssueSchema = z.object({
     url: z.string().url().optional(),
     datePublished: z.string().optional(),
     dateLabel: z.string().optional(),
-    image: z.string().url().optional(),
+    image: hrefSchema.optional(),
+    editor: personOrPeopleLikeSchema.optional(),
 }).optional();
 
 const publicationContainerSchema = z.object({
@@ -141,8 +149,9 @@ const reviews = defineCollection({
       type: z.literal("Book"),
       title: z.string(),
       shortTitle: z.string().optional(),
-      author: personLikeSchema.optional(),
-      editor: personLikeSchema.optional(),
+      author: personOrPeopleLikeSchema.optional(),
+      editor: personOrPeopleLikeSchema.optional(),
+      contributor: personOrPeopleLikeSchema.optional(),
       publisher: organizationLikeSchema.optional(),
       place: z.string().optional(),
       year: z.string().optional(),
@@ -197,8 +206,8 @@ const reviews = defineCollection({
     pagination: z.string().optional(),
     pageStart: z.string().optional(),
     pageEnd: z.string().optional(),
-
-    openingVersionNote: z.string().optional(),*/
+*/
+    openingVersionNote: z.string().optional(),
 
     searchMeta: z
       .object({

@@ -104,7 +104,7 @@ rights:
     orcid: "https://orcid.org/0000-0002-2599-3227"
   
 version: "Reproduction of the Version of Record"
-openingVersionNote: "the Version of Record"
+openingVersionNote: "Version of Record"
 
 image: "https://www.degruyterbrill.com/document/cover/isbn/9783839460382/product_pages/"
 

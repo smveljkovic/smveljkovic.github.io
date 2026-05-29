@@ -61,6 +61,9 @@ export interface PublicationSchemaItem {
     pageEnd?: string;
 }
 
+function uniqueStrings(values: Array<string | undefined>): string[] {
+    return [...new Set(values.filter(Boolean) as string[])];
+}
 
 function dateValue(date: string | Date | undefined) {
     if (!date) return undefined;
@@ -154,10 +157,10 @@ function publicationContainerIds(item: PublicationSchemaItem) {
 function periodicalIssns(item: PublicationSchemaItem): string[] | undefined {
     if (!item.periodical) return undefined;
 
-    const values = compactArray([
-        ...(item.periodical.issn ?? []),
+    const values = uniqueStrings([
         item.periodical.printIssn,
         item.periodical.electronicIssn,
+        ...(item.periodical.issn ?? []),
     ]);
 
     return values.length > 0 ? values : undefined;

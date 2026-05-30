@@ -31,7 +31,7 @@ function preventFinalWordWidow(value: string): string {
 }
 
 const copyrightNotice = review.rights?.copyrightYear &&
-review.rights?.copyrightHolder
+review.rights?.copyrightHolder?.name
     ? `© ${review.rights.copyrightYear} ${preventFinalWordWidow(review.rights.copyrightHolder.name)}.`
     : null;
 
@@ -43,9 +43,27 @@ const rightsParagraphHtml = [
   copyrightNotice,
 ].filter(Boolean).join(" ");
 
+const isPublishedBlogPost =
+    review.publishedReview?.type === "BlogPosting" ||
+    review.publishedReview?.schemaTypes?.includes("BlogPosting");
+
+const introOpeningText =
+    review.introOpeningText ??
+    (isPublishedBlogPost
+        ? "The following text reproduces the published post:"
+        : review.version
+            ? `The following text reproduces the ${
+                review.openingVersionNote ?? review.version
+            } for`
+            : null);
+
+const firstPublishedNoteLabel =
+    review.firstPublishedNoteLabel ??
+    (isPublishedBlogPost ? "First published" : "First published online");
+
 ---
 
-<div>
+<div class="review_header">
   <div class="review_intro">
     <h1 class="review_heading">{heading}</h1>
     <p class="review_dek">By
@@ -55,19 +73,18 @@ const rightsParagraphHtml = [
 
     <!--<hr class="review_intro_rule" />-->
 
-    {review.version && (
-        <p class="intro">The following text reproduces the {review.openingVersionNote ?? review.version} for</p>
+    {introOpeningText && (
+        <p class="intro">{introOpeningText}</p>
     )}
 
     <p
-        class="intro"
-        style="margin-left: 2em; text-indent: -2em;"
+        class="intro intro_citation-main"
         set:html={review.citationHtml}
     />
 
     {showFirstPublishedOnlineNote && (
-        <p class="intro" style="margin-left: 2em">
-          First published online {formattedFirstPublishedOnline}.
+        <p class="intro intro_citation-note">
+          {firstPublishedNoteLabel} {formattedFirstPublishedOnline}.
         </p>
     )}
 

@@ -88,15 +88,6 @@ const publicationIssueSchema = z.object({
     editor: personOrPeopleLikeSchema.optional(),
 }).optional();
 
-const publicationContainerSchema = z.object({
-    periodical: periodicalSchema.optional(),
-    volume: publicationVolumeSchema,
-    issue: publicationIssueSchema,
-    articleId: z.string().optional(),
-    pageStart: z.string().optional(),
-    pageEnd: z.string().optional(),
-    pagination: z.string().optional(),
-});
 
 const publicationIdentifierSchema = z.object({
     propertyID: z.string(),
@@ -164,6 +155,9 @@ const reviews = defineCollection({
     }),
 
     publishedReview: z.object({
+        type: z.enum(["BlogPosting", "ScholarlyArticle"]).optional(),
+        schemaTypes: z.array(z.enum(["BlogPosting", "Review", "ScholarlyArticle"])).optional(),
+
         title: z.string(),
         shortTitle: z.string().optional(),
         doi: z.string().optional(),
@@ -192,8 +186,11 @@ const reviews = defineCollection({
     doi: z.string().optional(),
     url: hrefSchema.optional(),
     firstPublishedOnline: z.string().optional(),
-
+    openingVersionNote: z.string().optional(),
+    introOpeningText: z.string().optional(),
+    firstPublishedNoteLabel: z.string().optional(),
     showFirstPublishedOnlineNote: z.boolean().optional(),
+
     rights: rightsSchema.optional(),
     reuseNoteHtml: z.string().optional(),
     modificationNote: z.string().optional(),
@@ -208,7 +205,6 @@ const reviews = defineCollection({
     pageStart: z.string().optional(),
     pageEnd: z.string().optional(),
 */
-    openingVersionNote: z.string().optional(),
 
     searchMeta: z
       .object({

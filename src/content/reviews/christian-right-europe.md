@@ -118,6 +118,7 @@ publicationList:
   year: 2025
   sortDate: "2025-07-01"
   noteId: "strange"
+  pdfPath: "/publications/reviews/christian-right-europe/veljkovic-christian-right-europe.pdf"
 
 bylineHtml: >-
   <p class="byline" style="text-align:left">Stevan Veljkovic</p>

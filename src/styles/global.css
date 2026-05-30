@@ -34,6 +34,45 @@ body, div, dl, dt, dd, h1, h2, h3, h4, h5, h6, p, pre, code, blockquote {
 	font-optical-sizing: auto;
 }
 
+
+
+.review_header {
+	--review-ui-size: clamp(0.95rem, 1.35vw, 1.2rem);
+	font-size: var(--review-ui-size);
+	width: min(100%, 80ch);
+	margin: 0 auto;
+	box-sizing: border-box;
+	display: flow-root;
+}
+
+.review_header .review_intro {
+	width: 100%;
+	max-width: none;
+	margin: 0.33rem 0;
+	font-size: 1em;
+}
+
+.review_header .control,
+.review_header .countercontrol {
+	font-size: 0.9em;
+	line-height: 1.4;
+	padding-top: 1em;
+}
+
+.review_intro .intro_citation-main {
+	padding-left: 2em;
+	text-indent: -2em;
+}
+
+.review_intro .intro_citation-note {
+	padding-left: 2em;
+}
+
+.review_heading {
+	font-family: inherit;
+	font-weight: 700;
+}
+
 a:link, button {
 	color: hsla(213,78%,65%,1);
 	text-decoration-color: #FFFFFF;
@@ -88,24 +127,19 @@ div.Basic-Text-Frame {
 	background-color: hsl(0, 0%, 7%);
 }
 
-.review_heading {
-	font: inherit;
+.review_header .review_heading {
+	font-family: inherit;
+	font-size: 1em;
 	font-weight: 700;
-	margin: 0 0 0 0;
+	line-height: 1.25;
+	margin: 0 0 0.35em;
 }
 
 .review_dek {
 	margin: 0 0 1.7rem;
 }
 
-p.review_par, p.BibEntry, p.CVEntry {
-	hanging-punctuation: first last;
-	padding-bottom: 1.2em;
-	grid-column: 2;
-	margin: 0;
-	display: block;
-	width: auto;
-}
+
 
 p.BibEntry.pub-note {
 	margin-left: var(--bib-indent);
@@ -168,6 +202,20 @@ p.BibEntry.pub-note > a.pub-link:active {
 	color: hsla(45, 100%, 70%, 1);
 	text-decoration: underline;
 	text-decoration-color: hsla(45, 100%, 70%, 1);
+}
+
+div.review_text p.counter,
+#writings p.counter_bib {
+	font-size: 0.8em;
+	line-height: inherit;
+	align-self: baseline;
+}
+
+div.review_text,
+#writings,
+#cv {
+	align-items: baseline;
+	width: min(100%, 70ch);
 }
 
 .home-card {
@@ -333,18 +381,18 @@ p.counter, p.counter_bib {
 	font-family: "Case VAR SV", sans-serif;
 	font-weight: 600;
 	font-feature-settings: "ss01" on;
-	font-size: clamp(0.9rem, 2vmin, 1.2rem);
 	/*float: left;*/
 	/*margin-left: clamp(-10dvmin, -10%, -7dvmin);*/
 	color: hsla(45, 100%, 70%, 1);
 	/* padding-top: clamp(0.20rem, 0.25rem, 0.40rem);*/
-	line-height: calc(1.5em + 0.5rem);
 	/*padding-right: 0.25rem;*/
 	grid-column: 1;
 	/*margin-left: auto;*/
 	display: inline-block;
 	text-align: right;
 	white-space: nowrap;
+	font-size: clamp(0.85rem, 2.4vw, 1.2rem);
+	line-height: 1.6;
 }
 
 
@@ -363,6 +411,28 @@ p.title {
 	margin: 0;
 	/*margin: auto;*/
 }
+
+p.review_standfirst, p.review_source_book {
+	text-indent: 0;
+	padding-left: 0;
+}
+
+
+
+p.review_source_book {
+	padding-top: 0;
+
+
+}
+
+.review_rule {
+	grid-column: 2;
+	width: 100%;
+	border: 0;
+	border-top: 1px solid rgba(255, 255, 255, 0.7);
+	margin: 0 0 1.2em;
+}
+
 div.review_text, #writings, #cv {
 	color: white;
 	font-family: ff-meta-serif-web-pro, serif;
@@ -373,38 +443,37 @@ div.review_text, #writings, #cv {
 	/*grid-template-columns: max-content minmax(40ch, 75ch);*/
 	/*width: clamp(45ch, 50%, 80ch);*/
  	justify-content: center;
-  	grid-template-columns: max-content minmax(40ch, 1fr);
+  	grid-template-columns: max-content minmax(0, 1fr);
   	column-gap: 1rem;
 	margin: 0 auto; 
-	width: min(100%, 70ch);
+	width: min(100%, 62ch);
+	box-sizing: border-box;
 	line-height: clamp(1.4, 1.5, 1.6);
-		border:none;
+	border:none;
 }
 
 
-	
-div.control {
-	color:white;
+div.control,
+div.countercontrol {
+	color: white;
 	font-family: "Case VAR SV", sans-serif;
-	font-size: clamp(0.9rem, 2vmin, 1.2rem);
-	text-align:right;
-	padding-top:3vh;
-	float: right;
-	padding-right:1.5vmin;
-	margin:0.33rem;
+	line-height: 1.4;
+	padding-top: 1em;
+	margin: 0.33rem;
 	font-weight: 550;
+}
+
+div.control {
+	float: right;
+	text-align: right;
+	padding-right: 1.5vmin;
 }
 
 div.countercontrol {
-	color:white;
-	font-family: "Case VAR SV", sans-serif;
-	font-size: clamp(0.9rem, 2vmin, 1.2rem);
 	float: left;
-	padding-top:3vh;
-	padding-left:1.5vmin;
-	margin:0.33rem;
-	font-weight: 550;
+	padding-left: 1.5vmin;
 }
+
 p.review_par, p.BibEntry, p.CVEntry {
     /* hanging-punctuation is currently only supported in Safari. */
     hanging-punctuation: first last;
@@ -414,6 +483,8 @@ p.review_par, p.BibEntry, p.CVEntry {
 	margin: 0;
 	display: block;
 	width: auto;
+	min-width: 0;
+	overflow-wrap: anywhere;
 	/*width: clamp(40ch, 50%, 75ch);*/
 	/*margin: auto;*/
 	
@@ -424,6 +495,8 @@ div.byline {
 	/*width: clamp(40ch, 50%, 75ch);*/
 	display: inline-block;
 	width: auto;
+	min-width: 0;
+	overflow-wrap: anywhere;
 	margin: 0;
 	/*margin: auto;*/
 }
@@ -436,17 +509,16 @@ div.review_intro {
 	color: white;
 	font-family: "Case VAR SV", sans-serif;
 	font-weight: 500;
-	font-size: clamp(0.9rem, 2vmin, 1.2rem);
 	border:medium solid white;
 	padding: 1em;
-	margin: 0.33rem;
-	max-width: 80ch;
+	box-sizing: border-box;
 	line-height: clamp(1.5, 1.6, 1.7);
 }
 
 p.intro {
-	
-	width: clamp(42ch, 50vw, 75ch);
+	max-width: 75ch;
+	width: auto;
+	box-sizing: border-box;
 	padding-bottom: 1.2em;
 }
 
@@ -545,32 +617,76 @@ div.test {
 	:root {
 		--bib-indent: 2em;
 	}
+	.review_header {
+		width: 100%;
+		margin-left: 0;
+		margin-right: 0;
+	}
+
+	.review_header .review_intro {
+		width: 100%;
+		max-width: 100%;
+		margin-left: 0;
+		margin-right: 0;
+		padding: 1em 0.75rem 1em 0.5rem;
+	}
+
+
+
+	div.review_intro p.intro {
+		width: 100%;
+		max-width: 100%;
+		min-width: 0;
+		box-sizing: border-box;
+		overflow-wrap: anywhere;
+		word-break: normal;
+	}
+
+
+	div.review_text {
+		width: 100%;
+		max-width: 100%;
+		min-width: 0;
+		grid-template-columns: minmax(0, 1fr);
+		box-sizing: border-box;
+		overflow-wrap: anywhere;
+	}
+
+	div.review_text > * {
+		min-width: 0;
+		max-width: 100%;
+		box-sizing: border-box;
+	}
+
+
 
 	body {
 		padding-left: 0.25rem;
 		padding-right: 0.25rem;
-		align-items: left;
+		align-items: flex-start;
 	}
 
-
-	div.review_text, div.control, div.review_intro, #writings, #cv {
+	div.review_text, #writings, #cv {
 		max-width: 100%;
 		margin-left: 0;
 		margin-right: 0;
 	}
 
-	div.review_intro {
-		border: thin solid white;
-		padding: 1em 0.5em 1em;
-		margin-top: 1em;
 
-		/*margin-left: 0.5rem;*/
+	.review_header .review_intro {
+		width: 100%;
+		max-width: 100%;
+		margin-left: 0;
+		margin-right: 0;
+		padding: 1em 0.75rem 1em 0.5rem;
+		box-sizing: border-box;
+		overflow-wrap: anywhere;
 	}
-
 
 	div.review_text, #writings, #cv {
 		grid-template-columns: 1fr;
 		font-size: 1rem;
+		overflow-wrap: anywhere;
 	}
 
 	p.counter, p.counter_bib {
@@ -581,11 +697,10 @@ div.test {
 		white-space: normal;
 		text-align: left;
 		margin: 0 0 0.5rem;
+
 	}
 
-	p.counter, p.review_intro, div.control, div.countercontrol, p.counter_bib {
-		font-size: 0.85rem;
-	}
+
 
 	div.review_text, #writings, #cv {
 
@@ -606,10 +721,11 @@ div.test {
 
 	}
 
-	p.review_par, p.title, div.byline, p.BibEntry, h1.BibHeading, CVEntry {
+	p.review_par, p.title, div.byline, p.BibEntry, h1.BibHeading, .CVEntry {
 		display: block;
 		grid-column: 1;
 		width: auto;
+		min-width: 0;
 		max-width: 100%;
 		white-space: normal;
 
@@ -651,8 +767,8 @@ div.test {
 	}
 
 	#writings, #cv {
-		grid-template-columns: minmax(32ch, 1fr);
-		word-wrap: break-word;
+		grid-template-columns: minmax(0, 1fr);
+		overflow-wrap: anywhere;
 	}
 
 	p.BibEntry.pub-note {
@@ -665,6 +781,58 @@ div.test {
 	p.counter_bib, p.counter {
 		font-weight: 600;
 	}
+	p.intro {
+		width: auto;
+		max-width: 100%;
+	}
+	div.review_text p.counter,
+	#writings p.counter_bib {
+		font-size: 0.95em;
+		line-height: inherit;
+		align-self: baseline;
+	}
+	.review_header .control,
+	.review_header .countercontrol {
+		font-size: 0.9em;
+		line-height: 1.4;
+		padding-top: 1em;
+	}
+	.review_rule {
+		grid-column: 1;
+	}
+}
+@media screen and (max-width: 900px) and (orientation: landscape) {
+	.review_header {
+		--review-ui-size: clamp(1.125rem, 2.5vmin, 1.5rem);
+	}
+	div.review_text p.counter,
+	#writings p.counter_bib {
+		font-size: 0.95em;
+		line-height: inherit;
+		align-self: baseline;
+	}
+	.review_header .review_intro {
+		line-height: 1.45;
+		padding-top: 0.75em;
+		padding-bottom: 0.75em;
+	}
 
+	.review_header .review_heading {
+		font-size: 1em;
+		line-height: 1.25;
+		margin-bottom: 0.25em;
+	}
 
+	.review_header .review_dek,
+	.review_header .review_intro p.intro {
+		font-size: 1em;
+		line-height: 1.45;
+	}
+
+	.review_header .control,
+	.review_header .countercontrol {
+		font-size: clamp(0.95rem, 3.6svh, 1.15rem);
+		line-height: 1.35;
+		padding-top: 0.75em;
+	}
 }

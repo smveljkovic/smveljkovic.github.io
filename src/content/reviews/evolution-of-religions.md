@@ -6,7 +6,11 @@ title: "Review of The Evolution of Religions"
 shortTitle: "Evolution of Religions"
 pageHeading: "Review of The Evolution of Religions"
 seoTitle: "Review of The Evolution of Religions"
-description: "Lance Grande’s project of encyclopaedic breadth produces dividends but remains unrealised, writes Stevan Veljkovic."
+description: "Lance Grande’s attempt at encyclopaedic breadth of coverage produces dividends but the project remains unrealised, writes Stevan Veljkovic."
+
+localSchemaTypes:
+  - "Article"
+  - "Review"
 
 datePublished: "2024-07-18"
 canonicalPath: "/publications/reviews/evolution-of-religions/"
@@ -49,13 +53,16 @@ publishedReview:
   blog:
     name: "LSE Review of Books"
     url: "https://blogs.lse.ac.uk/lsereviewofbooks/"
-    parentsite:
+    parentSite:
       name: "LSE Blogs"
-      url: "https://blogs.lse.ac.uk"
+      url: "https://blogs.lse.ac.uk/"
       
   publisher:
     name: "London School of Economics and Political Science"
     url: "https://www.lse.ac.uk"
+    
+  license: "https://creativecommons.org/licenses/by/4.0/"
+  copyrightYear: 2024
 
 showFirstPublishedOnlineNote: true
 
@@ -120,4 +127,4 @@ publicationList:
 <p class="counter">[&#8239;9&#8239;]</p>
 <p class="review_par">Grande’s big, bold book will test many readers with its profusion of typos, imprecise formulations, and methodological aporias. But it should be given serious attention by anyone interested in fresh approaches to the study of religion. It’s not uncommon that terms and ideas from STEM subjects are appropriated for philosophical or theoretical purposes – just consider the academic industry that has arisen around the term “<a href="https://www.anthropocene-curriculum.org/">anthropocene</a>.” Nor is it uncommon to see charges levelled, across the <a href="https://www.newstatesman.com/culture/2013/01/c-p-snow-two-cultures">two-cultures</a> divide, of borrowed materials being <a href="https://www.proquest.com/scholarly-journals/anthropocene-comparing-meaning-geology/docview/2554369235/se-2">improperly used</a>. It’s less usual for a representative of the natural sciences to take tools from her own field and apply them to the human and social sciences, as Grande does here with his classificatory panorama of religions. As a lesson in such cross-disciplinary ambition, the outcome of Grande’s project deserves to be widely discussed.</p>
 <hr class="review_rule">
-<p class="review_par"><em><strong>Note:</strong> This review gives the views of the author and not the position of the <i>LSE Review of Books</i> blog, nor of the London School of Economics and Political Science.</em</p>
+<p class="review_par"><em><strong>Note:</strong> This review gives the views of the author and not the position of the <i>LSE Review of Books</i> blog, nor of the London School of Economics and Political Science.</em></p>

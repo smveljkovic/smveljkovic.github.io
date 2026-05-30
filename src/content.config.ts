@@ -114,6 +114,7 @@ const reviews = defineCollection({
     pageHeading: z.string().optional(),
     schemaName: z.string().optional(),
     schemaHeadline: z.string().optional(),
+    localSchemaTypes: z.array(z.string()).optional(),
 
     dateCreated: z.string().optional(),
     datePublished: z.string(),
@@ -170,6 +171,14 @@ const reviews = defineCollection({
         publisher: organizationLikeSchema.optional(),
 
         periodical: periodicalSchema.optional(),
+        blog: z.object({
+            name: z.string(),
+            url: z.url(),
+            parentSite: z.object({
+                name: z.string(),
+                url: z.string(),
+            }).optional(),
+        }).optional(),
         volume: publicationVolumeSchema,
         issue: publicationIssueSchema,
         articleId: z.string().optional(),

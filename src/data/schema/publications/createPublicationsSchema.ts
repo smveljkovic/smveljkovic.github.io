@@ -15,6 +15,15 @@ type OrganizationLike =
     url?: string;
 };
 
+type BlogLike = {
+    name: string;
+    url: string;
+    parentSite?: {
+        name: string;
+        url: string;
+    };
+};
+
 export interface PublicationIdentifier {
     propertyID: string;
     value: string;
@@ -25,6 +34,7 @@ export interface PublicationSchemaItem {
     id: string;
     title: string;
     itemType: PublicationSchemaItemType;
+    schemaTypes?: string[];
     year: number;
     sortDate: string;
     position?: number;
@@ -33,6 +43,8 @@ export interface PublicationSchemaItem {
     localPath?: string;
     datePublished?: string;
     firstPublishedOnline?: string;
+    publisher?: OrganizationLike;
+    blog?: BlogLike;
     identifiers?: PublicationIdentifier[];
     periodical?: {
         name: string;
@@ -80,8 +92,61 @@ function compactObject(object: Record<string, unknown>) {
     );
 }
 
+function createBlogContainerNodes(item: PublicationSchemaItem) {
+    if (!item.blog?.url) return [];
+
+    const blogId = externalNodeId(item.blog.url, "blog");
+    const parentSiteId = item.blog.parentSite?.url
+        ? externalNodeId(item.blog.parentSite.url, "website")
+        : undefined;
+
+    const blogNode = compactObject({
+        "@id": blogId,
+        "@type": "Blog",
+        name: item.blog.name,
+        url: item.blog.url,
+        isPartOf: parentSiteId ? { "@id": parentSiteId } : undefined,
+        publisher: schemaOrganization(item.publisher),
+    });
+
+    const parentSiteNode =
+        item.blog.parentSite &&
+        parentSiteId &&
+        compactObject({
+            "@id": parentSiteId,
+            "@type": "WebSite",
+            name: item.blog.parentSite.name,
+            url: item.blog.parentSite.url,
+            publisher: schemaOrganization(item.publisher),
+        });
+
+    return compactArray([blogNode, parentSiteNode]);
+}
+
 function compactArray<T>(array: Array<T | undefined | null | false>): T[] {
     return array.filter(Boolean) as T[];
+}
+
+function absoluteUrlIfLocal(url: string): string {
+    if (url.startsWith("http://") || url.startsWith("https://")) {
+        return url;
+    }
+
+    return absoluteUrl(url);
+}
+
+function externalNodeId(url: string, fragment: string): string {
+    const nodeUrl = new URL(url);
+    nodeUrl.hash = fragment;
+    return nodeUrl.toString();
+}
+
+function publicationContainerReference(item: PublicationSchemaItem) {
+    if (item.blog?.url) {
+        return { "@id": externalNodeId(item.blog.url, "blog") };
+    }
+
+    return mostSpecificPublicationContainerReference(item);
 }
 
 function schemaOrganization(value: OrganizationLike | undefined) {
@@ -108,8 +173,12 @@ function slugify(value: string) {
         .replace(/^-|-$/g, "");
 }
 
-function schemaTypeForItem(itemType: PublicationSchemaItemType) {
-    switch (itemType) {
+function schemaTypesForItem(item: PublicationSchemaItem) {
+    if (item.schemaTypes?.length) {
+        return uniqueStrings(item.schemaTypes);
+    }
+
+    switch (item.itemType) {
                 case "article":
                     return "ScholarlyArticle";
                 case "bookReview":
@@ -224,7 +293,9 @@ function createPublicationContainerNodes(item: PublicationSchemaItem) {
         name: item.periodical.name,
         url: item.periodical.url,
         issn: periodicalIssns(item),
-        image: item.periodical.image,
+        image: item.periodical.image
+            ? absoluteUrlIfLocal(item.periodical.image)
+            : undefined,
         publisher: schemaOrganization(item.periodical.publisher),
     });
 
@@ -247,7 +318,9 @@ function createPublicationContainerNodes(item: PublicationSchemaItem) {
             issueNumber: item.issue.number,
             url: item.issue.url,
             datePublished: dateValue(item.issue.datePublished),
-            image: item.issue.image,
+            image: item.issue.image
+                ? absoluteUrlIfLocal(item.issue.image)
+                : undefined,
             isPartOf: item.volume
                 ? { "@id": volumeId }
                 : { "@id": periodicalId },
@@ -277,7 +350,7 @@ export function createPublicationsSchema(items: PublicationSchemaItem[]) {
 
         return compactObject({
             "@id": id,
-            "@type": schemaTypeForItem(item.itemType),
+            "@type": schemaTypesForItem(item),
             name: item.title,
             headline: item.title,
             url,
@@ -286,13 +359,14 @@ export function createPublicationsSchema(items: PublicationSchemaItem[]) {
                     ? url
                     : undefined,
             author: { "@id": site.orcid },
+            publisher: schemaOrganization(item.publisher),
             datePublished: dateValue(
                 item.firstPublishedOnline ??
                 item.datePublished
             ),
             inLanguage: site.language,
             identifier: publicationIdentifiers(item),
-            isPartOf: mostSpecificPublicationContainerReference(item),
+            isPartOf: publicationContainerReference(item),
             pagination: item.pagination,
             pageStart: item.pageStart,
             pageEnd: item.pageEnd,
@@ -301,6 +375,10 @@ export function createPublicationsSchema(items: PublicationSchemaItem[]) {
 
     const publicationContainerNodes = items.flatMap((item) =>
         createPublicationContainerNodes(item)
+    );
+
+    const blogContainerNodes = items.flatMap((item) =>
+        createBlogContainerNodes(item)
     );
 
     const graph = [
@@ -347,6 +425,7 @@ export function createPublicationsSchema(items: PublicationSchemaItem[]) {
         },
         ...publicationNodes,
         ...publicationContainerNodes,
+        ...blogContainerNodes,
     ];
 
     return {

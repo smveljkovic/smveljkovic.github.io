@@ -1,5 +1,5 @@
 ---
-draft: false
+draft: true
 
 title: "Review of The Evolution of Religions"
 itemType: "bookReview"

@@ -42,6 +42,11 @@ const reviewPublicationItems = reviews.map((entry) => {
         id: `review:${entry.id}`,
         title: review.publishedReview?.title ?? review.title,
         itemType: "bookReview" as const,
+        schemaTypes:
+            review.publishedReview?.schemaTypes ??
+            (review.publishedReview?.type
+                ? [review.publishedReview.type, "Review"]
+                : undefined),
         year:
             review.publicationList?.year ??
             new Date(review.datePublished).getFullYear(),
@@ -58,6 +63,8 @@ const reviewPublicationItems = reviews.map((entry) => {
         localPath: review.canonicalPath,
         datePublished: review.publishedReview?.datePublished ?? review.datePublished,
         firstPublishedOnline: review.publishedReview?.firstPublishedOnline,
+        publisher: review.publishedReview?.publisher,
+        blog: review.publishedReview?.blog,
         periodical: review.publishedReview?.periodical,
         volume: review.publishedReview?.volume,
         issue: review.publishedReview?.issue,

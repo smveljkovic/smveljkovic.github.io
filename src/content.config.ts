@@ -7,9 +7,9 @@ const personLikeSchema = z.union([
     z.object({
         name: z.string(),
         alternateName: z.string().optional(),
-        url: z.string().url().optional(),
-        orcid: z.string().url().optional(),
-        sameAs: z.array(z.string().url()).optional(),
+        url: z.url().optional(),
+        orcid: z.url().optional(),
+        sameAs: z.array(z.url()).optional(),
     }),
 ]);
 
@@ -22,7 +22,7 @@ const organizationLikeSchema = z.union([
     z.string(),
     z.object({
         name: z.string(),
-        url: z.string().url().optional(),
+        url: z.url().optional(),
     }),
 ]);
 
@@ -30,17 +30,17 @@ const rightsSchema = z.object({
     license: z.object({
         name: z.string(),
         fullName: z.string().optional(),
-        url: z.string().url(),
+        url: z.url(),
     }).optional(),
 
     copyrightYear: z.number().optional(),
 
     copyrightHolder: z.object({
         type: z.enum(["Organization", "Person"]).optional(),
-        id: z.string().url().optional(),
+        id: z.url().optional(),
         name: z.string(),
-        url: z.string().url().optional(),
-        orcid: z.string().url().optional(),
+        url: z.url().optional(),
+        orcid: z.url().optional(),
     }).optional(),
 }).optional();
 
@@ -68,20 +68,20 @@ const periodicalSchema = z.object({
     issn: z.array(z.string()).optional(),
     printIssn: z.string().optional(),
     electronicIssn: z.string().optional(),
-    url: z.string().url().optional(),
+    url: z.url().optional(),
     publisher: organizationLikeSchema.optional(),
-    image: z.string().url().optional(),
+    image: z.url().optional(),
 });
 
 const publicationVolumeSchema = z.object({
     number: z.string(),
-    url: z.string().url().optional(),
+    url: z.url().optional(),
 }).optional();
 
 const publicationIssueSchema = z.object({
     number: z.string().optional(),
     name: z.string().optional(),
-    url: z.string().url().optional(),
+    url: z.url().optional(),
     datePublished: z.string().optional(),
     dateLabel: z.string().optional(),
     image: hrefSchema.optional(),
@@ -92,7 +92,7 @@ const publicationIssueSchema = z.object({
 const publicationIdentifierSchema = z.object({
     propertyID: z.string(),
     value: z.string(),
-    url: z.string().url().optional(),
+    url: z.url().optional(),
 });
 
 const reviews = defineCollection({

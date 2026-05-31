@@ -1,5 +1,5 @@
 ---
-draft: false
+draft: true
 
 title: "Review of The Godless Crusade"
 itemType: "bookReview"

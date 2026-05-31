@@ -40,7 +40,7 @@ reviewedWork:
   isbn:
     - "9783839460382"
     - "3839460387"
-  image: "https://www.degruyterbrill.com/document/cover/isbn/9783839460382/product_pages/"
+  image: "/images/publications/reviews/christian-right-europe/reviewed-work/cover.jpg"
 
 pdf: "/publications/reviews/christian-right-europe/veljkovic-christian-right-europe.pdf"
 
@@ -89,7 +89,7 @@ publishedReview:
     url: "https://academic.oup.com/jcs/issue/67/3/"
     datePublished: "2025-07"
     issueDateLabel: "Summer 2025"
-    image: "https://oup.silverchair-cdn.com/oup/backfile/Content_public/Journal/jcs/Issue/67/3/15/m_jcs_67_3cover.jpeg"
+    image: "/images/publications/reviews/christian-right-europe/issue/cover.jpg"
   
 
 
@@ -106,7 +106,7 @@ rights:
 version: "Reproduction of the Version of Record"
 openingVersionNote: "Version of Record"
 
-image: "https://www.degruyterbrill.com/document/cover/isbn/9783839460382/product_pages/"
+image: "/images/publications/reviews/christian-right-europe/reviewed-work/cover.jpg"
 
 citationHtml: 'Veljkovic, Stevan. Review of <i>The Christian Right in Europe: Movements, Networks, and Denominations</i>, edited by Gionathan Lo Mascolo. <i>Journal of Church and State</i> 67, no. 3 (Summer 2025): csaf039. <a href="https://doi.org/10.1093/jcs/csaf039">https://doi.org/10.1093/jcs/csaf039</a>.'
 
@@ -117,6 +117,7 @@ reuseNoteHtml: "By permission of Oxford University Press on behalf of the J. M. 
 publicationList:
   year: 2025
   sortDate: "2025-07-01"
+  order: 20
   noteId: "strange"
   pdfPath: "/publications/reviews/christian-right-europe/veljkovic-christian-right-europe.pdf"
 

@@ -34,7 +34,7 @@ reviewedWork:
     - "9780674297067"
     - "0674297075"
     - "0674297067"
-  image: "https://www.degruyterbrill.com/document/cover/isbn/9780674297074/product_pages"
+  image: "/images/publications/reviews/cosmic-connections/reviewed-work/cover.jpg"
 
 publishedReview:
   title: "Book Review: Cosmic Connections: Poetry in the Age of Disenchantment"
@@ -68,7 +68,7 @@ publishedReview:
     url: "https://journals.sagepub.com/toc/esta/28/2"
     datePublished: "2025-05"
     dateLabel: "May 2025"
-    image: "https://journals.sagepub.com/cms/asset/e55d45ab-8419-4908-b935-0563c55874fa/esta_28_2.cover.png"
+    image: "/images/publications/reviews/cosmic-connections/issue/cover.png"
 
   publisher:
     name: "Sage Publications"
@@ -92,7 +92,7 @@ reviewDek:
 
 pdf: "/publications/reviews/cosmic-connections/veljkovic-review-cosmic-connections.pdf"
     
-image: "https://www.degruyterbrill.com/document/cover/isbn/9780674297074/product_pages"
+image: "/images/publications/reviews/cosmic-connections/reviewed-work/cover.jpg"
 
 citationHtml: 'Veljkovic, Stevan. Review of <i>Cosmic Connections: Poetry in the
 Age of Disenchantment</i>, by Charles Taylor. <i>European Journal of Social
@@ -106,8 +106,8 @@ openingVersionNote: "the Author’s Original Manuscript"
 reuseNoteHtml: "This unabridged original is significantly longer than the Version of Record and is made available here under the <a href='https://www.sagepub.com/journals/permissions/sages-author-archiving-and-re-use-guidelines/'>publisher’s policy</a> on author reuse."
 publicationList:
   year: 2024
-  sortDate: "2025-05-01"
-  order: 40
+  sortDate: "2024-05-24"
+  order: 20
   noteId: "strange"
   pdfPath: "/publications/reviews/cosmic-connections/veljkovic-review-cosmic-connections.pdf"
 

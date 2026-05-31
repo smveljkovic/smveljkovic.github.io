@@ -33,7 +33,7 @@ reviewedWork:
     - "9780231214704"
     - "9780231214711"
     - "9780231560429"
-  image: "https://www.degruyterbrill.com/document/cover/isbn/9780231560429/product_pages"
+  image: "/images/publications/reviews/hell-christian-ecology/reviewed-work/cover.jpg"
 
 version: "Version of Record"
 openingVersionNote: "the Version of Record"
@@ -94,7 +94,7 @@ citationHtml: 'Veljkovic, Stevan. Review of <i>Hell: In Search of a Christian Ec
 publicationList:
   year: 2025
   sortDate: "2025-01-20"
-  order: 20
+  order: 10
   pdfPath: "/publications/reviews/hell-christian-ecology/hell-christian-ecology.pdf"
 
 reviewDek:
@@ -104,7 +104,7 @@ reviewDek:
 
 pdf: "/publications/reviews/hell-christian-ecology/hell-christian-ecology.pdf"
 
-image: "https://www.degruyterbrill.com/document/cover/isbn/9780231560429/product_pages/"
+image: "/images/publications/reviews/hell-christian-ecology/reviewed-work/cover.jpg"
 ---
 <p class="title" style="padding-left: 0; text-indent: 0"> Timothy Morton, <i>Hell: In Search of a Christian Ecology</i> (New York: Columbia University Press, 2024), 310 pp., $26.95&thinsp;/&thinsp;£22.00 (pbk), ISBN: 978-0-231-21471&#8209;1.</p>
 <p class="counter" id="1">[&#8239;1&#8239;]</p>

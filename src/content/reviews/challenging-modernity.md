@@ -47,7 +47,7 @@ reviewedWork:
     - "9780231560511"
     - "9780231214896"
     - "9780231214889"
-  image: "https://www.degruyterbrill.com/document/cover/isbn/9780231560511/product_pages/"
+  image: "/images/publications/reviews/challenging-modernity/reviewed-work/cover.jpg"
 
 publishedReview:
   title: "Challenging Modernity"
@@ -99,7 +99,7 @@ publishedReview:
     editor:
       - "Manoela Carpenedo"
       - "Paul Freston"
-    image: "/images/crss20.v053.i04.largecover.jpg"
+    image: "/images/publications/reviews/challenging-modernity/issue/cover.jpg"
     
 showFirstPublishedOnlineNote: true
 
@@ -117,7 +117,7 @@ rights:
 version: "Reproduction of the Version of Record"
 openingVersionNote: "Version of Record"
 
-image: "https://www.degruyterbrill.com/document/cover/isbn/9780231560511/product_pages/"
+image: "/images/publications/reviews/challenging-modernity/reviewed-work/cover.jpg"
 
 
 citationHtml: 'Veljkovic, Stevan. Review of <i>Challenging Modernity</i>,
@@ -127,9 +127,9 @@ State and Society</i> 53, no. 4 (2025): 440–41. <a
 href="https://doi.org/10.1080/09637494.2024.2408091">https://doi.org/10.1080/09637494.2024.2408091</a>.'
 
 publicationList:
-  year: 2025
-  sortDate: "2025-08-08"
-  order: 30
+  year: 2024
+  sortDate: "2024-10-08"
+  order: 10
 ---
  <p class="title" style="padding-left: 0; text-indent: 0">
       <span style="font-weight:bolder;">Challenging Modernity</span>, by Robert Bellah, edited and with introduction and conclusion by Richard Madsen, William M. Sullivan, Ann Swidler, and Steven M. Tipton, New York, Columbia University Press, 2024, 371 pp., $32.00/£28.00 (paperback), ISBN 9780231214896

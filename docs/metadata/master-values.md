@@ -1,57 +1,83 @@
-26 May 2026 at 21:35:56 BST
+# Website Metadata Master Values
 
-# Website metadata master values
+Last reviewed against `docs/project-memory/current.md`,
+`docs/project-memory/DECISIONS.md`, and `docs/project-memory/NEXT-STEPS.md` on
+2026-05-31.
 
-This file records canonical metadata values and conventions for
-`stevanveljkovic.com`.
+This file is a human-readable metadata registry/checklist for
+`stevanveljkovic.com`. It is not automatically the code source of truth. When
+values conflict, prefer current source code/rendered output, then
+`docs/project-memory/current.md`.
 
-It is a human-readable registry/checklist, not necessarily the code source of
-truth. Stable reusable values should continue to live in site constants and be
-imported by layouts/schema generators where possible.
+## 1. Global Identity Values
 
-## Global identity values
-
-| Field | Canonical value |
+| Field | Current value / rule |
 |---|---|
 | Site URL | `https://stevanveljkovic.com` |
+| Canonical domain | `https://stevanveljkovic.com/` |
 | Site name | `Stevan Veljkovic` |
 | Person name | `Stevan Veljkovic` |
 | Author name | `Stevan Veljkovic` |
-| Public identity line | `Theory and editing` |
+| Display name in `site.ts` | `Dr Stevan M. Veljkovic` |
+| Public identity line in current homepage code | `Theory and design` |
 | Location | `Oxford, England` |
-| Email | `hello@stevanveljkovic.com` |
 | Language | `en-GB` |
-| Default image | `/images/headshot-1200x630.png` |
+| Canonical `Person.@id` | `https://orcid.org/0000-0002-2599-3227` |
 | ORCID | `https://orcid.org/0000-0002-2599-3227` |
 | Google Scholar | `https://scholar.google.com/citations?user=e42TN4UAAAAJ` |
 | GitHub | `https://github.com/smveljkovic` |
 | Analytics ID | `G-7VMGXMNZZ0` |
+| Separate seminars site | `https://seminars.stevanveljkovic.com/` |
 
-## Canonical site configuration
+Do not use the rejected/conflated OpenAlex profile in `sameAs`.
 
-Astro config should use:
+Do not expand canonical site/person names into descriptive phrases such as:
+
+```text
+Stevan Veljkovic - Theory and design
+Dr Stevan Veljkovic
+S. Veljkovic - theorist and editor
+```
+
+Descriptive phrases belong in visible copy, descriptions, and JSON-LD
+`description`/`about`, not in `WebSite.name`, `Person.name`, or `og:site_name`.
+
+## 2. Staging Area For Uncertain Or Contradictory Values
+
+These values are intentionally retained here because project memory or code
+currently conflicts. Do not treat them as settled canonical values until fixed.
+
+| Topic | Current conflict / uncertainty | Action |
+|---|---|---|
+| Contact email | `src/data/site.ts` uses `contact@stevanveljkovic.com`; homepage hardcodes `mailto:hello@stevanveljkovic.com`; recent memory points toward `contact@...`. | Align `site.ts`, homepage, review intro, JSON-LD, page metadata, and any footer/contact copy. |
+| Default/headshot image | Selected public tree has `/images/headshot-1200x630.JPG`; `site.ts`, home schema, CV schema, and older metadata mention `/images/headshot-1200x630.png`. | Inspect generated output and make code/assets agree. |
+| Public identity phrase | Older notes used `Theory and editing`; current homepage code and `site.ts` use `Theory and design`. | Confirm desired wording before launch; current operational value is `Theory and design`. |
+| `challenging-modernity` route | Current code builds it publicly; current rights decision says T&F Version-of-Record reproductions must not go live without CCC/T&F permission. | Set back to `draft: true` before launch unless permission is clarified. |
+| Sort/date metadata | `godless-crusade` uses `publicationList.sortDate: "2023-01-01"`; other review sort/year choices may be placeholder-like. | Verify and clean sort/date metadata. |
+| Hell issue date/PDF | `hell-christian-ecology` has issue date `2024-10-03` and a PDF path, but memory says both need verification. | Verify before launch. |
+
+## 3. Site Configuration And URL Rules
+
+Astro config should preserve:
 
 ```js
 site: "https://stevanveljkovic.com",
-trailingSlash: "always"
+trailingSlash: "always",
+integrations: [sitemap(), mdx()],
 ```
 
 Canonical URLs should use trailing slashes.
 
-Preferred route examples:
+Main route examples:
 
 ```text
 https://stevanveljkovic.com/
-https://stevanveljkovic.com/publications/
 https://stevanveljkovic.com/cv/
+https://stevanveljkovic.com/publications/
 https://stevanveljkovic.com/publications/reviews/cosmic-connections/
 ```
 
-## URL helper conventions
-
-Use URL helpers instead of manual string concatenation.
-
-Preferred:
+Use URL helpers instead of manual concatenation:
 
 ```ts
 absoluteUrl("/")
@@ -67,7 +93,7 @@ Avoid:
 
 because this can create double slashes.
 
-## Title rules
+## 4. Title And Open Graph Rules
 
 ### HTML `<title>`
 
@@ -77,15 +103,15 @@ because this can create double slashes.
 | Ordinary internal page | `{Page name} \| Stevan Veljkovic` |
 | Review page | `Review of {Reviewed work short title} \| Stevan Veljkovic` |
 
-### Site and person names
+### Site And Person Names
 
-These should remain:
+Use exactly:
 
 ```text
 Stevan Veljkovic
 ```
 
-Use this value for:
+for:
 
 ```text
 WebSite.name
@@ -93,100 +119,73 @@ Person.name
 og:site_name
 ```
 
-Do not use expanded forms such as:
+### Open Graph Defaults
 
-```text
-Stevan Veljkovic — Theory and editing
-Dr Stevan Veljkovic
-```
-
-as canonical site/person names.
-
-Descriptive phrases such as `Theory and editing`, `theorist and editor`,
-`Oxford`, and subject areas belong in descriptions, visible text, and JSON-LD
-`description`/`about`, not in `WebSite.name`.
-
-## Global Open Graph / social metadata
-
-| Field | Canonical/default value |
+| Field | Current value / rule |
 |---|---|
 | `og:site_name` | `Stevan Veljkovic` |
-| Default `og:image` |
-`https://stevanveljkovic.com/images/headshot-1200x630.png` |
 | Default language/locale basis | `en-GB` |
 | Homepage `og:type` | `website` |
-| Ordinary page `og:type` | `website` or `article` only when appropriate |
+| Ordinary page `og:type` | `website` unless `article` is appropriate |
 | Review page `og:type` | `article` |
+| Default `og:image` | See staging area: `.png` code references conflict with `.JPG` public file. |
 
-## JSON-LD stable node IDs
+## 5. Stable JSON-LD Node IDs
 
-| Node                                                                               | Canonical ID |
-|------------------------------------------------------------------------------------|---|
-| Person                                                                             | `https://orcid.org/0000-0002-2599-3227` |
-| WebSite                                                                            | `https://stevanveljkovic.com/#website` |
-| Homepage WebPage                                                                   | `https://stevanveljkovic.com/#webpage` |
-| Publications WebPage                                                               | `https://stevanveljkovic.com/publications/#webpage` |
-| CV WebPage                                                                         | `https://stevanveljkovic.com/cv/#webpage` |
-| Cosmic Connections review WebPage                                                  |
-| `https://stevanveljkovic.com/publications/reviews/cosmic-connections/#webpage`     |
-| Cosmic Connections local review                                                    |
-| `https://stevanveljkovic.com/publications/reviews/cosmic-connections/#review`      |
-| Christian Right review WebPage                                                     |
-| `https://stevanveljkovic.com/publications/reviews/christian-right-europe/#webpage` |
-| Christian Right local review                                                       |
-| `https://stevanveljkovic.com/publications/reviews/christian-right-europe/#review`  |
+| Node | Canonical ID |
+|---|---|
+| Person | `https://orcid.org/0000-0002-2599-3227` |
+| WebSite | `https://stevanveljkovic.com/#website` |
+| Homepage WebPage | `https://stevanveljkovic.com/#webpage` |
+| Publications WebPage | `https://stevanveljkovic.com/publications/#webpage` |
+| CV WebPage | `https://stevanveljkovic.com/cv/#webpage` |
+| Review WebPage | `https://stevanveljkovic.com/publications/reviews/<slug>/#webpage` |
+| Local review node | `https://stevanveljkovic.com/publications/reviews/<slug>/#review` |
 
-## Homepage metadata
+DOI URLs should be primary IDs for DOI-bearing works and published
+articles/reviews.
 
-| Field | Canonical value / rule |
+## 6. Page Metadata
+
+### Homepage
+
+| Field | Current value / rule |
 |---|---|
 | Route | `/` |
 | Canonical URL | `https://stevanveljkovic.com/` |
 | `<title>` | `Stevan Veljkovic` |
 | Site/person name | `Stevan Veljkovic` |
-| Public identity | `Theory and editing` |
+| Public identity in current code | `Theory and design` |
 | Location | `Oxford, England` |
-| Main person `@id` | `https://orcid.org/0000-0002-2599-3227` |
+| Person `@id` | `https://orcid.org/0000-0002-2599-3227` |
 | WebSite `@id` | `https://stevanveljkovic.com/#website` |
 | WebPage `@id` | `https://stevanveljkovic.com/#webpage` |
-| `og:site_name` | `Stevan Veljkovic` |
 | `og:type` | `website` |
 
 Homepage title-like metadata should not expand the site name beyond
 `Stevan Veljkovic` unless the field is explicitly a description.
 
-## Publications page metadata
+### Publications
 
-| Field | Canonical value / rule |
+| Field | Current value / rule |
 |---|---|
 | Route | `/publications/` |
 | Canonical URL | `https://stevanveljkovic.com/publications/` |
 | `<title>` | `Publications \| Stevan Veljkovic` |
+| Visible H1 in current code | `Publications and PhD thesis` |
 | WebPage `@id` | `https://stevanveljkovic.com/publications/#webpage` |
 | Page/schema name | `Publications` |
 | ItemList name | `Publications of Stevan Veljkovic` |
 | Main schema type | `CollectionPage` |
 | `CollectionPage.mainEntity` | `ItemList` |
 | `ItemList.itemListElement` | `ListItem[]` |
+| Expected count | Current live reviews plus thesis: `7` |
 
-Cleanup note: remove old strings such as:
+The page combines non-draft `reviews` and non-draft `publicationItems`.
 
-```text
-Publications | Dr Stevan Veljkovic
-Publications of Dr Stevan Veljkovic
-Publications of Dr Stevan Veljkovic.
-```
+### CV
 
-Use instead:
-
-```text
-Publications | Stevan Veljkovic
-Publications of Stevan Veljkovic
-```
-
-## CV page metadata
-
-| Field | Canonical value / rule |
+| Field | Current value / rule |
 |---|---|
 | Route | `/cv/` |
 | Canonical URL | `https://stevanveljkovic.com/cv/` |
@@ -195,19 +194,14 @@ Publications of Stevan Veljkovic
 | Person `@id` | `https://orcid.org/0000-0002-2599-3227` |
 | PDF path | `/cv/veljkovic-cv.pdf` |
 
-Do not link CV schema to a non-existent thesis page during Stage 3.
+Do not link CV schema to a non-existent local thesis page during Stage 3.
 
-## Review page metadata
+## 7. Review Page Metadata
 
-Review pages use the dynamic route:
+Review pages use:
 
 ```text
 /publications/reviews/<slug>/
-```
-
-Generated by:
-
-```text
 src/pages/publications/reviews/[slug]/index.astro
 ```
 
@@ -223,28 +217,37 @@ Review page `og:type`:
 article
 ```
 
-Review page JSON-LD should distinguish:
+Current live/generated review routes:
+
+```text
+/publications/reviews/challenging-modernity/
+/publications/reviews/christian-right-europe/
+/publications/reviews/cosmic-connections/
+/publications/reviews/evolution-of-religions/
+/publications/reviews/godless-crusade/
+/publications/reviews/hell-christian-ecology/
+```
+
+`challenging-modernity` is generated but rights-blocked. It should be withheld
+unless T&F/CCC permission is clarified.
+
+Review JSON-LD should distinguish:
 
 1. Stevan as `Person`;
 2. the reviewed work;
-3. the DOI-published review/article, where applicable;
-4. the local hosted review/manuscript representation;
-5. periodical/volume/issue containers, where applicable.
+3. the DOI-published review/article or external published post;
+4. the local hosted review/manuscript/page representation;
+5. periodical/volume/issue or blog containers where applicable.
 
-### Cosmic Connections review
+### Cosmic Connections
 
-| Field | Canonical value |
+| Field | Current value |
 |---|---|
 | Route | `/publications/reviews/cosmic-connections/` |
-| Canonical URL |
-`https://stevanveljkovic.com/publications/reviews/cosmic-connections/` |
-| `<title>` | `Review of Cosmic Connections \| Stevan Veljkovic` |
-| WebPage `@id` |
-`https://stevanveljkovic.com/publications/reviews/cosmic-connections/#webpage` |
-| Local review `@id` |
-`https://stevanveljkovic.com/publications/reviews/cosmic-connections/#review` |
+| WebPage `@id` | `https://stevanveljkovic.com/publications/reviews/cosmic-connections/#webpage` |
+| Local review `@id` | `https://stevanveljkovic.com/publications/reviews/cosmic-connections/#review` |
 | DOI article `@id` | `https://doi.org/10.1177/13684310241249684` |
-| Local version | `Author’s Original Manuscript` |
+| Local version | Author's Original Manuscript / author manuscript |
 | DOI article `datePublished` | `2024-05-24` |
 | Issue date | `2025-05` |
 | Periodical | `European Journal of Social Theory` |
@@ -254,119 +257,115 @@ Review page JSON-LD should distinguish:
 Do not use `sameAs` between the local review/manuscript and the DOI article.
 Use `isBasedOn` and/or `citation`.
 
-### Christian Right review
+### Christian Right
 
-| Field | Canonical value |
+| Field | Current value |
 |---|---|
 | Route | `/publications/reviews/christian-right-europe/` |
-| Canonical URL |
-`https://stevanveljkovic.com/publications/reviews/christian-right-europe/` |
-| `<title>` | `Review of The Christian Right in Europe \| Stevan Veljkovic` |
-| WebPage `@id` |
-`https://stevanveljkovic.com/publications/reviews/christian-right-europe/#
-webpage` |
-| Local review `@id` |
-`https://stevanveljkovic.com/publications/reviews/christian-right-europe/#review
-` |
+| WebPage `@id` | `https://stevanveljkovic.com/publications/reviews/christian-right-europe/#webpage` |
+| Local review `@id` | `https://stevanveljkovic.com/publications/reviews/christian-right-europe/#review` |
 | DOI review `@id` | `https://doi.org/10.1093/jcs/csaf039` |
 | Reviewed book DOI | `https://doi.org/10.1515/9783839460382` |
 | Periodical | `Journal of Church and State` |
 | Volume | `67` |
 | Issue | `3` |
 | Article ID | `csaf039` |
+| Issue date precision | Month precision: `2025-07` |
+| PDF path | `/publications/reviews/christian-right-europe/veljkovic-christian-right-europe.pdf` |
 
 The reviewed edited volume should use `editor`, not an author value containing
-`(ed.)`.
+`(ed.)`. `csaf039` is article ID, not pagination.
 
-Cleanup note: verify whether the issue date is exactly:
+### Evolution Of Religions
 
-```text
-2025-07-01
-```
-
-If only month-level certainty is available, use:
-
-```text
-2025-07
-```
-
-or omit.
-
-## Thesis metadata during Stage 3
-
-Decision: the thesis remains **bibliography-only until Stage 4**.
-
-No substantive thesis page should be created during Stage 3 unless intentionally
-creating a minimal bibliographic route. Do not add a thesis page to sitemap or
-schema until it exists.
-
-Current thesis DOI:
-
-```text
-10.5287/ora-4rjoobkvk
-https://doi.org/10.5287/ora-4rjoobkvk
-```
-
-Current thesis title:
-
-```text
-Religious atavism and the climate crisis, with reference to Taylor and Rorty on
-liberalism
-```
-
-Preferred thesis JSON-LD work identifier:
-
-```text
-https://doi.org/10.5287/ora-4rjoobkvk
-```
-
-Current thesis type:
-
-```json
-"@type": "Thesis"
-```
-
-Identifier values:
-
-| Identifier | Value |
+| Field | Current value |
 |---|---|
+| Route | `/publications/reviews/evolution-of-religions/` |
+| Published post type | `BlogPosting` / `Review` |
+| Local reproduction type | `Article` / `Review` |
+| Container | LSE Review of Books blog under LSE Blogs website |
+| First published | `2024-07-18` |
+
+Do not invent journal, volume, issue, pagination, ISSN, or fake issue images.
+
+### Godless Crusade
+
+| Field | Current value / rule |
+|---|---|
+| Route | `/publications/reviews/godless-crusade/` |
+| Local version | `Accepted Manuscript` |
+| Opening note | `Accepted Manuscript (AM)` |
+| Published review DOI | `https://doi.org/10.1080/09637494.2023.2260684` |
+| Reviewed book DOI | `https://doi.org/10.1017/9781009262125` |
+| Periodical | `Religion, State and Society` |
+| Volume | `51` |
+| Issue | `4–5` |
+| Issue URL | `https://www.tandfonline.com/toc/crss20/51/4-5` |
+| Published review first-online date | `2023-12-14` |
+| Article/review pagination | `491–492`, `491`, `492` |
+| Issue date | `2023` or omit unless exact issue date is verified |
+
+Do not expose T&F Version-of-Record PDF/text unless permission is granted. Keep
+the Goodhart correction note visible if the local AM text corrects the AM error.
+
+### Hell: In Search Of A Christian Ecology
+
+| Field | Current value / rule |
+|---|---|
+| Route | `/publications/reviews/hell-christian-ecology/` |
+| DOI review | `https://doi.org/10.1558/jsrnc.30282` |
+| Reviewed book DOI | `https://doi.org/10.7312/mort21470` |
+| License | `CC BY-NC-ND 4.0` |
+| Published review first-online date | `2025-01-20` |
+| Periodical | `Journal for the Study of Religion, Nature and Culture` |
+| Volume | `19` |
+| Issue date | Staged for verification: `2024-10-03` |
+| PDF path | Staged for verification: `/publications/reviews/hell-christian-ecology/hell-christian-ecology.pdf` |
+
+If using generic JSRNC visual assets, attach them to `Periodical`, not
+`PublicationIssue`.
+
+### Challenging Modernity
+
+| Field | Current value / rule |
+|---|---|
+| Route | `/publications/reviews/challenging-modernity/` |
+| Rights status | Active launch blocker |
+| Local version | Taylor & Francis Version-of-Record reproduction |
+| Published review DOI | `https://doi.org/10.1080/09637494.2024.2408091` |
+| Reviewed book DOI | `https://doi.org/10.7312/bell21488` |
+
+Must be drafted/withheld before launch unless T&F/CCC permission is clarified.
+It may still appear as a bibliographic DOI item on `/publications/`.
+
+## 8. Thesis Metadata During Stage 3
+
+Decision: the thesis remains bibliography-only until Stage 4.
+
+Do not add a thesis page to sitemap or schema until it exists.
+
+| Field | Current value |
+|---|---|
+| Deferred local slug | `/thesis/religious-atavism-climate-crisis/` |
+| Primary thesis ID | `https://doi.org/10.5287/ora-4rjoobkvk` |
 | DOI | `10.5287/ora-4rjoobkvk` |
 | ARK | `ark:/29072/ora_7aff13dc075e4c17bee95adfc1b2fcf4` |
 | Oxford Research Archive pubs id | `1624720` |
 | Oxford Research Archive local pid | `pubs:1624720` |
+| Title | `Religious atavism and the climate crisis, with reference to Taylor and Rorty on liberalism` |
+| Type | `Thesis` |
 
-ARK decision:
+ARK rule:
 
-- include the ARK as a secondary `PropertyValue` identifier;
+- include ARK as a secondary `PropertyValue` identifier where useful;
 - do not use the ARK as the primary `@id`;
 - do not use the ARK as `sameAs` while the DOI exists.
 
-Title decision:
+Do not automatically set thesis `datePublished` to a deposit date without first
+deciding whether it means award date, completion/submission date, repository
+deposit date, DOI publication date, or repository availability date.
 
-The thesis `name` and `headline` may remain the full thesis title for now,
-because this matches the visible citation and DOI/ORA record more closely. If a
-shorter schema/display label is desired later, add a separate field such as
-`schemaName` or `shortTitle`.
-
-Date cleanup note:
-
-The thesis currently has:
-
-```json
-"datePublished": "2023-01-01"
-```
-
-Treat this as a cleanup item unless verified as exact. Known ORA deposit date:
-
-```text
-2024-02-11
-```
-
-Do not automatically replace `datePublished` with the deposit date without first
-deciding whether `datePublished` means award date, completion/submission date,
-repository deposit date, DOI publication date, or repository availability date.
-
-## Date precision rules
+## 9. Date, Pagination, And Issue Rules
 
 Use date-only values unless an actual meaningful time is known.
 
@@ -382,7 +381,31 @@ Avoid invented datetimes:
 "datePublished": "2025-07-25T12:00:00+01:00"
 ```
 
-If only month or year is known, avoid invented day precision where possible.
+Article/review date rule:
+
+```text
+publishedReview.datePublished = publisher-recognised first publication date,
+usually first online.
+```
+
+Internal `firstPublishedOnline` may make the article-level date explicit, but it
+should map to Schema.org `datePublished`; do not emit a non-standard
+`firstPublishedOnline`.
+
+Issue date rule:
+
+```text
+PublicationIssue.datePublished = issue date/month/year, where known.
+```
+
+Do not let article first-online dates leak onto issue nodes.
+
+Pagination rule:
+
+- article/review pagination belongs on the published article/review node:
+  `pagination`, `pageStart`, `pageEnd`;
+- issue-level pagination should only describe whole-issue pagination and only if
+  verified.
 
 Known cleanup examples:
 
@@ -391,44 +414,87 @@ Known cleanup examples:
 2023-01-01
 ```
 
-These may be placeholders and should be verified.
+These may be placeholders and should be verified before being treated as exact
+publication dates.
 
-## Sitemap rules
+## 10. Asset Path Rules
 
-The sitemap should include only actual generated, non-draft canonical pages.
+Use root-relative URLs in frontmatter and metadata. Do not include `public` in
+frontmatter URLs.
 
-Do not include planned pages such as:
-
-```text
-/publications/reviews/godless-crusade/
-/publications/reviews/hell-christian-ecology/
-/publications/reviews/challenging-modernity/
-/thesis/religious-atavism-climate-crisis/
-```
-
-until they are intentionally generated and non-draft.
-
-## Planned review pages
-
-Planned full review pages remain draft until text, metadata, rights status,
-version wording, and schema have been checked:
+Preferred review image convention:
 
 ```text
-/publications/reviews/godless-crusade/
-/publications/reviews/hell-christian-ecology/
-/publications/reviews/challenging-modernity/
+public/images/publications/reviews/<slug>/
+  reviewed-work/cover.jpg
+  issue/cover.jpg
+  periodical/poster.jpg
+  periodical/banner.jpg
+  article/image.jpg
+  page/social-card.jpg
 ```
 
-Expected content files:
+Attachment rule:
+
+- `reviewed-work/cover.jpg` -> reviewed `Book` / work;
+- `issue/cover.jpg` -> `PublicationIssue`;
+- `periodical/poster.jpg` or `periodical/banner.jpg` -> `Periodical`;
+- `article/image.jpg` -> article/post/review only if rights are clear;
+- `page/social-card.jpg` -> local page/Open Graph image.
+
+Preferred future review PDF convention:
 
 ```text
-src/content/reviews/godless-crusade.md
-src/content/reviews/hell-christian-ecology.md
-src/content/reviews/challenging-modernity.md
+public/publications/reviews/<slug>/veljkovic-review-<slug>.pdf
 ```
 
-Initial frontmatter rule:
+Current exception:
 
-```yaml
-draft: true
+```text
+public/publications/reviews/christian-right-europe/veljkovic-christian-right-europe.pdf
 ```
+
+## 11. Sitemap And Redirect Rules
+
+The sitemap should include only actual generated, non-draft canonical pages that
+are intended to be live.
+
+Generated does not automatically mean launch-ready. Rights-blocked routes should
+be drafted or otherwise excluded before launch.
+
+Legacy URLs to consider:
+
+```text
+/writing.html
+/writing/ReviewCosmicConnectionsV2.html
+/writing/ReviewCosmicConnectionsV2.pdf
+/itinerary.pdf
+```
+
+GitHub Pages cannot create true arbitrary 301 redirects. Static HTML redirect
+stubs may be used for old HTML URLs and should include:
+
+- canonical link;
+- meta refresh;
+- `location.replace`;
+- visible fallback link;
+- no full JSON-LD.
+
+Do not replace old PDF URLs with HTML redirect stubs unless true HTTP redirects
+are available.
+
+## 12. Superseded Values Retained For Audit
+
+These values appeared in older metadata/memory but are no longer current
+operational values:
+
+| Superseded value | Current handling |
+|---|---|
+| `Theory and editing` | Superseded by current code value `Theory and design`, pending final wording confirmation. |
+| `hello@stevanveljkovic.com` as canonical email | Not settled; homepage still hardcodes it, but `site.ts` and recent memory point to `contact@...`. |
+| `/images/headshot-1200x630.png` as definitely valid asset | Code references it, but selected public tree shows `/images/headshot-1200x630.JPG`; fix needed. |
+| Only Cosmic Connections and Christian Right as generated review pages | Superseded; six review routes currently build. |
+| Godless, Hell, Challenging Modernity as merely planned draft pages | Superseded; content files exist and currently build, subject to rights/asset validation. |
+| `src/content/publication-items/phd-thesis.md` | Current thesis publication item is `religious-atavism-climate-crisis.md`. |
+| `veljkovic-review-christian-right-europe.pdf` | Current Christian Right path is `veljkovic-christian-right-europe.pdf`. |
+| Thesis page as immediate Stage 3 task | Superseded; thesis remains bibliography-only until Stage 4. |

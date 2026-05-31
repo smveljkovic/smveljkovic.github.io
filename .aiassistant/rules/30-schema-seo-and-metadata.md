@@ -1,22 +1,56 @@
-# Schema, SEO, and metadata rules
+---
+apply: always
+---
 
-Preserve scholarly metadata carefully.
+# Schema, SEO, And Metadata
 
-The ORCID URL is the canonical JSON-LD `Person.@id`:
+Preserve scholarly metadata carefully. Validate rendered page-source JSON-LD,
+not TypeScript object literals.
+
+Canonical `Person.@id`:
 
 ```text
 https://orcid.org/0000-0002-2599-3227
 ```
 
-DOI URLs are stable identifiers for scholarly works when available.
+DOI URLs are primary stable identifiers for DOI-bearing scholarly works. Do not
+include the rejected/conflated OpenAlex profile.
 
-Do not include the rejected/conflated OpenAlex profile.
+JSON-LD belongs on canonical pages, not redirect stubs. Visible content and
+JSON-LD should agree.
 
-JSON-LD belongs on canonical pages, not redirect stubs.
+Homepage and CV schemas remain manual:
 
-Visible content and JSON-LD should agree.
+```text
+src/data/schema/home.ts
+src/data/schema/cv.ts
+```
 
-Validate rendered page-source JSON-LD, not TypeScript object literals.
+Do not use `createReviewSchema()` on the homepage or CV. Active review pages use:
+
+```ts
+const jsonLd = createReviewSchema(review);
+```
+
+from:
+
+```text
+src/data/schema/reviews/createReviewSchema.ts
+```
+
+`/publications/` uses:
+
+```text
+src/data/schema/publications/createPublicationsSchema.ts
+```
+
+and should remain:
+
+```text
+CollectionPage
+  mainEntity -> ItemList
+    itemListElement -> ListItem[]
+```
 
 Review schema should distinguish:
 
@@ -25,48 +59,41 @@ Review schema should distinguish:
 3. the published review/article
 4. the local hosted manuscript/page
 
-Local hosted manuscripts and DOI articles are distinct if materially different.
-
-Do not use false `sameAs`.
-
-Use `itemReviewed` for reviewed works.
-
-Use `editor` for edited volumes.
-
-Current local review type may be:
-
-```ts
-["@type": ["ScholarlyArticle", "Review"]]
-```
-
-unless explicitly refactored.
-
-Home and CV schemas remain manual:
+Current journal review graph:
 
 ```text
-src/data/schema/home.ts
-src/data/schema/cv.ts
+local WebPage
+  mainEntity -> local #review
+  about -> reviewed Book
+
+local #review
+  itemReviewed -> reviewed Book
+  isBasedOn/citation -> DOI/published review
+
+DOI/published review
+  itemReviewed -> reviewed Book
+  isPartOf -> PublicationIssue -> PublicationVolume -> Periodical
 ```
 
-Do not use `createReviewSchema()` on the homepage or CV.
+Do not use false `sameAs` between local manuscripts/reproductions and DOI pages
+unless they are truly identical.
 
-Review JSON-LD should be generated through:
+Pagination rule:
 
-```text
-src/data/schema/reviews/createReviewSchema.ts
-```
+- article/review pagination belongs on the published article/review node:
+  `pagination`, `pageStart`, `pageEnd`;
+- issue-level pagination only describes the whole issue and only if verified.
 
-with:
+Date rule:
 
-```ts
-const jsonLd = createReviewSchema(review);
-```
+- `publishedReview.datePublished` means publisher-recognised first publication
+  date, usually first online;
+- internal `firstPublishedOnline` may map to Schema.org `datePublished`;
+- do not emit a non-standard Schema.org `firstPublishedOnline`;
+- `PublicationIssue.datePublished` means issue date/month/year where known.
 
-A future publications schema factory may live at:
+Do not emit `PublicationIssue.name` merely as the issue number. Use issue number
+fields for numbers; use `name` only for real publisher-supplied issue labels.
 
-```text
-src/data/schema/publications/createPublicationsSchema.ts
-```
-
-and should probably model `/publications/` as a `CollectionPage` with
-`mainEntity` as an `ItemList`.
+Use date-only values unless a real meaningful time is known. Do not invent
+noon/midnight datetimes.

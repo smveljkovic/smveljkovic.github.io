@@ -1,45 +1,57 @@
-# Project identity
+---
+apply: always
+---
 
-This repository is the Astro source for Stevan Veljkovic’s personal
+# Project Identity
+
+This repository is the Astro source for Stevan Veljkovic's personal
 academic/professional website:
 
+```text
 https://stevanveljkovic.com/
+```
 
-The site is an academic/research hub, not a generic portfolio.
+The site is a durable academic/research hub, not a generic portfolio or theme.
+Preserve its distinctive scholarly presentation during Stage 3.
 
-Public identity:
+Current homepage identity in code:
 
-- Stevan Veljkovic
-- Theory and editing
-- Oxford, England
+```text
+Stevan Veljkovic
+Theory and design,
+Oxford, England.
+```
 
-Subject identity:
+Canonical domain:
 
-- religious studies
-- modern history
-- social theory
-- secularism
-- climate change
-- liberalism
+```text
+https://stevanveljkovic.com/
+```
+
+Separate seminars site:
+
+```text
+https://seminars.stevanveljkovic.com/
+```
 
 Core identifiers:
 
-- ORCID: https://orcid.org/0000-0002-2599-3227
-- Google Scholar: https://scholar.google.com/citations?user=e42TN4UAAAAJ
-- GitHub: https://github.com/smveljkovic
-- Email: hello@stevanveljkovic.com
+```text
+ORCID: https://orcid.org/0000-0002-2599-3227
+Google Scholar: https://scholar.google.com/citations?user=e42TN4UAAAAJ
+GitHub: https://github.com/smveljkovic
+```
 
-The canonical `Person.@id` in JSON-LD is:
+The canonical JSON-LD `Person.@id` is:
 
+```text
 https://orcid.org/0000-0002-2599-3227
+```
 
-Canonical site domain:
+Email is currently inconsistent and must not be treated as settled:
 
-https://stevanveljkovic.com/
+- `src/data/site.ts` uses `contact@stevanveljkovic.com`.
+- the homepage currently hardcodes `hello@stevanveljkovic.com`.
+- recent memory points toward aligning on `contact@stevanveljkovic.com`.
 
-Separate seminars subdomain:
-
-https://seminars.stevanveljkovic.com/
-
-Do not turn the site into a generic academic theme. Preserve its distinctive
-visual identity and existing scholarly presentation.
+Do not include the rejected/conflated OpenAlex profile in `sameAs`.

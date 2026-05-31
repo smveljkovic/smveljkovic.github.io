@@ -1,9 +1,13 @@
-# Design, CSS, and accessibility rules
+---
+apply: always
+---
+
+# Design, CSS, And Accessibility
 
 Preserve the custom visual identity. Do not replace the site with generic
-academic theme styling.
+academic-theme styling during Stage 3.
 
-Global CSS is currently preserved in:
+Global CSS is preserved in:
 
 ```text
 src/styles/global.css
@@ -38,26 +42,31 @@ nav-list
 pronunciation
 ```
 
-Preserve `p.Headings` unless the CSS is deliberately rewritten.
+Homepage identity currently shown in code:
 
-Homepage navigation labels and links:
+```text
+Stevan Veljkovic
+Theory and design,
+Oxford, England.
+```
 
-```html
-Contact  -> mailto:hello@stevanveljkovic.com
+Homepage navigation labels and targets:
+
+```text
+Contact  -> currently mailto:hello@stevanveljkovic.com
 Résumé   -> /cv/
 Writing  -> /publications/
 Seminars -> https://seminars.stevanveljkovic.com/
 ```
 
-Pronunciation link:
+The Contact email is an active inconsistency: `site.email` is
+`contact@stevanveljkovic.com`, while the homepage hardcodes `hello@...`. Align
+before launch.
+
+Pronunciation link and display:
 
 ```text
 https://ipa-reader.com/?text=stεv(%C9%99)n&voice=Brian
-```
-
-Displayed IPA:
-
-```text
 /ˈstεv(ə)n ˈvεlˌkəːvɪk/
 ```
 
@@ -75,10 +84,7 @@ Accessibility constraints:
 - Homepage nav `<ul>` must contain `<li>` children.
 
 Known Safari/homepage issue: if `h1.Name` is invisible because of black text on
-dark background, a likely fix is:
+dark background, use a targeted color fix rather than a CSS rewrite.
 
-```css
-h1.Name {
-  color: #fff;
-}
-```
+Avoid typography/layout rabbit holes before launch. The inherited
+margin-counter/year-marker layout may be revisited in Stage 4.

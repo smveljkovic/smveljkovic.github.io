@@ -1,82 +1,66 @@
-# Astro architecture rules
+---
+apply: always
+---
 
-This project uses Astro. Do not replace Astro with another framework and do not
-introduce a theme unless explicitly asked.
+# Astro Architecture
 
-The Astro config should preserve:
+This project uses Astro. Do not replace Astro, introduce a theme, or redesign
+the site unless explicitly asked.
+
+Astro config should preserve:
 
 ```js
 site: "https://stevanveljkovic.com",
 trailingSlash: "always",
+integrations: [sitemap(), mdx()],
 ```
 
-Preferred config shape:
-
-```js
-import { defineConfig } from "astro/config";
-import sitemap from "@astrojs/sitemap";
-
-export default defineConfig({
-  site: "https://stevanveljkovic.com",
-  trailingSlash: "always",
-  integrations: [sitemap()],
-});
-```
-
-Current route model:
+Main route model:
 
 ```text
 src/pages/index.astro                              -> /
-src/pages/publications/index.astro                -> /publications/
 src/pages/cv/index.astro                          -> /cv/
-src/pages/publications/reviews/[slug]/index.astro ->
-/publications/reviews/<slug>/
+src/pages/publications/index.astro                -> /publications/
+src/pages/publications/reviews/[slug]/index.astro -> /publications/reviews/<slug>/
 ```
 
-Dynamic review routes should be generated from the `reviews` content collection.
+Review pages are generated from `src/content/reviews/*.md` through the dynamic
+review route. Do not add static per-review route files under
+`src/pages/publications/reviews/`, because Astro static routes mask dynamic
+routes.
 
-Use this naming convention:
+Current review files:
 
-```ts
-entry = full Astro collection entry
-review = entry.data
+```text
+challenging-modernity.md
+christian-right-europe.md
+cosmic-connections.md
+evolution-of-religions.md
+godless-crusade.md
+hell-christian-ecology.md
 ```
 
-Correct examples:
+The current build has 9 pages, including all six review routes. Note that
+`challenging-modernity` is rights-blocked and may need to return to
+`draft: true` before launch.
 
-```ts
-entry.id
-entry.data
-review.slug
-review.title
-review.citationHtml
-```
-
-Avoid confusing entry/data shapes. Do not write `review.data.title` unless
-`review` is actually a full collection entry.
-
-Dynamic review routes should query non-draft reviews:
+Dynamic review routes should query only non-draft reviews:
 
 ```ts
 getCollection("reviews", ({ data }) => !data.draft)
 ```
 
-Use `entry.data.slug` for route params.
+Use this naming convention:
 
-Static route warning: Astro static routes take priority over dynamic routes. Do
-not add per-review static page files under:
-
-```text
-src/pages/publications/reviews/
+```ts
+const entry = /* full Astro collection entry */;
+const review = entry.data;
 ```
 
-if they would mask:
+Use `entry.id` for entry identity and `review.slug`, `review.title`, etc. for
+frontmatter. Do not write `review.data.title` when `review = entry.data`.
 
-```text
-src/pages/publications/reviews/[slug]/index.astro
-```
-
-Astro content collections should use the current Astro 6 loader pattern:
+Astro content collections use the Astro 6 loader pattern:
 
 ```ts
 import { defineCollection } from "astro:content";
@@ -84,4 +68,5 @@ import { glob } from "astro/loaders";
 import { z } from "astro/zod";
 ```
 
-Do not use duplicate `schema` keys.
+Use `z.url()` for URL validation. Avoid deprecated `z.string().url()`. Do not
+use duplicate `schema` keys.

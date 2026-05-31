@@ -1,658 +1,354 @@
 # Next Steps
 
-## 1. Immediate next actions
+This file is an active checklist derived from `docs/project-memory/current.md`.
+Treat `current.md` and the actual code/build output as authoritative. Older
+migration-era assumptions, especially notes that only Cosmic Connections and
+Christian Right exist as review pages, are superseded.
 
-1. **Confirm the current project state**
-   - Work from:
+## 1. Immediate Launch Blockers
+
+1. **Resolve the `challenging-modernity` rights blocker**
+   - Current code builds `/publications/reviews/challenging-modernity/`
+     publicly.
+   - The page is a Taylor & Francis Version-of-Record reproduction.
+   - No Taylor & Francis Version-of-Record page should go live until T&F/CCC
+     permission is clarified.
+   - Decide whether to set `src/content/reviews/challenging-modernity.md` back
+     to `draft: true` before launch.
+   - It may still appear as a bibliographic DOI item on `/publications/`.
+
+2. **Verify `godless-crusade` Accepted Manuscript handling**
+   - Current local version should be `Accepted Manuscript`, not Version of
+     Record.
+   - Do not expose T&F Version-of-Record PDF/text unless permission is granted.
+   - Check:
+     - exact visible Accepted Manuscript wording;
+     - Goodhart correction note;
+     - local text/version accuracy;
+     - schema output;
+     - sitemap inclusion/exclusion according to final rights decision;
+     - absence of VoR PDF/text.
+   - Key current metadata:
      ```text
-     /Users/stevan/Projects/smvsite-astro
+     route: /publications/reviews/godless-crusade/
+     published review DOI: https://doi.org/10.1080/09637494.2023.2260684
+     reviewed book DOI: https://doi.org/10.1017/9781009262125
+     journal: Religion, State and Society, volume 51, issue 4-5
+     published review first-online date: 2023-12-14
+     article/review pagination: 491-492, 491, 492
      ```
-   - Run:
-     ```bash
-     npx astro sync
-     npx astro check
-     npm run build
-     ```
-   - Fix any TypeScript/content-collection/build errors before adding new features.
 
-2. **Inspect the live/generated route set**
-   - Confirm these pages build and load locally:
+3. **Resolve Hell-specific metadata and asset questions**
+   - Check whether `hell-christian-ecology` should use:
+     ```text
+     Reproduction of the Version of Record
+     ```
+   - Decide whether the first-published note should display.
+   - Verify whether issue date `2024-10-03` is real issue-level metadata or
+     should be omitted.
+   - Verify referenced PDF path exists before launch.
+   - If using generic JSRNC visual assets, attach them to `Periodical`, not
+     `PublicationIssue`.
+
+## 2. Required Verification Pass
+
+1. **Run project checks**
+   ```bash
+   npx astro sync
+   npx astro check
+   npm run build
+   ```
+
+   Current memory says `npm run build` succeeded as of 2026-05-31 12:07 BST,
+   but rerun after any content/schema changes.
+
+2. **Confirm generated route set**
+   - Current static build should produce 9 pages:
      ```text
      /
-     /publications/
      /cv/
-     /publications/reviews/cosmic-connections/
+     /publications/
+     /publications/reviews/challenging-modernity/
      /publications/reviews/christian-right-europe/
+     /publications/reviews/cosmic-connections/
+     /publications/reviews/evolution-of-religions/
+     /publications/reviews/godless-crusade/
+     /publications/reviews/hell-christian-ecology/
      ```
-   - In dev:
-     ```bash
-     npm run dev
-     ```
-     then visit:
+   - If `challenging-modernity` is withheld, update the expected generated
+     route set and sitemap accordingly.
+
+3. **Inspect generated sitemap**
+   ```bash
+   find dist -name "sitemap*.xml" -print -exec cat {} \;
+   ```
+
+   Confirm only intended live canonical pages appear. Pay particular attention
+   to `challenging-modernity` and `godless-crusade`.
+
+4. **Verify generated-page asset references**
+   - PDFs.
+   - Reviewed-work cover images.
+   - Issue/periodical images.
+   - Favicon files.
+   - Open Graph/social image.
+   - Current selected public tree confirms only these review PDFs:
      ```text
-     http://localhost:4321/
-     http://localhost:4321/publications/
-     http://localhost:4321/cv/
-     http://localhost:4321/publications/reviews/cosmic-connections/
-     http://localhost:4321/publications/reviews/christian-right-europe/
+     public/publications/reviews/cosmic-connections/veljkovic-review-cosmic-connections.pdf
+     public/publications/reviews/christian-right-europe/veljkovic-christian-right-europe.pdf
      ```
+   - Verify any references for `hell-christian-ecology`, `godless-crusade`, and
+     `challenging-modernity` before launch.
 
-3. **Check for dynamic-route masking**
-   - Run:
-     ```bash
-     find src/pages/publications/reviews -type f
-     ```
-   - Ensure the only active review page route is:
-     ```text
-     src/pages/publications/reviews/[slug]/index.astro
-     ```
-   - Remove or archive old static per-review pages under `src/pages/publications/reviews/`, because they will mask the dynamic route.
-
-4. **Confirm review schema usage**
-   - In the dynamic review route, confirm it imports:
-     ```ts
-     import { createReviewSchema } from "../../../../data/schema/reviews/createReviewSchema";
-     ```
-   - Confirm it calls:
-     ```ts
-     const jsonLd = createReviewSchema(review);
-     ```
-   - Confirm homepage and CV do **not** import or call `createReviewSchema`.
-   - Homepage should use `homeSchema`; CV should use `cvSchema`.
-
-5. **Verify current sitemap setup**
-   - Check `astro.config.mjs` for:
-     ```js
-     site: "https://stevanveljkovic.com",
-     trailingSlash: "always",
-     integrations: [sitemap()],
-     ```
-   - If sitemap integration is absent, install it:
-     ```bash
-     npx astro add sitemap
-     ```
-   - Ensure only actual generated pages appear in the sitemap.
-
----
-
-## 2. Implementation tasks
-
-1. **Finish the publications index migration**
-   - Add a lightweight list-only publication collection:
-     ```text
-     src/content/publication-items/
-     ```
-   - Add it to:
-     ```text
-     src/content.config.ts
-     ```
-   - Use Astro 6 loader-style imports:
-     ```ts
-     import { defineCollection } from "astro:content";
-     import { glob } from "astro/loaders";
-     import { z } from "astro/zod";
-     ```
-   - The collection should support fields such as:
-     ```ts
-     draft
-     year
-     sortDate
-     order
-     citationHtml
-     noteHtml
-     noteId
-     doi
-     url
-     localPath
-     ```
-   - This collection is for bibliography records that do **not** yet need full generated review pages.
-
-2. **Restore all bibliography entries on `/publications/`**
-   - Add list-only files for the publications not yet migrated as full reviews:
-     ```text
-     src/content/publication-items/phd-thesis.md
-     src/content/publication-items/hell-christian-ecology.md
-     src/content/publication-items/challenging-modernity.md
-     src/content/publication-items/evolution-of-religions.md
-     src/content/publication-items/godless-crusade.md
-     ```
-   - The publications page should eventually list:
-     - 2025 Christian Right review;
-     - 2025 Hell review;
-     - 2025 Challenging Modernity review;
-     - 2025 Cosmic Connections review;
-     - 2024 Evolution of Religions review;
-     - 2023 Godless Crusade review;
-     - 2023/2024 PhD thesis.
-
-3. **Update `/publications/index.astro` to combine both collections**
-   - Query full review pages:
-     ```ts
-     const reviews = await getCollection("reviews", ({ data }) => !data.draft);
-     ```
-   - Query list-only records:
-     ```ts
-     const publicationItems = await getCollection("publicationItems", ({ data }) => !data.draft);
-     ```
-   - Normalize both to a shared display shape:
-     ```ts
-     {
-       id,
-       year,
-       sortDate,
-       order,
-       citationHtml,
-       noteHtml,
-       noteId
-     }
-     ```
-   - Sort by:
-     1. descending year;
-     2. descending `sortDate`;
-     3. ascending manual `order`.
-   - Preserve existing visual classes:
-     ```text
-     BibEntry
-     counter_bib
-     test#writings
-     ```
-
-4. **Add publications-page JSON-LD**
-   - Create:
-     ```text
-     src/data/schema/publications/createPublicationsSchema.ts
-     ```
-   - Model `/publications/` as:
-     ```text
-     CollectionPage
-       mainEntity → ItemList
-     ```
-   - Use identifiers in this order:
-     1. DOI URL if available;
-     2. local page URL if a local page exists;
-     3. stable fragment such as `/publications/#<slug>` if neither exists.
-   - Pass the generated schema into the publications page layout.
-
-5. **Add remaining full review pages when ready**
-   - For each review that should have a local HTML page, add one Markdown file under:
-     ```text
-     src/content/reviews/
-     ```
-   - Likely future files:
-     ```text
-     hell-christian-ecology.md
-     challenging-modernity.md
-     evolution-of-religions.md
-     godless-crusade.md
-     ```
-   - Add corresponding PDFs/assets under `public/` only if needed.
-   - Do **not** create new `.astro` pages per review.
-   - Do **not** create per-review schema files unless the shared factory cannot handle the case.
-
-6. **Implement the thesis page or adjust references**
-   - Current planned route:
-     ```text
-     /thesis/religious-atavism-climate-crisis/
-     ```
-   - Add:
-     ```text
-     src/pages/thesis/religious-atavism-climate-crisis/index.astro
-     ```
-     or design a content-driven thesis route.
-   - Planned PDF path:
-     ```text
-     /thesis/religious-atavism-climate-crisis/veljkovic-phd-thesis.pdf
-     ```
-   - Until this page exists, avoid having live schema imply that a non-existent page is available.
-
-7. **Add legacy redirect stubs**
-   - Add static HTML redirect stubs for old URLs if they are not already implemented:
-     ```text
-     /writing.html
-     /writing/ReviewCosmicConnectionsV2.html
-     ```
-   - Targets:
-     ```text
-     /writing.html → /publications/
-     /writing/ReviewCosmicConnectionsV2.html → /publications/reviews/cosmic-connections/
-     ```
-   - Stubs should include:
-     - canonical link;
-     - meta refresh;
-     - `location.replace`;
-     - visible fallback link.
-   - Do **not** include full JSON-LD on redirect stubs.
-
-8. **Preserve old PDF URLs where possible**
-   - Keep these old assets available if they exist:
-     ```text
-     /writing/ReviewCosmicConnectionsV2.pdf
-     /itinerary.pdf
-     ```
-   - Do not replace PDF URLs with HTML redirect pages unless moving to a platform that supports true HTTP redirects.
-
----
-
-## 3. Verification/testing tasks
-
-1. **Run build and inspect output**
-   - Run:
-     ```bash
-     npm run build
-     ```
-   - Inspect generated review directories:
-     ```bash
-     ls dist/publications/reviews/
-     ls dist/publications/reviews/cosmic-connections/
-     ls dist/publications/reviews/christian-right-europe/
-     ```
-   - Confirm both current review pages produce `index.html`.
-
-2. **Verify content collection loading**
-   - Run:
-     ```bash
-     find src/content -maxdepth 4 -type f -print
-     ```
-   - Confirm current review Markdown files exist:
-     ```text
-     src/content/reviews/cosmic-connections.md
-     src/content/reviews/christian-right-europe.md
-     ```
-   - After adding `publication-items`, confirm those files are detected by Astro with no collection-empty warnings.
-
-3. **Validate rendered JSON-LD**
-   - Inspect final page source, not TypeScript literals.
+5. **Validate rendered JSON-LD**
+   - Inspect built page source, not TypeScript literals.
    - Search for:
      ```html
      application/ld+json
      ```
-   - Validate rendered pages with:
+   - Validate:
+     ```text
+     /
+     /cv/
+     /publications/
+     all intended live review pages
+     ```
+   - External tools:
      ```text
      https://validator.schema.org/
-     ```
-   - Priority pages:
-     ```text
-     /
-     /cv/
-     /publications/
-     /publications/reviews/cosmic-connections/
-     /publications/reviews/christian-right-europe/
-     ```
-   - Confirm JSON-LD is not HTML-escaped as `&quot;`.
-
-4. **Check review structured data**
-   - For Cosmic Connections:
-     - local manuscript and DOI article should be distinct;
-     - no misleading `sameAs` between local manuscript and DOI article;
-     - use `isBasedOn` and/or `citation` to the published DOI article;
-     - reviewed book should use DOI URL as `@id`.
-   - For Christian Right:
-     - reviewed volume should use `editor`, not `author`;
-     - editor should be `Gionathan Lo Mascolo`, not `"Gionathan Lo Mascolo (ed.)"` in structured data;
-     - DOI and journal metadata should be verified.
-
-5. **Check internal links and asset paths**
-   - Confirm root-relative links resolve:
-     ```text
-     /cv/veljkovic-cv.pdf
-     /publications/reviews/cosmic-connections/veljkovic-review-cosmic-connections.pdf
-     /publications/reviews/christian-right-europe/veljkovic-review-christian-right-europe.pdf
-     ```
-   - Avoid deep relative paths such as:
-     ```text
-     ../../../images/...
+     https://search.google.com/test/rich-results
      ```
 
-6. **Verify sitemap**
-   - After build, inspect generated sitemap.
-   - It should include only actual live pages:
-     ```text
-     /
-     /publications/
-     /cv/
-     /publications/reviews/cosmic-connections/
-     /publications/reviews/christian-right-europe/
-     ```
-   - Future review routes should not appear until their pages are generated and intended to be live.
-
-7. **Validate HTML and accessibility**
+6. **Validate HTML/accessibility basics**
    - Use:
      ```text
      https://validator.w3.org/
      ```
-   - Check homepage navigation markup:
-     - `<ul>` should contain `<li>` children;
-     - preserve `p.Headings` inside list items if CSS depends on it.
+   - Check homepage navigation markup.
    - Decorative icons should use:
      ```html
      alt="" aria-hidden="true"
      ```
-   - Internal CV link should not use `target="_blank"`.
+   - Internal CV links should not use `target="_blank"`.
 
-8. **Cross-browser visual check**
-   - Specifically re-check the Safari homepage issue where:
-     ```html
-     <h1 class="Name">Stevan Veljkovic</h1>
-     ```
-     may appear invisible.
-   - Likely fix to test:
-     ```css
-     h1.Name {
-       color: #fff;
-     }
-     ```
-   - Inspect cascade in Safari Web Inspector before finalizing.
+## 3. Content And Metadata Cleanup
 
-9. **Check deployment/DNS behaviour**
-   - Run:
-     ```bash
-     curl -I https://stevanveljkovic.com/
-     curl -I https://www.stevanveljkovic.com/
-     curl -I https://seminars.stevanveljkovic.com/
-     curl -I https://stevanveljkovic.com/seminars/
-     curl -I -L https://stevanveljkovic.com/seminars/
-     ```
-   - Confirm apex canonical behaviour and whether `www` redirects correctly.
-
----
-
-## 4. Cleanup/refactoring tasks
-
-1. **Remove stale schema imports**
-   - Search for old or mistaken schema imports:
-     ```bash
-     grep -R "buildReviewSchema\|createReviewSchema" src/pages src/layouts src/components src/data -n
-     ```
-   - Active review pages should use only:
-     ```ts
-     createReviewSchema(review)
-     ```
-   - Homepage should use:
-     ```ts
-     homeSchema
-     ```
-   - CV should use:
-     ```ts
-     cvSchema
-     ```
-
-2. **Keep old Cosmic schema as reference only**
-   - Old/reference files:
-     ```text
-     src/data/schema/reviews/cosmic-connections/cosmic-connections.ts
-     src/lib/schema/review.ts
-     ```
-   - Do not import them in active routes unless deliberately restoring needed logic.
-   - Once the shared factory fully reproduces required detail, archive or remove stale schema code.
-
-3. **Normalize naming around review entries**
-   - In dynamic review route, maintain the distinction:
-     ```ts
-     const entry = ...;
-     const review = entry.data;
-     ```
-   - Use:
-     ```ts
-     entry.id
-     review.slug
-     review.title
-     review.citationHtml
-     ```
-   - Avoid:
-     ```ts
-     review.id
-     review.data.title
-     ```
-
-4. **Avoid duplicate collection schema keys**
-   - In `src/content.config.ts`, ensure each collection has a single `schema` key.
-   - Do not mix old `type: "content"` patterns with Astro 6 loader-style config unless intentionally required.
-
-5. **Centralize URL generation**
-   - Use the shared site data in:
+1. **Align contact email**
+   - Current mismatch:
+     - homepage hardcodes `hello@stevanveljkovic.com`;
+     - review intro uses `site.email`;
+     - recent decisions point toward `contact@stevanveljkovic.com`.
+   - Align:
      ```text
      src/data/site.ts
-     ```
-   - Ensure helper avoids double slashes:
-     ```ts
-     function absoluteUrl(path: string) {
-       return new URL(path, site.url).toString();
-     }
-     ```
-   - Use:
-     ```ts
-     absoluteUrl("/")
-     ```
-     instead of manually concatenating:
-     ```ts
-     `${site.url}/`
+     homepage contact link
+     review intro
+     JSON-LD
+     page metadata
+     any footer/contact copy
      ```
 
-6. **Postpone CSS rewrite**
-   - Do not rename or aggressively refactor legacy classes yet.
-   - Preserve classes such as:
+2. **Fix schema/frontmatter mismatches where fields are meant to matter**
+   - Check any frontmatter keys not declared in `src/content.config.ts`.
+   - Pay attention to display-only date labels:
+     - `publicationIssueSchema` currently has `dateLabel`;
+     - older notes mention `issueDateLabel`;
+     - keep display-only labels out of Schema.org unless mapped intentionally.
+
+3. **Clean placeholder-like sorting/date metadata**
+   - `godless-crusade` has `publicationList.sortDate: "2023-01-01"`, which may
+     be placeholder-like.
+   - `christian-right-europe` issue date is month precision, but sort date may
+     use `"2025-07-01"`.
+   - `challenging-modernity` citation issue-year is 2025, but list year/sort
+     date may follow first-online publication in 2024.
+
+4. **Check headshot/OG image path**
+   - Current selected public tree has:
      ```text
-     Basic-Text-Frame
-     Name
-     Details
-     Headings
-     BibHeading
-     BibEntry
-     counter_bib
-     review_intro
-     review_text
-     review_par
-     byline
-     review_byline
-     CVEntry
-     nav-list
-     pronunciation
+     /images/headshot-1200x630.JPG
      ```
-   - Only make targeted fixes required for bugs, accessibility, or layout.
-
-7. **Check `JsonLd.astro` and `Analytics.astro`**
-   - Ensure inline scripts explicitly use:
-     ```astro
-     is:inline
-     ```
-   - JSON-LD component should use:
-     ```astro
-     <script
-       is:inline
-       type="application/ld+json"
-       set:html={JSON.stringify(data, null, 2)}
-     ></script>
-     ```
-
-8. **Remove invalid image dimensions**
-   - On homepage and elsewhere, remove invalid attributes such as:
-     ```html
-     width="41vw" height="27vw"
-     ```
-   - Let CSS control responsive sizing instead.
-
----
-
-## 5. Documentation/content tasks
-
-1. **Document the review-adding workflow**
-   - Add or update a local project note explaining:
-     - add one Markdown file under `src/content/reviews/`;
-     - add PDFs/assets under `public/`;
-     - no new `.astro` page;
-     - no new per-review schema file;
-     - dynamic route is:
-       ```text
-       src/pages/publications/reviews/[slug]/index.astro
-       ```
-
-2. **Document the publication item model**
-   - Explain the distinction:
+   - Older notes expected:
      ```text
-     src/content/reviews/
-       Full local review pages.
+     /images/headshot-1200x630.png
+     ```
+   - Inspect `src/data/site.ts` and generated page source for broken image URLs.
 
-     src/content/publication-items/
-       List-only bibliography records.
-     ```
-   - Note that `/publications/` combines both.
+5. **Remove accidental macOS files if tracked**
+   - `.DS_Store` files are present in source/public tree.
+   - Remove them from the repo if tracked or accidentally committed.
 
-3. **Record exact metadata for Christian Right**
-   - Verify and document:
-     - exact publication date;
-     - volume/issue;
-     - `csaf039` handling;
-     - journal ISSNs;
-     - PDF filename/path;
-     - author manuscript/version wording.
-   - Current known data:
-     ```text
-     DOI: https://doi.org/10.1093/jcs/csaf039
-     Journal: Journal of Church and State
-     Volume: 67
-     Issue: 3
-     Year: 2025
-     Identifier/pagination: csaf039
+6. **Review analytics script duplication**
+   - `Analytics.astro` uses `site.analyticsId` for the script URL but hardcodes:
+     ```js
+     gtag("config", "G-7VMGXMNZZ0")
      ```
+   - Fine if matching, but not DRY.
 
-4. **Record metadata for remaining reviews**
-   - For each of these:
-     ```text
-     Hell: In Search of a Christian Ecology
-     Challenging Modernity
-     The Evolution of Religions
-     The Godless Crusade
-     ```
-   - Verify:
-     - reviewed work title;
-     - author/editor;
-     - journal/blog;
-     - DOI or URL;
-     - year/date;
-     - volume/issue/pages if applicable;
-     - book DOI/ISBN if useful;
-     - whether a local HTML page/PDF should exist.
+## 4. Structured Data Rules To Preserve
 
-5. **Document thesis-page plan**
-   - Canonical slug:
-     ```text
-     /thesis/religious-atavism-climate-crisis/
-     ```
-   - Do not use:
-     ```text
-     /thesis/atavism-climate-crisis/
-     ```
-   - Record:
-     ```text
-     DOI: https://doi.org/10.5287/ora-4rjoobkvk
-     ORA: https://ora.ox.ac.uk/objects/uuid:7aff13dc-075e-4c17-bee9-5adfc1b2fcf4
-     Date: 2024-02
-     ```
+1. **Journal review graph**
+   ```text
+   local WebPage
+     mainEntity -> local #review
+     about -> reviewed Book
 
-6. **Document deployment workflow**
+   local #review
+     itemReviewed -> reviewed Book
+     isBasedOn/citation -> DOI/published review
+
+   DOI/published review
+     itemReviewed -> reviewed Book
+     isPartOf -> PublicationIssue -> PublicationVolume -> Periodical
+   ```
+
+2. **Pagination**
+   - Article/review pagination belongs on the published article/review node:
+     ```text
+     pagination
+     pageStart
+     pageEnd
+     ```
+   - Issue-level pagination should only describe the whole issue and only be
+     added if verified.
+   - `csaf039` is an article ID, not pagination.
+
+3. **Dates**
+   - `publishedReview.datePublished` means publisher-recognised first
+     publication date, usually first online.
+   - `publishedReview.firstPublishedOnline` may be used internally, but should
+     map to Schema.org `datePublished`.
+   - Do not emit a non-standard Schema.org `firstPublishedOnline`.
+   - `PublicationIssue.datePublished` means issue date/month/year where known.
+   - Do not put article first-online dates on issue nodes.
+
+4. **Issue names**
+   - Do not emit `PublicationIssue.name` merely as the issue number.
+   - Use `issueNumber` for numbers.
+   - Use `name` only for real publisher-supplied issue labels.
+
+5. **Images**
+   - Preferred convention:
+     ```text
+     public/images/publications/reviews/<slug>/
+       reviewed-work/cover.jpg
+       issue/cover.jpg
+       periodical/poster.jpg
+       periodical/banner.jpg
+       article/image.jpg
+       page/social-card.jpg
+     ```
+   - Frontmatter should use root-relative URLs:
+     ```yaml
+     reviewedWork:
+       image: "/images/publications/reviews/<slug>/reviewed-work/cover.jpg"
+     ```
+   - Attach images to the correct entity:
+     - `reviewed-work/cover.jpg` -> reviewed `Book` / work;
+     - `issue/cover.jpg` -> `PublicationIssue`;
+     - `periodical/poster.jpg` or `periodical/banner.jpg` -> `Periodical`;
+     - `article/image.jpg` -> article/post/review only if rights are clear;
+     - `page/social-card.jpg` -> local page/Open Graph image.
+
+## 5. Deployment And Legacy URLs
+
+1. **Document deployment workflow**
    - Determine and record whether deployment uses:
      - GitHub Actions building Astro;
      - committed `dist/`;
      - separate deployment to `smveljkovic.github.io`;
      - another workflow.
-   - Record where the CNAME file/domain configuration lives.
+   - Record where CNAME/domain configuration lives.
 
-7. **Maintain compact AI project memory**
-   - Use a local notes structure such as:
+2. **Resolve legacy URL strategy**
+   - Old URLs to consider:
      ```text
-     AI/
-       site-project/
-         00-current-summary.md
-         01-active-question.md
-         02-astro-structure.md
-         03-jsonld-notes.md
-         04-css-notes.md
-         archive/
+     /writing.html
+     /writing/ReviewCosmicConnectionsV2.html
+     /writing/ReviewCosmicConnectionsV2.pdf
+     /itinerary.pdf
      ```
-   - Keep this updated instead of relying on long chat transcripts.
-
----
-
-## 6. Open questions to resolve
-
-1. **Should the thesis page be implemented now?**
-   - CV schema may already reference:
-     ```text
-     /thesis/religious-atavism-climate-crisis/
-     ```
-   - Decide whether to:
-     - create the page now; or
-     - remove/defer schema references until the route exists.
-
-2. **What is the final homepage/site title?**
-   - Recorded variants include:
-     ```text
-     Re: Stevan Veljkovic
-     Dr Stevan Veljkovic – theorist and editor
-     Stevan Veljkovic – theorist and editor
-     S. Veljkovic – theorist and editor
-     ```
-   - Choose the canonical browser title and SEO title pattern.
-
-3. **Should remaining reviews become full local pages or list-only records?**
-   - Decide case by case for:
-     ```text
-     Hell: In Search of a Christian Ecology
-     Challenging Modernity
-     The Evolution of Religions
-     The Godless Crusade
-     ```
-   - If no local manuscript/PDF is available or intended, keep them as `publicationItems`.
-
-4. **How rich should review JSON-LD become in the next pass?**
-   - Open refinements:
-     - split local page into `WebPage` plus `#review` article node;
-     - add `Periodical`, `PublicationVolume`, and `PublicationIssue`;
-     - clarify `datePublished` meaning;
-     - decide when to use both `citation` and `isBasedOn`;
-     - confirm whether `version` is valid/useful enough to include.
-
-5. **What should happen with old URLs long-term?**
    - GitHub Pages cannot create true arbitrary 301 redirects.
-   - Decide whether static HTML redirect stubs are sufficient or whether Cloudflare should be adopted later for:
+   - Decide whether static HTML redirect stubs are sufficient or whether
+     Cloudflare should be adopted later for:
      - true 301 redirects;
      - PDF headers;
      - security headers;
      - `www` to apex redirect.
+   - Redirect stubs, if used, should include:
+     - canonical link;
+     - meta refresh;
+     - `location.replace`;
+     - visible fallback link;
+     - no full JSON-LD.
 
-6. **Should the seminars site remain separate?**
+3. **Check deployment/DNS behaviour**
+   ```bash
+   curl -I https://stevanveljkovic.com/
+   curl -I https://www.stevanveljkovic.com/
+   curl -I https://seminars.stevanveljkovic.com/
+   curl -I https://stevanveljkovic.com/seminars/
+   curl -I -L https://stevanveljkovic.com/seminars/
+   ```
+
+## 6. Deferred Until Stage 4
+
+1. **Thesis page**
+   - Thesis remains bibliography-only until Stage 4.
+   - Do not create or link:
+     ```text
+     /thesis/religious-atavism-climate-crisis/
+     ```
+     unless actually implemented.
+   - Primary thesis ID:
+     ```text
+     https://doi.org/10.5287/ora-4rjoobkvk
+     ```
+
+2. **Larger CSS/layout rewrite**
+   - Preserve migrated visual identity for Stage 3.
+   - Do not rename or aggressively refactor legacy classes before launch.
+   - The inherited margin-counter/year-marker layout may be rethought or
+     discarded in Stage 4.
+
+3. **Richer `/publications/` JSON-LD**
+   - Richer reviewed-book nodes, license/copyright-holder modelling, and
+     external WebPage nodes are deferred.
+   - Keep current `/publications/` model:
+     ```text
+     CollectionPage
+       mainEntity -> ItemList
+         itemListElement -> ListItem[]
+     ```
+
+4. **Trusted HTML migration**
+   - Current trusted local bridge fields remain acceptable:
+     ```text
+     citationHtml
+     bylineHtml
+     reuseNoteHtml
+     modificationNote
+     publicationList.noteHtml
+     ```
+   - Decide later whether to replace them with a more semantic citation/content
+     model.
+
+5. **Seminars site consolidation**
    - Current seminars URL:
      ```text
      https://seminars.stevanveljkovic.com/
      ```
-   - Resolve whether to:
-     - leave it as a separate repo/site;
-     - consolidate it into the main Astro repo;
-     - preserve repo history if consolidated.
+   - Leave separate for now unless a deliberate consolidation plan is made.
 
-7. **Has the Safari homepage CSS bug been fixed?**
-   - If not, inspect and fix the `h1.Name` visibility issue.
-   - Do not broadly rewrite CSS until the bug is isolated.
+## 7. Superseded Assumptions Removed
 
-8. **What is the canonical deployment setup?**
-   - Need to confirm:
-     - source repo;
-     - GitHub Pages settings;
-     - build command;
-     - publish directory;
-     - CNAME handling;
-     - whether `dist/` is committed or generated by CI.
-
-9. **Should Cloudflare be introduced?**
-   - Not currently required.
-   - Revisit only if true redirects, headers, or canonical hostname management become important.
-
-10. **How should trusted HTML fields be phased out later?**
-   - Current bridge fields are acceptable:
-     ```yaml
-     citationHtml
-     bylineHtml
-     originalSubmissionNote
-     publicationList.noteHtml
-     ```
-   - Decide later whether to replace them with a more semantic citation/content model.
+- Only Cosmic Connections and Christian Right are live review pages.
+- `publicationItems` still needs to be created.
+- `/publications/index.astro` still needs to be migrated to combine reviews and
+  list-only publication items.
+- `createPublicationsSchema.ts` still needs to be created.
+- Hell, Challenging Modernity, Evolution of Religions, and Godless Crusade are
+  merely future review files.
+- The thesis page should be implemented immediately.
+- Review JSON-LD still needs its basic `WebPage` / local `#review` / DOI review
+  split, periodical chain, pagination rule, and first-online date rule decided.

@@ -1,4 +1,8 @@
-# Content and publications rules
+---
+apply: always
+---
+
+# Content And Publications
 
 Full local review pages belong in:
 
@@ -6,16 +10,33 @@ Full local review pages belong in:
 src/content/reviews/
 ```
 
-Bibliography/list-only publication records belong in:
+List-only bibliography records belong in:
 
 ```text
 src/content/publication-items/
 ```
 
-Do not force every bibliography entry into `reviews`.
+Do not force every bibliography entry into `reviews`. `/publications/` combines
+live review pages with non-draft `publicationItems`. Duplicate/list-only review
+records are currently drafted except the thesis item to avoid duplicate
+publication-list/schema entries.
 
-The publications page should preserve the existing grouped-by-year bibliography
-style and legacy classes, including:
+Current publication-item files:
+
+```text
+challenging-modernity.md
+evolution-of-religions.md
+godless-crusade.md
+hell-christian-ecology.md
+religious-atavism-climate-crisis.md
+```
+
+The thesis remains bibliography-only until Stage 4. Do not create or advertise
+`/thesis/religious-atavism-climate-crisis/` unless the page is actually
+implemented.
+
+The publications page should preserve the grouped bibliography style and legacy
+classes, including:
 
 ```text
 BibEntry
@@ -26,20 +47,19 @@ control
 test#writings
 ```
 
-The publications page may continue to use trusted local HTML fields during
-migration, especially:
+Trusted local HTML bridge fields are acceptable during Stage 3:
 
 ```yaml
 citationHtml
-noteHtml
-publicationList.noteHtml
-originalSubmissionNote
 bylineHtml
+reuseNoteHtml
+modificationNote
+publicationList.noteHtml
 ```
 
-`set:html` is acceptable only for trusted local migration fields.
+Use `set:html` only for trusted local migration fields.
 
-Review pages should preserve the original scholarly/manuscript visual structure:
+Review pages should keep the current content structure:
 
 ```astro
 <ReviewIntro review={review} />
@@ -50,24 +70,17 @@ Review pages should preserve the original scholarly/manuscript visual structure:
 </div>
 ```
 
-Do not casually change review byline email behavior. Historical mismatches may
-be intentional, for example:
+Review-specific rules:
 
-```html
-<a
-href="mailto:correspondence@stevanveljkovic.com">stevan.veljkovic@theology.ox.ac
-.uk</a>
-```
-
-Cosmic Connections special rule:
-
-- The local page is an unabridged Original Submission / Author Manuscript.
-- It is materially different from the published version.
-- Do not use `sameAs` to identify it with the DOI article.
-- Use `isBasedOn` and/or `citation` where appropriate.
-
-Christian Right special rule:
-
-- The reviewed book is an edited volume.
-- Use `editor: Gionathan Lo Mascolo`.
-- Do not model the editor as an author string containing “(ed.)”.
+- `cosmic-connections`: local page is an unabridged Author's Original
+  Manuscript, distinct from the DOI article; do not use `sameAs`.
+- `christian-right-europe`: reviewed work is an edited volume; use `editor`, not
+  an author string with "(ed.)"; `csaf039` is article ID, not pagination.
+- `evolution-of-religions`: model the published LSE post as `BlogPosting /
+  Review`; do not invent journal/volume/issue metadata.
+- `godless-crusade`: local version should be an Accepted Manuscript, not Version
+  of Record; verify AM wording, Goodhart correction note, assets, and schema.
+- `challenging-modernity`: T&F Version-of-Record reproduction; must be withheld
+  unless rights are clarified.
+- `hell-christian-ecology`: verify version wording, first-published note, issue
+  date, and referenced PDF path.

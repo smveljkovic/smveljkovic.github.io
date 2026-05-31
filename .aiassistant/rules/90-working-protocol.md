@@ -1,11 +1,18 @@
-# Working protocol for AI assistant
+---
+apply: always
+---
 
-Before making changes, inspect the relevant files. Do not assume the repository
-exactly matches old memory notes.
+# Working Protocol
 
-Prefer small, reversible edits.
+Before making changes, inspect relevant files. Do not assume the repository
+matches old memory notes.
 
-After meaningful Astro/content/schema changes, suggest running:
+Prefer small, reversible edits. Do not rewrite broad CSS, routing, or schema
+systems unless explicitly asked.
+
+Use `rg` for searches.
+
+After meaningful Astro/content/schema changes, run or suggest:
 
 ```bash
 npx astro sync
@@ -13,35 +20,35 @@ npx astro check
 npm run build
 ```
 
-For routing issues, inspect:
+For routing and content checks:
 
 ```bash
 find src/pages/publications/reviews -type f
-find src/content -maxdepth 4 -type f -print
+find src/content -maxdepth 4 -type f | sort
 ```
 
-For generated review routes, inspect:
+For generated route checks after build:
 
 ```bash
-ls dist/publications/reviews/
-ls dist/publications/reviews/cosmic-connections/
-ls dist/publications/reviews/christian-right-europe/
+find dist -maxdepth 5 -type f | sort
+find dist -name "sitemap*.xml" -print -exec cat {} \;
 ```
 
-Use Schema Markup Validator for general JSON-LD:
+Current expected generated pages are `/`, `/cv/`, `/publications/`, and six
+review routes, unless `challenging-modernity` is drafted/withheld for rights.
+
+Validate rendered JSON-LD with:
 
 ```text
 https://validator.schema.org/
 ```
 
-Google Rich Results may report “no items detected” for general scholarly schema
-types; this is not necessarily an error.
+Google Rich Results may report "no items detected" for general scholarly schema;
+that is not necessarily an error.
 
 Do not delete old rich schema/reference files unless explicitly asked. They may
-be benchmarks for future generated schema.
+remain useful comparison material.
 
-When uncertain whether something is historical, intentional, or obsolete, ask
-before changing it.
-
-For fuller historical context, consult `docs/project-memory/`, especially
-`PROJECT-MEMORY-CARRYOVER.md`.
+When uncertain whether something is historical, intentional, or obsolete, check
+`docs/project-memory/current.md`, `DECISIONS.md`, and `NEXT-STEPS.md`; if still
+unclear, ask before changing it.

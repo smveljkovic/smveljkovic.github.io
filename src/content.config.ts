@@ -55,6 +55,7 @@ const hrefSchema = z.string().refine(
 );
 
 const publicationListSchema = z.object({
+    include: z.boolean().default(true),
     year: z.number(),
     sortDate: z.string().optional(),
     order: z.number().optional(),

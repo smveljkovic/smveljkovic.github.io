@@ -1,5 +1,5 @@
 ---
-draft: false
+draft: true
 slug: "christian-right-europe"
 
 title: "Review of The Christian Right in Europe"
@@ -42,7 +42,7 @@ reviewedWork:
     - "3839460387"
   image: "/images/publications/reviews/christian-right-europe/reviewed-work/cover.jpg"
 
-pdf: "/publications/reviews/christian-right-europe/veljkovic-christian-right-europe.pdf"
+pdf: "/publications/reviews/christian-right-europe/veljkovic-review-christian-right-europe.pdf"
 
 publishedReview:
   title: "The Christian Right in Europe: Movements, Networks, and Denominations. Edited by Gionathan Lo Mascolo"
@@ -119,7 +119,7 @@ publicationList:
   sortDate: "2025-07-01"
   order: 20
   noteId: "strange"
-  pdfPath: "/publications/reviews/christian-right-europe/veljkovic-christian-right-europe.pdf"
+  pdfPath: "/publications/reviews/christian-right-europe/veljkovic-review-christian-right-europe.pdf"
 
 bylineHtml: >-
   <p class="byline" style="text-align:left">Stevan Veljkovic</p>

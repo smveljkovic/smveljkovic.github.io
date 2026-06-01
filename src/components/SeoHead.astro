@@ -35,7 +35,26 @@ const objectTitle = title ?? site.siteName;
 
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="preconnect" href="https://use.typekit.net" crossorigin />
+<link rel="preconnect" href="https://p.typekit.net" crossorigin />
 
+<link
+        rel="preload"
+        href="/fonts/case/case-upright-var.woff2"
+        as="font"
+        type="font/woff2"
+        crossorigin
+/>
+
+<link
+        rel="preload"
+        href="/fonts/case/case-italic-var.woff2"
+        as="font"
+        type="font/woff2"
+        crossorigin
+/>
+
+<link rel="stylesheet" href="https://use.typekit.net/icu4lvx.css" />
 <Analytics />
 
 <title>{fullTitle}</title>

@@ -96,7 +96,7 @@ showFirstPublishedOnlineNote: true
 version: "Accepted Manuscript"
 openingVersionNote: "Accepted Manuscript (AM)"
 
-reuseNoteHtml: "Published by Taylor & Francis. The AM is made available here according to the publisher’s policy on author reuse."
+reuseNoteHtml: "Published by Taylor & Francis. The AM is made available here according to the <a href='https://authorservices.taylorandfrancis.com/research-impact/sharing-versions-of-journal-articles/'>publisher’s policy</a> on author reuse."
 modificationNote: "Editorial note: The original AM text misstated the title of David Goodhart’s book as <i>The Road to Populism</i>; it has been corrected here to <i>The Road to Somewhere</i>."
 
 rights:

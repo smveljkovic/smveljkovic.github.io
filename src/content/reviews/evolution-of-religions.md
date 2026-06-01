@@ -83,10 +83,10 @@ Review of Books</i> (blog). LSE Blogs, 18 July 2024. <a
 href="https://blogs.lse.ac.uk/lsereviewofbooks/2024/07/18/book-review-the-evolution-of-religions-lance-grande/">https://blogs.lse.ac.uk/lsereviewofbooks/2024/07/18/book-review-the-evolution-of-religions-lance-grande/</a>.'
 
 reuseNoteHtml: "Made available here under <a href='https://creativecommons.org/licenses/by/4.0/'>CC BY 4.0</a>."
-modificationNote: "The wording and basic textual formatting have been retained; page furniture and elements native to the LSE Blogs page have been omitted."
+modificationNote: "Wordings are unmodified and basic textual formatting has been recreated; page furniture and elements native to the LSE Blogs page have been omitted."
 
-openingVersionNote: "published LSE Review of Books post"
-version: "Reproduction of the published blog post"
+openingVersionNote: "published web article"
+version: "Reproduction of the published web article"
 
 publicationList:
   year: 2024

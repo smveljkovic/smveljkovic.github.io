@@ -10,7 +10,7 @@ body, div, dl, dt, dd, h1, h2, h3, h4, h5, h6, p, pre, code, blockquote {
 	src: url("/fonts/case/case-upright-var.woff2") format("woff2");
 	font-weight: 100 900; /* replace with actual range if different */
 	font-style: normal;
-	font-display: swap;
+	font-display: block;
 }
 
 @font-face {
@@ -18,11 +18,18 @@ body, div, dl, dt, dd, h1, h2, h3, h4, h5, h6, p, pre, code, blockquote {
 	src: url("/fonts/case/case-italic-var.woff2") format("woff2");
 	font-weight: 100 900; /* replace with actual range if different */
 	font-style: italic;
-	font-display: swap;
+	font-display: block;
 }
 
 :root {
-	--bib-indent: 2em; --font-sans: "Case VAR SV", Arial, Helvetica, sans-serif;
+	--bib-indent: 2em;
+	--font-sans: "Case VAR SV", Arial, Helvetica, sans-serif;
+	--font-serif: ff-meta-serif-web-pro, serif;
+
+	--review-serif-size: clamp(1.125rem, 2.5vmin, 1.5rem);
+	--review-case-scale: 0.8;
+	--review-measure: 66ch;
+	--review-intro-pad-x: 1em;
 }
 
 .Name,
@@ -37,19 +44,26 @@ body, div, dl, dt, dd, h1, h2, h3, h4, h5, h6, p, pre, code, blockquote {
 
 
 .review_header {
-	--review-ui-size: clamp(0.95rem, 1.35vw, 1.2rem);
-	font-size: var(--review-ui-size);
-	width: min(100%, 80ch);
+	font-family: var(--font-serif);
+	font-size: var(--review-serif-size);
+	width: min(100%, calc(var(--review-measure) + (2 * var(--review-intro-pad-x))));
 	margin: 0 auto;
 	box-sizing: border-box;
 	display: flow-root;
 }
 
 .review_header .review_intro {
-	width: 100%;
-	max-width: none;
-	margin: 0.33rem 0;
-	font-size: 1em;
+	width: min(100%, calc(66ch + 2em));
+	max-width: 1--%;
+	margin: 0.33rem auto;
+	font-size: calc(1em * var(--review-case-scale));
+}
+
+div.review_text {
+	--review-measure: 66ch;
+	font-family: var(--font-serif);
+	font-size: var(--review-serif-size);
+	width: min(100%, var(--review-measure));
 }
 
 .review_header .control,
@@ -123,7 +137,8 @@ body {
 
 
 div.Basic-Text-Frame {
-    border-style: thin;
+    border-width: thin;
+	border-style: solid;
 	background-color: hsl(0, 0%, 7%);
 }
 
@@ -165,7 +180,7 @@ p.BibEntry.pub-note > a.pub-link {
 	padding: 0.08em 0.75em 0;
 	border: 1px solid #fff;
 	border-radius: 999px;
-	font-family: "Case VAR SV", sans-serif;
+	font-family: var(--font-sans);
 	font-variant-caps: all-small-caps;
 	font-feature-settings: "smcp" 1, "c2sc" 2;
 	font-weight: 500;
@@ -263,7 +278,7 @@ p.Details {
 }
 p.Headings {
     color: #FFFFFF;
-    font-family: "Case VAR SV", sans-serif;
+    font-family: var(--font-sans);
 	/* minus 20% base .name */
     font-size: clamp(1.8rem, 6.4vmin, 2.3rem);
     font-style: normal;
@@ -286,7 +301,7 @@ p.Headings {
 }
 h1.Name {
     color: #FFFFFF;
-    font-family: "Case VAR SV", sans-serif;
+    font-family: var(--font-sans);
     font-size: clamp(2.25rem, 8vmin, 2.875rem);
     font-style: normal;
     font-variant: normal;
@@ -334,7 +349,7 @@ h1.Name {
 }
 h1.BibHeading {
     color: #FFFFFF;
-    font-family: "Case VAR SV", sans-serif;
+    font-family: var(--font-sans);
     font-size: clamp(1.35rem, 3.2vmin, 2rem);
     font-style: normal;
     font-variant: normal;
@@ -378,9 +393,9 @@ p.BibNote {
 }
 
 p.counter, p.counter_bib {
-	font-family: "Case VAR SV", sans-serif;
+	font-family: var(--font-sans);
 	font-weight: 600;
-	font-feature-settings: "ss01" on;
+	font-feature-settings: "ss01" 1;
 	/*float: left;*/
 	/*margin-left: clamp(-10dvmin, -10%, -7dvmin);*/
 	color: hsla(45, 100%, 70%, 1);
@@ -446,17 +461,31 @@ div.review_text, #writings, #cv {
   	grid-template-columns: max-content minmax(0, 1fr);
   	column-gap: 1rem;
 	margin: 0 auto; 
-	width: min(100%, 62ch);
+	width: min(100%, 66ch);
 	box-sizing: border-box;
 	line-height: clamp(1.4, 1.5, 1.6);
 	border:none;
 }
 
+div.review_text,
+#writings,
+#cv {
+	--review-measure: 66ch;
+	font-size: clamp(1.125rem, 2.5vmin, 1.5rem);
+	width: min(100%, var(--review-measure));
+}
+p.intro {
+	max-width: 100%;
+	width: auto;
+	box-sizing: border-box;
+	padding-bottom: 1.2em;
+}
 
 div.control,
 div.countercontrol {
 	color: white;
-	font-family: "Case VAR SV", sans-serif;
+	font-family: var(--font-sans);
+	font-size: calc(var(--review-serif-size) * 0.9);
 	line-height: 1.4;
 	padding-top: 1em;
 	margin: 0.33rem;
@@ -507,7 +536,7 @@ p.byline, p.trigger {
 
 div.review_intro {
 	color: white;
-	font-family: "Case VAR SV", sans-serif;
+	font-family: var(--font-sans);
 	font-weight: 500;
 	border:medium solid white;
 	padding: 1em;
@@ -516,10 +545,18 @@ div.review_intro {
 }
 
 p.intro {
-	max-width: 75ch;
+	max-width: 100%;
 	width: auto;
 	box-sizing: border-box;
 	padding-bottom: 1.2em;
+}
+
+.review_header .review_intro p.intro {
+	width: min(100%, 66ch);
+	max-width: 66ch;
+	margin-left: auto;
+	margin-right: auto;
+	box-sizing: border-box;
 }
 
 p.intro a {
@@ -624,19 +661,21 @@ div.test {
 	}
 
 	.review_header .review_intro {
-		width: 100%;
+		width: min(100%, calc(66ch + 1.25rem));
 		max-width: 100%;
-		margin-left: 0;
-		margin-right: 0;
+		margin-left: auto;
+		margin-right: auto;
 		padding: 1em 0.75rem 1em 0.5rem;
 	}
 
 
 
 	div.review_intro p.intro {
-		width: 100%;
-		max-width: 100%;
+		width: min(100%, 66ch);
+		max-width: 66ch;
 		min-width: 0;
+		margin-left: auto;
+		margin-right: auto;
 		box-sizing: border-box;
 		overflow-wrap: anywhere;
 		word-break: normal;
@@ -674,10 +713,10 @@ div.test {
 
 
 	.review_header .review_intro {
-		width: 100%;
+		width: min(100%, calc(66ch + 1.25rem));
 		max-width: 100%;
-		margin-left: 0;
-		margin-right: 0;
+		margin-left: auto;
+		margin-right: auto;
 		padding: 1em 0.75rem 1em 0.5rem;
 		box-sizing: border-box;
 		overflow-wrap: anywhere;
@@ -792,8 +831,10 @@ div.test {
 		align-self: baseline;
 	}
 	.review_header .control,
-	.review_header .countercontrol {
-		font-size: 0.9em;
+	.review_header .countercontrol,
+	div.control,
+	div.countercontrol{
+		font-size: 0.9rem;
 		line-height: 1.4;
 		padding-top: 1em;
 	}
@@ -802,9 +843,6 @@ div.test {
 	}
 }
 @media screen and (max-width: 900px) and (orientation: landscape) {
-	.review_header {
-		--review-ui-size: clamp(1.125rem, 2.5vmin, 1.5rem);
-	}
 	div.review_text p.counter,
 	#writings p.counter_bib {
 		font-size: 0.95em;

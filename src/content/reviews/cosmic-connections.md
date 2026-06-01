@@ -101,7 +101,7 @@ href="https://doi.org/10.1177/13684310241249684">https://doi.org/10.1177/
 13684310241249684</a>.'
 
 version: "Author’s Original Manuscript"
-openingVersionNote: "the Author’s Original Manuscript"
+openingVersionNote: "Author’s Original Manuscript"
 
 reuseNoteHtml: "This unabridged original is significantly longer than the Version of Record and is made available here under the <a href='https://www.sagepub.com/journals/permissions/sages-author-archiving-and-re-use-guidelines/'>publisher’s policy</a> on author reuse."
 publicationList:

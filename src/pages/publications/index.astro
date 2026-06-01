@@ -12,27 +12,35 @@ function compactArray<T>(array: Array<T | undefined | null | false>): T[] {
 
 const meta = pageMeta.publications;
 
-const reviews = await getCollection("reviews", ({ data }) => !data.draft);
+const reviews = await getCollection(
+    "reviews",
+    ({ data }) => data.publicationList.include !== false
+);
+
+const reviewIds = new Set(reviews.map((entry) => entry.id));
+
 const listOnlyPublicationItems = await getCollection(
     "publicationItems",
-    ({ data }) => !data.draft
+    ({ id, data }) => !data.draft && !reviewIds.has(id)
 );
 
 const reviewPublicationItems = reviews.map((entry) => {
     const review = entry.data;
 
+  const isLocalPageLive = !review.draft;
+
   const links = compactArray([
-    review.canonicalPath
-      ? {
-        href: review.canonicalPath,
-        label: "webpage",
-      }
-      : undefined,
-    review.publicationList.pdfPath
-      ? {
+    isLocalPageLive && review.canonicalPath
+        ? {
+          href: review.canonicalPath,
+          label: "webpage",
+        }
+        : undefined,
+    isLocalPageLive && review.publicationList.pdfPath
+        ? {
           href: review.publicationList.pdfPath,
           label: "pdf",
-      }
+        }
         : undefined,
   ]);
 
@@ -60,7 +68,7 @@ const reviewPublicationItems = reviews.map((entry) => {
         noteId: review.publicationList?.noteId,
         doi: review.publishedReview?.doi,
         url: review.publishedReview?.url,
-        localPath: review.canonicalPath,
+        localPath: isLocalPageLive ? review.canonicalPath : undefined,
         datePublished: review.publishedReview?.datePublished ?? review.datePublished,
         firstPublishedOnline: review.publishedReview?.firstPublishedOnline,
         publisher: review.publishedReview?.publisher,

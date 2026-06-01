@@ -1,5 +1,5 @@
 ---
-draft: false
+draft: true
 slug: "challenging-modernity"
 
 title: "Review of Challenging Modernity"

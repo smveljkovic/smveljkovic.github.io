@@ -2,6 +2,7 @@
 import HomeLayout from "../layouts/HomeLayout.astro";
 import { homeSchema } from "../data/schema/home";
 import { pageMeta } from "../data/pageMeta"
+import { site } from "../data/site";
 
 const meta = pageMeta.home;
 ---
@@ -25,7 +26,7 @@ const meta = pageMeta.home;
         <ul class="nav-list">
           <li>
             <p class="Headings">
-              <a href="mailto:hello@stevanveljkovic.com">Contact</a>
+              <a href={`mailto:${site.email}`}>Contact</a>
               &nbsp;<img src="/images/Artwork_1.png" alt="" aria-hidden="true"
 class="email" />
             </p>

@@ -34,8 +34,11 @@ find dist -maxdepth 5 -type f | sort
 find dist -name "sitemap*.xml" -print -exec cat {} \;
 ```
 
-Current expected generated pages are `/`, `/cv/`, `/publications/`, and six
-review routes, unless `challenging-modernity` is drafted/withheld for rights.
+Current observed generated pages are `/`, `/cv/`, `/publications/`, and four
+review routes: `cosmic-connections`, `evolution-of-religions`,
+`godless-crusade`, and `hell-christian-ecology`. Drafted reviews may still
+appear bibliographically on `/publications/`; verify route and sitemap state
+from the current build.
 
 Validate rendered JSON-LD with:
 
@@ -52,3 +55,6 @@ remain useful comparison material.
 When uncertain whether something is historical, intentional, or obsolete, check
 `docs/project-memory/current.md`, `DECISIONS.md`, and `NEXT-STEPS.md`; if still
 unclear, ask before changing it.
+
+For the user's GTD/org-mode task trees, do not rewrite whole subtrees unless
+asked. Prefer targeted comments, small edits, and risk flags.

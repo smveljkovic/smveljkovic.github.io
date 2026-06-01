@@ -28,22 +28,26 @@ as authoritative when they conflict with older notes.
   `/publications/reviews/cosmic-connections/`.  
   **Status:** Final.
 
-- **Current static build has 9 pages.**  
+- **Current observed static output has 7 pages.**  
   **Current routes:**
   ```text
   /
   /cv/
   /publications/
-  /publications/reviews/challenging-modernity/
-  /publications/reviews/christian-right-europe/
   /publications/reviews/cosmic-connections/
   /publications/reviews/evolution-of-religions/
   /publications/reviews/godless-crusade/
   /publications/reviews/hell-christian-ecology/
   ```
-  **Caution:** `challenging-modernity` currently builds publicly, but must not go
-  live unless T&F/CCC rights are clarified.  
+  **Caution:** Draft state can change the generated route set; verify routes
+  and sitemap from the current build before launch.  
   **Status:** Current, subject to rights gating.
+
+- **Stage 3.4-3.7 is a launch gate.**  
+  **Rule:** If a page is uncertain, draft/withhold it. If an enhancement is
+  optional, defer it. Checks that prevent rights, broken-link, sitemap, schema,
+  or deployment mistakes belong before launch.  
+  **Status:** Final for launch.
 
 - **Generate review pages from Markdown content collections.**  
   **Decision:** Use `src/pages/publications/reviews/[slug]/index.astro` with
@@ -63,12 +67,14 @@ as authoritative when they conflict with older notes.
 
 ## 2. Content Collections And Publications Page
 
-- **Use `reviews` only for full generated review pages.**  
-  **Decision:** Full review pages live in `src/content/reviews/`.  
+- **Use `reviews` for review records, with `draft:true` gating page generation.**  
+  **Decision:** Review records live in `src/content/reviews/`; non-draft records
+  generate full review pages, while drafted records may still generate
+  bibliography entries when `publicationList.include !== false`.  
   **Status:** Final.
 
 - **Use `publicationItems` for list-only bibliography records.**  
-  **Decision:** `/publications/` combines live reviews and list-only items.  
+  **Decision:** `/publications/` combines review records and list-only items.  
   **Current detail:** Duplicate/list-only review records exist but are drafted
   except the thesis item, to avoid duplicate publication-list/schema entries.  
   **Status:** Implemented/current.
@@ -240,10 +246,10 @@ as authoritative when they conflict with older notes.
   **Status:** Active unresolved checks.
 
 - **Challenging Modernity must be withheld unless rights are clarified.**  
-  **Known:** current code builds it publicly; local version is a Taylor & Francis
-  Version-of-Record reproduction.  
-  **Decision needed:** set back to `draft: true` before launch unless CCC/T&F
-  permission is confirmed.  
+  **Known:** current code has it drafted/withheld; local version is a Taylor &
+  Francis Version-of-Record reproduction.  
+  **Decision needed:** keep withheld before launch unless CCC/T&F permission is
+  confirmed.  
   **Status:** Active launch blocker.
 
 ## 5. Assets, URLs, And Deployment
@@ -271,9 +277,8 @@ as authoritative when they conflict with older notes.
 
 - **Current PDF reality has exceptions.**  
   **Preferred future convention:** `veljkovic-review-<slug>.pdf`.  
-  **Current exception:** Christian Right uses
-  `veljkovic-christian-right-europe.pdf`.  
-  **Missing/unchecked:** PDFs for `hell-christian-ecology`, `godless-crusade`,
+  **Current public tree confirms:** Cosmic Connections and Hell PDFs.  
+  **Missing/unchecked:** PDFs for `christian-right-europe`, `godless-crusade`,
   and `challenging-modernity` are not confirmed in the latest selected public
   tree.  
   **Status:** Current caution.
@@ -281,6 +286,21 @@ as authoritative when they conflict with older notes.
 - **Only actual/generated pages should appear in the sitemap.**  
   **Caution:** A generated page still needs to be intended live; rights-blocked
   routes should be drafted or otherwise excluded.  
+  **Status:** Final.
+
+- **Do not use post-build pruning for draft review assets.**  
+  **Decision:** `public/` should contain only files definitely intended to be
+  public.  
+  **Implications:** `draft:true` controls page generation only; Astro still
+  copies static files under `public/` into `dist/`.  
+  **Status:** Final.
+
+- **Use canonical publication-version labels.**  
+  **Labels:** Author's Original Manuscript (AOM), Accepted Manuscript (AM),
+  Version of Record (VoR), and Published web article.  
+  **Implications:** Use `Published web article` for edited web-outlet/blog-series
+  cases such as `evolution-of-religions`; do not call these VoR unless the
+  publisher uses that terminology.  
   **Status:** Final.
 
 - **Use GitHub Pages-compatible redirect stubs for old HTML URLs if needed.**  
@@ -298,10 +318,12 @@ as authoritative when they conflict with older notes.
   `www` -> apex redirect.  
   **Status:** Deferred option.
 
-- **Deployment workflow remains unrecorded.**  
-  **Options to confirm:** GitHub Actions build, committed `dist/`, separate
-  deployment to `smveljkovic.github.io`, or another workflow.  
-  **Status:** Active unresolved decision.
+- **Use GitHub Pages as the first deployment target.**  
+  **Current recorded method:** GitHub Actions builds the Astro site and publishes
+  `dist/`.  
+  **Still needed:** add/confirm the workflow file and custom domain/CNAME
+  handling.  
+  **Status:** Active deployment task.
 
 ## 6. Design, Accessibility, And Content-Rendering Decisions
 

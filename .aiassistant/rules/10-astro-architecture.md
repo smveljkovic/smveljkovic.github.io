@@ -40,9 +40,21 @@ godless-crusade.md
 hell-christian-ecology.md
 ```
 
-The current build has 9 pages, including all six review routes. Note that
-`challenging-modernity` is rights-blocked and may need to return to
-`draft: true` before launch.
+Current observed `dist/` output has 7 pages:
+
+```text
+/
+/cv/
+/publications/
+/publications/reviews/cosmic-connections/
+/publications/reviews/evolution-of-religions/
+/publications/reviews/godless-crusade/
+/publications/reviews/hell-christian-ecology/
+```
+
+`challenging-modernity` and `christian-right-europe` are currently
+drafted/withheld from page generation. Verify the generated route set and
+sitemap from the current build before launch.
 
 Dynamic review routes should query only non-draft reviews:
 

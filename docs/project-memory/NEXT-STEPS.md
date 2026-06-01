@@ -7,15 +7,16 @@ Christian Right exist as review pages, are superseded.
 
 ## 1. Immediate Launch Blockers
 
-1. **Resolve the `challenging-modernity` rights blocker**
-   - Current code builds `/publications/reviews/challenging-modernity/`
-     publicly.
+1. **Verify the withheld `challenging-modernity` rights state**
+   - Current code has `src/content/reviews/challenging-modernity.md` as
+     `draft: true`.
    - The page is a Taylor & Francis Version-of-Record reproduction.
    - No Taylor & Francis Version-of-Record page should go live until T&F/CCC
      permission is clarified.
-   - Decide whether to set `src/content/reviews/challenging-modernity.md` back
-     to `draft: true` before launch.
-   - It may still appear as a bibliographic DOI item on `/publications/`.
+   - Confirm it has no generated route, sitemap entry, or unpermitted public
+     assets.
+   - Confirm it still appears as a bibliographic DOI item on `/publications/`
+     when `publicationList.include !== false`.
 
 2. **Verify `godless-crusade` Accepted Manuscript handling**
    - Current local version should be `Accepted Manuscript`, not Version of
@@ -59,24 +60,21 @@ Christian Right exist as review pages, are superseded.
    npm run build
    ```
 
-   Current memory says `npm run build` succeeded as of 2026-05-31 12:07 BST,
-   but rerun after any content/schema changes.
+   Rerun after any content/schema changes.
 
 2. **Confirm generated route set**
-   - Current static build should produce 9 pages:
+   - Current observed `dist/` snapshot contains 7 pages:
      ```text
      /
      /cv/
      /publications/
-     /publications/reviews/challenging-modernity/
-     /publications/reviews/christian-right-europe/
      /publications/reviews/cosmic-connections/
      /publications/reviews/evolution-of-religions/
      /publications/reviews/godless-crusade/
      /publications/reviews/hell-christian-ecology/
      ```
-   - If `challenging-modernity` is withheld, update the expected generated
-     route set and sitemap accordingly.
+   - If any drafted review is intentionally made live, update the expected
+     generated route set and sitemap accordingly.
 
 3. **Inspect generated sitemap**
    ```bash
@@ -95,9 +93,9 @@ Christian Right exist as review pages, are superseded.
    - Current selected public tree confirms only these review PDFs:
      ```text
      public/publications/reviews/cosmic-connections/veljkovic-review-cosmic-connections.pdf
-     public/publications/reviews/christian-right-europe/veljkovic-christian-right-europe.pdf
+     public/publications/reviews/hell-christian-ecology/veljkovic-review-hell-christian-ecology.pdf
      ```
-   - Verify any references for `hell-christian-ecology`, `godless-crusade`, and
+   - Verify any references for `christian-right-europe`, `godless-crusade`, and
      `challenging-modernity` before launch.
 
 5. **Validate rendered JSON-LD**

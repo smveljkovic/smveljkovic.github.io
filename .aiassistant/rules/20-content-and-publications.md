@@ -16,10 +16,13 @@ List-only bibliography records belong in:
 src/content/publication-items/
 ```
 
-Do not force every bibliography entry into `reviews`. `/publications/` combines
-live review pages with non-draft `publicationItems`. Duplicate/list-only review
-records are currently drafted except the thesis item to avoid duplicate
-publication-list/schema entries.
+`/publications/` derives bibliography entries from review records where
+`publicationList.include !== false`, including drafted reviews. It adds local
+webpage/PDF links only for non-draft reviews. It also includes non-draft
+`publicationItems` whose IDs are not already represented by reviews.
+
+Duplicate/list-only review records are currently drafted except the thesis item
+to avoid duplicate publication-list/schema entries.
 
 Current publication-item files:
 
@@ -77,7 +80,8 @@ Review-specific rules:
 - `christian-right-europe`: reviewed work is an edited volume; use `editor`, not
   an author string with "(ed.)"; `csaf039` is article ID, not pagination.
 - `evolution-of-religions`: model the published LSE post as `BlogPosting /
-  Review`; do not invent journal/volume/issue metadata.
+  Review`; use `Published web article` as the publication-version label; do not
+  invent journal/volume/issue metadata.
 - `godless-crusade`: local version should be an Accepted Manuscript, not Version
   of Record; verify AM wording, Goodhart correction note, assets, and schema.
 - `challenging-modernity`: T&F Version-of-Record reproduction; must be withheld

@@ -29,8 +29,13 @@ Current selected public tree includes:
 ```text
 public/images/headshot-1200x630.JPG
 public/publications/reviews/cosmic-connections/veljkovic-review-cosmic-connections.pdf
-public/publications/reviews/christian-right-europe/veljkovic-christian-right-europe.pdf
+public/publications/reviews/hell-christian-ecology/veljkovic-review-hell-christian-ecology.pdf
 ```
+
+If a file is in `public/`, it is public. Astro copies `public/` directly into
+`dist/`; `draft:true` only controls page generation and does not protect static
+PDFs, images, or other assets. Do not put rights-uncertain publication assets in
+`public/`.
 
 Active caution: code still references `/images/headshot-1200x630.png` in places,
 while the selected public tree shows `.JPG`. Verify generated output and fix the
@@ -62,14 +67,8 @@ Preferred future PDF convention is:
 public/publications/reviews/<slug>/veljkovic-review-<slug>.pdf
 ```
 
-but current code has exceptions, including:
-
-```text
-public/publications/reviews/christian-right-europe/veljkovic-christian-right-europe.pdf
-```
-
 Verify all generated-page asset references before launch, especially PDFs for
-`hell-christian-ecology`, `godless-crusade`, and `challenging-modernity`.
+`christian-right-europe`, `godless-crusade`, and `challenging-modernity`.
 
 Legacy URLs to consider:
 
@@ -88,5 +87,6 @@ Do not replace old PDF URLs with HTML redirect stubs unless true HTTP redirects
 are available. Cloudflare is deferred unless true redirects, headers, or `www`
 canonicalization become important.
 
-Deployment workflow and CNAME/domain handling remain unresolved and should be
-documented before launch.
+Initial deployment target is GitHub Pages. Current recorded method is GitHub
+Actions building the Astro site and publishing `dist/`. Add/confirm the workflow
+file and custom domain/CNAME handling before launch.

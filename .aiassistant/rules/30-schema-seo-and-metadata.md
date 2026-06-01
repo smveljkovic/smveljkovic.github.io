@@ -52,6 +52,10 @@ CollectionPage
     itemListElement -> ListItem[]
 ```
 
+For drafted/withheld reviews on `/publications/`, do not emit nonexistent local
+page IDs such as `/publications/reviews/<slug>/#review`. Prefer DOI/publisher
+IDs where available, otherwise stable `/publications/` fragment IDs.
+
 Review schema should distinguish:
 
 1. Stevan as `Person`

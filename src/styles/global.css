@@ -28,7 +28,7 @@ body, div, dl, dt, dd, h1, h2, h3, h4, h5, h6, p, pre, code, blockquote {
 
 	--review-serif-size: clamp(1.125rem, 2.5vmin, 1.5rem);
 	--review-case-scale: 0.8;
-	--review-measure: 66ch;
+	--review-measure: 62ch;
 	--review-intro-pad-x: 1em;
 }
 
@@ -46,21 +46,21 @@ body, div, dl, dt, dd, h1, h2, h3, h4, h5, h6, p, pre, code, blockquote {
 .review_header {
 	font-family: var(--font-serif);
 	font-size: var(--review-serif-size);
-	width: min(100%, calc(var(--review-measure) + (2 * var(--review-intro-pad-x))));
+	width: min(100%, calc(58ch + 2em));
 	margin: 0 auto;
 	box-sizing: border-box;
 	display: flow-root;
 }
 
 .review_header .review_intro {
-	width: min(100%, calc(66ch + 2em));
-	max-width: 1--%;
+	width: 100%;
+	max-width: 100%;
 	margin: 0.33rem auto;
 	font-size: calc(1em * var(--review-case-scale));
 }
 
 div.review_text {
-	--review-measure: 66ch;
+	--review-measure: 62ch;
 	font-family: var(--font-serif);
 	font-size: var(--review-serif-size);
 	width: min(100%, var(--review-measure));
@@ -230,7 +230,7 @@ div.review_text,
 #writings,
 #cv {
 	align-items: baseline;
-	width: min(100%, 70ch);
+	width: min(100%, 62ch);
 }
 
 .home-card {
@@ -461,7 +461,7 @@ div.review_text, #writings, #cv {
   	grid-template-columns: max-content minmax(0, 1fr);
   	column-gap: 1rem;
 	margin: 0 auto; 
-	width: min(100%, 66ch);
+	width: min(100%, 62ch);
 	box-sizing: border-box;
 	line-height: clamp(1.4, 1.5, 1.6);
 	border:none;
@@ -470,7 +470,7 @@ div.review_text, #writings, #cv {
 div.review_text,
 #writings,
 #cv {
-	--review-measure: 66ch;
+	--review-measure: 62ch;
 	font-size: clamp(1.125rem, 2.5vmin, 1.5rem);
 	width: min(100%, var(--review-measure));
 }
@@ -488,7 +488,7 @@ div.countercontrol {
 	font-size: calc(var(--review-serif-size) * 0.9);
 	line-height: 1.4;
 	padding-top: 1em;
-	margin: 0.33rem;
+	margin: 0.33rem 0;
 	font-weight: 550;
 }
 
@@ -552,8 +552,8 @@ p.intro {
 }
 
 .review_header .review_intro p.intro {
-	width: min(100%, 66ch);
-	max-width: 66ch;
+	width: min(100%, 62ch);
+	max-width: 62ch;
 	margin-left: auto;
 	margin-right: auto;
 	box-sizing: border-box;
@@ -631,7 +631,7 @@ div.test {
   	grid-template-columns: max-content minmax(40ch, 1fr);
 	column-gap: 1rem;
 	margin: 0 auto; 
-	width: min(100%, 70ch);
+	width: min(100%, 62ch);
 	line-height: clamp(1.4, 1.5, 1.6);
 }*/
 	
@@ -661,7 +661,7 @@ div.test {
 	}
 
 	.review_header .review_intro {
-		width: min(100%, calc(66ch + 1.25rem));
+		width: min(100%, calc(62ch + 1.25rem));
 		max-width: 100%;
 		margin-left: auto;
 		margin-right: auto;
@@ -671,8 +671,8 @@ div.test {
 
 
 	div.review_intro p.intro {
-		width: min(100%, 66ch);
-		max-width: 66ch;
+		width: min(100%, 62ch);
+		max-width: 62ch;
 		min-width: 0;
 		margin-left: auto;
 		margin-right: auto;
@@ -713,7 +713,7 @@ div.test {
 
 
 	.review_header .review_intro {
-		width: min(100%, calc(66ch + 1.25rem));
+		width: min(100%, calc(62ch + 1.25rem));
 		max-width: 100%;
 		margin-left: auto;
 		margin-right: auto;

@@ -521,14 +521,14 @@ General notes:
 
 #### Rights status of the various publications
 
-| Pub                    | Publisher                              | Holder            | Open access? | Version on site | Reuse basis           | Reuse URL or email information                                                                                                                                                                                                            | Rights platform, if any | Permission/clarification sought? | Launch status   | Rights-platform credit language                                | Publisher suggested credit language                                                                                                                                    |
-|------------------------|----------------------------------------|-------------------|--------------|-----------------|-----------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------|----------------------------------|-----------------|----------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| godless-crusade        | Taylor & Francis                       | Stevan Veljkovic  | No           | AM              | Publisher policy      | https://authorservices.taylorandfrancis.com/research-impact/sharing-versions-of-journal-articles/                                                                                                                                         | PLSClear                | Yes                              | Live if AM only | ‘Reproduced with permission of the Licensor through PLSclear.’ | ‘This is an Accepted Manuscript of an article published by Taylor & Francis in [JOURNAL TITLE] on [date of publication], available at: https://doi.org/[Article DOI].’ |
-| cosmic-connections     | Sage Publications                      | Stevan Veljkovic  | No           | AOM             | Publisher policy      | https://www.sagepub.com/journals/permissions/sages-author-archiving-and-re-use-guidelines/                                                                                                                                                |                         | No                               | Live            |                                                                |                                                                                                                                                                        |
-| challenging-modernity  | Taylor & Francis                       | Stevan Veljkovic  | No           | VoR             | Permission granted    | [Email from no-reply@email.copyright.com: Additional Information Needed for Your Request to Taylor & Francis Informa UK Ltd - Journals](message://%3C0100019e68ed1644-c6e37698-4b56-469f-b0f8-42eef4365670-000000@email.amazonses.com%3E) | CCC                     | Yes                              | Live if AM only |                                                                |                                                                                                                                                                        |
-| hell-christian-ecology | Equinox Publishing                     | Stevan Veljkovic  | Yes          | VoR             | Licensed: CC BY-NC-ND | https://journal.equinoxpub.com/JSRNC/Open                                                                                                                                                                                                 |                         | No                               | Live            |                                                                |                                                                                                                                                                        |
-| evolution-of-religions | London School of Economics / LSE Blogs | Stevan Veljkovic  | Yes          | URL             | Licensed: CC BY       | https://blogs.lse.ac.uk/republishing-policy/                                                                                                                                                                                              |                         | No                               | Live            |                                                                |                                                                                                                                                                        |
-| christian-right-europe | Oxford University Press                | Stevan Veljkovic  | No           | VoR             | Permission granted    | [Email from no-reply@email.copyright.com: Thank you for your order with RightsLink / Oxford University Press](message://%3C0100019e3bce63fe-6380f2eb-6054-4911-8f4c-ff46ce1a2670-000000@email.amazonses.com%3E)                           | CCC                     | Yes                              | Live if AM only |                                                                |                                                                                                                                                                        |
+| Pub                    | Publisher                              | Holder            | Open access? | Version on site | Reuse basis                      | Reuse URL or email information                                                                                                                                                                                                            | Rights platform, if any | Permission/clarification sought? | Launch status   | Rights-platform credit language                                | Publisher suggested credit language                                                                                                                                    |
+|------------------------|----------------------------------------|-------------------|--------------|-----------------|----------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------|----------------------------------|-----------------|----------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| godless-crusade        | Taylor & Francis                       | Stevan Veljkovic  | No           | AM              | Publisher policy                 | https://authorservices.taylorandfrancis.com/research-impact/sharing-versions-of-journal-articles/                                                                                                                                         | PLSClear                | Yes                              | Live if AM only | ‘Reproduced with permission of the Licensor through PLSclear.’ | ‘This is an Accepted Manuscript of an article published by Taylor & Francis in [JOURNAL TITLE] on [date of publication], available at: https://doi.org/[Article DOI].’ |
+| cosmic-connections     | Sage Publications                      | Stevan Veljkovic  | No           | AOM             | Publisher policy                 | https://www.sagepub.com/journals/permissions/sages-author-archiving-and-re-use-guidelines/                                                                                                                                                |                         | No                               | Live            |                                                                |                                                                                                                                                                        |
+| challenging-modernity  | Taylor & Francis                       | Stevan Veljkovic  | No           | VoR             | Permission provisionally granted | [Email from no-reply@email.copyright.com: Additional Information Needed for Your Request to Taylor & Francis Informa UK Ltd - Journals](message://%3C0100019e68ed1644-c6e37698-4b56-469f-b0f8-42eef4365670-000000@email.amazonses.com%3E) | CCC                     | Yes                              | Live if AM only |                                                                |                                                                                                                                                                        |
+| hell-christian-ecology | Equinox Publishing                     | Stevan Veljkovic  | Yes          | VoR             | Licensed: CC BY-NC-ND            | https://journal.equinoxpub.com/JSRNC/Open                                                                                                                                                                                                 |                         | No                               | Live            |                                                                |                                                                                                                                                                        |
+| evolution-of-religions | London School of Economics / LSE Blogs | Stevan Veljkovic  | Yes          | URL             | Licensed: CC BY                  | https://blogs.lse.ac.uk/republishing-policy/                                                                                                                                                                                              |                         | No                               | Live            |                                                                |                                                                                                                                                                        |
+| christian-right-europe | Oxford University Press                | Stevan Veljkovic  | No           | VoR             | Permission provisionally granted | [Email from no-reply@email.copyright.com: Thank you for your order with RightsLink / Oxford University Press](message://%3C0100019e3bce63fe-6380f2eb-6054-4911-8f4c-ff46ce1a2670-000000@email.amazonses.com%3E)                           | CCC                     | Yes                              | Live if AM only |                                                                |                                                                                                                                                                        |
 
 ### Rules on use and management of files in public/
 
@@ -538,9 +538,37 @@ General notes:
 
 ### Rules regarding design and typography
 
-The ratio of sizing between FF Meta Serif and Case VAR is about 4 to 5
+- As an optical starting point:
+  - All other parameters being equal, if a character of FF Meta Serif is 4mm, the same character in Case VAR will be about 5mm.
+    - Therefore:
+      - Treat FF Meta Serif as the baseline;
+      - Adjust Case VAR downwards when visual parity is desired;
+        - In ordinary use, good style will usually mean making this adjustment.
 
-## 12. Audit information
+
+## 12. Project memory maintenance procedure
+
+### Resources
+
+- Scripts and directories for processing project-memory materials live in `~/Projects/web-admin/project-memory-materials`
+
+### Procedure and best practice
+
+- Overview conversations with gpt-5.5 are carried out in BBEdit AI Worksheets
+  - These live normally in `~/Projects/web-admin/project-memory-materials/raw-logs/`
+- Worksheet length threshold is ~ 20,000–25,000 words
+  - When a conv approaches threshold, the thread is extracted into an .md file
+    - The .md file is placed in `~/Projects/web-admin/project-memory-materials/inbox/delta-from-conversation/`
+- A script which automates an API call produces a draft in `~/Projects/web-admin/project-memory-materials/draft-deltas/`
+- The draft delta is examined and if acceptable moved to `docs/project-memory/deltas/`
+- File naming for new deltas follows the pattern [date]-[conv_index]-[keywords].md
+- The new delta is used as the basis for requests to gpt in WebStorm
+  - First request is revision of core project-memory files
+  - Second request is revision of .aiassistant rules
+- Model prompt to WebStorm stored in `~/Projects/web-admin/project-memory-materials/prompts/2026-06-01-conv-14-webstorm-prompt.md`
+- A new thread then begins in a fresh BBEdit worksheet using the contents of current.md as introductory context and reference material
+
+## 13. Audit information
 
 ### JSON-LD audit 2026-06-01T10:34Z
 - `Pass` means success
@@ -558,7 +586,7 @@ The ratio of sizing between FF Meta Serif and Case VAR is about 4 to 5
 | christian-right-europe | Pass                                        | Pass                                                                  | 2 Articles <br/> 2 Review snippets | Articles [non-critical]: missing image; invalid datetime value for datePublished; datePublished missing timezone <br/> Review snippets: None                            |       |
 | evolution-of-religions | Pass                                        | Pass                                                                  | 2 Articles <br/> 2 Review snippets | Articles [non-critical]: missing image; invalid datetime value for datePublished; datePublished missing timezone <br/> Review snippets: None                            |       |
 
-## 13. Deployment notes / memory
+## 14. Deployment notes / memory
 
 ### Legacy URLs
 
@@ -645,3 +673,68 @@ Check:
 - live publications
 - live sitemap
 - JSON-LD validation for representative pages
+
+### Astro/GitHub Pages workflow
+
+```yaml
+name: Deploy to GitHub Pages
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+  
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+  
+      - name: Install dependencies
+        run: npm ci
+        
+      - name: Sync Astro types
+        run: npx astro sync
+        
+      - name: Check
+        run: npx astro check
+  
+      - name: Build
+        run: npm run build
+  
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./dist
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+```

@@ -48,10 +48,13 @@ The canonical JSON-LD `Person.@id` is:
 https://orcid.org/0000-0002-2599-3227
 ```
 
-Email is currently inconsistent and must not be treated as settled:
+Canonical contact email in current code:
 
-- `src/data/site.ts` uses `contact@stevanveljkovic.com`.
-- the homepage currently hardcodes `hello@stevanveljkovic.com`.
-- recent memory points toward aligning on `contact@stevanveljkovic.com`.
+```text
+stevan@stevanveljkovic.com
+```
+
+Homepage and review intro should use `site.email`. Individual review
+`bylineHtml` may still contain manuscript-specific byline addresses.
 
 Do not include the rejected/conflated OpenAlex profile in `sameAs`.

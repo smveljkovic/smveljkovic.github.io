@@ -10,11 +10,11 @@ When sources conflict, use this order:
 
 1. Current source code and rendered build output.
 2. `docs/project-memory/current.md`.
-3. `.aiassistant/rules/*.md`.
+3. `docs/project-memory/NEXT-STEPS.md`.
 4. `docs/project-memory/DECISIONS.md`.
-5. `docs/project-memory/NEXT-STEPS.md`.
-6. `docs/metadata/master-values.md` for metadata registry values.
-7. Newest relevant file in `docs/project-memory/deltas/`.
+5. Newest relevant file in `docs/project-memory/deltas/`.
+6. `.aiassistant/rules/*.md`.
+7. `docs/metadata/master-values.md` for metadata registry values.
 8. `docs/project-memory/archive/`.
 9. Older generated summaries, raw logs, and chat-derived material.
 

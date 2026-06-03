@@ -5,53 +5,45 @@ Treat `current.md` and the actual code/build output as authoritative. Older
 migration-era assumptions, especially notes that only Cosmic Connections and
 Christian Right exist as review pages, are superseded.
 
-## 1. Immediate Launch Blockers
+## 1. Post-Launch Follow-Up
 
-1. **Verify the withheld `challenging-modernity` rights state**
-   - Current code has `src/content/reviews/challenging-modernity.md` as
-     `draft: true`.
-   - The page is a Taylor & Francis Version-of-Record reproduction.
-   - No Taylor & Francis Version-of-Record page should go live until T&F/CCC
-     permission is clarified.
-   - Confirm it has no generated route, sitemap entry, or unpermitted public
-     assets.
-   - Confirm it still appears as a bibliographic DOI item on `/publications/`
-     when `publicationList.include !== false`.
+1. **Fix or deliberately resolve the OG/headshot image mismatch**
+   - Current code/build output references:
+     ```text
+     /images/headshot-1200x630.png
+     ```
+   - Current public file is:
+     ```text
+     /images/headshot-1200x630.JPG
+     ```
 
-2. **Verify `godless-crusade` Accepted Manuscript handling**
-   - Current local version should be `Accepted Manuscript`, not Version of
-     Record.
-   - Do not expose T&F Version-of-Record PDF/text unless permission is granted.
+2. **Repeat PageSpeed checks and record metrics**
+   - Check the homepage and at least one representative review page.
+   - Record the metrics in project memory or a validation note.
+
+3. **Recheck legacy URL behaviour after deployment**
+   - HTML stubs should forward correctly and stay out of the sitemap.
+   - PDF compatibility URLs should load PDFs.
    - Check:
-     - exact visible Accepted Manuscript wording;
-     - Goodhart correction note;
-     - local text/version accuracy;
-     - schema output;
-     - sitemap inclusion/exclusion according to final rights decision;
-     - absence of VoR PDF/text.
-   - Key current metadata:
      ```text
-     route: /publications/reviews/godless-crusade/
-     published review DOI: https://doi.org/10.1080/09637494.2023.2260684
-     reviewed book DOI: https://doi.org/10.1017/9781009262125
-     journal: Religion, State and Society, volume 51, issue 4-5
-     published review first-online date: 2023-12-14
-     article/review pagination: 491-492, 491, 492
+     /writing.html
+     /writing/ReviewCosmicConnectionsV2.html
+     /writing/ReviewCosmicConnectionsV2.pdf
+     /itinerary.pdf
      ```
 
-3. **Resolve Hell-specific metadata and asset questions**
-   - Check whether `hell-christian-ecology` should use:
+4. **Keep withheld reviews withheld unless decisions change**
+   - `challenging-modernity` and `christian-right-europe` are drafted/withheld.
+   - Their temporarily removed review materials are stored at:
      ```text
-     Reproduction of the Version of Record
+     ~/Projects/website-admin/withheld-images-folders/
      ```
-   - Decide whether the first-published note should display.
-   - Verify whether issue date `2024-10-03` is real issue-level metadata or
-     should be omitted.
-   - Verify referenced PDF path exists before launch.
-   - If using generic JSRNC visual assets, attach them to `Periodical`, not
-     `PublicationIssue`.
 
-## 2. Required Verification Pass
+5. **Enable automatic deployment on push to `main`**
+   - Current workflow is manual-only with `workflow_dispatch`.
+   - Updating it to build on push is intended as the final Stage 3 subtask.
+
+## 2. Continuing Verification Pass
 
 1. **Run project checks**
    ```bash
@@ -81,8 +73,8 @@ Christian Right exist as review pages, are superseded.
    find dist -name "sitemap*.xml" -print -exec cat {} \;
    ```
 
-   Confirm only intended live canonical pages appear. Pay particular attention
-   to `challenging-modernity` and `godless-crusade`.
+   Confirm only intended live canonical pages appear. Current expected sitemap
+   entries are the seven generated routes above.
 
 4. **Verify generated-page asset references**
    - PDFs.
@@ -95,8 +87,9 @@ Christian Right exist as review pages, are superseded.
      public/publications/reviews/cosmic-connections/veljkovic-review-cosmic-connections.pdf
      public/publications/reviews/hell-christian-ecology/veljkovic-review-hell-christian-ecology.pdf
      ```
-   - Verify any references for `christian-right-europe`, `godless-crusade`, and
-     `challenging-modernity` before launch.
+   - Keep references for drafted/withheld `christian-right-europe` and
+     `challenging-modernity` from becoming public routes or public assets unless
+     rights/publication decisions change.
 
 5. **Validate rendered JSON-LD**
    - Inspect built page source, not TypeScript literals.
@@ -131,29 +124,14 @@ Christian Right exist as review pages, are superseded.
 
 ## 3. Content And Metadata Cleanup
 
-1. **Align contact email**
-   - Current mismatch:
-     - homepage hardcodes `hello@stevanveljkovic.com`;
-     - review intro uses `site.email`;
-     - recent decisions point toward `contact@stevanveljkovic.com`.
-   - Align:
-     ```text
-     src/data/site.ts
-     homepage contact link
-     review intro
-     JSON-LD
-     page metadata
-     any footer/contact copy
-     ```
-
-2. **Fix schema/frontmatter mismatches where fields are meant to matter**
+1. **Fix schema/frontmatter mismatches where fields are meant to matter**
    - Check any frontmatter keys not declared in `src/content.config.ts`.
    - Pay attention to display-only date labels:
      - `publicationIssueSchema` currently has `dateLabel`;
      - older notes mention `issueDateLabel`;
      - keep display-only labels out of Schema.org unless mapped intentionally.
 
-3. **Clean placeholder-like sorting/date metadata**
+2. **Clean placeholder-like sorting/date metadata**
    - `godless-crusade` has `publicationList.sortDate: "2023-01-01"`, which may
      be placeholder-like.
    - `christian-right-europe` issue date is month precision, but sort date may
@@ -161,7 +139,7 @@ Christian Right exist as review pages, are superseded.
    - `challenging-modernity` citation issue-year is 2025, but list year/sort
      date may follow first-online publication in 2024.
 
-4. **Check headshot/OG image path**
+3. **Check headshot/OG image path**
    - Current selected public tree has:
      ```text
      /images/headshot-1200x630.JPG
@@ -172,11 +150,11 @@ Christian Right exist as review pages, are superseded.
      ```
    - Inspect `src/data/site.ts` and generated page source for broken image URLs.
 
-5. **Remove accidental macOS files if tracked**
+4. **Remove accidental macOS files if tracked**
    - `.DS_Store` files are present in source/public tree.
    - Remove them from the repo if tracked or accidentally committed.
 
-6. **Review analytics script duplication**
+5. **Review analytics script duplication**
    - `Analytics.astro` uses `site.analyticsId` for the script URL but hardcodes:
      ```js
      gtag("config", "G-7VMGXMNZZ0")
@@ -250,37 +228,7 @@ Christian Right exist as review pages, are superseded.
 
 ## 5. Deployment And Legacy URLs
 
-1. **Document deployment workflow**
-   - Determine and record whether deployment uses:
-     - GitHub Actions building Astro;
-     - committed `dist/`;
-     - separate deployment to `smveljkovic.github.io`;
-     - another workflow.
-   - Record where CNAME/domain configuration lives.
-
-2. **Resolve legacy URL strategy**
-   - Old URLs to consider:
-     ```text
-     /writing.html
-     /writing/ReviewCosmicConnectionsV2.html
-     /writing/ReviewCosmicConnectionsV2.pdf
-     /itinerary.pdf
-     ```
-   - GitHub Pages cannot create true arbitrary 301 redirects.
-   - Decide whether static HTML redirect stubs are sufficient or whether
-     Cloudflare should be adopted later for:
-     - true 301 redirects;
-     - PDF headers;
-     - security headers;
-     - `www` to apex redirect.
-   - Redirect stubs, if used, should include:
-     - canonical link;
-     - meta refresh;
-     - `location.replace`;
-     - visible fallback link;
-     - no full JSON-LD.
-
-3. **Check deployment/DNS behaviour**
+1. **Recheck deployment/DNS behaviour periodically during post-launch hardening**
    ```bash
    curl -I https://stevanveljkovic.com/
    curl -I https://www.stevanveljkovic.com/
@@ -288,6 +236,24 @@ Christian Right exist as review pages, are superseded.
    curl -I https://stevanveljkovic.com/seminars/
    curl -I -L https://stevanveljkovic.com/seminars/
    ```
+
+2. **Enable build-on-push to `main` as the final Stage 3 subtask**
+   - Current workflow is manual-only with `workflow_dispatch`.
+   - Preserve the manual trigger if useful.
+
+3. **Keep legacy stop-gaps working**
+   - HTML stubs currently cover:
+     ```text
+     /writing.html
+     /writing/ReviewCosmicConnectionsV2.html
+     ```
+   - PDF compatibility files currently cover:
+     ```text
+     /writing/ReviewCosmicConnectionsV2.pdf
+     /itinerary.pdf
+     ```
+   - A later Netlify/Cloudflare move can replace these with true redirects if
+     desired.
 
 ## 6. Deferred Until Stage 4
 

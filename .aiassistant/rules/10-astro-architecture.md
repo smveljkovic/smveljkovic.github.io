@@ -54,7 +54,7 @@ Current observed `dist/` output has 7 pages:
 
 `challenging-modernity` and `christian-right-europe` are currently
 drafted/withheld from page generation. Verify the generated route set and
-sitemap from the current build before launch.
+sitemap from the current build during post-launch hardening.
 
 Dynamic review routes should query only non-draft reviews:
 

@@ -7,10 +7,13 @@
 - Separate seminars site: `https://seminars.stevanveljkovic.com/`
 - Current local root: `/Users/stevan/Projects/smvsite-astro`
 - Current git branch: `main`
-- Latest git status snapshot:
-  - untracked: `docs/project-memory/README.md`, `docs/project-memory/inputs/`, `scripts/`
-  - no reported `git diff --stat` output
-- Current phase: Stage 3.4-3.7 launch gating and deployment preparation, not a redesign.
+- Git remote `origin`: `https://github.com/smveljkovic/smveljkovic.github.io.git`
+- Current phase: post-launch validation / Stage 3.7 deployment hardening, not a redesign.
+- Site is live at `https://stevanveljkovic.com/`.
+- `https://www.stevanveljkovic.com/` redirects permanently to the apex domain.
+- GitHub Pages deployment uses GitHub Actions artifact publishing from `origin/main`.
+- `.github/workflows/deploy.yml` currently uses manual `workflow_dispatch`; enabling build-on-push to `main` is intended as the last Stage 3 subtask.
+- `public/CNAME` contains exactly `stevanveljkovic.com`.
 - Latest observed `dist/` snapshot: static Astro site, 7 pages:
   - `/`
   - `/cv/`
@@ -20,6 +23,7 @@
   - `/publications/reviews/godless-crusade/`
   - `/publications/reviews/hell-christian-ecology/`
 - Current code has `challenging-modernity` and `christian-right-europe` drafted/withheld from page generation.
+- Withheld review image/material folders temporarily live at `~/Projects/website-admin/withheld-images-folders/`.
 
 ## 2. Current implementation / architecture
 
@@ -169,7 +173,8 @@
   - Résumé
   - Writing
   - Seminars
-- Homepage contact currently hardcodes `mailto:hello@stevanveljkovic.com`; this conflicts with recent contact-email decisions.
+- Homepage contact uses `site.email`; current canonical code value is
+  `stevan@stevanveljkovic.com`.
 - Dark background remains `hsl(0, 0%, 7%)`.
 - Preserve fragile/legacy classes for now, including:
   ```text
@@ -231,7 +236,7 @@
   - `public/publications/reviews/hell-christian-ecology/veljkovic-review-hell-christian-ecology.pdf`
 - Important missing/unchecked asset issue:
   - latest selected public tree does **not** show PDFs for `christian-right-europe`, `godless-crusade`, or `challenging-modernity`.
-  - verify content references before launch.
+  - verify content references before making any withheld/draft review live.
 - Preferred future PDF convention:
   ```text
   public/publications/reviews/<slug>/veljkovic-review-<slug>.pdf
@@ -324,7 +329,7 @@
   - local version is a Taylor & Francis Version-of-Record reproduction.
   - published review DOI: `https://doi.org/10.1080/09637494.2024.2408091`
   - reviewed book DOI: `https://doi.org/10.7312/bell21488`
-  - must remain drafted/withheld before launch unless T&F/CCC permission is clarified.
+  - must remain drafted/withheld unless T&F/CCC permission is clarified.
   - It still appears as a bibliographic DOI item on `/publications/` if `publicationList.include !== false`.
 - `evolution-of-religions`:
   - complete for Stage 3.
@@ -355,7 +360,10 @@
 
 ## 7. Known issues, cautions, and unresolved questions
 
-- **T&F rights blocker:** no Taylor & Francis Version-of-Record page should go live until T&F/CCC confirms permission. Current code has `challenging-modernity` withheld; verify it remains absent from routes, sitemap, and public assets before launch.
+- **T&F rights caution:** no Taylor & Francis Version-of-Record page should go
+  live until T&F/CCC confirms permission. Current code has
+  `challenging-modernity` withheld; keep it absent from routes, sitemap, and
+  public assets unless that decision changes.
 - `godless-crusade` AM is acceptable in principle under T&F author-reuse policy, but still needs final verification for:
   - exact visible AM wording
   - Goodhart correction note
@@ -363,16 +371,16 @@
   - schema
   - sitemap
   - absence of VoR PDF/text
-- Contact email is inconsistent:
-  - homepage hardcodes `hello@stevanveljkovic.com`
-  - review intro uses `site.email`
-  - recent decisions point toward `contact@stevanveljkovic.com`
-  - align `src/data/site.ts`, homepage link, JSON-LD, metadata, and any contact/footer copy.
+- Current canonical contact email in code is `stevan@stevanveljkovic.com`.
+  Homepage and review intro use `site.email`; individual review `bylineHtml`
+  may still contain manuscript-specific byline addresses.
 - Possible OG image mismatch:
   - public tree has `/images/headshot-1200x630.JPG`
   - older notes expected `/images/headshot-1200x630.png`
   - inspect `src/data/site.ts` and generated page source for broken image URLs.
-- Current build does not prove linked assets exist. Latest selected public tree only confirms Cosmic and Hell PDFs.
+- Latest selected public tree confirms review PDFs for Cosmic and Hell only.
+  Godless currently has no local PDF; drafted/withheld Christian Right and
+  Challenging Modernity PDF/image assets are not in `public/`.
 - `hell-christian-ecology` unresolved checks:
   - whether version should be `Reproduction of the Version of Record`
   - whether first-published note should display
@@ -387,49 +395,30 @@
 - `publicationIssueSchema` has `dateLabel`, but some notes mention `issueDateLabel`. Keep display-only labels out of Schema.org unless mapped intentionally.
 - `Analytics.astro` uses `site.analyticsId` for script URL but hardcodes `gtag('config', 'G-7VMGXMNZZ0')`. Fine if matching, but not DRY.
 - `.DS_Store` files are present in source/public tree. Remove from repo if tracked or accidentally committed.
-- Legacy redirect strategy is unresolved. Old URLs to consider:
+- GitHub Pages legacy stop-gaps are implemented for:
   - `/writing.html`
   - `/writing/ReviewCosmicConnectionsV2.html`
   - `/writing/ReviewCosmicConnectionsV2.pdf`
   - `/itinerary.pdf`
+  Old PDF URLs remain PDFs on GitHub Pages; the old Cosmic V2 PDF path may serve
+  the current Cosmic PDF as a compatibility alias.
 
 ## 8. Immediate next steps
 
-1. Verify withheld reviews have no generated route, sitemap entry, or unpermitted public assets.
-2. Verify drafted reviews still appear on `/publications/` where `publicationList.include !== false`.
-3. Run:
-   ```bash
-   npx astro sync
-   npx astro check
-   npm run build
-   ```
-4. Inspect generated sitemap:
-   ```bash
-   find dist -name "sitemap*.xml" -print -exec cat {} \;
-   ```
-   Confirm only intended live canonical pages appear.
-5. Verify all generated-page asset references:
-   - PDFs
-   - review cover images
-   - issue/periodical images
-   - favicon files
-   - OG/social image
-6. Align canonical contact email across:
-   - `src/data/site.ts`
-   - homepage contact link
-   - review intro
-   - JSON-LD
-   - metadata docs
-   - any footer/contact copy
-7. Validate rendered JSON-LD for:
-   - `/`
-   - `/cv/`
-   - `/publications/`
-   - all intended live review pages
-8. Fix schema/frontmatter mismatches where stripped fields are meant to matter.
-9. Clean placeholder-like sort/date metadata.
-10. Resolve Hell-specific metadata and asset questions.
-11. Prepare launch/deployment docs and legacy URL plan.
+1. Fix or deliberately resolve the OG/headshot mismatch:
+   - code/build output references `/images/headshot-1200x630.png`;
+   - current public file is `/images/headshot-1200x630.JPG`.
+2. Repeat PageSpeed checks and record metrics for the homepage and at least one review page.
+3. Recheck legacy URL behaviour after deployment:
+   - `/writing.html`
+   - `/writing/ReviewCosmicConnectionsV2.html`
+   - `/writing/ReviewCosmicConnectionsV2.pdf`
+   - `/itinerary.pdf`
+4. Keep `challenging-modernity` and `christian-right-europe` withheld unless rights/publication decisions change.
+5. Enable automatic deployment on push to `main` as the final Stage 3 subtask once the manual workflow is judged stable.
+6. Fix schema/frontmatter mismatches where stripped fields are meant to matter.
+7. Clean placeholder-like sort/date metadata.
+8. Resolve any remaining Hell-specific metadata questions.
 
 ## 9. Details that should not be lost
 
@@ -486,13 +475,13 @@
 
 - Older notes listing only Cosmic and Christian Right as live review pages are superseded by current code and current draft state.
 - Older planned-page notes for Hell, Challenging Modernity, Evolution of Religions, and Godless Crusade are mostly superseded by current files, but rights/asset validation remains active.
-- Earlier public identity said “Theory and editing”; current homepage code says “Theory and design”. Confirm desired wording before launch.
-- Older constants said `hello@stevanveljkovic.com`; recent decisions point toward `contact@stevanveljkovic.com`, but current code still has at least one hardcoded `hello@` link.
+- Earlier public identity said “Theory and editing”; current homepage code says “Theory and design”. Confirm desired wording before further identity work.
+- Older constants said `hello@stevanveljkovic.com` or `contact@stevanveljkovic.com`; current code uses `stevan@stevanveljkovic.com` through `site.email`.
 - Older expected headshot path `/images/headshot-1200x630.png` may be superseded or broken; current public file shown is `/images/headshot-1200x630.JPG`.
 - Older Case font path notes used `public/fonts/Case/...`; current code uses lowercase `public/fonts/case/...` and simplified lowercase filenames.
 - Older PDF convention used `veljkovic-review-<slug>.pdf`; current/planned paths may differ.
 - Current `publicationList.year` and sorting choices may not match final bibliographic grouping decisions, especially for Challenging Modernity and Godless Crusade.
-- Richer `/publications/` JSON-LD for reviewed-book nodes, licenses, copyright holders, and external WebPage nodes is deferred; do not over-model before launch unless necessary.
+- Richer `/publications/` JSON-LD for reviewed-book nodes, licenses, copyright holders, and external WebPage nodes is deferred; do not over-model during post-launch hardening unless necessary.
 - `.aiassistant/rules/*.md` are intended to be concise operational extracts from `current.md`, not a competing memory system. If absent or stale, update them from this file and actual code rather than from old generated summaries.
 
 ## 11. Other information
@@ -590,13 +579,13 @@ General notes:
 
 ### Legacy URLs
 
-- The intention is to deploy first to GitHub Pages, then shift to a provider which offers proper redirects
-  - Interim solutions will likely be necessary for the launch
+- The site is deployed first to GitHub Pages. A later move to a provider with
+  true redirects remains optional.
 
 | Old URL                                 | Long-term target                                                                 | Implementable on GitHub Pages? | Launch action                 | Notes                                                  |
 |-----------------------------------------|----------------------------------------------------------------------------------|--------------------------------|-------------------------------|--------------------------------------------------------|
-| /writing.html                           | /publications/                                                                   | Yes                            | Optional static redirect stub | Former writing/publications page                       |
-| /writing/ReviewCosmicConnectionsV2.html | /publications/reviews/cosmic-connections/                                        | Yes                            | Optional static redirect stub | Old Cosmic Connections HTML                            |
+| /writing.html                           | /publications/                                                                   | Yes                            | Static redirect stub present  | Former writing/publications page                       |
+| /writing/ReviewCosmicConnectionsV2.html | /publications/reviews/cosmic-connections/                                        | Yes                            | Static redirect stub present  | Old Cosmic Connections HTML                            |
 | /writing/ReviewCosmicConnectionsV2.pdf  | /publications/reviews/cosmic-connections/veljkovic-review-cosmic-connections.pdf | No                             | Retain page at old URL        | PDF URLs cannot be redirected properly on GitHub Pages |
 | /itinerary.pdf                          | /cv/veljkovic-cv.pdf                                                             | No                             | Retain page at old URL        | Old PDF                                                |
 
@@ -622,6 +611,11 @@ Deployment method: GitHub Actions builds the Astro site and publishes `dist/`.
 GitHub Pages source: GitHub Actions.
 
 Custom domain: stevanveljkovic.com.
+
+Sitemap submission target: `https://stevanveljkovic.com/sitemap-index.xml`.
+
+Current workflow trigger: manual `workflow_dispatch`; enable build-on-push to
+`main` as the final Stage 3 subtask after the manual workflow is stable.
 
 Important:
 - `public/` is copied directly to `dist/`.
@@ -738,3 +732,10 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v4
 ```
+
+## 15. Post-launch notes
+
+### First GitHub Actions workflow run produced warnings
+
+- *build* Node.js 20 actions are deprecated. The following actions are running on Node.js 20 and may not work as expected: actions/checkout@v4, actions/configure-pages@v5, actions/setup-node@v4, actions/upload-artifact@v4. Actions will be forced to run with Node.js 24 by default starting June 16th, 2026. Node.js 20 will be removed from the runner on September 16th, 2026. Please check if updated versions of these actions are available that support Node.js 24. To opt into Node.js 24 now, set the FORCE_JAVASCRIPT_ACTIONS_TO_NODE24=true environment variable on the runner or in your workflow file. Once Node.js 24 becomes the default, you can temporarily opt out by setting ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+- *deploy* Node.js 20 actions are deprecated. The following actions are running on Node.js 20 and may not work as expected: actions/deploy-pages@v4. Actions will be forced to run with Node.js 24 by default starting June 16th, 2026. Node.js 20 will be removed from the runner on September 16th, 2026. Please check if updated versions of these actions are available that support Node.js 24. To opt into Node.js 24 now, set the FORCE_JAVASCRIPT_ACTIONS_TO_NODE24=true environment variable on the runner or in your workflow file. Once Node.js 24 becomes the default, you can temporarily opt out by setting ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/

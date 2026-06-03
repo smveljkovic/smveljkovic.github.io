@@ -248,9 +248,8 @@ as authoritative when they conflict with older notes.
 - **Challenging Modernity must be withheld unless rights are clarified.**  
   **Known:** current code has it drafted/withheld; local version is a Taylor &
   Francis Version-of-Record reproduction.  
-  **Decision needed:** keep withheld before launch unless CCC/T&F permission is
-  confirmed.  
-  **Status:** Active launch blocker.
+  **Decision:** keep withheld unless CCC/T&F permission is confirmed.
+  **Status:** Active caution.
 
 ## 5. Assets, URLs, And Deployment
 
@@ -303,27 +302,47 @@ as authoritative when they conflict with older notes.
   publisher uses that terminology.  
   **Status:** Final.
 
-- **Use GitHub Pages-compatible redirect stubs for old HTML URLs if needed.**  
+- **Use GitHub Pages-compatible redirect stubs for old HTML URLs.**
   **Stubs should include:** canonical link, meta refresh, `location.replace`,
   visible fallback link, and no full JSON-LD.  
-  **Status:** Strategy accepted; implementation unresolved.
+  **Current stop-gaps:** `public/writing.html` and
+  `public/writing/ReviewCosmicConnectionsV2.html`.
+  **Status:** Implemented/current.
 
 - **Do not replace old PDF URLs with HTML redirect pages.**  
   **Rationale:** PDF URLs should remain PDFs unless true HTTP redirects are
   available.  
+  **Current stop-gaps:** `public/writing/ReviewCosmicConnectionsV2.pdf` and
+  `public/itinerary.pdf`. The old Cosmic V2 PDF path may serve the current
+  Cosmic PDF as a compatibility alias.
   **Status:** Final.
 
 - **Cloudflare is not currently required.**  
   **May revisit for:** true 301 redirects, PDF headers, security headers, or
-  `www` -> apex redirect.  
+  redirect features beyond current GitHub Pages behaviour. Current `www`
+  behaviour redirects permanently to the apex domain.
   **Status:** Deferred option.
 
-- **Use GitHub Pages as the first deployment target.**  
-  **Current recorded method:** GitHub Actions builds the Astro site and publishes
-  `dist/`.  
-  **Still needed:** add/confirm the workflow file and custom domain/CNAME
-  handling.  
-  **Status:** Active deployment task.
+- **Use GitHub Pages as the deployment target for launch.**
+  **Current method:** GitHub Actions builds the Astro site and publishes a Pages
+  artifact from `origin/main`.
+  **Custom domain:** `public/CNAME` contains exactly `stevanveljkovic.com`.
+  **Current trigger:** manual `workflow_dispatch`. Build-on-push to `main`
+  should be enabled as the final Stage 3 subtask once the manual workflow is
+  judged stable.
+  **Status:** Implemented/current.
+
+- **Submit the sitemap index to Google Search Console.**
+  **URL:** `https://stevanveljkovic.com/sitemap-index.xml`, not
+  `sitemap-0.xml`.
+  **Status:** Final/current.
+
+- **Calibrate warnings proportionately.**
+  **Rule:** Treat rights-uncertain assets under `public/` as serious because
+  they deploy live; treat draft/source Markdown visibility in a public repo as a
+  minor caveat unless Stevan says otherwise. Do not repeatedly escalate
+  low-probability risks once an informed judgment has been made.
+  **Status:** Final working rule.
 
 ## 6. Design, Accessibility, And Content-Rendering Decisions
 
@@ -352,23 +371,16 @@ as authoritative when they conflict with older notes.
 
 ## 7. Active Decisions Still Needed
 
-- **Resolve `challenging-modernity` rights before launch.**
+- **Resolve `challenging-modernity` rights before making it live.**
 - **Verify `godless-crusade` AM wording, correction note, assets, and schema.**
 - **Resolve Hell metadata and asset questions.**
-- **Align canonical contact email.** Current mismatch: homepage hardcodes
-  `hello@stevanveljkovic.com`; recent decisions point toward
-  `contact@stevanveljkovic.com`; review intro uses `site.email`.
 - **Check OG/headshot image path.** Current selected public file is
   `/images/headshot-1200x630.JPG`; older notes expected `.png`.
 - **Clean questionable sort/date metadata.** Especially `godless-crusade`,
   `christian-right-europe`, and `challenging-modernity`.
 - **Fix schema/frontmatter mismatches where fields are meant to matter.**
   `dateLabel` vs older `issueDateLabel` needs care.
-- **Confirm deployment workflow and CNAME/domain handling.**
-- **Resolve legacy URL strategy.** Consider `/writing.html`,
-  `/writing/ReviewCosmicConnectionsV2.html`,
-  `/writing/ReviewCosmicConnectionsV2.pdf`, and `/itinerary.pdf`.
-- **Check `www.stevanveljkovic.com` canonical behavior.**
+- **Enable build-on-push to `main` as the final Stage 3 deployment subtask.**
 - **Resolve Safari homepage name visibility if still reproducible.**
 - **Confirm final homepage/site identity wording.** Current homepage code says
   `Theory and design, Oxford, England.`

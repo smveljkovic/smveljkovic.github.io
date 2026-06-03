@@ -53,15 +53,13 @@ Oxford, England.
 Homepage navigation labels and targets:
 
 ```text
-Contact  -> currently mailto:hello@stevanveljkovic.com
+Contact  -> mailto derived from site.email
 Résumé   -> /cv/
 Writing  -> /publications/
 Seminars -> https://seminars.stevanveljkovic.com/
 ```
 
-The Contact email is an active inconsistency: `site.email` is
-`contact@stevanveljkovic.com`, while the homepage hardcodes `hello@...`. Align
-before launch.
+Current canonical `site.email` is `stevan@stevanveljkovic.com`.
 
 Pronunciation link and display:
 
@@ -86,5 +84,5 @@ Accessibility constraints:
 Known Safari/homepage issue: if `h1.Name` is invisible because of black text on
 dark background, use a targeted color fix rather than a CSS rewrite.
 
-Avoid typography/layout rabbit holes before launch. The inherited
+Avoid typography/layout rabbit holes during post-launch hardening. The inherited
 margin-counter/year-marker layout may be revisited in Stage 4.

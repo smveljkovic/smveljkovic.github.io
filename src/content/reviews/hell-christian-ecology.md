@@ -95,14 +95,14 @@ publicationList:
   year: 2025
   sortDate: "2025-01-20"
   order: 10
-  pdfPath: "/publications/reviews/hell-christian-ecology/hell-christian-ecology.pdf"
+  pdfPath: "/publications/reviews/hell-christian-ecology/veljkovic-review-hell-christian-ecology.pdf"
 
 reviewDek:
   workTitle: "Hell: In Search of a Christian Ecology"
   creatorRole: "author"
   creatorName: "Tim Morton"
 
-pdf: "/publications/reviews/hell-christian-ecology/hell-christian-ecology.pdf"
+pdf: "/publications/reviews/hell-christian-ecology/veljkovic-review-hell-christian-ecology.pdf"
 
 image: "/images/publications/reviews/hell-christian-ecology/reviewed-work/cover.jpg"
 ---

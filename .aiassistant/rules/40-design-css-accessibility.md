@@ -86,3 +86,10 @@ dark background, use a targeted color fix rather than a CSS rewrite.
 
 Avoid typography/layout rabbit holes during post-launch hardening. The inherited
 margin-counter/year-marker layout may be revisited in Stage 4.
+
+## Note on text-block width
+
+- Preserve the site’s typographic discipline.
+  - Keep dense prose in a legible text block rather than stretching it across the viewport.
+  - Use approximately `62ch` for serif prose columns and `58ch` for sans-serif prose columns.
+  - The narrower sans-serif measure accounts for Case VAR’s larger apparent character width compared with FF Meta Serif.

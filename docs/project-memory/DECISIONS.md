@@ -11,21 +11,17 @@ as authoritative when they conflict with older notes.
   Markdown/MDX, clean URLs, build-time SEO/JSON-LD, and possible future islands.  
   **Status:** Final.
 
-- **Preserve the current visual identity during Stage 3.**  
-  **Rationale:** The site is a durable academic/research hub, not a generic
-  portfolio.  
-  **Implications:** Do not adopt a full theme or redesign before launch. Preserve
-  legacy classes unless a targeted fix is needed.  
-  **Status:** Final for Stage 3; broader layout work is deferred.
+- **Preserve core aspects of the current visual identity going into Stage 4.0.**  
+  **Rationale:** The site is a durable academic/research hub, not a generic portfolio.  
+  **Implications:** Keep work on full theme and redesign achievable and constrained. Preserve legacy classes unless a targeted fix is needed.  
+  **Status:** Current for Stage 4.0.
 
 - **Canonical production domain is `https://stevanveljkovic.com/`.**  
-  **Implications:** Astro `site`, canonical links, sitemap, and JSON-LD should use
-  the apex domain.  
+  **Implications:** Astro `site`, canonical links, sitemap, and JSON-LD should use the apex domain.  
   **Status:** Final.
 
 - **Use clean trailing-slash URLs.**  
-  **Examples:** `/publications/`, `/cv/`,
-  `/publications/reviews/cosmic-connections/`.  
+  **Examples:** `/publications/`, `/cv/`, `/publications/reviews/cosmic-connections/`.  
   **Status:** Final.
 
 - **Current observed static output has 7 pages.**  
@@ -39,21 +35,16 @@ as authoritative when they conflict with older notes.
   /publications/reviews/godless-crusade/
   /publications/reviews/hell-christian-ecology/
   ```
-  **Caution:** Draft state can change the generated route set; verify routes
-  and sitemap from the current build before launch.  
+  **Caution:** Draft state can change the generated route set; verify routes and sitemap from the current build before launch.  
   **Status:** Current, subject to rights gating.
 
-- **Stage 3.4-3.7 is a launch gate.**  
-  **Rule:** If a page is uncertain, draft/withhold it. If an enhancement is
-  optional, defer it. Checks that prevent rights, broken-link, sitemap, schema,
-  or deployment mistakes belong before launch.  
-  **Status:** Final for launch.
+- **Stage 3 is complete.**  
+  **Decision:** The launch / deployment-hardening phase is complete; current work moves into Stage 4.0 planning and foundation.  
+  **Status:** Current.
 
 - **Generate review pages from Markdown content collections.**  
-  **Decision:** Use `src/pages/publications/reviews/[slug]/index.astro` with
-  `src/content/reviews/*.md`.  
-  **Implications:** Adding a review should require Markdown plus public assets,
-  not a new `.astro` route.  
+  **Decision:** Use `src/pages/publications/reviews/[slug]/index.astro` with `src/content/reviews/*.md`.  
+  **Implications:** Adding a review should require Markdown plus public assets, not a new `.astro` route.  
   **Status:** Final architecture.
 
 - **Do not keep static per-review pages under `src/pages`.**  
@@ -61,8 +52,7 @@ as authoritative when they conflict with older notes.
   **Status:** Final.
 
 - **Use Astro 6 loader-style content collections.**  
-  **Decision:** Use `defineCollection`, `glob` from `astro/loaders`, and `z` from
-  `astro/zod`.  
+  **Decision:** Use `defineCollection`, `glob` from `astro/loaders`, and `z` from `astro/zod`.  
   **Status:** Final.
 
 ## 2. Content Collections And Publications Page
@@ -75,8 +65,8 @@ as authoritative when they conflict with older notes.
 
 - **Use `publicationItems` for list-only bibliography records.**  
   **Decision:** `/publications/` combines review records and list-only items.  
-  **Current detail:** Duplicate/list-only review records exist but are drafted
-  except the thesis item, to avoid duplicate publication-list/schema entries.  
+  **Current detail:** Duplicate / list-only review records exist but are drafted
+  except the thesis item, to avoid duplicate publication-list / schema entries.  
   **Status:** Implemented/current.
 
 - **Current review files are:**
@@ -129,12 +119,16 @@ as authoritative when they conflict with older notes.
   **Rejected:** `https://openalex.org/A5056034517`  
   **Status:** Final.
 
+- **Use the fresh and true OpenAlex profile as one canonical identity source.**
+  **Verified:** `https://openalex.org/authors/A5115945824`
+  **Status:** Current.
+
 - **Use DOI URLs as primary scholarly `@id`s where available.**  
   **Implications:** Publisher pages can be `url` or `sameAs`, but DOI URLs
-  identify DOI-bearing books/articles/reviews.  
+  identify DOI-bearing books / articles / reviews.  
   **Status:** Final.
 
-- **Keep local manuscripts/pages distinct from DOI-published articles.**  
+- **Keep local manuscripts / pages distinct from DOI-published articles.**  
   **Implications:** Do not use false `sameAs`; use `isBasedOn` and/or `citation`
   where appropriate.  
   **Status:** Final.
@@ -172,7 +166,7 @@ as authoritative when they conflict with older notes.
   ```
   **Status:** Current decision.
 
-- **LSE Review of Books uses a blog/post container model.**  
+- **LSE Review of Books uses a blog / post container model.**  
   **For `evolution-of-religions`:**
   ```text
   BlogPosting / Review
@@ -182,20 +176,15 @@ as authoritative when they conflict with older notes.
   **Do not invent:** journal, volume, issue, or fake issue images.  
   **Status:** Final for this review.
 
-- **Pagination belongs on the published article/review node.**  
+- **Pagination belongs on the published article / review node.**  
   **Fields:** `pagination`, `pageStart`, `pageEnd`.  
-  **Issue-level pagination:** only for whole-issue pagination and only if
-  verified.  
+  **Issue-level pagination:** only for whole-issue pagination and only if verified.
   **Status:** Final.
 
-- **Article/review date convention is decided.**  
-  **Rule:** `publishedReview.datePublished` means the publisher-recognised first
-  publication date, normally first online.  
-  **Internal helper:** `firstPublishedOnline` may be used internally and should
-  map to Schema.org `datePublished`; do not emit a non-standard
-  `firstPublishedOnline`.  
-  **Issue rule:** `PublicationIssue.datePublished` means issue date/month/year
-  where known.  
+- **Article / review date convention is decided.**  
+  **Rule:** `publishedReview.datePublished` means the publisher-recognised first publication date, normally first online.  
+  **Internal helper:** `firstPublishedOnline` may be used internally and should map to Schema.org `datePublished`; do not emit a non-standard `firstPublishedOnline`.  
+  **Issue rule:** `PublicationIssue.datePublished` means issue date / month / year where known.  
   **Status:** Final.
 
 - **Do not emit `PublicationIssue.name` merely as an issue number.**  
@@ -204,8 +193,7 @@ as authoritative when they conflict with older notes.
   **Status:** Final.
 
 - **Render JSON-LD with unescaped inline script HTML.**  
-  **Pattern:** `<script is:inline type="application/ld+json"
-  set:html={JSON.stringify(data, null, 2)}>`  
+  **Pattern:** `<script is:inline type="application/ld+json" set:html={JSON.stringify(data, null, 2)}>`  
   **Status:** Final.
 
 - **Validate rendered page-source JSON-LD, not TypeScript literals.**  
@@ -228,12 +216,11 @@ as authoritative when they conflict with older notes.
   `Article/Review`.  
   **Status:** Final for Stage 3.
 
-- **Hell: In Search of a Christian Ecology has unresolved launch checks.**  
+- **Hell: In Search of a Christian Ecology is complete for Stage 3.**  
   **Known:** DOI review `https://doi.org/10.1558/jsrnc.30282`; reviewed book DOI
   `https://doi.org/10.7312/mort21470`; license CC BY-NC-ND 4.0.  
-  **Still check:** version wording, first-published note, issue date
-  `2024-10-03`, referenced PDF path.  
-  **Status:** Active unresolved checks.
+  **Checked:** Wersion wording, first-published note, issue date `2024-10-03`, referenced PDF path.  
+  **Status:** Final for Stage 3.
 
 - **Godless Crusade should be an Accepted Manuscript locally.**  
   **Not:** Version of Record.  
@@ -241,12 +228,12 @@ as authoritative when they conflict with older notes.
   `https://doi.org/10.1080/09637494.2023.2260684`; reviewed book DOI
   `https://doi.org/10.1017/9781009262125`; journal volume 51, issue `4–5`;
   article/review pagination `491–492`, `491`, `492`.  
-  **Still check:** T&F AM wording, Goodhart correction note, version/text
+  **Still check:** T&F AM wording, Goodhart correction note, version / text
   accuracy, schema, sitemap, and absence of VoR PDF/text.  
   **Status:** Active unresolved checks.
 
 - **Challenging Modernity must be withheld unless rights are clarified.**  
-  **Known:** current code has it drafted/withheld; local version is a Taylor &
+  **Known:** current code has it drafted / withheld; local version is a Taylor &
   Francis Version-of-Record reproduction.  
   **Decision:** keep withheld unless CCC/T&F permission is confirmed.
   **Status:** Active caution.
@@ -270,7 +257,7 @@ as authoritative when they conflict with older notes.
   ```
   **Attachment rule:** reviewed-work image -> reviewed work; issue cover ->
   `PublicationIssue`; periodical images -> `Periodical`; article image ->
-  article/post/review only if rights are clear; page/social-card -> local page
+  article / post / review only if rights are clear; page / social-card -> local page
   or Open Graph.  
   **Status:** Final convention.
 
@@ -282,7 +269,7 @@ as authoritative when they conflict with older notes.
   tree.  
   **Status:** Current caution.
 
-- **Only actual/generated pages should appear in the sitemap.**  
+- **Only actual / generated pages should appear in the sitemap.**  
   **Caution:** A generated page still needs to be intended live; rights-blocked
   routes should be drafted or otherwise excluded.  
   **Status:** Final.
@@ -297,44 +284,48 @@ as authoritative when they conflict with older notes.
 - **Use canonical publication-version labels.**  
   **Labels:** Author's Original Manuscript (AOM), Accepted Manuscript (AM),
   Version of Record (VoR), and Published web article.  
-  **Implications:** Use `Published web article` for edited web-outlet/blog-series
-  cases such as `evolution-of-religions`; do not call these VoR unless the
+  **Implications:** Use `Published web article` for edited web-outlet / blog-series cases such as `evolution-of-religions`; do not call these VoR unless the
   publisher uses that terminology.  
   **Status:** Final.
 
-- **Use GitHub Pages-compatible redirect stubs for old HTML URLs.**
-  **Stubs should include:** canonical link, meta refresh, `location.replace`,
-  visible fallback link, and no full JSON-LD.  
-  **Current stop-gaps:** `public/writing.html` and
-  `public/writing/ReviewCosmicConnectionsV2.html`.
-  **Status:** Implemented/current.
+- **Use Netlify as the production deployment host.**  
+  **Rationale:** Frictionless deploy workflow, real redirects, private-repo-capable deployment, and lower conceptual overhead than Cloudflare.  
+  **Implications:** Netlify builds from `main` with `npm run build` and publishes `dist`. GitHub Pages deployment for the Astro site is retired.  
+  **Status:** Final/current.
 
-- **Do not replace old PDF URLs with HTML redirect pages.**  
-  **Rationale:** PDF URLs should remain PDFs unless true HTTP redirects are
-  available.  
-  **Current stop-gaps:** `public/writing/ReviewCosmicConnectionsV2.pdf` and
-  `public/itinerary.pdf`. The old Cosmic V2 PDF path may serve the current
-  Cosmic PDF as a compatibility alias.
-  **Status:** Final.
+- **Keep the apex domain canonical.**  
+  **Decision:** Use `https://stevanveljkovic.com/` as canonical despite Netlify’s recommendation to prefer `www` for optimal CDN behaviour.  
+  **Status:** Final/current.
 
-- **Cloudflare is not currently required.**  
-  **May revisit for:** true 301 redirects, PDF headers, security headers, or
-  redirect features beyond current GitHub Pages behaviour. Current `www`
-  behaviour redirects permanently to the apex domain.
-  **Status:** Deferred option.
+- **Keep DNS hosted at Hover for now.**  
+  **Decision:** Do not move DNS to Netlify for the foreseeable future. Accept Netlify’s Hover fallback A-record setup for now.  
+  **Current apex A record:** `75.2.60.5`  
+  **Revisit if:** Evidence of performance problems emerges. One possible future route is Cloudflare DNS while continuing to host on Netlify.  
+  **Status:** Final/current.
 
-- **Use GitHub Pages as the deployment target for launch.**
-  **Current method:** GitHub Actions builds the Astro site and publishes a Pages
-  artifact from `origin/main`.
-  **Custom domain:** `public/CNAME` contains exactly `stevanveljkovic.com`.
-  **Current trigger:** manual `workflow_dispatch`. Build-on-push to `main`
-  should be enabled as the final Stage 3 subtask once the manual workflow is
-  judged stable.
-  **Status:** Implemented/current.
+- **Keep the seminars subdomain separate and untouched.**  
+  **Current DNS:** `CNAME seminars smveljkovic.github.io`  
+  **Status:** Final/current.
+
+- **Use forced Netlify redirects for legacy URLs.**  
+  **Decision:** Use `301!` rules in `public/_redirects` while old compatibility files still exist.  
+  **Rationale:** Without forced redirects, Netlify may serve an existing physical legacy file with `200`.  
+  **Current rules:**
+  ```text
+  /writing.html /publications/ 301!
+  /writing/ReviewCosmicConnectionsV2.html /publications/reviews/cosmic-connections/ 301!
+  /writing/ReviewCosmicConnectionsV2.pdf /publications/reviews/cosmic-connections/veljkovic-review-cosmic-connections.pdf 301!
+  /itinerary.pdf /cv/veljkovic-cv.pdf 301!
+  ```
+  **Status:** Final/current.
+
+- **Cloudflare is not needed now.**  
+  **Decision:** Netlify was chosen over Cloudflare Pages after testing. Cloudflare remains a possible future option, especially for DNS/performance routing, but should not be introduced now.  
+  **Do not add:** `@astrojs/cloudflare`, `wrangler.toml`, Workers, KV, D1, R2, or Cloudflare adapter config.  
+  **Status:** Deferred option only.
 
 - **Submit the sitemap index to Google Search Console.**
-  **URL:** `https://stevanveljkovic.com/sitemap-index.xml`, not
-  `sitemap-0.xml`.
+  **URL:** `https://stevanveljkovic.com/sitemap-index.xml`, not `sitemap-0.xml`.
   **Status:** Final/current.
 
 - **Calibrate warnings proportionately.**
@@ -352,67 +343,72 @@ as authoritative when they conflict with older notes.
   `https://seminars.stevanveljkovic.com/`.  
   **Status:** Final for Stage 3.
 
+- **Homepage navigation labels are to be revisited in Stage 4.0 (targets are set apart from Seminars)**  
+  **Labels:** Contact, Résumé, Writing, Seminars.  
+  **Targets:** `/cv/`, `/publications/`, `https://seminars.stevanveljkovic.com/`.  
+  **Status:** Current in Stage 4.0.
+
 - **Accessibility fixes should be preserved.**  
   **Rules:** Internal CV link should not use `_blank`; decorative icons should
   have `alt="" aria-hidden="true"`; `_blank` links need `rel`; homepage nav list
   should remain valid list markup.  
   **Status:** Final.
 
-- **Use JavaScript/animation sparingly.**  
+- **Use JavaScript / animation sparingly.**  
   **Rationale:** Core content should remain static, durable, and accessible.  
   **Status:** Final.
 
 - **Trusted HTML bridge fields are acceptable for migration.**  
   **Fields:** `citationHtml`, `bylineHtml`, `reuseNoteHtml`,
   `modificationNote`, `publicationList.noteHtml`.  
-  **Rationale:** Preserve legacy citation formatting while semantic modelling
-  improves.  
+  **Rationale:** Preserve legacy citation formatting while semantic modelling improves.  
   **Status:** Final for Stage 3; long-term refactor deferred.
 
+- **Stage 4.0 is a constrained core architecture / design foundation phase.**  
+  **In scope:** thesis page; expanded / web-native CV page; header / navigation/footer; first-pass design foundation; constrained light / dark mode; one review-page reading aid; seminars bridge.  
+  **Deferred:** full thesis HTML edition; full seminars reconstruction; blog launch; broad React / Vue experimentation; full redesign; complete CSS refactor; multiple experimental UI features.  
+  **Principle:** Touch the broader vision, but do not try to realise all of it.  
+  **Status:** Final / urrent for Stage 4.0 planning.
+  - 
 ## 7. Active Decisions Still Needed
 
 - **Resolve `challenging-modernity` rights before making it live.**
 - **Verify `godless-crusade` AM wording, correction note, assets, and schema.**
 - **Resolve Hell metadata and asset questions.**
-- **Check OG/headshot image path.** Current selected public file is
-  `/images/headshot-1200x630.JPG`; older notes expected `.png`.
-- **Clean questionable sort/date metadata.** Especially `godless-crusade`,
-  `christian-right-europe`, and `challenging-modernity`.
-- **Fix schema/frontmatter mismatches where fields are meant to matter.**
-  `dateLabel` vs older `issueDateLabel` needs care.
-- **Enable build-on-push to `main` as the final Stage 3 deployment subtask.**
+- **Check OG / headshot image path.** Current selected public file is `/images/headshot-1200x630.JPG`; older notes expected `.png`.
+- **Clean questionable sort / date metadata.** Especially `godless-crusade`, `christian-right-europe`, and `challenging-modernity`.
+- **Fix schema/frontmatter mismatches where fields are meant to matter.** `dateLabel` vs older `issueDateLabel` needs care.
+- **Decide Stage 4.0 approximate time budget.** Proposed target: 35–45 hours; review scope at 25 hours; re-scope if exceeding 50 hours.
+- **Decide thesis route.** Current preferred candidates are `/research/doctoral-thesis/<slug>` if a `/research/` landing/bridge page is created, otherwise `/doctoral-thesis/<slug>`.
+- **Decide Stage 4.1 navigation labels.**
+- **Confirm no accidental Cloudflare Workers configuration entered `main`.**
 - **Resolve Safari homepage name visibility if still reproducible.**
-- **Confirm final homepage/site identity wording.** Current homepage code says
-  `Theory and design, Oxford, England.`
-- **Decide long-term seminars architecture.** Keep separate unless there is a
-  deliberate consolidation plan.
+- **Confirm final homepage / site identity wording.** Current homepage code says `Theory and design, Oxford, England.`
+- **Decide long-term seminars architecture.** Keep separate unless there is a deliberate consolidation plan.
 
 ## 8. Deferred Decisions
 
-- **Thesis page is deferred until Stage 4.**  
-  **Slug remains:** `/thesis/religious-atavism-climate-crisis/`.  
-  **Rule:** Thesis remains bibliography-only until an actual page is
-  implemented. Do not link or advertise a non-existent local route.  
+- **Thesis page is in Stage 4.0 scope, but route is not yet settled.**  
+  **Preferred candidates:** `/research/doctoral-thesis/<slug>` if a `/research/` landing/bridge page is created; otherwise `/doctoral-thesis/<slug>`.  
+  **Less-preferred candidates:** `/thesis/<slug>`, `/phd-thesis/<slug>`, `/research-projects/thesis/<slug>`.  
+  **Rule:** Do not link or advertise a non-existent local route until actually implemented.  
   **Primary ID:** `https://doi.org/10.5287/ora-4rjoobkvk`.
 
 - **Large CSS/layout rewrite is deferred.**  
   **Current approach:** targeted fixes only.  
-  **Deferred:** rethinking or discarding the inherited margin-counter/year-marker
-  layout.
+  **Deferred:** rethinking or discarding the inherited margin-counter / year-marker layout.
 
-- **Publication/review component extraction is deferred.**  
-  **Possible future components:** `ReviewListItem.astro`,
-  `PublicationCitation.astro`, byline components.  
+- **Publication / review component extraction is deferred.**  
+  **Possible future components:** `ReviewListItem.astro`, `PublicationCitation.astro`, byline components.  
   **Rule:** avoid premature refactor before launch.
 
 - **Trusted HTML migration is deferred.**  
-  **Future question:** whether review bodies remain Markdown with raw HTML, move
-  to MDX, or become more semantic Markdown.
+  **Future question:** whether review bodies remain Markdown with raw HTML, move to MDX, or become more semantic Markdown.
 
 ## 9. Superseded Or Updated Decisions
 
 - **Only Cosmic Connections and Christian Right are live review pages.**  
-  **Superseded by:** six review routes currently build.
+  **Superseded by:** six review routes exist; four review routes currently build; two are excluded pending rights clarity.
 
 - **`publicationItems` still needs to be created.**  
   **Superseded by:** implemented `publicationItems` collection and current files.
@@ -420,19 +416,14 @@ as authoritative when they conflict with older notes.
 - **`createPublicationsSchema.ts` still needs to be created.**  
   **Superseded by:** current publications schema implementation.
 
-- **Hell, Challenging Modernity, Evolution of Religions, and Godless Crusade are
-  future review pages.**  
-  **Superseded by:** current review Markdown files and generated routes, subject
-  to rights/asset validation.
+- **Hell, Challenging Modernity, Evolution of Religions, and Godless Crusade are future review pages.**  
+  **Superseded by:** current review Markdown files and generated routes, subject to rights / asset validation.
 
-- **Review graph split, periodical chain, date rule, and pagination rule are
-  tentative.**  
-  **Superseded by:** current decided review graph and conventions in
-  `current.md`.
+- **Review graph split, periodical chain, date rule, and pagination rule are tentative.**  
+  **Superseded by:** current decided review graph and conventions in `current.md`.
 
 - **Local review `datePublished` meaning is open.**  
-  **Superseded by:** current convention for article/review first publication
-  dates and issue dates.
+  **Superseded by:** current convention for article/review first publication dates and issue dates.
 
 - **Thesis page should be implemented now or CV schema adjusted immediately.**  
   **Superseded by:** thesis remains bibliography-only until Stage 4.
@@ -441,23 +432,19 @@ as authoritative when they conflict with older notes.
   **Superseded by:** `/publications/reviews/<slug>/`.
 
 - **Earlier thesis slug `/thesis/atavism-climate-crisis/`.**  
-  **Superseded by:** `/thesis/religious-atavism-climate-crisis/`.
+  **Decision now pending with several options, with following leading candidate:** `/research/doctoral-thesis/<slug>`.
 
 - **Per-review static Astro pages and per-review schema files.**  
-  **Superseded by:** dynamic review route, Markdown content, and
-  `createReviewSchema(review)`.
+  **Superseded by:** dynamic review route, Markdown content, and `createReviewSchema(review)`.
 
 - **`buildReviewSchema()` active usage.**  
-  **Superseded by:** `createReviewSchema(review)`. Old schema files may remain
-  reference material only.
+  **Superseded by:** `createReviewSchema(review)`. Old schema files may remain reference material only.
 
 - **Old Astro content imports and `z.string().url()` style.**  
-  **Superseded by:** Astro 6 loader-style imports and `z.url()` where URL
-  validation is needed.
+  **Superseded by:** Astro 6 loader-style imports and `z.url()` where URL validation is needed.
 
-- **Optional/required `openingVersionNote` assumptions from older notes.**  
-  **Updated by:** actual `src/content.config.ts`; verify schema before relying on
-  old memory.
+- **Optional / required `openingVersionNote` assumptions from older notes.**  
+  **Updated by:** actual `src/content.config.ts`; verify schema before relying on old memory.
 
 - **Publisher landing page as reviewed-work `@id` when DOI exists.**  
   **Superseded by:** DOI URL as the stronger `@id`.
@@ -472,5 +459,13 @@ as authoritative when they conflict with older notes.
   **Superseded by:** root-relative URLs.
 
 - **Older expected headshot path `/images/headshot-1200x630.png`.**  
-  **Updated by:** current selected public tree showing
-  `/images/headshot-1200x630.JPG`; verify code/generated output.
+  **Updated by:** current selected public tree showing `/images/headshot-1200x630.JPG`; verify code/generated output.
+
+- **Use GitHub Pages as the deployment target for launch.**  
+  **Superseded by:** Netlify production hosting.
+
+- **Enable GitHub Actions build-on-push as final Stage 3 subtask.**  
+  **Superseded by:** Netlify build-on-push from `main`.
+
+- **GitHub Pages-compatible redirect stubs/PDF compatibility as long-term deployment workaround.**  
+  **Superseded by:** Netlify forced `301!` redirects.

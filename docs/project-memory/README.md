@@ -37,8 +37,7 @@ active unresolved decisions, deferred decisions, and superseded decisions.
 
 ### `NEXT-STEPS.md`
 
-The active operational checklist. It should contain current work only, not old
-migration plans or completed tasks.
+The active operational checklist. Its main purpose is to contain current work. It may also include active checks, preservation rules, deferred work, and a short superseded-assumption audit.
 
 ### `deltas/`
 
@@ -126,9 +125,15 @@ current code, `current.md`, `DECISIONS.md`, and `NEXT-STEPS.md`.
 - Keep `current.md` compact and operational.
 - Keep `DECISIONS.md` categorized and explicit about final, active, deferred, and
   superseded decisions.
-- Keep `NEXT-STEPS.md` limited to current tasks.
+- Keep NEXT-STEPS.md primarily focused on current tasks.
+  - It may also include active checks, preservation rules, deferred work, and a short superseded-assumption audit
 - Keep `.aiassistant/rules/` concise and actionable.
 - Keep `master-values.md` current for metadata and retain contradictions in its
   staging/audit sections.
 - Move stale generated summaries and large historical files into `archive/`
   rather than letting them compete with current memory.
+
+## Operational control
+
+- TODO items and project structure are managed in org-mode sub-trees as part of a GTD organisation system
+- `~/org/smvsite.org`

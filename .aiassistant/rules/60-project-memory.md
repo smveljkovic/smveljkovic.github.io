@@ -27,13 +27,15 @@ for audit but are not automatically authoritative.
 
 Priority when sources conflict:
 
-1. Current source code / rendered build
-2. `docs/project-memory/current.md`
-3. `docs/project-memory/NEXT-STEPS.md`
-4. `docs/project-memory/DECISIONS.md`
-5. Newest relevant delta
-7. Older carryovers and generated summaries
-8. Raw logs
+1. Current source code and rendered build output.
+2. `docs/project-memory/current.md`.
+3. `docs/project-memory/NEXT-STEPS.md`.
+4. `docs/project-memory/DECISIONS.md`.
+5. Newest relevant file in `docs/project-memory/deltas/`.
+6. `.aiassistant/rules/*.md`.
+7. `docs/metadata/master-values.md` for metadata registry values.
+8. `docs/project-memory/archive/`.
+9. Older generated summaries, raw logs, and chat-derived material.
 
 If `.aiassistant/rules/*.md` conflicts with the sources above, update the rule
 rather than preserving stale operational guidance.

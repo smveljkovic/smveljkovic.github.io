@@ -1,47 +1,53 @@
 # Next Steps
 
 This file is an active checklist derived from `docs/project-memory/current.md`.
-Treat `current.md` and the actual code/build output as authoritative. Older
-migration-era assumptions, especially notes that only Cosmic Connections and
-Christian Right exist as review pages, are superseded.
+Treat `current.md` and the actual code/build output as authoritative. Stage 3 is complete; production hosting is now Netlify, not GitHub Pages.
 
-## 1. Post-Launch Follow-Up
+## 1. Stage 4.0 Planning
 
-1. **Fix or deliberately resolve the OG/headshot image mismatch**
-   - Current code/build output references:
+1. **Decide Stage 4.0 approximate time budget**
+   - Proposed:
      ```text
-     /images/headshot-1200x630.png
-     ```
-   - Current public file is:
-     ```text
-     /images/headshot-1200x630.JPG
+     Target: 35–45 hours
+     Review scope at: 25 hours
+     Re-scope if exceeding: 50 hours
      ```
 
-2. **Repeat PageSpeed checks and record metrics**
-   - Check the homepage and at least one representative review page.
-   - Record the metrics in project memory or a validation note.
-
-3. **Recheck legacy URL behaviour after deployment**
-   - HTML stubs should forward correctly and stay out of the sitemap.
-   - PDF compatibility URLs should load PDFs.
-   - Check:
+2. **Decide thesis route**
+   - Preferred candidates:
      ```text
-     /writing.html
-     /writing/ReviewCosmicConnectionsV2.html
-     /writing/ReviewCosmicConnectionsV2.pdf
-     /itinerary.pdf
+     /research/doctoral-thesis/<slug>
+     /doctoral-thesis/<slug>
+     ```
+   - Use `/research/doctoral-thesis/<slug>` only if creating a `/research/` landing/bridge page.
+   - Less-preferred candidates:
+     ```text
+     /thesis/
+     /phd-thesis/
+     /research-projects/thesis/
      ```
 
-4. **Keep withheld reviews withheld unless decisions change**
-   - `challenging-modernity` and `christian-right-europe` are drafted/withheld.
-   - Their temporarily removed review materials are stored at:
-     ```text
-     ~/Projects/website-admin/withheld-images-folders/
-     ```
+3. **Begin Stage 4.1 with information architecture / site shell**
+   - Work on header / navigation / footer before thesis / CV content implementation.
+   - Decide Stage 4.1 navigation labels in the next session or two.
 
-5. **Enable automatic deployment on push to `main`**
-   - Current workflow is manual-only with `workflow_dispatch`.
-   - Updating it to build on push is intended as the final Stage 3 subtask.
+4. **Keep Stage 4.0 constrained**
+   - In scope:
+     - thesis page;
+     - expanded / web-native CV page;
+     - header / navigation/footer;
+     - first-pass design foundation;
+     - constrained light / dark mode;
+     - one review-page reading aid;
+     - bridge to seminars project.
+   - Deferred:
+     - full thesis HTML edition;
+     - full seminars reconstruction;
+     - blog launch;
+     - broad React / Vue experimentation;
+     - full redesign;
+     - complete CSS refactor;
+     - multiple experimental UI features.
 
 ## 2. Continuing Verification Pass
 
@@ -52,7 +58,7 @@ Christian Right exist as review pages, are superseded.
    npm run build
    ```
 
-   Rerun after any content/schema changes.
+   Rerun after any content / schema changes.
 
 2. **Confirm generated route set**
    - Current observed `dist/` snapshot contains 7 pages:
@@ -65,8 +71,7 @@ Christian Right exist as review pages, are superseded.
      /publications/reviews/godless-crusade/
      /publications/reviews/hell-christian-ecology/
      ```
-   - If any drafted review is intentionally made live, update the expected
-     generated route set and sitemap accordingly.
+   - If any drafted review is intentionally made live, update the expected generated route set and sitemap accordingly.
 
 3. **Inspect generated sitemap**
    ```bash
@@ -79,17 +84,17 @@ Christian Right exist as review pages, are superseded.
 4. **Verify generated-page asset references**
    - PDFs.
    - Reviewed-work cover images.
-   - Issue/periodical images.
+   - Issue / periodical images.
    - Favicon files.
-   - Open Graph/social image.
+   - Open Graph / social image.
    - Current selected public tree confirms only these review PDFs:
      ```text
      public/publications/reviews/cosmic-connections/veljkovic-review-cosmic-connections.pdf
      public/publications/reviews/hell-christian-ecology/veljkovic-review-hell-christian-ecology.pdf
      ```
-   - Keep references for drafted/withheld `christian-right-europe` and
+   - Keep references for drafted  /withheld `christian-right-europe` and
      `challenging-modernity` from becoming public routes or public assets unless
-     rights/publication decisions change.
+     rights / publication decisions change.
 
 5. **Validate rendered JSON-LD**
    - Inspect built page source, not TypeScript literals.
@@ -110,7 +115,7 @@ Christian Right exist as review pages, are superseded.
      https://search.google.com/test/rich-results
      ```
 
-6. **Validate HTML/accessibility basics**
+6. **Validate HTML / accessibility basics**
    - Use:
      ```text
      https://validator.w3.org/
@@ -124,14 +129,14 @@ Christian Right exist as review pages, are superseded.
 
 ## 3. Content And Metadata Cleanup
 
-1. **Fix schema/frontmatter mismatches where fields are meant to matter**
+1. **Fix schema / frontmatter mismatches where fields are meant to matter**
    - Check any frontmatter keys not declared in `src/content.config.ts`.
    - Pay attention to display-only date labels:
      - `publicationIssueSchema` currently has `dateLabel`;
      - older notes mention `issueDateLabel`;
      - keep display-only labels out of Schema.org unless mapped intentionally.
 
-2. **Clean placeholder-like sorting/date metadata**
+2. **Clean placeholder-like sorting / date metadata**
    - `godless-crusade` has `publicationList.sortDate: "2023-01-01"`, which may
      be placeholder-like.
    - `christian-right-europe` issue date is month precision, but sort date may
@@ -139,7 +144,7 @@ Christian Right exist as review pages, are superseded.
    - `challenging-modernity` citation issue-year is 2025, but list year/sort
      date may follow first-online publication in 2024.
 
-3. **Check headshot/OG image path**
+3. **Check headshot / OG image path**
    - Current selected public tree has:
      ```text
      /images/headshot-1200x630.JPG
@@ -190,10 +195,8 @@ Christian Right exist as review pages, are superseded.
    - `csaf039` is an article ID, not pagination.
 
 3. **Dates**
-   - `publishedReview.datePublished` means publisher-recognised first
-     publication date, usually first online.
-   - `publishedReview.firstPublishedOnline` may be used internally, but should
-     map to Schema.org `datePublished`.
+   - `publishedReview.datePublished` means publisher-recognised first publication date, usually first online.
+   - `publishedReview.firstPublishedOnline` may be used internally, but should map to Schema.org `datePublished`.
    - Do not emit a non-standard Schema.org `firstPublishedOnline`.
    - `PublicationIssue.datePublished` means issue date/month/year where known.
    - Do not put article first-online dates on issue nodes.
@@ -226,58 +229,65 @@ Christian Right exist as review pages, are superseded.
      - `article/image.jpg` -> article/post/review only if rights are clear;
      - `page/social-card.jpg` -> local page/Open Graph image.
 
-## 5. Deployment And Legacy URLs
+## 5. Deployment, DNS, And Legacy URLs
 
-1. **Recheck deployment/DNS behaviour periodically during post-launch hardening**
+1. **Recheck Netlify/DNS behaviour periodically**
    ```bash
    curl -I https://stevanveljkovic.com/
    curl -I https://www.stevanveljkovic.com/
    curl -I https://seminars.stevanveljkovic.com/
-   curl -I https://stevanveljkovic.com/seminars/
-   curl -I -L https://stevanveljkovic.com/seminars/
+   curl -I https://stevanveljkovic.com/sitemap-index.xml
    ```
 
-2. **Enable build-on-push to `main` as the final Stage 3 subtask**
-   - Current workflow is manual-only with `workflow_dispatch`.
-   - Preserve the manual trigger if useful.
+   Check:
+   - apex works;
+   - `www` redirects to apex;
+   - sitemap works;
+   - seminars subdomain still works.
 
-3. **Keep legacy stop-gaps working**
-   - HTML stubs currently cover:
+2. **Keep Netlify forced redirects working**
+   - Current rules:
      ```text
-     /writing.html
-     /writing/ReviewCosmicConnectionsV2.html
+     /writing.html /publications/ 301!
+     /writing/ReviewCosmicConnectionsV2.html /publications/reviews/cosmic-connections/ 301!
+     /writing/ReviewCosmicConnectionsV2.pdf /publications/reviews/cosmic-connections/veljkovic-review-cosmic-connections.pdf 301!
+     /itinerary.pdf /cv/veljkovic-cv.pdf 301!
      ```
-   - PDF compatibility files currently cover:
-     ```text
-     /writing/ReviewCosmicConnectionsV2.pdf
-     /itinerary.pdf
-     ```
-   - A later Netlify/Cloudflare move can replace these with true redirects if
-     desired.
+   - Keep `301!` while physical legacy files remain.
 
-## 6. Deferred Until Stage 4
+3. **Optional Netlify/post-migration cleanup**
+   - Make repo private if desired.
+   - Remove old compatibility files once confident redirects suffice.
+   - Remove harmless old GitHub Pages TXT verification record.
+   - Learn/evaluate Netlify `_headers`.
+
+4. **Cloudflare cleanup / guardrail**
+   - Confirm no accidental Cloudflare Workers configuration entered `main`.
+   - Do not merge the accidental Cloudflare Workers PR.
+   - Do not add `@astrojs/cloudflare`, `wrangler.toml`, Workers, KV, D1, R2, or Cloudflare adapter config.
+
+## 6. Stage 4.0 Scope And Deferred Work
 
 1. **Thesis page**
-   - Thesis remains bibliography-only until Stage 4.
-   - Do not create or link:
+   - Thesis page is in Stage 4.0 scope.
+   - Do not create or link a thesis route until the route decision is made and the page is actually implemented.
+   - Current route candidates:
      ```text
-     /thesis/religious-atavism-climate-crisis/
+     /research/doctoral-thesis/<slug>
+     /doctoral-thesis/<slug>
      ```
-     unless actually implemented.
    - Primary thesis ID:
      ```text
      https://doi.org/10.5287/ora-4rjoobkvk
-     ```
+      ```
 
 2. **Larger CSS/layout rewrite**
-   - Preserve migrated visual identity for Stage 3.
-   - Do not rename or aggressively refactor legacy classes before launch.
-   - The inherited margin-counter/year-marker layout may be rethought or
-     discarded in Stage 4.
+   - Preserve migrated visual identity going into Stage 4.0.
+   - Do not rename or aggressively refactor legacy classes before doing more foundational work.
+   - The inherited margin-counter / year-marker layout may be re-thought or discarded in Stage 4.
 
 3. **Richer `/publications/` JSON-LD**
-   - Richer reviewed-book nodes, license/copyright-holder modelling, and
-     external WebPage nodes are deferred.
+   - Richer reviewed-book nodes, license / copyright-holder modelling, and external WebPage nodes should be completed during Stage 4.0.
    - Keep current `/publications/` model:
      ```text
      CollectionPage
@@ -294,8 +304,7 @@ Christian Right exist as review pages, are superseded.
      modificationNote
      publicationList.noteHtml
      ```
-   - Decide later whether to replace them with a more semantic citation/content
-     model.
+   - Replace them later with a more semantic citation/content model.
 
 5. **Seminars site consolidation**
    - Current seminars URL:
@@ -303,16 +312,19 @@ Christian Right exist as review pages, are superseded.
      https://seminars.stevanveljkovic.com/
      ```
    - Leave separate for now unless a deliberate consolidation plan is made.
+   - A conceptual / visual bridge to the seminars project is in Stage 4.0 scope.
+   - Full seminars reconstruction or consolidation remains deferred.
 
-## 7. Superseded Assumptions Removed
+## 7. Superseded Assumptions
 
 - Only Cosmic Connections and Christian Right are live review pages.
 - `publicationItems` still needs to be created.
-- `/publications/index.astro` still needs to be migrated to combine reviews and
-  list-only publication items.
+- `/publications/index.astro` still needs to be migrated to combine reviews and list-only publication items.
 - `createPublicationsSchema.ts` still needs to be created.
-- Hell, Challenging Modernity, Evolution of Religions, and Godless Crusade are
-  merely future review files.
+- Hell, Challenging Modernity, Evolution of Religions, and Godless Crusade are merely future review files.
 - The thesis page should be implemented immediately.
-- Review JSON-LD still needs its basic `WebPage` / local `#review` / DOI review
-  split, periodical chain, pagination rule, and first-online date rule decided.
+- Review JSON-LD still needs its basic `WebPage` / local `#review` / DOI review  split, periodical chain, pagination rule, and first-online date rule decided.
+- GitHub Pages is the active production deployment target.
+- GitHub Actions deployment automation was superseded by ‘Netlify builds from main.’
+- Legacy PDF URLs must remain compatibility files because true redirects are unavailable.
+- A Netlify / Cloudflare move is only a future possibility for true redirects.

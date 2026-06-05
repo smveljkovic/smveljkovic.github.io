@@ -11,8 +11,9 @@ academic/professional website:
 https://stevanveljkovic.com/
 ```
 
-The site is a durable academic/research hub, not a generic portfolio or theme.
-Preserve its distinctive scholarly presentation during Stage 3.
+The site is a durable academic / research hub, not a generic portfolio or theme.
+- Preserve migrated / custom identity;
+- Stage 4.0 changes should be constrained, not a full redesign.
 
 Current homepage identity in code:
 
@@ -54,7 +55,9 @@ Canonical contact email in current code:
 stevan@stevanveljkovic.com
 ```
 
-Homepage and review intro should use `site.email`. Individual review
-`bylineHtml` may still contain manuscript-specific byline addresses.
+Homepage and review intro should use `site.email`.
+- Individual review `bylineHtml` once contained manuscript-specific byline addresses;
+  - This is now deprecated.
 
-Do not include the rejected/conflated OpenAlex profile in `sameAs`.
+Do not include the rejected / conflated OpenAlex profile in `sameAs`.
+- There is true OpenAlex profile: https://openalex.org/authors/A5115945824

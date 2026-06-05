@@ -4,8 +4,8 @@ apply: always
 
 # Design, CSS, And Accessibility
 
-Preserve the custom visual identity. Do not replace the site with generic
-academic-theme styling during Stage 3.
+Preserve the custom visual identity. Do not replace the site with generic academic-theme styling.
+- Preserve migrated / custom identity; Stage 4.0 changes should be constrained, not a full redesign.
 
 Global CSS is preserved in:
 
@@ -81,11 +81,11 @@ Accessibility constraints:
 - Decorative nav icons should use `alt="" aria-hidden="true"`.
 - Homepage nav `<ul>` must contain `<li>` children.
 
-Known Safari/homepage issue: if `h1.Name` is invisible because of black text on
+Known Safari / homepage issue: if `h1.Name` is invisible because of black text on
 dark background, use a targeted color fix rather than a CSS rewrite.
 
-Avoid typography/layout rabbit holes during post-launch hardening. The inherited
-margin-counter/year-marker layout may be revisited in Stage 4.
+Avoid typography / layout rabbit holes during post-launch hardening. The inherited
+margin-counter / year-marker layout may be revisited in Stage 4.0.
 
 ## Note on text-block width
 

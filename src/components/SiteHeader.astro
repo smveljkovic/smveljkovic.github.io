@@ -1,0 +1,42 @@
+---
+import {primaryNav, type NavItem} from "../data/navigation";
+
+const pathname = Astro.url.pathname;
+
+function isCurrent(item: NavItem) {
+    const matches = item.match ?? [item.href];
+    return matches.some((prefix) => pathname === prefix ||
+        pathname.startsWith(prefix));
+}
+---
+
+<header class="site-header">
+    <div class="site-header__inner">
+        <a class="site-header__brand" href="/" aria-label="Stevan Veljkovic home">
+            Stevan Veljkovic
+        </a>
+
+        <nav class="site-header__nav" aria-label="Primary">
+            <ul class="site-header__nav-list">
+                {primaryNav.map((item) => {
+                    const current = isCurrent(item);
+
+                    return (
+                            <li>
+                                <a
+                                        href={item.href}
+                                        class:list={[
+                                            "site-header__nav-link",
+                                            current && "is-current",
+                                        ]}
+                                        aria-current={current ? "page" : undefined}
+                                >
+                                    {item.label}
+                                </a>
+                            </li>
+                    );
+                })}
+            </ul>
+        </nav>
+    </div>
+</header>

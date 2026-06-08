@@ -222,6 +222,7 @@ body.text-page .site-main {
 .site-footer__link {
     color: inherit;
     font-weight: 600;
+    text-decoration: none;
     text-decoration-thickness: 7%;
     text-underline-offset: 0.16em;
 }

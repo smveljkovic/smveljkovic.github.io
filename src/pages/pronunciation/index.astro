@@ -1,0 +1,58 @@
+---
+import TextPageLayout from "../../layouts/TextPageLayout.astro";
+import {pageMeta} from "../../data/pageMeta";
+
+const meta = pageMeta.pronunciation;
+---
+
+<TextPageLayout
+        title={meta.title}
+        description={meta.description}
+        canonicalPath={meta.path}
+        ogType={meta.ogType}
+>
+    <article class="test pronunciation-page">
+        <h1>Pronunciation</h1>
+
+        <p class="pronunciation-page__name">Stevan Veljkovic</p>
+
+        <p class="pronunciation pronunciation-page__transcription">
+                <span
+                        class="pronunciation__ipa"
+                        lang="und-fonipa"
+                        aria-label="Stevan Veljkovic pronunciation"
+                >/ˈstɛv(ə)n ˈvɛl.kə.vɪk/</span>
+        </p>
+
+        <p>
+            This is the pronunciation of my name in English. The transcription
+            is <a
+                href="https://en.wikipedia.org/wiki/Phonetic_transcription#Narrow_versus_broad;_phonemic_versus_phonetic">broad</a>
+            rather than narrowly phonetic.
+        </p>
+
+        <p>
+            My first name is stressed on the first syllable: <span class="pronunciation__ipa" lang="und-fonipa">/ˈstɛv(ə)n/</span>.
+            The first vowel is <span class="pronunciation__ipa" lang="und-fonipa">/ɛ/</span>, the DRESS vowel of
+            English, as in <em>bed</em> in many accents. The middle vowel may be reduced.
+        </p>
+
+        <p>
+            The first syllable is therefore STEV, not STEEV; it is not pronounced like the names Steven and
+            Steve.
+        </p>
+
+        <p>
+            My surname is also stressed on the first syllable: <span class="pronunciation__ipa" lang="und-fonipa">/ˈvɛl.kə.vɪk/</span>.
+            In my pronunciation, the middle vowel is reduced.
+        </p>
+
+        <p>
+            All together, roughly: STEV-(ən) VEL-kuh-vik.
+        </p>
+
+        <p>
+            Audio may be added later.
+        </p>
+    </article>
+</TextPageLayout>

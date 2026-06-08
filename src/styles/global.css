@@ -83,8 +83,7 @@ body.text-page .site-main {
     font-size: var(--site-header-brand-size);
     font-weight: 700;
     line-height: 1;
-    font-optical-sizing: none;
-    font-variation-settings: "opsz" 45;
+    font-optical-sizing: auto;
     text-decoration: none;
     white-space: nowrap;
 }
@@ -105,8 +104,7 @@ body.text-page .site-main {
     font-size: var(--site-header-nav-size);
     font-weight: 700;
     line-height: 1;
-    font-optical-sizing: none;
-    font-variation-settings: "opsz" 45;
+    font-optical-sizing: auto;
     text-decoration: none;
     white-space: nowrap;
 }
@@ -327,7 +325,12 @@ div.review_text,
 
 .home-card {
     --home-tight-gap: 0;
-    --home-wide-gap: 1.5rem;
+    --home-wide-gap: clamp(2.5rem, 7vmin, 4rem);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--home-wide-gap);
+    box-sizing: border-box;
 }
 
 .home-card h1.Name {
@@ -335,15 +338,23 @@ div.review_text,
 }
 
 .home-card header {
-    padding-bottom: var(--home-wide-gap);
+    padding-bottom: 0;
 }
 
-.home-card .nav-list {
-    margin-bottom: var(--home-wide-gap);
+.home-card h1.Name,
+.home-card p.Details,
+.home-card .pronunciation {
+    text-align: left;
 }
 
 .home-card .pronunciation {
     padding-top: 0;
+    margin: 0;
+}
+
+.home-card #_idContainer002 {
+    border: 0;
+    margin: 0;
 }
 
 p.Details {

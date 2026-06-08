@@ -4,8 +4,18 @@ apply: always
 
 # Design, CSS, And Accessibility
 
+Inherited / artefactual homepage labels: Contact, Résumé, Writing, Seminars.
+Do not treat these as current primary navigation.
+
+Stage 4.1 primary nav:
+Stevan Veljkovic -> /
+CV -> /cv/
+Publications -> /publications/
+Research -> /research/ only after `/research/` exists.
+
 Preserve the custom visual identity. Do not replace the site with generic academic-theme styling.
-- Preserve migrated / custom identity; Stage 4.0 changes should be constrained, not a full redesign.
+
+Stage 4.0 changes should be constrained, not a full redesign.
 
 Global CSS is preserved in:
 
@@ -50,7 +60,7 @@ Theory and design,
 Oxford, England.
 ```
 
-Homepage navigation labels and targets:
+Historical/inherited homepage navigation labels and targets:
 
 ```text
 Contact  -> mailto derived from site.email
@@ -84,12 +94,13 @@ Accessibility constraints:
 Known Safari / homepage issue: if `h1.Name` is invisible because of black text on
 dark background, use a targeted color fix rather than a CSS rewrite.
 
-Avoid typography / layout rabbit holes during post-launch hardening. The inherited
+Avoid typography / layout rabbit holes during Stage 4.0 verification/cleanup. The inherited
 margin-counter / year-marker layout may be revisited in Stage 4.0.
 
 ## Note on text-block width
 
 - Preserve the site’s typographic discipline.
-  - Keep dense prose in a legible text block rather than stretching it across the viewport.
-  - Use approximately `62ch` for serif prose columns and `58ch` for sans-serif prose columns.
-  - The narrower sans-serif measure accounts for Case VAR’s larger apparent character width compared with FF Meta Serif.
+   - Keep dense prose in a legible text block rather than stretching it across the viewport.
+   - Use approximately `62ch` for serif prose columns and `58ch` for sans-serif prose columns.
+   - The narrower sans-serif measure accounts for Case VAR’s larger apparent character width compared with FF Meta
+     Serif.

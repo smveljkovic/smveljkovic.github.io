@@ -37,7 +37,8 @@ active unresolved decisions, deferred decisions, and superseded decisions.
 
 ### `NEXT-STEPS.md`
 
-The active operational checklist. Its main purpose is to contain current work. It may also include active checks, preservation rules, deferred work, and a short superseded-assumption audit.
+The active operational checklist. Its main purpose is to contain current work. It may also include active checks,
+preservation rules, deferred work, and a short superseded-assumption audit.
 
 ### `deltas/`
 
@@ -65,6 +66,8 @@ Current rule files cover:
 .aiassistant/rules/60-project-memory.md
 .aiassistant/rules/90-working-protocol.md
 ```
+
+`.aiassistant/rules/` should mark historical material explicitly rather than carrying it as active guidance
 
 ## Metadata Registry
 
@@ -126,7 +129,7 @@ current code, `current.md`, `DECISIONS.md`, and `NEXT-STEPS.md`.
 - Keep `DECISIONS.md` categorized and explicit about final, active, deferred, and
   superseded decisions.
 - Keep NEXT-STEPS.md primarily focused on current tasks.
-  - It may also include active checks, preservation rules, deferred work, and a short superseded-assumption audit
+   - It may also include active checks, preservation rules, deferred work, and a short superseded-assumption audit
 - Keep `.aiassistant/rules/` concise and actionable.
 - Keep `master-values.md` current for metadata and retain contradictions in its
   staging/audit sections.

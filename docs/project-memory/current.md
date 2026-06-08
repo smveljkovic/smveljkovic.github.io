@@ -1,12 +1,18 @@
 # Current Project Memory
 
+For task list: NEXT-STEPS.md
+For durable decisions: DECISIONS.md
+For metadata registry: docs/metadata/master-values.md
+For operational AI rules: .aiassistant/rules/
+
 ## 1. Project status
 
 - Project: Stevan Veljkovic’s personal academic/professional Astro website, intended as a durable academic/research hub.
 - Canonical domain: `https://stevanveljkovic.com/`
 - Separate seminars site: `https://seminars.stevanveljkovic.com/`
 - Current local root: `/Users/stevan/Projects/smvsite-astro`
-- Current git branch: `main`
+- Current working branch for Stage 4.0: `stage-4-0`
+- Production branch: `main` (`origin/main` deploys to Netlify)
 - Git remote `origin`: `https://github.com/smveljkovic/smveljkovic.github.io.git`
 - Stage 3 is complete.
 - Current phase: Stage 4.0 planning / core architecture and design foundation.
@@ -35,63 +41,81 @@ If the exact Node patch causes trouble, use `22`.
 - GitHub Pages deployment for the Astro site is retired; `public/CNAME` and `.github/workflows/deploy.yml` are no longer
   part of the active deployment model.
 - Latest observed `dist/` snapshot: static Astro site, 7 pages:
-  - `/`
-  - `/cv/`
-  - `/publications/`
-  - `/publications/reviews/cosmic-connections/`
-  - `/publications/reviews/evolution-of-religions/`
-  - `/publications/reviews/godless-crusade/`
-  - `/publications/reviews/hell-christian-ecology/`
+   - `/`
+   - `/cv/`
+   - `/publications/`
+   - `/publications/reviews/cosmic-connections/`
+   - `/publications/reviews/evolution-of-religions/`
+   - `/publications/reviews/godless-crusade/`
+   - `/publications/reviews/hell-christian-ecology/`
 - Current code has `challenging-modernity` and `christian-right-europe` drafted / withheld from page generation.
 - Withheld review image / material folders temporarily live at `~/Projects/website-admin/withheld-images-folders/`.
+
+- Stage 4.0 time budget:
+  ```text
+  Target: 40–50 hours
+  Mandatory scope review: 30 hours
+  Re-scope / stop-and-decide threshold: 55 hours
+  ```
+- Project-memory maintenance should not consume more than roughly 10–15% of Stage 4.0 work from here onward.
 
 ## 2. Current implementation / architecture
 
 - Framework: Astro. Framework should be set for the foreseeable future. Significant design work remains to be done.
 - `package.json`:
-  - `astro: ^6.3.1`
-  - `@astrojs/sitemap: ^3.7.2`
-  - `@astrojs/mdx: ^5.0.6`
-  - `@astrojs/check: ^0.9.9`
-  - `typescript: ^6.0.3`
-  - Node engine: `>=22.12.0`
+   - `astro: ^6.3.1`
+   - `@astrojs/sitemap: ^3.7.2`
+   - `@astrojs/mdx: ^5.0.6`
+   - `@astrojs/check: ^0.9.9`
+   - `typescript: ^6.0.3`
+   - Node engine: `>=22.12.0`
 - `astro.config.mjs`:
-  - `site: 'https://stevanveljkovic.com'`
-  - `trailingSlash: 'always'`
-  - integrations: `sitemap()`, `mdx()`
+   - `site: 'https://stevanveljkovic.com'`
+   - `trailingSlash: 'always'`
+   - integrations: `sitemap()`, `mdx()`
 - Main routes:
-  - `src/pages/index.astro` → `/`
-  - `src/pages/cv/index.astro` → `/cv/`
-  - `src/pages/publications/index.astro` → `/publications/`
-  - `src/pages/publications/reviews/[slug]/index.astro` → `/publications/reviews/<slug>/`
+   - `src/pages/index.astro` → `/`
+   - `src/pages/cv/index.astro` → `/cv/`
+   - `src/pages/publications/index.astro` → `/publications/`
+   - `src/pages/publications/reviews/[slug]/index.astro` → `/publications/reviews/<slug>/`
 - Review pages are content-collection driven from `src/content/reviews/*.md`.
 - Current review route generates only non-draft reviews. Draft review pages are not generated locally unless temporarily
   made non-draft.
 - `draft:true` controls review page generation only; it does not protect static files under `public/`.
 - `/publications/` derives:
-  - review bibliography entries from `getCollection("reviews", ({ data }) => data.publicationList.include !== false)`,
-    including drafted reviews;
-  - local webpage / PDF links only for non-draft reviews;
-  - list-only items from non-draft `publicationItems` whose IDs are not already represented by reviews.
+   - review bibliography entries from `getCollection("reviews", ({ data }) => data.publicationList.include !== false)`,
+     including drafted reviews;
+   - local webpage / PDF links only for non-draft reviews;
+   - list-only items from non-draft `publicationItems` whose IDs are not already represented by reviews.
 - `publication-items` includes duplicate / list-only review records, currently drafted except the thesis item, to avoid
   duplicate publication-list / schema entries.
 - Layout chain:
-  - reviews: `ReviewLayout.astro` → `BaseLayout.astro` → `SeoHead.astro`
-  - text pages: `TextPageLayout.astro` → `BaseLayout.astro`
-  - homepage: `HomeLayout.astro` → `BaseLayout.astro`
+   - reviews: `ReviewLayout.astro` → `BaseLayout.astro` → `SeoHead.astro`
+   - text pages: `TextPageLayout.astro` → `BaseLayout.astro`
+   - homepage: `HomeLayout.astro` → `BaseLayout.astro`
 - Global CSS: `src/styles/global.css`, imported once by `BaseLayout.astro`. Preserve legacy class names for now.
 - JSON-LD and schema code:
-  - `src/components/JsonLd.astro`
-  - `src/data/schema/home.ts`
-  - `src/data/schema/cv.ts`
-  - `src/data/schema/publications/createPublicationsSchema.ts`
-  - `src/data/schema/reviews/createReviewSchema.ts`
-  - `src/data/schema/reviews/cosmic-connections/cosmic-connections.ts`
+   - `src/components/JsonLd.astro`
+   - `src/data/schema/home.ts`
+   - `src/data/schema/cv.ts`
+   - `src/data/schema/publications/createPublicationsSchema.ts`
+   - `src/data/schema/reviews/createReviewSchema.ts`
+   - `src/data/schema/reviews/cosmic-connections/cosmic-connections.ts`
 - DOI/schema helpers:
-  - `src/lib/doi.ts`
-  - `src/lib/schema/ids.ts`
-  - `src/lib/schema/person.ts`
-  - `src/lib/schema/review.ts`
+   - `src/lib/doi.ts`
+   - `src/lib/schema/ids.ts`
+   - `src/lib/schema/person.ts`
+   - `src/lib/schema/review.ts`
+
+   - Stage 4.1 site-shell work is expected to involve:
+      - `src/data/navigation.ts`
+      - `src/components/SiteHeader.astro`
+      - `src/components/SiteFooter.astro`
+      - `src/layouts/BaseLayout.astro`
+      - `src/styles/global.css`
+   - A basic global header exists locally. `Research` should remain absent/commented out in live primary navigation
+     until
+     `/research/` exists.
 
 ## 3. Content model, schema, and metadata
 
@@ -103,21 +127,21 @@ If the exact Node patch causes trouble, use `22`.
   import { z } from "astro/zod";
   ```
 - Collections:
-  - `reviews`
-  - `publicationItems`
+   - `reviews`
+   - `publicationItems`
 - Current review files:
-  - `src/content/reviews/challenging-modernity.md`
-  - `src/content/reviews/christian-right-europe.md`
-  - `src/content/reviews/cosmic-connections.md`
-  - `src/content/reviews/evolution-of-religions.md`
-  - `src/content/reviews/godless-crusade.md`
-  - `src/content/reviews/hell-christian-ecology.md`
+   - `src/content/reviews/challenging-modernity.md`
+   - `src/content/reviews/christian-right-europe.md`
+   - `src/content/reviews/cosmic-connections.md`
+   - `src/content/reviews/evolution-of-religions.md`
+   - `src/content/reviews/godless-crusade.md`
+   - `src/content/reviews/hell-christian-ecology.md`
 - Current publication-item files:
-  - `src/content/publication-items/challenging-modernity.md`
-  - `src/content/publication-items/evolution-of-religions.md`
-  - `src/content/publication-items/godless-crusade.md`
-  - `src/content/publication-items/hell-christian-ecology.md`
-  - `src/content/publication-items/religious-atavism-climate-crisis.md`
+   - `src/content/publication-items/challenging-modernity.md`
+   - `src/content/publication-items/evolution-of-religions.md`
+   - `src/content/publication-items/godless-crusade.md`
+   - `src/content/publication-items/hell-christian-ecology.md`
+   - `src/content/publication-items/religious-atavism-climate-crisis.md`
 - `/publications/` schema should remain:
   ```text
   CollectionPage
@@ -126,23 +150,23 @@ If the exact Node patch causes trouble, use `22`.
   ```
 - Expected `/publications/` count from current live reviews plus thesis: 7.
 - Current review metadata supports, among other fields:
-  - `reviewedWork`
-  - `publishedReview`
-  - `periodical`, `volume`, `issue`
-  - `blog` for non-journal cases
-  - `rights`
-  - `reuseNoteHtml`
-  - `modificationNote`
-  - `publicationList`
-  - `localSchemaTypes`
+   - `reviewedWork`
+   - `publishedReview`
+   - `periodical`, `volume`, `issue`
+   - `blog` for non-journal cases
+   - `rights`
+   - `reuseNoteHtml`
+   - `modificationNote`
+   - `publicationList`
+   - `localSchemaTypes`
 - Important schema conventions:
-  - Canonical `Person.@id`: `https://orcid.org/0000-0002-2599-3227`
-  - DOI URLs are stable IDs for DOI-identified works.
-  - No `@id` should become an array.
-  - JSON-LD belongs on canonical pages, not redirect stubs.
-  - Use date-only values unless a real meaningful time is known.
-  - Do not invent noon / midnight datetimes.
-  - Validate rendered page-source JSON-LD, not TypeScript literals.
+   - Canonical `Person.@id`: `https://orcid.org/0000-0002-2599-3227`
+   - DOI URLs are stable IDs for DOI-identified works.
+   - No `@id` should become an array.
+   - JSON-LD belongs on canonical pages, not redirect stubs.
+   - Use date-only values unless a real meaningful time is known.
+   - Do not invent noon / midnight datetimes.
+   - Validate rendered page-source JSON-LD, not TypeScript literals.
 - Journal review model:
   ```text
   local WebPage
@@ -158,29 +182,29 @@ If the exact Node patch causes trouble, use `22`.
     isPartOf → PublicationIssue → PublicationVolume → Periodical
   ```
 - LSE Review of Books model for `evolution-of-religions`:
-  - published LSE post: `["@type": ["BlogPosting", "Review"]]`
-  - local Stevan-site reproduction: `["@type": ["Article", "Review"]]`
-  - no fake periodical / volume / issue chain
-  - container:
-    ```text
-    BlogPosting / Review
-      isPartOf → Blog: LSE Review of Books
-        isPartOf → WebSite: LSE Blogs
-    ```
+   - published LSE post: `["@type": ["BlogPosting", "Review"]]`
+   - local Stevan-site reproduction: `["@type": ["Article", "Review"]]`
+   - no fake periodical / volume / issue chain
+   - container:
+     ```text
+     BlogPosting / Review
+       isPartOf → Blog: LSE Review of Books
+         isPartOf → WebSite: LSE Blogs
+     ```
 - Pagination rule:
-  - article / review pagination belongs on the published article / review node:
-    `pagination`, `pageStart`, `pageEnd`
-  - issue-level pagination should only describe the whole issue and only be added if verified.
+   - article / review pagination belongs on the published article / review node:
+     `pagination`, `pageStart`, `pageEnd`
+   - issue-level pagination should only describe the whole issue and only be added if verified.
 - Date rule:
-  - `publishedReview.datePublished` = publisher-recognised first publication date, usually first online.
-  - `PublicationIssue.datePublished` = issue date / month / year where known.
-  - Do not put article first-online dates on issue nodes.
+   - `publishedReview.datePublished` = publisher-recognised first publication date, usually first online.
+   - `PublicationIssue.datePublished` = issue date / month / year where known.
+   - Do not put article first-online dates on issue nodes.
 - `set:html` remains acceptable only for trusted local migration fields such as:
-  - `citationHtml`
-  - `bylineHtml`
-  - `reuseNoteHtml`
-  - `modificationNote`
-  - `publicationList.noteHtml`
+   - `citationHtml`
+   - `bylineHtml`
+   - `reuseNoteHtml`
+   - `modificationNote`
+   - `publicationList.noteHtml`
 
 ## 4. Design, typography, and layout decisions
 
@@ -191,11 +215,32 @@ If the exact Node patch causes trouble, use `22`.
   Theory and design,
   Oxford, England.
   ```
-- Homepage navigation labels:
-  - Contact
-  - Résumé
-  - Writing
-  - Seminars
+- Inherited / artefactual homepage nav labels:
+   - Contact
+   - Résumé
+   - Writing
+   - Seminars
+- Stage 4.1 primary navigation is settled as:
+  ```text
+  Stevan Veljkovic → /
+  CV → /cv/
+  Publications → /publications/
+  Research → /research/
+  ```
+- `Research` must not be exposed in live primary navigation until `/research/` exists.
+- Avoid primary-nav `Contact` unless a real `/contact/` page exists.
+- Avoid putting `Seminars` in primary navigation for now.
+
+- Stage 4.1 footer / secondary navigation is settled as:
+  ```text
+  Contact → mailto:stevan@stevanveljkovic.com
+  ORCID → https://orcid.org/0000-0002-2599-3227
+  Google Scholar → https://scholar.google.com/citations?user=e42TN4UAAAAJ
+  GitHub → https://github.com/smveljkovic
+  Pronunciation → /pronunciation/
+  Seminars → https://seminars.stevanveljkovic.com/
+  ```
+
 - Homepage contact uses `site.email`; current canonical code value is `stevan@stevanveljkovic.com`.
 - Dark background remains `hsl(0, 0%, 7%)`.
 - Preserve fragile / legacy classes for now, including:
@@ -206,18 +251,18 @@ If the exact Node patch causes trouble, use `22`.
   test, CVEntry, nav-list, pronunciation
   ```
 - Webfonts:
-  - Adobe Fonts / Typekit loaded globally in `BaseLayout.astro`:
-    ```html
-    <link rel="stylesheet" href="https://use.typekit.net/icu4lvx.css">
-    ```
-  - Case VAR self-hosted:
-    ```text
-    public/fonts/case/case-upright-var.woff2
-    public/fonts/case/case-italic-var.woff2
-    ```
-  - CSS family name: `"Case VAR SV"`
-  - Confirmed axes: `wght`, `opsz`
-  - Use root-relative font URLs; do not include `/public`.
+   - Adobe Fonts / Typekit loaded globally in `BaseLayout.astro`:
+     ```html
+     <link rel="stylesheet" href="https://use.typekit.net/icu4lvx.css">
+     ```
+   - Case VAR self-hosted:
+     ```text
+     public/fonts/case/case-upright-var.woff2
+     public/fonts/case/case-italic-var.woff2
+     ```
+   - CSS family name: `"Case VAR SV"`
+   - Confirmed axes: `wght`, `opsz`
+   - Use root-relative font URLs; do not include `/public`.
 - Review intro pattern:
   ```text
   Review of [Work]
@@ -231,37 +276,37 @@ If the exact Node patch causes trouble, use `22`.
 - Repetitive review dek was removed / suppressed. Review h1s are editorial, not mechanically generated.
 - Review intro h1 currently uses `font-weight: 700`; the intro rule is commented out / not displayed.
 - `/publications/` has subtle small-caps resource pills for live review resources:
-  - current labels in code: `webpage`, `pdf`
-- Avoid typography / layout rabbit holes during Stage 3. If stable and not misleading, ship; deeper layout rethink
+   - current labels in code: `webpage`, `pdf`
+- Avoid typography / layout rabbit holes. If stable and not misleading, ship; deeper layout rethink
   belongs to Stage 4.
 - The inherited margin-counter / year-marker layout is fragile and may be rethought or discarded in Stage 4.
 
 ## 5. Important files, paths, commands, and workflows
 
 - Main source files:
-  - `astro.config.mjs`
-  - `public/_redirects`
-  - `src/content.config.ts`
-  - `src/data/site.ts`
-  - `src/data/pageMeta.ts`
-  - `src/styles/global.css`
-  - `src/layouts/BaseLayout.astro`
-  - `src/components/SeoHead.astro`
-  - `src/components/ReviewIntro.astro`
-  - `src/pages/publications/index.astro`
-  - `src/pages/publications/reviews/[slug]/index.astro`
+   - `astro.config.mjs`
+   - `public/_redirects`
+   - `src/content.config.ts`
+   - `src/data/site.ts`
+   - `src/data/pageMeta.ts`
+   - `src/styles/global.css`
+   - `src/layouts/BaseLayout.astro`
+   - `src/components/SeoHead.astro`
+   - `src/components/ReviewIntro.astro`
+   - `src/pages/publications/index.astro`
+   - `src/pages/publications/reviews/[slug]/index.astro`
 - Public files confirmed in latest selected tree:
-  - `public/cv/veljkovic-cv.pdf`
-  - `public/favicon.ico`
-  - `public/favicon.svg`
-  - `public/site.webmanifest`
-  - `public/images/headshot-1200x630.JPG`
-  - `public/publications/reviews/cosmic-connections/veljkovic-review-cosmic-connections.pdf`
-  - `public/publications/reviews/hell-christian-ecology/veljkovic-review-hell-christian-ecology.pdf`
+   - `public/cv/veljkovic-cv.pdf`
+   - `public/favicon.ico`
+   - `public/favicon.svg`
+   - `public/site.webmanifest`
+   - `public/images/headshot-1200x630.JPG`
+   - `public/publications/reviews/cosmic-connections/veljkovic-review-cosmic-connections.pdf`
+   - `public/publications/reviews/hell-christian-ecology/veljkovic-review-hell-christian-ecology.pdf`
 - Important missing / unchecked asset issue:
-  - latest selected public tree does **not** show PDFs for `christian-right-europe`, `godless-crusade`, or
-    `challenging-modernity`.
-  - verify content references before making any withheld / draft review live.
+   - latest selected public tree does **not** show PDFs for `christian-right-europe`, `godless-crusade`, or
+     `challenging-modernity`.
+   - verify content references before making any withheld / draft review live.
 - Preferred future PDF convention:
   ```text
   public/publications/reviews/<slug>/veljkovic-review-<slug>.pdf
@@ -283,121 +328,78 @@ If the exact Node patch causes trouble, use `22`.
     image: "/images/publications/reviews/<slug>/reviewed-work/cover.jpg"
   ```
 - Attach images to the correct JSON-LD entity:
-  - `reviewed-work/cover.jpg` → reviewed `Book` / work
-  - `issue/cover.jpg` → `PublicationIssue`
-  - `periodical/poster.jpg` or `periodical/banner.jpg` → `Periodical`
-  - `article/image.jpg` → article/post/review only if rights are clear
-  - `page/social-card.jpg` → local page/Open Graph image
-- Commands:
-  ```bash
-  npm run dev
-  npm run build
-  npm run preview
-  npx astro sync
-  npx astro check
-  ```
-- Inspection commands:
-  ```bash
-  find src/pages -type f | sort
-  find src/content -maxdepth 4 -type f | sort
-  find public -maxdepth 6 -type f | sort
-  find dist -maxdepth 5 -type f | sort
-  find dist -name "sitemap*.xml" -print -exec cat {} \;
-  find src/pages/publications/reviews -type f
-  ```
-- External validation:
-  - https://validator.w3.org/
-  - https://validator.schema.org/
-  - https://search.google.com/test/rich-results
-  - https://pagespeed.web.dev/
-- Astro workflow:
-  ```text
-  WebStorm + npm run dev / npm run preview + browser DevTools
-  ```
-  Do not use Dreamweaver for the Astro site.
+   - `reviewed-work/cover.jpg` → reviewed `Book` / work
+   - `issue/cover.jpg` → `PublicationIssue`
+   - `periodical/poster.jpg` or `periodical/banner.jpg` → `Periodical`
+   - `article/image.jpg` → article/post/review only if rights are clear
+   - `page/social-card.jpg` → local page/Open Graph image
 
 ## 6. Recent decisions and rationale
 
+- Header/navigation should be implemented directly in Astro/CSS/browser iteration, not by beginning in Figma or Adobe
+  tools.
+- First-pass header should use a no-JavaScript responsive layout; no hamburger menu is needed initially because primary
+  nav is small.
+- Header, homepage masthead, and page heading should remain conceptually distinct.
+- Header should be a stable global site shell:
+  ```html
+  <header>
+    <a href="/">Stevan Veljkovic</a>
+    <nav aria-label="Primary">…</nav>
+  </header>
+  ```
+
+- Stage 4.0 should not be deployed as one big-bang release, and individual micro-steps should not be deployed
+  separately.
+- Deploy coherent public release units:
+  ```text
+  4.1a shell v1: header + footer + stable nav, no broken links
+  4.1b research hub v1: /research/ exists and Research appears in nav
+  4.2 thesis page v1
+  4.3 CV expansion v1
+  4.4+ bounded design / interaction improvements
+  ```
+- Git workflow for Stage 4.0:
+  ```text
+  main = production
+  stage-4-0 = work / integration branch
+  merge to main = coherent public release units
+  ```
+
 - Deployment is now Netlify, not GitHub Pages.
-  - Netlify was chosen over Cloudflare Pages after test deployments because it gives a frictionless deploy workflow,
-    real redirects, private-repo-capable deployment, and lower conceptual overhead.
-  - Cloudflare remains a possible future option, but is not needed now.
-    - Note: Cloudflare was found to be generally preferable on the basis of site style and feel.
-    - But site style and feel were determined to be immaterial to the present aims.
-  - No Netlify Functions, SSR, adapter change, framework migration, or Cloudflare adapter configuration is intended.
+   - Netlify was chosen over Cloudflare Pages after test deployments because it gives a frictionless deploy workflow,
+     real redirects, private-repo-capable deployment, and lower conceptual overhead.
+   - Cloudflare remains a possible future option, but is not needed now.
+      - Note: Cloudflare was found to be generally preferable on the basis of site style and feel.
+      - But site style and feel were determined to be immaterial to the present aims.
+   - No Netlify Functions, SSR, adapter change, framework migration, or Cloudflare adapter configuration is intended.
 - Keep the apex domain as canonical despite Netlify’s recommendation to prefer `www` for optimal CDN behaviour.
 - Keep DNS hosted at Hover for now; do not move DNS to Netlify for the foreseeable future.
-  - Revisit only if performance issues emerge.
-  - If performance issues arise, consider Cloudflare DNS to use Netlify’s preferred load-balancer route.
-- Keep the seminars subdomain separate and untouched.
+   - Revisit only if performance issues emerge.
+   - If performance issues arise, consider Cloudflare DNS to use Netlify’s preferred load-balancer route.
+
+- Seminars integration for Stage 4.1 is “bridge, don’t migrate”:
+   - keep `https://seminars.stevanveljkovic.com/` separate for now;
+   - expose Seminars in footer / secondary nav;
+   - optionally add a short Seminars section/card on `/research/`;
+   - do not import seminar PDFs/assets into the main Astro site during Stage 4.1.
+
 - Live review routes now build for:
-  - Cosmic Connections
-  - Hell: In Search of a Christian Ecology
-  - The Evolution of Religions
-  - The Godless Crusade
+   - Cosmic Connections
+   - Hell: In Search of a Christian Ecology
+   - The Evolution of Religions
+   - The Godless Crusade
 - Slug policy:
-  - Do not rename existing slugs unless there is a real error.
-  - Existing slugs:
-    ```text
-    cosmic-connections
-    christian-right-europe
-    hell-christian-ecology
-    challenging-modernity
-    evolution-of-religions
-    godless-crusade
-    ```
-  - Use the shortest clear, stable, human-readable title slug.
-- `godless-crusade`:
-  - route: `/publications/reviews/godless-crusade/`
-  - current local version should be `Accepted Manuscript`, not Version of Record.
-  - published review DOI: `https://doi.org/10.1080/09637494.2023.2260684`
-  - reviewed book DOI: `https://doi.org/10.1017/9781009262125`
-  - journal: *Religion, State and Society*, volume 51, issue `4–5`
-  - issue date should be `2023` or omitted unless exact issue date is verified.
-  - published review first-online date may be `2023-12-14`.
-  - article/review pagination: `491–492`, `491`, `492`
-  - issue URL may use ASCII hyphen: `.../51/4-5`; issue number in display / schema may use en dash `4–5`.
-  - Do not expose T&F VoR PDF / text unless permission is granted.
-  - If VoR permission is later granted, the stable route can be updated in place; no separate route is required unless
-    both AM and VoR are intentionally kept public.
-  - Accepted Manuscript contained a Goodhart title error; local text should correct it and include a visible correction
-    note.
-  - Prefer recognisable Taylor & Francis AM wording in the intro / version block.
-- `challenging-modernity`:
-  - current code has it drafted / withheld from page generation.
-  - local version is a Taylor & Francis Version-of-Record reproduction.
-  - published review DOI: `https://doi.org/10.1080/09637494.2024.2408091`
-  - reviewed book DOI: `https://doi.org/10.7312/bell21488`
-  - must remain drafted / withheld unless T&F / CCC permission is clarified.
-  - It still appears as a bibliographic DOI item on `/publications/` if `publicationList.include !== false`.
-- `evolution-of-religions`:
-  - complete for Stage 3.
-  - model LSE post as `BlogPosting/Review`.
-  - model local reproduction as `Article/Review`.
-  - do not invent journal metadata or fake issue images.
-- `hell-christian-ecology`:
-  - DOI review: `https://doi.org/10.1558/jsrnc.30282`
-  - reviewed book DOI: `https://doi.org/10.7312/mort21470`
-  - license: CC BY-NC-ND 4.0
-  - if using generic JSNRC visual assets, attach them to `Periodical`, not `PublicationIssue`.
-- `christian-right-europe`:
-  - edited volume uses `editor`, not author string with “(ed.)”.
-  - `csaf039` is article ID, not pagination.
-  - issue date is month precision in frontmatter: `2025-07`.
-- `cosmic-connections`:
-  - local page is an unabridged Author’s Original Manuscript and distinct from DOI article.
-  - do not use `sameAs` between local review and DOI node.
-- `/publications/` derives review list entries from review content, including drafted reviews where
-  `publicationList.include !== false`, and generates local-resource pills only for non-draft reviews where
-  `canonicalPath`/`pdfPath` exist.
-- Authorial-voice rule:
-  - Suggested wording is acceptable for short collaborative labels / copy.
-  - Do not generate extended prose in Stevan’s authorial voice or personal communications unless explicitly asked.
-- Project memory rule:
-  - actual code / build output is highest authority.
-  - `docs/project-memory/current.md` should be compact operational memory.
-  - deltas are change history and should be incorporated into `current.md`.
-  - raw logs / generated summaries are audit material, not automatic current authority.
+   - Do not rename existing slugs unless there is a real error.
+   - Existing slugs:
+     ```text
+     cosmic-connections
+     christian-right-europe
+     hell-christian-ecology
+     challenging-modernity
+     evolution-of-religions
+     godless-crusade
+     ```
 
 ## 7. Known issues, cautions, and unresolved questions
 
@@ -406,34 +408,34 @@ If the exact Node patch causes trouble, use `22`.
   `challenging-modernity` withheld; keep it absent from routes, sitemap, and
   public assets unless that decision changes.
 - `godless-crusade` AM is acceptable in principle under T&F author-reuse policy, but still needs final verification for:
-  - exact visible AM wording
-  - Goodhart correction note
-  - text/version accuracy
-  - schema
-  - sitemap
-  - absence of VoR PDF / text
+   - exact visible AM wording
+   - Goodhart correction note
+   - text/version accuracy
+   - schema
+   - sitemap
+   - absence of VoR PDF / text
 - Current canonical contact email in code is `stevan@stevanveljkovic.com`.
   Homepage and review intro use `site.email`; `bylineHtml` is deprecated; manuscript-specific bylines are historical and
   may contain now-defunct `stevan.veljkovic@theology.ox.ac.uk` address.
 - Possible OG image mismatch:
-  - public tree has `/images/headshot-1200x630.JPG`
-  - older notes expected `/images/headshot-1200x630.png`
-  - inspect `src/data/site.ts` and generated page source for broken image URLs.
+   - public tree has `/images/headshot-1200x630.JPG`
+   - older notes expected `/images/headshot-1200x630.png`
+   - inspect `src/data/site.ts` and generated page source for broken image URLs.
 - Latest selected public tree confirms review PDFs for Cosmic and Hell only.
   Godless currently has no local PDF; drafted / withheld Christian Right and Challenging Modernity PDF / image assets
   are not in `public/`.
 - `hell-christian-ecology` unresolved checks:
-  - whether version should be `Reproduction of the Version of Record`
-  - whether first-published note should display
-  - whether issue date `2024-10-03` is verified or should be omitted
-  - whether referenced PDF path exists
+   - whether version should be `Reproduction of the Version of Record`
+   - whether first-published note should display
+   - whether issue date `2024-10-03` is verified or should be omitted
+   - whether referenced PDF path exists
 - Current review route has no dev-only draft preview generation. To preview a draft route locally, temporarily set
   `draft: false` or implement a dev-only pattern.
 - Some sort / date metadata remains questionable:
-  - `godless-crusade` `publicationList.sortDate: "2023-01-01"` may be placeholder-like.
-  - `christian-right-europe` issue date is month precision but sort date may be `"2025-07-01"`.
-  - `challenging-modernity` citation issue-year is 2025, but `publicationList.year` may be 2024 and sort date may be
-    first-online date.
+   - `godless-crusade` `publicationList.sortDate: "2023-01-01"` may be placeholder-like.
+   - `christian-right-europe` issue date is month precision but sort date may be `"2025-07-01"`.
+   - `challenging-modernity` citation issue-year is 2025, but `publicationList.year` may be 2024 and sort date may be
+     first-online date.
 - Content schema / frontmatter mismatch risk remains. Current schema is better than older notes, but verify any
   frontmatter keys not declared in `src/content.config.ts`, especially if intended to drive display or JSON-LD.
 - `publicationIssueSchema` has `dateLabel`, but some notes mention `issueDateLabel`. Keep display-only labels out of
@@ -453,40 +455,56 @@ If the exact Node patch causes trouble, use `22`.
 
 ## 8. Immediate next steps
 
-1. Decide Stage 4.0 approximate time budget.
-
-- Proposed target:
-  ```text
-  Target: 35–45 hours
-  Review scope at: 25 hours
-  Re-scope if exceeding: 50 hours
-  ```
-
-2. Decide thesis route:
-
-- likely `/research/doctoral-thesis/<slug>` if creating a `/research/` landing/bridge page;
-- otherwise `/doctoral-thesis/<slug>`.
-
-3. Begin implementation with Stage 4.1 information architecture / site shell before thesis / CV content work.
-4. Decide Stage 4.1 navigation labels in the next session or two.
-5. Confirm no accidental Cloudflare Workers configuration entered `main`; do not merge the accidental Cloudflare Workers
-   PR.
-6. Optional cleanup:
-
-- make repo private;
-- remove old compatibility files once confident Netlify redirects suffice;
-- remove harmless old GitHub Pages TXT verification record;
-- learn/evaluate Netlify `_headers`.
-
-7. Keep `challenging-modernity` and `christian-right-europe` withheld unless rights / publication decisions change.
-8. Continue content / schema cleanup items as needed:
-
-- schema / frontmatter mismatches;
-- placeholder-like sort / date metadata;
-- Hell-specific metadata questions;
-- OG / headshot mismatch if still present.
+1. Continue Stage 4.1 shell work on `stage-4-0`.
+2. Finish “4.1a shell v1” before merging to `main`:
+   * header;
+   * footer;
+   * stable primary and secondary navigation;
+   * no broken links;
+   * no `Research` primary-nav link until `/research/` exists;
+   * narrow/mobile layout;
+   * active/current-page state;
+   * accessible markup and visible keyboard focus.
+3. Implement footer links:
+   ```text
+   Contact / ORCID / Google Scholar / GitHub / Pronunciation / Seminars
+   ```
+4. Create `/research/` as a compact hub.
+5. Once `/research/` exists, add `Research → /research/` to primary nav.
+6. Add only a short Seminars bridge on `/research/` if it fits naturally.
+7. Then implement the thesis page:
+   ```text
+   /research/doctoral-thesis/religious-atavism-climate-crisis/
+   ```
+8. Before merging any Stage 4.0 increment to `main`, run:
+   ```bash
+   npx astro check
+   npm run build
+   npm run preview
+   ```
+   Inspect:
+   ```text
+   /
+   /cv/
+   /publications/
+   /publications/reviews/cosmic-connections/
+   /publications/reviews/evolution-of-religions/
+   /publications/reviews/godless-crusade/
+   /publications/reviews/hell-christian-ecology/
+   /research/   once created
+   ```
 
 ## 9. Details that should not be lost
+
+- Minimal `/research/` structure:
+  ```text
+  Research
+  - Doctoral thesis
+  - Research themes
+  - Earlier academic work
+  - Publications and review essays
+  - Seminars
+  ```
 
 - Core identifiers:
   ```text
@@ -499,18 +517,18 @@ If the exact Node patch causes trouble, use `22`.
   https://orcid.org/0000-0002-2599-3227
   ```
 - Title rules:
-  - homepage `<title>`: `Stevan Veljkovic`
-  - ordinary pages: `{Page name} | Stevan Veljkovic`
-  - review pages: `Review of {Reviewed work short title} | Stevan Veljkovic`
+   - homepage `<title>`: `Stevan Veljkovic`
+   - ordinary pages: `{Page name} | Stevan Veljkovic`
+   - review pages: `Review of {Reviewed work short title} | Stevan Veljkovic`
 - `WebSite.name`, `Person.name`, and `og:site_name` should be `Stevan Veljkovic`.
 - Descriptive phrases belong in descriptions / copy / schema descriptions, not in canonical site name.
 - Use URL helpers, not manual concatenation, for absolute URLs and node IDs.
 - Do not use the rejected / conflated OpenAlex profile.
 - Real OpenAlex profile URL is now known and may be used.
 - For DOI-identified journal reviews:
-  - article / review `datePublished` = publisher-recognised first publication date, usually first online.
-  - `PublicationIssue.datePublished` = issue date / month / year where known.
-  - do not emit non-standard `firstPublishedOnline`; map it to Schema.org `datePublished`.
+   - article / review `datePublished` = publisher-recognised first publication date, usually first online.
+   - `PublicationIssue.datePublished` = issue date / month / year where known.
+   - do not emit non-standard `firstPublishedOnline`; map it to Schema.org `datePublished`.
 - Do not emit `PublicationIssue.name` merely as the issue number. Use `issueNumber` for numbers; only emit `name` for
   real issue labels.
 - Issue cover images belong on `PublicationIssue` only when they are issue-specific covers.
@@ -528,7 +546,20 @@ If the exact Node patch causes trouble, use `22`.
   ```
 - For local reproductions / manuscripts, do not use `sameAs` with the DOI / publisher page unless truly identical.
   Prefer `isBasedOn` and / or `citation`.
-- Thesis remains bibliography-only until Stage 4. Do not create or link a thesis page unless actually implemented.
+
+- `/research/` is now intended as a compact research hub.
+- Thesis slug is settled:
+  ```text
+  religious-atavism-climate-crisis
+  ```
+- Thesis route is settled but should not be linked until implemented:
+  ```text
+  /research/doctoral-thesis/religious-atavism-climate-crisis/
+  ```
+- `/research/` should function as a map/signposting hub, not an essay or manifesto.
+- Give the doctoral thesis pride of place; do not apologise for lack of conventional research articles; do not
+  overclaim; separate outputs from themes.
+
 - Thesis DOI is primary ID:
   ```text
   https://doi.org/10.5287/ora-4rjoobkvk
@@ -544,291 +575,4 @@ If the exact Node patch causes trouble, use `22`.
   ~/Projects/website-admin/stage-4/plan-mission-note.md
   ```
 
-## 10. Possibly superseded or uncertain information
 
-- Older notes listing only Cosmic and Christian Right as live review pages are superseded by current code and current
-  draft state.
-- Older planned-page notes for Hell, Challenging Modernity, Evolution of Religions, and Godless Crusade are mostly
-  superseded by current files, but rights / asset validation remains active.
-- Earlier public identity said “Theory and editing”; current homepage code says “Theory and design”. Confirm desired
-  wording before further identity work.
-- Older constants said `hello@stevanveljkovic.com` or `contact@stevanveljkovic.com`; current code uses
-  `stevan@stevanveljkovic.com` through `site.email`.
-- Older expected headshot path `/images/headshot-1200x630.png` may be superseded or broken; current public file shown is
-  `/images/headshot-1200x630.JPG`.
-- Older Case font path notes used `public/fonts/Case/...`; current code uses lowercase `public/fonts/case/...` and
-  simplified lowercase filenames.
-- Current `publicationList.year` and sorting choices may not match final bibliographic grouping decisions, especially
-  for Challenging Modernity and Godless Crusade.
-- Richer `/publications/` JSON-LD for reviewed-book nodes, licenses, copyright holders, and external WebPage nodes is
-  deferred; do not over-model during post-launch hardening unless necessary.
-- `.aiassistant/rules/*.md` are intended to be concise operational extracts from `current.md`, not a competing memory
-  system. If absent or stale, update them from this file and actual code rather than from old generated summaries.
-- Older GitHub Pages deployment notes are superseded by Netlify production hosting.
-- Older plans to enable GitHub Actions build-on-push are superseded by Netlify build-on-push from `main`.
-- Older GitHub Pages redirect-stub/PDF-compatibility strategy is superseded by Netlify forced `301!` redirects, though
-  old compatibility files may remain temporarily.
-
-## 11. Other information
-
-### Rights and permissions table
-
-General notes:
-
-- Accepted Manuscript (AM)
-- Author’s Original Manuscript (AOM)
-- Version of Record (VoR)
-- It is standard policy amongst publishers that author reuse of Accepted Manuscript (AM) versions is automatic
-  - Although in some cases this can be subject to embargo
-- For blogs, equivalent of VoR is URL
-- If the value of `Permission/clarification sought?` is `Yes`, then permissions or rights should *not* be regarded as
-  final
-- Other useful information
-  - [OUP policy](https://academic.oup.com/pages/open-research/open-access/charges-licences-and-self-archiving/author-self-archiving-policy)
-- All items, regardless of launch status, should appear on bibliography
-- `Live if AM only` means that permission for VoR use has been sought but is not yet finally confirmed
-- If the cell for `Rights platform` is not blank, permission has been sought or obtained on that platform
-  - Unless otherwise specified, that permission is for use of the VoR
-- Platform credit language would not ordinarily apply except in cases of permissions granted for use of the VoR
-- Publisher credit language applies even when the version used is AM
-  - Credit language is recorded here for completeness, but the practice adopted in this project is not to adhere
-    strictly to these suggestions
-  - Because suggested credit language is often in bad style, the policy is to make sure that every *element* of
-    suggested language is included although the form may differ significantly from the suggested wording
-
-#### Rights status of the various publications
-
-| Pub                    | Publisher                              | Holder           | Open access? | Version on site | Reuse basis                      | Reuse URL or email information                                                                                                                                                                                                            | Rights platform, if any | Permission/clarification sought? | Launch status   | Excluded pending rights clarity | Rights-platform credit language                                | Publisher suggested credit language                                                                                                                                    |
-|------------------------|----------------------------------------|------------------|--------------|-----------------|----------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------|----------------------------------|-----------------|---------------------------------|----------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| godless-crusade        | Taylor & Francis                       | Stevan Veljkovic | No           | AM              | Publisher policy                 | https://authorservices.taylorandfrancis.com/research-impact/sharing-versions-of-journal-articles/                                                                                                                                         | PLSClear                | Yes                              | Live if AM only | No                              | ‘Reproduced with permission of the Licensor through PLSclear.’ | ‘This is an Accepted Manuscript of an article published by Taylor & Francis in [JOURNAL TITLE] on [date of publication], available at: https://doi.org/[Article DOI].’ |
-| cosmic-connections     | Sage Publications                      | Stevan Veljkovic | No           | AOM             | Publisher policy                 | https://www.sagepub.com/journals/permissions/sages-author-archiving-and-re-use-guidelines/                                                                                                                                                |                         | No                               | Live            | No                              |                                                                |                                                                                                                                                                        |
-| challenging-modernity  | Taylor & Francis                       | Stevan Veljkovic | No           | VoR             | Permission provisionally granted | [Email from no-reply@email.copyright.com: Additional Information Needed for Your Request to Taylor & Francis Informa UK Ltd - Journals](message://%3C0100019e68ed1644-c6e37698-4b56-469f-b0f8-42eef4365670-000000@email.amazonses.com%3E) | CCC                     | Yes                              | Live if AM only | Yes                             |                                                                |                                                                                                                                                                        |
-| hell-christian-ecology | Equinox Publishing                     | Stevan Veljkovic | Yes          | VoR             | Licensed: CC BY-NC-ND            | https://journal.equinoxpub.com/JSRNC/Open                                                                                                                                                                                                 |                         | No                               | Live            | No                              |                                                                |                                                                                                                                                                        |
-| evolution-of-religions | London School of Economics / LSE Blogs | Stevan Veljkovic | Yes          | URL             | Licensed: CC BY                  | https://blogs.lse.ac.uk/republishing-policy/                                                                                                                                                                                              |                         | No                               | Live            | No                              |                                                                |                                                                                                                                                                        |
-| christian-right-europe | Oxford University Press                | Stevan Veljkovic | No           | VoR             | Permission provisionally granted | [Email from no-reply@email.copyright.com: Thank you for your order with RightsLink / Oxford University Press](message://%3C0100019e3bce63fe-6380f2eb-6054-4911-8f4c-ff46ce1a2670-000000@email.amazonses.com%3E)                           | CCC                     | Yes                              | Live if AM only | Yes                             |                                                                |                                                                                                                                                                        |
-|                        |                                        |                  |              |                 |                                  |                                                                                                                                                                                                                                           |                         |                                  |                 |                                 |                                                                |                                                                                                                                                                        |
-
-### Rules on use and management of files in public/
-
-- No rights-uncertain PDF, image, or other publication asset should live under public/.
-- `draft:true` controls page generation only; it does not protect static files in public/.
-- A later stage should define an explicit allowlist of files permitted under `public/`.
-
-### Rules regarding design and typography
-
-- As an optical starting point:
-  - All other parameters being equal, if a character of FF Meta Serif is 4mm, the same character in Case VAR will be
-    about 5mm.
-    - Therefore:
-      - Treat FF Meta Serif as the baseline;
-      - Adjust Case VAR downwards when visual parity is desired;
-        - In ordinary use, good style will usually mean making this adjustment.
-
-## 12. Project memory maintenance procedure
-
-### Resources
-
-- Scripts and directories for processing project-memory materials live in
-  `~/Projects/web-admin/project-memory-materials`
-
-### Procedure and best practice
-
-- Overview conversations with gpt-5.5 are carried out in BBEdit AI Worksheets
-  - These live normally in `~/Projects/web-admin/project-memory-materials/raw-logs/`
-- Worksheet length threshold is ~ 20,000–25,000 words
-  - When a conv approaches threshold, the thread is extracted into an .md file
-    - The .md file is placed in `~/Projects/web-admin/project-memory-materials/inbox/delta-from-conversation/`
-- A script which automates an API call produces a draft in `~/Projects/web-admin/project-memory-materials/draft-deltas/`
-- The draft delta is examined and if acceptable moved to `docs/project-memory/deltas/`
-- File naming for new deltas follows the pattern [date]-[conv_index]-[keywords].md
-- The new delta is used as the basis for requests to gpt in WebStorm
-  - First request is revision of core project-memory files
-  - Second request is revision of .aiassistant rules
-- Second script is then used to produce a revisions report
-- As much as possible, revisions are performed / checked manually by human reviewer
-- Alternatively, model prompt to WebStorm stored in
-  `~/Projects/web-admin/project-memory-materials/prompts/2026-06-01-conv-14-webstorm-prompt.md`
-- A new thread then begins in a fresh BBEdit worksheet using the contents of current.md as introductory context and
-  reference material
-- Last complete project memory update: 2026-06-06
-
-## 13. Audit information
-
-### JSON-LD audit 2026-06-01T10:34Z
-
-- `Pass` means success
-- multiple items of same type in `Detected data issues` share issues set unless otherwise noted
-
-| Page                       | Playground: https://json-ld.org/playground/ | Google Rich Results test: https://search.google.com/test/rich-results | Google detected item types         | Google detected issues                                                                                                                                                  | Notes |
-|----------------------------|---------------------------------------------|-----------------------------------------------------------------------|------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------|
-| /                          | Pass                                        | Pass                                                                  | None                               | None                                                                                                                                                                    |       |
-| /cv/                       | Pass                                        | Pass                                                                  | 1 Profile page                     | None                                                                                                                                                                    |       | 
-| /publications/             | Pass                                        | Pass                                                                  | 6 Articles <br/> 6 Review snippets | Articles [non-critical]: missing image; invalid datetime value for datePublished; datePublished missing timezone <br/> Review snippets [critical]: missing itemReviewed |       |
-| cosmic-connections         | Pass                                        | Pass                                                                  | 2 Articles <br/> 2 Review snippets | Articles [non-critical]: missing image; invalid datetime value for datePublished; datePublished missing timezone <br/> Review snippets: None                            |       |
-| godless-crusade            | Pass                                        | Pass                                                                  | 2 Articles <br/> 2 Review snippets | Articles [non-critical]: missing image; invalid datetime value for datePublished; datePublished missing timezone <br/> Review snippets: None                            |       |
-| hell-christian-ecology     | Pass                                        | Pass                                                                  | 2 Articles <br/> 2 Review snippets | Articles [non-critical]: missing image; invalid datetime value for datePublished; datePublished missing timezone <br/> Review snippets: None                            |       |
-| challenging-modernity[^*]  | Pass                                        | Pass                                                                  | 2 Articles <br/> 2 Review snippets | Articles [non-critical]: missing image; invalid datetime value for datePublished; datePublished missing timezone <br/> Review snippets: None                            |       |
-| christian-right-europe[^*] | Pass                                        | Pass                                                                  | 2 Articles <br/> 2 Review snippets | Articles [non-critical]: missing image; invalid datetime value for datePublished; datePublished missing timezone <br/> Review snippets: None                            |       |
-| evolution-of-religions     | Pass                                        | Pass                                                                  | 2 Articles <br/> 2 Review snippets | Articles [non-critical]: missing image; invalid datetime value for datePublished; datePublished missing timezone <br/> Review snippets: None                            |       |
-
-[^*]: Validated only in a temporary/non-production build; current production excludes these review routes pending rights
-clarity.
-
-## 14. Deployment notes / memory
-
-### Legacy URLs
-
-Netlify forced redirects in `public/_redirects` provide real `301` redirects for legacy URLs:
-
-| Old URL                                   | Long-term target                                                                   | Current action         |
-|-------------------------------------------|------------------------------------------------------------------------------------|------------------------|
-| `/writing.html`                           | `/publications/`                                                                   | Forced `301!` redirect |
-| `/writing/ReviewCosmicConnectionsV2.html` | `/publications/reviews/cosmic-connections/`                                        | Forced `301!` redirect |
-| `/writing/ReviewCosmicConnectionsV2.pdf`  | `/publications/reviews/cosmic-connections/veljkovic-review-cosmic-connections.pdf` | Forced `301!` redirect |
-| `/itinerary.pdf`                          | `/cv/veljkovic-cv.pdf`                                                             | Forced `301!` redirect |
-
-Keep `301!` while old physical compatibility files remain.
-
-### Deployment
-
-Canonical domain: `https://stevanveljkovic.com/`
-
-Framework: Astro static build.
-
-Deployment target: Netlify.
-
-Production branch: `main`.
-
-Build settings:
-
-  ```text
-  Build command: npm run build
-  Publish directory: dist
-  NODE_VERSION = 22.12.0
-  ```
-
-DNS:
-
-- Hover remains DNS host.
-- Apex uses Netlify fallback A record:
-  ```text
-  75.2.60.5
-  ```
-- `www` redirects to apex.
-- `seminars.stevanveljkovic.com` remains separate on GitHub Pages.
-
-Local checks:
-
-  ```bash
-  npx astro sync
-  npx astro check
-  npm run build
-  npx serve dist
-  ```
-
-Important:
-
-- `public/` is copied directly to `dist/`.
-- Only publishable files should be placed under `public/`.
-- Draft review pages are not generated, but public assets are still copied if present.
-- Do not add Netlify Functions, SSR, adapter changes, `@astrojs/cloudflare`, `wrangler.toml`, Workers, KV, D1, R2, or
-  Cloudflare adapter config.
-
-### Launch checklist [note: slated for archiving]
-
-#### Local checks
-
-```bash
-npx astro sync
-npx astro check
-npm run build
-find dist -name "sitemap*.xml" -print -exec cat {} \;
-find dist/publications -type f | sort
-npx serve dist
-```
-
-Check:
-
-- homepage
-- CV
-- publications
-- intended live review pages
-- withheld review pages absent
-- PDFs/images/favicons
-- sitemap includes only intended URLs
-
-#### Rights checks
-
-- Only permitted PDFs/assets are in `public/`.
-- `challenging-modernity` withheld if T&F/CCC permission unresolved.
-- Any `draft:true` review has no public assets unless intentionally permitted.
-
-#### Live checks
-
-```bash
-curl -I https://stevanveljkovic.com/
-curl -I https://www.stevanveljkovic.com/
-curl -I https://seminars.stevanveljkovic.com/
-```
-
-Check:
-
-- live homepage
-- live CV
-- live publications
-- live sitemap
-- JSON-LD validation for representative pages
-
-## 15. Post-launch notes
-
-### Netlify
-
-- Netlify apex currently uses Hover fallback A record `75.2.60.5`.
-- Revisit DNS setup only if evidence emerges of poor performance.
-- One possible future route would be to use Cloudflare DNS while continuing to host on Netlify.
-- Netlify forced redirects should remain forced while physical legacy files exist.
-
-### Stage 4.0
-
-Stage 4.0 is the constrained core architecture / design foundation phase, not an unbounded redesign.
-
-In scope:
-
-- thesis page;
-- expanded / web-native CV page, with PDF remaining available as formal / downloadable resource;
-- header / navigation / footer;
-- first-pass design foundation;
-- constrained light / dark mode as design-foundation work;
-- one review-page reading aid as the bounded experimental feature;
-- conceptual / visual bridge to the seminars project.
-
-Deferred:
-
-- full thesis HTML edition;
-- full seminars reconstruction;
-- blog launch;
-- broad React / Vue experimentation;
-- full redesign;
-- complete CSS refactor;
-- multiple “fun” UI features.
-
-Broader principle: touch the broader vision, but do not try to realise all of it.
-
-Note on style:
-
-- When referring to the phase as a whole, use uppercase `Stage 4.0`
-- When referring to a part or sub-part, use lowercase `stage <part identifer>`
-  - E.g., `stage 4.2`
-
-## 16. Working TODO control
-
-- Tasks and project structure are managed:
-  - in org-mode subtrees, which are
-  - in `~/org/smvsite.org/`, which is part of
-  - an org-mode–based GTD organisation system.
-
-- `smvsite.org` contains two large subtrees defined as PROJECT items:
-  1. Stage 3, now archival;
-  2. Stage 4.0, currently active.
-
-The current task at any given time can be known by reference to the org system.

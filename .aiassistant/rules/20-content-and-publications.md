@@ -34,10 +34,9 @@ hell-christian-ecology.md
 religious-atavism-climate-crisis.md
 ```
 
-The thesis remains bibliography-only until Stage 4.
-Do not create or advertise `/research/doctoral-thesis/<slug>`[^*] unless the page is actually implemented.
-
-[^*]: Pending final decision.
+The thesis remains bibliography-only until the local thesis page is implemented.
+Settled route: `/research/doctoral-thesis/religious-atavism-climate-crisis/`.
+Do not create, link, advertise, sitemap, or schema-link the local route until the page exists.
 
 The publications page should preserve the grouped bibliography style and legacy
 classes, including:
@@ -51,7 +50,8 @@ control
 test#writings
 ```
 
-Trusted local HTML bridge fields are acceptable as trusted local migration bridge fields; long-term refactor deferred but desirable.
+Trusted local HTML bridge fields are acceptable as trusted local migration bridge fields; long-term refactor deferred
+but desirable.
 
 ```yaml
 citationHtml
@@ -80,7 +80,7 @@ Review-specific rules:
   Manuscript, distinct from the DOI article; do not use `sameAs`.
 - `christian-right-europe`: reviewed work is an edited volume; use `editor`, not
   an author string with "(ed.)"; `csaf039` is article ID, not pagination.
-  - Must be withheld unless rights are clarified (with OUP).
+   - Must be withheld unless rights are clarified (with OUP).
 - `evolution-of-religions`: model the published LSE post as `BlogPosting /
   Review`; use `Published web article` as the publication-version label; do not
   invent journal/volume/issue metadata.

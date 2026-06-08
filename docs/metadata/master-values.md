@@ -2,7 +2,7 @@
 
 Last reviewed against `docs/project-memory/current.md`,
 `docs/project-memory/DECISIONS.md`, and `docs/project-memory/NEXT-STEPS.md` on
-2026-06-05.
+2026-06-08.
 
 This file is a human-readable metadata registry/checklist for
 `stevanveljkovic.com`. It is not automatically the code source of truth. When
@@ -48,13 +48,13 @@ Descriptive phrases belong in visible copy, descriptions, and JSON-LD
 These values are intentionally retained here because project memory or code
 currently conflicts. Do not treat them as settled canonical values until fixed.
 
-| Topic                         | Current conflict / uncertainty                                                                                                                                                                              | Action                                                                                                                                                        |
-|-------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Contact email                 | There was previously inconsistency amongst different instances, but the canonical version is now `stevan@stevanveljkovic.com`; all instances should populate from site.ts and nothing should be hard-coded. | Verify that there’s now alignment of `site.ts`, homepage, review intro, JSON-LD, page metadata, and any footer/contact copy, and that no hard-coding remains. |
-| Default/headshot image        | Selected public tree has `/images/headshot-1200x630.JPG`; `site.ts`, home schema, CV schema, and older metadata mention `/images/headshot-1200x630.png`.                                                    | Inspect generated output and make code/assets agree.                                                                                                          |
-| Public identity phrase        | Older notes used `Theory and editing`; current homepage code and `site.ts` use `Theory and design`.                                                                                                         | Confirm desired wording before launch; current operational value is `Theory and design`.                                                                      |
-| Sort/date metadata            | `godless-crusade` uses `publicationList.sortDate: "2023-01-01"`; other review sort/year choices may be placeholder-like.                                                                                    | Verify and clean sort/date metadata.                                                                                                                          |
-| Hell issue date/PDF           | `hell-christian-ecology` has issue date `2024-10-03` and a PDF path, but memory says both need verification.                                                                                                | Verify sometime before Stage 4.4.                                                                                                                             |
+| Topic                  | Current conflict / uncertainty                                                                                                                                                                              | Action                                                                                                                                                        |
+|------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Contact email          | There was previously inconsistency amongst different instances, but the canonical version is now `stevan@stevanveljkovic.com`; all instances should populate from site.ts and nothing should be hard-coded. | Verify that there’s now alignment of `site.ts`, homepage, review intro, JSON-LD, page metadata, and any footer/contact copy, and that no hard-coding remains. |
+| Default/headshot image | Selected public tree has `/images/headshot-1200x630.JPG`; `site.ts`, home schema, CV schema, and older metadata mention `/images/headshot-1200x630.png`.                                                    | Inspect generated output and make code/assets agree.                                                                                                          |
+| Public identity phrase | Older notes used `Theory and editing`; current homepage code and `site.ts` use `Theory and design`.                                                                                                         | Confirm desired wording before launch; current operational value is `Theory and design`.                                                                      |
+| Sort/date metadata     | `godless-crusade` uses `publicationList.sortDate: "2023-01-01"`; other review sort/year choices may be placeholder-like.                                                                                    | Verify and clean sort/date metadata.                                                                                                                          |
+| Hell issue date/PDF    | `hell-christian-ecology` has issue date `2024-10-03` and a PDF path, but memory says both need verification.                                                                                                | Verify sometime before Stage 4.4.                                                                                                                             |
 
 ## 3. Site Configuration And URL Rules
 
@@ -62,8 +62,12 @@ Astro config should preserve:
 
 ```js
 site: "https://stevanveljkovic.com",
-trailingSlash: "always",
-integrations: [sitemap(), mdx()],
+    trailingSlash
+:
+"always",
+    integrations
+:
+[sitemap(), mdx()],
 ```
 
 Canonical URLs should use trailing slashes.
@@ -181,7 +185,8 @@ Homepage title-like metadata should not expand the site name beyond
 | `ItemList.itemListElement`  | `ListItem[]`                                        |
 | Expected count              | Current live reviews plus thesis: `7`               |
 
-- Note: Bibliography entries can include drafted reviews where publicationList.include !== false; local webpage/PDF links are only for non-draft reviews.
+- Note: Bibliography entries can include drafted reviews where publicationList.include !== false; local webpage/PDF
+  links are only for non-draft reviews.
 
 ### CV
 
@@ -194,7 +199,7 @@ Homepage title-like metadata should not expand the site name beyond
 | Person `@id`  | `https://orcid.org/0000-0002-2599-3227`   |
 | PDF path      | `/cv/veljkovic-cv.pdf`                    |
 
-Do not link CV schema to a non-existent local thesis page during Stage 3.
+Do not link CV schema to a non-existent local thesis page.
 
 ## 7. Review Page Metadata
 
@@ -356,9 +361,11 @@ Do not add a thesis page to sitemap or schema until it exists.
 | Title                             | `Religious atavism and the climate crisis, with reference to Taylor and Rorty on liberalism` |
 | Type                              | `Thesis`                                                                                     |
 
+Local thesis route:
+`/research/doctoral-thesis/religious-atavism-climate-crisis/`
+
 Local slug:
-- Undetermined; pending decision
-  - Current leading candidate: `/research/doctoral-thesis/<slug>`
+`religious-atavism-climate-crisis`
 
 ARK rule:
 
@@ -393,7 +400,8 @@ publishedReview.datePublished = publisher-recognised first publication date,
 usually first online.
 ```
 
-Internal `firstPublishedOnline` may make the article-level date explicit, but it should map to Schema.org `datePublished`; do not emit a non-standard `firstPublishedOnline`.
+Internal `firstPublishedOnline` may make the article-level date explicit, but it should map to Schema.org
+`datePublished`; do not emit a non-standard `firstPublishedOnline`.
 
 Issue date rule:
 
@@ -406,7 +414,7 @@ Do not let article first-online dates leak onto issue nodes.
 Pagination rule:
 
 - article / review pagination belongs on the published article / review node:
-  - `pagination`, `pageStart`, `pageEnd`;
+   - `pagination`, `pageStart`, `pageEnd`;
 - issue-level pagination should only describe whole-issue pagination and only if verified.
 
 Known cleanup examples:
@@ -421,7 +429,7 @@ publication dates.
 
 ## 10. Asset Path Rules
 
-Use root-relative URLs in frontmatter and metadata. Do not include `public` in  frontmatter URLs.
+Use root-relative URLs in frontmatter and metadata. Do not include `public` in frontmatter URLs.
 
 Preferred review image convention:
 
@@ -451,9 +459,10 @@ public/publications/reviews/<slug>/veljkovic-review-<slug>.pdf
 
 ## 11. Sitemap And Redirect Rules
 
-The sitemap should include only actual generated, non-draft canonical pages that  are intended to be live.
+The sitemap should include only actual generated, non-draft canonical pages that are intended to be live.
 
-Generated does not automatically mean launch-ready. Rights-blocked routes should be drafted or otherwise excluded before launch.
+Generated does not automatically mean launch-ready. Rights-blocked routes should be drafted or otherwise excluded before
+launch.
 
 Legacy URLs currently being served by 301! redirects on Netlify
 
@@ -479,11 +488,12 @@ operational values:
 | Only Cosmic Connections and Christian Right as generated review pages | Superseded; six review routes exist; four currently build; two are excluded.                                                                 |
 | Godless, Hell, Challenging Modernity as merely planned draft pages    | Superseded; content files exist, but christian-right-europe and challenging-modernity routes are currently excluded pending rights clarity.  |
 | `src/content/publication-items/phd-thesis.md`                         | Current thesis publication item is `religious-atavism-climate-crisis.md`.                                                                    |
-| Thesis page as immediate Stage 3 task                                 | Superseded; thesis remains bibliography-only until Stage 4.                                                                                  |
+| Thesis page as immediate Stage 3 task                                 | settled route; implementation pending.                                                                                                       |
 
 ## 13. Other naming decisions
 
-### Canonical labeling for publication text 
+### Canonical labeling for publication text
+
 There should be consistency in the application of these terms across all references to article versions
 
 | Description                                                                                                                | Label                                  | Alternate labels                                                          | Other notes                                                                                                                                                                                                                   |

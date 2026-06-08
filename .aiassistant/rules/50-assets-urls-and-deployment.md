@@ -4,6 +4,9 @@ apply: always
 
 # Assets, URLs, And Deployment
 
+- `main` is production.
+- `stage-4-0` is the Stage 4.0 integration branch.
+
 Use root-relative URLs for public assets. These map to files in `public/`.
 Avoid fragile deep relative paths.
 
@@ -45,7 +48,7 @@ Temporarily removed withheld-review materials currently live at:
 
 Active caution: code still references `/images/headshot-1200x630.png` in places,
 while the selected public tree shows `.JPG`. Verify generated output and fix the
-broken side during post-launch hardening.
+broken side during Stage 4.0 verification/cleanup.
 
 Preferred review image convention:
 
@@ -73,7 +76,7 @@ Preferred future PDF convention is:
 public/publications/reviews/<slug>/veljkovic-review-<slug>.pdf
 ```
 
-Verify generated-page asset references during post-launch hardening. Keep
+Verify generated-page asset references during Stage 4.0 verification/cleanup. Keep
 drafted / withheld `christian-right-europe` and `challenging-modernity` assets out
 of `public/` unless rights / publication decisions change.
 
@@ -83,7 +86,7 @@ of `public/` unless rights / publication decisions change.
 - publish `dist`;
 - `public/CNAME` and GitHub Actions Pages deploy are retired for the Astro site;
 - legacy URLs use forced Netlify 301! rules in `public/_redirects`;
-  - keep 301! while physical compatibility files remain;
+   - keep 301! while physical compatibility files remain;
 - seminars subdomain remains on GitHub Pages.
 
 The site is live at `https://stevanveljkovic.com/`.

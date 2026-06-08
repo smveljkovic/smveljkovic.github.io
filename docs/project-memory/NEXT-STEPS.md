@@ -1,64 +1,105 @@
 # Next Steps
 
+Source of truth: current code/build output, then `current.md`.
+
 This file is an active checklist derived from `docs/project-memory/current.md`.
-Treat `current.md` and the actual code/build output as authoritative. Stage 3 is complete; production hosting is now Netlify, not GitHub Pages.
+Stage 3 is complete; production hosting is now Netlify, not GitHub Pages.
 
-## 1. Stage 4.0 Planning
+Stage 4.0 budget:
 
-1. **Decide Stage 4.0 approximate time budget**
-   - Proposed:
-     ```text
-     Target: 35–45 hours
-     Review scope at: 25 hours
-     Re-scope if exceeding: 50 hours
-     ```
+  ```text
+  Target: 40–50 hours
+  Mandatory scope review: 30 hours
+  Re-scope / stop-and-decide threshold: 55 hours
+  ```
 
-2. **Decide thesis route**
-   - Preferred candidates:
-     ```text
-     /research/doctoral-thesis/<slug>
-     /doctoral-thesis/<slug>
-     ```
-   - Use `/research/doctoral-thesis/<slug>` only if creating a `/research/` landing/bridge page.
-   - Less-preferred candidates:
-     ```text
-     /thesis/
-     /phd-thesis/
-     /research-projects/thesis/
-     ```
+Project-memory maintenance should remain bounded and should not consume more than roughly 10–15% of Stage 4.0 work from
+here onward.
 
-3. **Begin Stage 4.1 with information architecture / site shell**
-   - Work on header / navigation / footer before thesis / CV content implementation.
-   - Decide Stage 4.1 navigation labels in the next session or two.
+## Current Workflow
 
-4. **Keep Stage 4.0 constrained**
-   - In scope:
-     - thesis page;
-     - expanded / web-native CV page;
-     - header / navigation/footer;
-     - first-pass design foundation;
-     - constrained light / dark mode;
-     - one review-page reading aid;
-     - bridge to seminars project.
-   - Deferred:
-     - full thesis HTML edition;
-     - full seminars reconstruction;
-     - blog launch;
-     - broad React / Vue experimentation;
-     - full redesign;
-     - complete CSS refactor;
-     - multiple experimental UI features.
+- `main` = production.
+- `stage-4-0` = Stage 4.0 integration branch.
+- Merge only coherent public release units.
 
-## 2. Continuing Verification Pass
+## 1. Stage 4.1 Site Shell
+
+1. **Finish 4.1a shell v1 before deployment**
+   - header;
+   - footer;
+   - stable primary and secondary navigation;
+   - no broken links;
+   - no `Research` primary-nav link until `/research/` exists;
+   - desktop and narrow/mobile layout;
+   - active/current-page state;
+   - accessible markup;
+   - visible keyboard focus.
+
+2. **Use settled primary navigation**
+   ```text
+   Stevan Veljkovic → /
+   CV → /cv/
+   Publications → /publications/
+   Research → /research/   only once /research/ exists
+   ```
+
+3. **Implement footer / secondary navigation**
+   ```text
+   Contact → mailto:stevan@stevanveljkovic.com
+   ORCID → https://orcid.org/0000-0002-2599-3227
+   Google Scholar → https://scholar.google.com/citations?user=e42TN4UAAAAJ
+   GitHub → https://github.com/smveljkovic
+   Pronunciation → /pronunciation/
+   Seminars → https://seminars.stevanveljkovic.com/
+   ```
+
+## 2. Stage 4.1b Research Hub And Later Stage 4 Work
+
+1. **Create `/research/` as a compact hub**
+   - It should be a map/signposting page, not an essay or manifesto.
+   - Give the doctoral thesis pride of place.
+   - Separate outputs from themes.
+   - Do not apologise for lack of conventional research articles.
+   - Keep v1 modest.
+
+2. **Expose Research in primary nav only after `/research/` exists**
+   ```text
+   Research → /research/
+   ```
+
+3. **Add a short Seminars bridge only if it fits naturally**
+   - Keep `https://seminars.stevanveljkovic.com/` separate.
+   - Do not import seminar PDFs/assets into the main Astro site during Stage 4.1.
+
+4. **Then implement the thesis page**
+   ```text
+   /research/doctoral-thesis/religious-atavism-climate-crisis/
+   ```
+
+## 3. Continuing Verification Pass
 
 1. **Run project checks**
    ```bash
    npx astro sync
    npx astro check
    npm run build
+   npm run preview
    ```
 
    Rerun after any content / schema changes.
+
+   Inspect before merging a Stage 4.0 release unit to `main`:
+
+     ```text
+     /
+     /cv/
+     /publications/
+     /publications/reviews/cosmic-connections/
+     /publications/reviews/evolution-of-religions/
+     /publications/reviews/godless-crusade/
+     /publications/reviews/hell-christian-ecology/
+     /research/   once created
+     ```
 
 2. **Confirm generated route set**
    - Current observed `dist/` snapshot contains 7 pages:
@@ -72,6 +113,9 @@ Treat `current.md` and the actual code/build output as authoritative. Stage 3 is
      /publications/reviews/hell-christian-ecology/
      ```
    - If any drafted review is intentionally made live, update the expected generated route set and sitemap accordingly.
+   - Once `/research/` is created, update the expected generated route set, sitemap checks, and primary navigation.
+   - Do not expect or link the thesis route until `/research/doctoral-thesis/religious-atavism-climate-crisis/` is
+     implemented.
 
 3. **Inspect generated sitemap**
    ```bash
@@ -92,7 +136,7 @@ Treat `current.md` and the actual code/build output as authoritative. Stage 3 is
      public/publications/reviews/cosmic-connections/veljkovic-review-cosmic-connections.pdf
      public/publications/reviews/hell-christian-ecology/veljkovic-review-hell-christian-ecology.pdf
      ```
-   - Keep references for drafted  /withheld `christian-right-europe` and
+   - Keep references for drafted /withheld `christian-right-europe` and
      `challenging-modernity` from becoming public routes or public assets unless
      rights / publication decisions change.
 
@@ -127,14 +171,14 @@ Treat `current.md` and the actual code/build output as authoritative. Stage 3 is
      ```
    - Internal CV links should not use `target="_blank"`.
 
-## 3. Content And Metadata Cleanup
+## 4. Content And Metadata Cleanup
 
 1. **Fix schema / frontmatter mismatches where fields are meant to matter**
    - Check any frontmatter keys not declared in `src/content.config.ts`.
    - Pay attention to display-only date labels:
-     - `publicationIssueSchema` currently has `dateLabel`;
-     - older notes mention `issueDateLabel`;
-     - keep display-only labels out of Schema.org unless mapped intentionally.
+      - `publicationIssueSchema` currently has `dateLabel`;
+      - older notes mention `issueDateLabel`;
+      - keep display-only labels out of Schema.org unless mapped intentionally.
 
 2. **Clean placeholder-like sorting / date metadata**
    - `godless-crusade` has `publicationList.sortDate: "2023-01-01"`, which may
@@ -166,165 +210,20 @@ Treat `current.md` and the actual code/build output as authoritative. Stage 3 is
      ```
    - Fine if matching, but not DRY.
 
-## 4. Structured Data Rules To Preserve
-
-1. **Journal review graph**
-   ```text
-   local WebPage
-     mainEntity -> local #review
-     about -> reviewed Book
-
-   local #review
-     itemReviewed -> reviewed Book
-     isBasedOn/citation -> DOI/published review
-
-   DOI/published review
-     itemReviewed -> reviewed Book
-     isPartOf -> PublicationIssue -> PublicationVolume -> Periodical
-   ```
-
-2. **Pagination**
-   - Article/review pagination belongs on the published article/review node:
-     ```text
-     pagination
-     pageStart
-     pageEnd
-     ```
-   - Issue-level pagination should only describe the whole issue and only be
-     added if verified.
-   - `csaf039` is an article ID, not pagination.
-
-3. **Dates**
-   - `publishedReview.datePublished` means publisher-recognised first publication date, usually first online.
-   - `publishedReview.firstPublishedOnline` may be used internally, but should map to Schema.org `datePublished`.
-   - Do not emit a non-standard Schema.org `firstPublishedOnline`.
-   - `PublicationIssue.datePublished` means issue date/month/year where known.
-   - Do not put article first-online dates on issue nodes.
-
-4. **Issue names**
-   - Do not emit `PublicationIssue.name` merely as the issue number.
-   - Use `issueNumber` for numbers.
-   - Use `name` only for real publisher-supplied issue labels.
-
-5. **Images**
-   - Preferred convention:
-     ```text
-     public/images/publications/reviews/<slug>/
-       reviewed-work/cover.jpg
-       issue/cover.jpg
-       periodical/poster.jpg
-       periodical/banner.jpg
-       article/image.jpg
-       page/social-card.jpg
-     ```
-   - Frontmatter should use root-relative URLs:
-     ```yaml
-     reviewedWork:
-       image: "/images/publications/reviews/<slug>/reviewed-work/cover.jpg"
-     ```
-   - Attach images to the correct entity:
-     - `reviewed-work/cover.jpg` -> reviewed `Book` / work;
-     - `issue/cover.jpg` -> `PublicationIssue`;
-     - `periodical/poster.jpg` or `periodical/banner.jpg` -> `Periodical`;
-     - `article/image.jpg` -> article/post/review only if rights are clear;
-     - `page/social-card.jpg` -> local page/Open Graph image.
-
 ## 5. Deployment, DNS, And Legacy URLs
 
-1. **Recheck Netlify/DNS behaviour periodically**
-   ```bash
-   curl -I https://stevanveljkovic.com/
-   curl -I https://www.stevanveljkovic.com/
-   curl -I https://seminars.stevanveljkovic.com/
-   curl -I https://stevanveljkovic.com/sitemap-index.xml
-   ```
+Before release, verify Netlify deploy, apex/www redirects, sitemap, and forced legacy redirects.
 
-   Check:
-   - apex works;
-   - `www` redirects to apex;
-   - sitemap works;
-   - seminars subdomain still works.
-
-2. **Keep Netlify forced redirects working**
-   - Current rules:
-     ```text
-     /writing.html /publications/ 301!
-     /writing/ReviewCosmicConnectionsV2.html /publications/reviews/cosmic-connections/ 301!
-     /writing/ReviewCosmicConnectionsV2.pdf /publications/reviews/cosmic-connections/veljkovic-review-cosmic-connections.pdf 301!
-     /itinerary.pdf /cv/veljkovic-cv.pdf 301!
-     ```
-   - Keep `301!` while physical legacy files remain.
-
-3. **Optional Netlify/post-migration cleanup**
-   - Make repo private if desired.
-   - Remove old compatibility files once confident redirects suffice.
-   - Remove harmless old GitHub Pages TXT verification record.
-   - Learn/evaluate Netlify `_headers`.
-
-4. **Cloudflare cleanup / guardrail**
-   - Confirm no accidental Cloudflare Workers configuration entered `main`.
-   - Do not merge the accidental Cloudflare Workers PR.
-   - Do not add `@astrojs/cloudflare`, `wrangler.toml`, Workers, KV, D1, R2, or Cloudflare adapter config.
-
-## 6. Stage 4.0 Scope And Deferred Work
+## 6. Later Stage 4.0 Work
 
 1. **Thesis page**
    - Thesis page is in Stage 4.0 scope.
-   - Do not create or link a thesis route until the route decision is made and the page is actually implemented.
-   - Current route candidates:
+   - Do not create, link, advertise, sitemap, or schema-link the route until the page exists.
+   - Route settled:
      ```text
-     /research/doctoral-thesis/<slug>
-     /doctoral-thesis/<slug>
+     /research/doctoral-thesis/religious-atavism-climate-crisis/
      ```
    - Primary thesis ID:
      ```text
      https://doi.org/10.5287/ora-4rjoobkvk
       ```
-
-2. **Larger CSS/layout rewrite**
-   - Preserve migrated visual identity going into Stage 4.0.
-   - Do not rename or aggressively refactor legacy classes before doing more foundational work.
-   - The inherited margin-counter / year-marker layout may be re-thought or discarded in Stage 4.
-
-3. **Richer `/publications/` JSON-LD**
-   - Richer reviewed-book nodes, license / copyright-holder modelling, and external WebPage nodes should be completed during Stage 4.0.
-   - Keep current `/publications/` model:
-     ```text
-     CollectionPage
-       mainEntity -> ItemList
-         itemListElement -> ListItem[]
-     ```
-
-4. **Trusted HTML migration**
-   - Current trusted local bridge fields remain acceptable:
-     ```text
-     citationHtml
-     bylineHtml
-     reuseNoteHtml
-     modificationNote
-     publicationList.noteHtml
-     ```
-   - Replace them later with a more semantic citation/content model.
-
-5. **Seminars site consolidation**
-   - Current seminars URL:
-     ```text
-     https://seminars.stevanveljkovic.com/
-     ```
-   - Leave separate for now unless a deliberate consolidation plan is made.
-   - A conceptual / visual bridge to the seminars project is in Stage 4.0 scope.
-   - Full seminars reconstruction or consolidation remains deferred.
-
-## 7. Superseded Assumptions
-
-- Only Cosmic Connections and Christian Right are live review pages.
-- `publicationItems` still needs to be created.
-- `/publications/index.astro` still needs to be migrated to combine reviews and list-only publication items.
-- `createPublicationsSchema.ts` still needs to be created.
-- Hell, Challenging Modernity, Evolution of Religions, and Godless Crusade are merely future review files.
-- The thesis page should be implemented immediately.
-- Review JSON-LD still needs its basic `WebPage` / local `#review` / DOI review  split, periodical chain, pagination rule, and first-online date rule decided.
-- GitHub Pages is the active production deployment target.
-- GitHub Actions deployment automation was superseded by ‘Netlify builds from main.’
-- Legacy PDF URLs must remain compatibility files because true redirects are unavailable.
-- A Netlify / Cloudflare move is only a future possibility for true redirects.

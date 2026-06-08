@@ -17,8 +17,8 @@ docs/project-memory/current.md
 Supporting files:
 
 ```text
-docs/project-memory/DECISIONS.md
 docs/project-memory/NEXT-STEPS.md
+docs/project-memory/DECISIONS.md
 docs/project-memory/deltas/
 ```
 

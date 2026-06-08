@@ -11,8 +11,12 @@ Astro config should preserve:
 
 ```js
 site: "https://stevanveljkovic.com",
-trailingSlash: "always",
-integrations: [sitemap(), mdx()],
+    trailingSlash
+:
+"always",
+    integrations
+:
+[sitemap(), mdx()],
 ```
 
 Main route model:
@@ -54,12 +58,12 @@ Current observed `dist/` output has 7 pages:
 
 `challenging-modernity` and `christian-right-europe` are currently
 drafted/withheld from page generation. Verify the generated route set and
-sitemap from the current build during post-launch hardening.
+sitemap from the current build during Stage 4.0 verification/cleanup.
 
 Dynamic review routes should query only non-draft reviews:
 
 ```ts
-getCollection("reviews", ({ data }) => !data.draft)
+getCollection("reviews", ({data}) => !data.draft)
 ```
 
 Use this naming convention:
@@ -75,9 +79,9 @@ frontmatter. Do not write `review.data.title` when `review = entry.data`.
 Astro content collections use the Astro 6 loader pattern:
 
 ```ts
-import { defineCollection } from "astro:content";
-import { glob } from "astro/loaders";
-import { z } from "astro/zod";
+import {defineCollection} from "astro:content";
+import {glob} from "astro/loaders";
+import {z} from "astro/zod";
 ```
 
 Use `z.url()` for URL validation. Avoid deprecated `z.string().url()`. Do not

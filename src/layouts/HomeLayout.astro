@@ -1,16 +1,17 @@
 ---
 import BaseLayout from "./BaseLayout.astro";
 
-const { title, description, canonicalPath, ogType, jsonLd } = Astro.props;
+const {title, description, canonicalPath, ogType, jsonLd} = Astro.props;
 ---
 
 <BaseLayout
-  title={title}
-  description={description}
-  canonicalPath={canonicalPath}
-  ogType={ogType}
-  jsonLd={jsonLd}
-  bodyStyle="display:block; padding-top: clamp(2%,7%,10%)">
+        title={title}
+        description={description}
+        canonicalPath={canonicalPath}
+        ogType={ogType}
+        jsonLd={jsonLd}
+        bodyClass="home-page"
+        bodyStyle="display:block; padding-top: clamp(2%,7%,10%)">
 
-  <slot />
+    <slot/>
 </BaseLayout>

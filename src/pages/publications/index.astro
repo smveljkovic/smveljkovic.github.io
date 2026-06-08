@@ -1,11 +1,11 @@
 ---
-import { getCollection } from "astro:content";
+import {getCollection} from "astro:content";
 import TextPageLayout from "../../layouts/TextPageLayout.astro";
-import { pageMeta } from "../../data/pageMeta";
-import { createPublicationsSchema } from "../../data/schema/publications/createPublicationsSchema";
+import {pageMeta} from "../../data/pageMeta";
+import {createPublicationsSchema} from "../../data/schema/publications/createPublicationsSchema";
 
 function compactArray<T>(array: Array<T | undefined | null | false>): T[] {
-  return array.filter(Boolean) as T[];
+    return array.filter(Boolean) as T[];
 }
 
 
@@ -14,36 +14,35 @@ const meta = pageMeta.publications;
 
 const reviews = await getCollection(
     "reviews",
-    ({ data }) => data.publicationList.include !== false
+    ({data}) => data.publicationList.include !== false
 );
 
 const reviewIds = new Set(reviews.map((entry) => entry.id));
 
 const listOnlyPublicationItems = await getCollection(
     "publicationItems",
-    ({ id, data }) => !data.draft && !reviewIds.has(id)
+    ({id, data}) => !data.draft && !reviewIds.has(id)
 );
 
 const reviewPublicationItems = reviews.map((entry) => {
     const review = entry.data;
 
-  const isLocalPageLive = !review.draft;
+    const isLocalPageLive = !review.draft;
 
-  const links = compactArray([
-    isLocalPageLive && review.canonicalPath
-        ? {
-          href: review.canonicalPath,
-          label: "webpage",
-        }
-        : undefined,
-    isLocalPageLive && review.publicationList.pdfPath
-        ? {
-          href: review.publicationList.pdfPath,
-          label: "pdf",
-        }
-        : undefined,
-  ]);
-
+    const links = compactArray([
+        isLocalPageLive && review.canonicalPath
+            ? {
+                href: review.canonicalPath,
+                label: "webpage",
+            }
+            : undefined,
+        isLocalPageLive && review.publicationList.pdfPath
+            ? {
+                href: review.publicationList.pdfPath,
+                label: "pdf",
+            }
+            : undefined,
+    ]);
 
 
     return {
@@ -85,32 +84,32 @@ const reviewPublicationItems = reviews.map((entry) => {
 });
 
 const bibliographyPublicationItems = listOnlyPublicationItems.map((entry) => {
-  const publicationItem = entry.data;
+    const publicationItem = entry.data;
 
-  return {
-    id: `publicationItem:${entry.id}`,
-    title: publicationItem.title,
-    itemType: publicationItem.itemType,
-    year: publicationItem.publicationList.year,
-    sortDate: publicationItem.publicationList.sortDate ?? `${publicationItem.publicationList.year}-01-01`,
-    order: publicationItem.publicationList.order ?? 0,
-    citationHtml: publicationItem.citationHtml,
-    noteHtml: publicationItem.publicationList.noteHtml,
-    noteId: publicationItem.publicationList.noteId,
-    links: [],
-    doi: publicationItem.doi,
-    url: publicationItem.url,
-    datePublished: publicationItem.firstPublishedOnline,
-    firstPublishedOnline: publicationItem.firstPublishedOnline,
-    periodical: publicationItem.periodical,
-    volume: publicationItem.volume,
-    issue: publicationItem.issue,
-    articleId: publicationItem.articleId,
-    pagination: publicationItem.pagination,
-    pageStart: publicationItem.pageStart,
-    pageEnd: publicationItem.pageEnd,
-    identifiers: publicationItem.identifiers,
-  };
+    return {
+        id: `publicationItem:${entry.id}`,
+        title: publicationItem.title,
+        itemType: publicationItem.itemType,
+        year: publicationItem.publicationList.year,
+        sortDate: publicationItem.publicationList.sortDate ?? `${publicationItem.publicationList.year}-01-01`,
+        order: publicationItem.publicationList.order ?? 0,
+        citationHtml: publicationItem.citationHtml,
+        noteHtml: publicationItem.publicationList.noteHtml,
+        noteId: publicationItem.publicationList.noteId,
+        links: [],
+        doi: publicationItem.doi,
+        url: publicationItem.url,
+        datePublished: publicationItem.firstPublishedOnline,
+        firstPublishedOnline: publicationItem.firstPublishedOnline,
+        periodical: publicationItem.periodical,
+        volume: publicationItem.volume,
+        issue: publicationItem.issue,
+        articleId: publicationItem.articleId,
+        pagination: publicationItem.pagination,
+        pageStart: publicationItem.pageStart,
+        pageEnd: publicationItem.pageEnd,
+        identifiers: publicationItem.identifiers,
+    };
 });
 
 const publicationItems = [
@@ -131,8 +130,8 @@ const sortedPublicationItems = publicationItems.sort((a, b) => {
 
 const jsonLd = createPublicationsSchema(
     sortedPublicationItems.map((item, index) => ({
-      ...item,
-      position: index + 1,
+        ...item,
+        position: index + 1,
     }))
 );
 
@@ -143,53 +142,54 @@ const publicationsGroups = Array.from(
         groups.set(item.year, group);
         return groups;
     }, new Map<number, typeof sortedPublicationItems>())
-    );
+);
 ---
 <TextPageLayout
-  title={meta.title}
-  description={meta.description}
-  canonicalPath={meta.path}
-  ogType={meta.ogType}
-  jsonLd={jsonLd}>
+        title={meta.title}
+        description={meta.description}
+        canonicalPath={meta.path}
+        ogType={meta.ogType}
+        jsonLd={jsonLd}>
 
-  <div style="display:inline-block; width:fit-content;">
-    <h1 class="BibHeading">Publications and PhD thesis</h1>
-    <div>
-      <div class="countercontrol">[&#8201;<a href="/">previous page</a>&#8201;]</div>
-      <div class="control">updated May 2026</div>
+    <div class="text-page-heading">
+        <h1 class="BibHeading">Publications and PhD thesis</h1>
+        <div>
+            <div class="countercontrol">[&#8201;<a href="/">previous page</a>&#8201;]</div>
+            <div class="control">updated May 2026</div>
+        </div>
     </div>
-  </div>
 
-  <div class="test" id="writings">
-      {publicationsGroups.map(([year, items]) => (
-        <>
-            <p class="counter_bib">&#8239;{year}&#8239;</p>
+    <div class="test" id="writings">
+        {publicationsGroups.map(([year, items]) => (
+                <>
+                    <p class="counter_bib">&#8239;{year}&#8239;</p>
 
-            {items.map((item) => (
-                    <>
-                        <p class="BibEntry" set:html={item.citationHtml} />
+                    {items.map((item) => (
+                            <>
+                                <p class="BibEntry" set:html={item.citationHtml}/>
 
-                      {(item.noteHtml || item.links.length > 0) && (
-                          <p
-                              class:list={[
-                                "BibEntry",
-                                "pub-note",
-                                !item.noteHtml && "pub-note--links-only",
-                              ]}
-                              id={item.noteId}
-                          >
-                            {item.noteHtml && <span set:html={item.noteHtml} />}
+                                {(item.noteHtml || item.links.length > 0) && (
+                                        <p
+                                                class:list={[
+                                                    "BibEntry",
+                                                    "pub-note",
+                                                    !item.noteHtml && "pub-note--links-only",
+                                                ]}
+                                                id={item.noteId}
+                                        >
+                                            {item.noteHtml && <span set:html={item.noteHtml}/>}
 
-                            {item.noteHtml && item.links.length > 0 && <span> </span>}
+                                            {item.noteHtml && item.links.length > 0 && <span> </span>}
 
-                            {item.links.map((link) => (
-                                <a class="pub-link" href={link.href}><span class="pub-link__label">{link.label}</span></a>
-                            ))}
-                          </p>
-                      )}
-                    </>
-            ))}
-        </>
-       ))}
-  </div>
+                                            {item.links.map((link) => (
+                                                    <a class="pub-link" href={link.href}><span
+                                                            class="pub-link__label">{link.label}</span></a>
+                                            ))}
+                                        </p>
+                                )}
+                            </>
+                    ))}
+                </>
+        ))}
+    </div>
 </TextPageLayout>

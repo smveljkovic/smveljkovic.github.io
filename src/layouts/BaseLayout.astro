@@ -2,7 +2,7 @@
 import '../styles/global.css'
 import SeoHead from "../components/SeoHead.astro";
 import SiteHeader from "../components/SiteHeader.astro";
-// import SiteFooter from "../components/SiteFooter.astro";
+import SiteFooter from "../components/SiteFooter.astro";
 import {site} from "../data/site";
 
 interface Props {
@@ -47,6 +47,7 @@ const {
 <main class="site-main">
     <slot/>
 </main>
-<!-- <SiteFooter /> -->
+
+<SiteFooter/>
 </body>
 </html>

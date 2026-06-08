@@ -53,12 +53,60 @@ body.text-page .site-main {
     --bib-indent: 2em;
     --font-sans: "Case VAR SV", Arial, Helvetica, sans-serif;
     --font-serif: ff-meta-serif-web-pro, serif;
+    --font-ipa: Arial, Helvetica, sans-serif;
 
     --review-serif-size: clamp(1.125rem, 2.5vmin, 1.5rem);
     --review-case-scale: 0.8;
     --review-measure: 62ch;
+    --site-measure: 62ch;
     --review-intro-pad-x: 1em;
 }
+
+.pronunciation__ipa {
+    font-family: var(--font-ipa);
+    white-space: nowrap;
+}
+
+.home-card .pronunciation__ipa {
+    font-size: calc(clamp(1.215rem, 4.32vmin, 1.5525rem) - 20%);
+}
+
+.pronunciation-page {
+    display: block;
+    width: min(100%, var(--site-measure));
+    box-sizing: border-box;
+    color: #fff;
+    font-family: var(--font-serif);
+    font-size: var(--review-serif-size);
+    line-height: clamp(1.4, 1.5, 1.6);
+}
+
+.pronunciation-page h1 {
+    margin: 0 0 1.2rem;
+    color: #fff;
+    font-family: var(--font-sans);
+    font-size: clamp(1.35rem, 3.2vmin, 2rem);
+    font-weight: 700;
+    line-height: 1.25;
+}
+
+.pronunciation-page p {
+    margin: 0 0 1.2em;
+}
+
+.pronunciation-page p:last-child {
+    margin-bottom: 0;
+}
+
+.pronunciation-page__name {
+    font-family: var(--font-sans);
+    font-weight: 700;
+}
+
+.pronunciation-page__transcription {
+    text-align: left;
+}
+
 
 .site-header {
     width: 100%;
@@ -69,7 +117,7 @@ body.text-page .site-main {
 }
 
 .site-header__inner {
-    width: min(100%, 62ch);
+    width: min(100%, var(--site-measure));
     margin-inline: auto;
     padding: clamp(1rem, 3vmin, 2rem) 1rem clamp(1.5rem, 4vmin, 2.5rem);
     display: flex;
@@ -109,19 +157,102 @@ body.text-page .site-main {
     white-space: nowrap;
 }
 
+.site-header__brand:link,
 .site-header__brand:visited,
-.site-header__nav-link:visited {
+.site-header__nav-link:link,
+.site-header__nav-link:visited,
+.site-footer__link:link,
+.site-footer__link:visited {
     color: inherit;
 }
 
 .site-header__brand:hover,
+.site-header__brand:visited:hover,
 .site-header__nav-link:hover,
+.site-header__nav-link:visited:hover,
+.site-footer__link:hover,
+.site-footer__link:visited:hover {
+    color: inherit;
+    text-decoration: underline;
+    text-decoration-thickness: 7%;
+    text-decoration-color: hsla(213, 78%, 65%, 1);
+    text-underline-offset: 0.16em;
+}
+
+.site-header__brand:focus-visible,
 .site-header__nav-link:focus-visible,
-.site-header__nav-link.is-current {
+.site-header__nav-link.is-current,
+.site-header__nav-link.is-current:hover,
+.site-header__nav-link.is-current:visited:hover,
+.site-footer__link:focus-visible,
+.site-footer__link.is-current,
+.site-footer__link.is-current:hover,
+.site-footer__link.is-current:visited:hover {
     color: inherit;
     text-decoration: underline;
     text-decoration-thickness: 7%;
     text-decoration-color: hsla(45, 100%, 70%, 1);
+    text-underline-offset: 0.16em;
+}
+
+
+.site-footer {
+    margin-top: clamp(3rem, 7vmin, 5rem);
+    padding: 0 1rem clamp(1.25rem, 3vmin, 2rem);
+    color: inherit;
+    font-family: var(--font-sans);
+    font-size: clamp(0.875rem, 1.8vmin, 1rem);
+    font-optical-sizing: auto;
+}
+
+.site-footer__inner {
+    width: min(100%, var(--site-measure));
+    margin-inline: auto;
+}
+
+.site-footer__list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35em 0.9em;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.site-footer__link {
+    color: inherit;
+    font-weight: 600;
+    text-decoration-thickness: 7%;
+    text-underline-offset: 0.16em;
+}
+
+
+.site-footer__note {
+    margin-block: 1rem 0;
+    font-size: 0.875em;
+}
+
+body.home-page .site-footer {
+    margin-top: clamp(2rem, 5vmin, 3.5rem);
+    font-size: 0.875rem;
+}
+
+body.home-page .site-footer__inner {
+    width: max-content;
+    max-width: 100%;
+}
+
+:where(a[href], button):focus-visible {
+    outline: 2px solid hsla(45, 100%, 70%, 1);
+    outline-offset: 0.2em;
+}
+
+a:focus-visible {
+    color: inherit;
+    text-decoration: underline;
+    text-decoration-thickness: 7%;
+    text-decoration-color: hsla(45, 100%, 70%, 1);
+    text-decoration-skip-ink: auto;
     text-underline-offset: 0.16em;
 }
 
@@ -179,38 +310,35 @@ div.review_text {
     font-weight: 700;
 }
 
-a:link, button {
+a:link {
     color: hsla(213, 78%, 65%, 1);
-    text-decoration-color: #FFFFFF;
+    text-decoration-color: #fff;
     text-decoration-thickness: 7%;
-
+    text-underline-offset: 0.16em;
 }
 
-a:visited, button {
+a:visited {
     color: hsla(270, 50%, 70%, 1);
-    text-decoration-color: #FFFFFF;
+    text-decoration-color: #fff;
 }
 
-a:hover {
+a:hover,
+a:visited:hover {
     color: inherit;
     text-decoration: underline;
     text-decoration-thickness: 7%;
     text-decoration-color: hsla(213, 78%, 65%, 1);
     text-decoration-skip-ink: auto;
-}
-
-a:visited:hover {
-    color: inherit;
-    text-decoration: underline;
-    text-decoration-thickness: 7%;
-    text-decoration-color: hsla(270, 50%, 70%, 1);
-    text-decoration-skip-ink: auto;
-
+    text-underline-offset: 0.16em;
 }
 
 a:active {
     color: hsla(45, 100%, 70%, 1);
-    text-decoration: inherit;
+    text-decoration-color: hsla(45, 100%, 70%, 1);
+}
+
+button {
+    color: hsla(213, 78%, 65%, 1);
 }
 
 body {
@@ -299,10 +427,6 @@ p.BibEntry.pub-note > a.pub-link > .pub-link__label {
 }
 
 
-p.BibEntry.pub-note > a.pub-link:visited:hover {
-    text-decoration-color: hsla(270, 50%, 70%, 1);
-}
-
 p.BibEntry.pub-note > a.pub-link:active {
     color: hsla(45, 100%, 70%, 1);
     text-decoration: underline;
@@ -320,7 +444,14 @@ div.review_text,
 #writings,
 #cv {
     align-items: baseline;
-    width: min(100%, 62ch);
+    width: min(100%, var(--site-measure));
+}
+
+.text-page-heading {
+    width: min(100%, var(--site-measure));
+    margin-inline: auto;
+    box-sizing: border-box;
+    display: flow-root;
 }
 
 .home-card {
@@ -571,7 +702,7 @@ div.review_text, #writings, #cv {
     grid-template-columns: max-content minmax(0, 1fr);
     column-gap: 1rem;
     margin: 0 auto;
-    width: min(100%, 62ch);
+    width: min(100%, var(--site-measure));
     box-sizing: border-box;
     line-height: clamp(1.4, 1.5, 1.6);
     border: none;
@@ -580,7 +711,7 @@ div.review_text, #writings, #cv {
 div.review_text,
 #writings,
 #cv {
-    --review-measure: 62ch;
+    --review-measure: var(--site-measure);
     font-size: clamp(1.125rem, 2.5vmin, 1.5rem);
     width: min(100%, var(--review-measure));
 }

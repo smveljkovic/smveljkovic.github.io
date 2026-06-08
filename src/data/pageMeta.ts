@@ -1,4 +1,4 @@
-import { site } from "./site";
+import {site} from "./site";
 
 export const pageMeta = {
     home: {
@@ -20,6 +20,13 @@ export const pageMeta = {
         title: "CV",
         description: "Curriculum vitae of Stevan Veljkovic.",
         path: "/cv/",
+        ogType: "website",
+    },
+
+    pronunciation: {
+        title: "Pronunciation",
+        description: "Pronunciation of Stevan Veljkovic.",
+        path: "/pronunciation/",
         ogType: "website",
     },
 } as const;

@@ -23,7 +23,7 @@ export const primaryNav: NavItem[] = [
         },*/
 ];
 
-export const footerNav: NavItem[] = [
+export const footerLinks: NavItem[] = [
     {
         label: "Contact",
         href: "mailto:stevan@stevanveljkovic.com",

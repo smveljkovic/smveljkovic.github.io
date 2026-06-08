@@ -1,0 +1,43 @@
+---
+import {footerLinks, type NavItem} from "../data/navigation";
+
+const currentYear = new Date().getFullYear();
+const pathname = Astro.url.pathname;
+
+function isCurrent(item: NavItem) {
+    if (!item.href.startsWith("/")) return false;
+
+    const matches = item.match ?? [item.href];
+
+    return matches.some((prefix) => pathname === prefix ||
+        pathname.startsWith(prefix));
+}
+---
+
+<footer class="site-footer">
+    <div class="site-footer__inner">
+        <nav class="site-footer__nav" aria-label="Footer">
+            <ul class="site-footer__list">
+                {footerLinks.map((link) => {
+                    const current = isCurrent(link);
+
+                    return (
+                            <li class="site-footer__item">
+                                <a
+                                        href={link.href}
+                                        class:list={["site-footer__link", current && "is-current"]}
+                                        aria-current={current ? "page" : undefined}
+                                >
+                                    {link.label}
+                                </a>
+                            </li>
+                    );
+                })}
+            </ul>
+        </nav>
+
+        <p class="site-footer__note">
+            © {currentYear} Stevan Veljkovic.
+        </p>
+    </div>
+</footer>

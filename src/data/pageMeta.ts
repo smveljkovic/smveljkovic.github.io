@@ -29,4 +29,11 @@ export const pageMeta = {
         path: "/pronunciation/",
         ogType: "website",
     },
+
+    research: {
+        title: "Research",
+        description: "Research by Stevan Veljkovic.",
+        path: "/research/",
+        ogType: "website",
+    },
 } as const;

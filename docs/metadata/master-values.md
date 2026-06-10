@@ -2,7 +2,7 @@
 
 Last reviewed against `docs/project-memory/current.md`,
 `docs/project-memory/DECISIONS.md`, and `docs/project-memory/NEXT-STEPS.md` on
-2026-06-08.
+2026-06-10.
 
 This file is a human-readable metadata registry/checklist for
 `stevanveljkovic.com`. It is not automatically the code source of truth. When
@@ -59,16 +59,13 @@ currently conflicts. Do not treat them as settled canonical values until fixed.
 ## 3. Site Configuration And URL Rules
 
 Astro config should preserve:
-
+<!--@formatter:off-->
 ```js
 site: "https://stevanveljkovic.com",
-    trailingSlash
-:
-"always",
-    integrations
-:
-[sitemap(), mdx()],
+trailingSlash: "always",
+integrations: [sitemap(), mdx()],
 ```
+<!--@formatter:on-->
 
 Canonical URLs should use trailing slashes.
 
@@ -263,19 +260,19 @@ Use `isBasedOn` and/or `citation`.
 
 ### Christian Right[^*]
 
-| Field                | Current value                                                                       |
-|----------------------|-------------------------------------------------------------------------------------|
-| Route                | `/publications/reviews/christian-right-europe/`                                     |
-| WebPage `@id`        | `https://stevanveljkovic.com/publications/reviews/christian-right-europe/#webpage`  |
-| Local review `@id`   | `https://stevanveljkovic.com/publications/reviews/christian-right-europe/#review`   |
-| DOI review `@id`     | `https://doi.org/10.1093/jcs/csaf039`                                               |
-| Reviewed book DOI    | `https://doi.org/10.1515/9783839460382`                                             |
-| Periodical           | `Journal of Church and State`                                                       |
-| Volume               | `67`                                                                                |
-| Issue                | `3`                                                                                 |
-| Article ID           | `csaf039`                                                                           |
-| Issue date precision | Month precision: `2025-07`                                                          |
-| PDF path             | `/publications/reviews/christian-right-europe/veljkovic-christian-right-europe.pdf` |
+| Field                        | Current value                                                                       |
+|------------------------------|-------------------------------------------------------------------------------------|
+| Eventual route; not current  | `/publications/reviews/christian-right-europe/`                                     |
+| WebPage `@id`                | `https://stevanveljkovic.com/publications/reviews/christian-right-europe/#webpage`  |
+| Local review `@id`           | `https://stevanveljkovic.com/publications/reviews/christian-right-europe/#review`   |
+| DOI review `@id`             | `https://doi.org/10.1093/jcs/csaf039`                                               |
+| Reviewed book DOI            | `https://doi.org/10.1515/9783839460382`                                             |
+| Periodical                   | `Journal of Church and State`                                                       |
+| Volume                       | `67`                                                                                |
+| Issue                        | `3`                                                                                 |
+| Article ID                   | `csaf039`                                                                           |
+| Issue date precision         | Month precision: `2025-07`                                                          |
+| PDF; provisional, not public | `/publications/reviews/christian-right-europe/veljkovic-christian-right-europe.pdf` |
 
 The reviewed edited volume should use `editor`, not an author value containing
 `(ed.)`. `csaf039` is article ID, not pagination.
@@ -345,9 +342,7 @@ It may still appear as a bibliographic DOI item on `/publications/`.
 
 [^*]: All values to be regarded as provisional whilst review is excluded pending rights clarity.
 
-## 8. Thesis Metadata Going into Stage 4.0
-
-Decision: the thesis remains bibliography-only until Stage 4.
+## 8. Thesis Metadata in Stage 4.0
 
 Do not add a thesis page to sitemap or schema until it exists.
 

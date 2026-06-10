@@ -32,13 +32,11 @@ and immediate next work.
 
 ### `DECISIONS.md`
 
-The categorized decisions register. It records current durable decisions,
-active unresolved decisions, deferred decisions, and superseded decisions.
+The categorized decisions register. It records current durable decisions, active cautions, and deferred decisions.
 
 ### `NEXT-STEPS.md`
 
-The active operational checklist. Its main purpose is to contain current work. It may also include active checks,
-preservation rules, deferred work, and a short superseded-assumption audit.
+The active operational checklist. Its main purpose is to contain current work, active checks, and verification tasks.
 
 ### `deltas/`
 
@@ -126,10 +124,8 @@ current code, `current.md`, `DECISIONS.md`, and `NEXT-STEPS.md`.
 ## Maintenance Rules
 
 - Keep `current.md` compact and operational.
-- Keep `DECISIONS.md` categorized and explicit about final, active, deferred, and
-  superseded decisions.
+- Keep `DECISIONS.md` categorized and explicit about final, active, and deferred decisions.
 - Keep NEXT-STEPS.md primarily focused on current tasks.
-   - It may also include active checks, preservation rules, deferred work, and a short superseded-assumption audit
 - Keep `.aiassistant/rules/` concise and actionable.
 - Keep `master-values.md` current for metadata and retain contradictions in its
   staging/audit sections.

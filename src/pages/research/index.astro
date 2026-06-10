@@ -1,0 +1,80 @@
+---
+import TextPageLayout from "../../layouts/TextPageLayout.astro";
+import {pageMeta} from "../../data/pageMeta";
+
+const meta = pageMeta.research;
+---
+<TextPageLayout
+        title={meta.title}
+        description={meta.description}
+        canonicalPath={meta.path}
+        ogType={meta.ogType}
+>
+    <article class="test research-page">
+        <h1>Research</h1>
+
+        <p>
+            This page is an overview of my academic research, including published review essays, my doctoral thesis,
+            related
+            projects.
+            It is intended to serve as a compact map for the main areas of work on this site.
+        </p>
+
+        <h2>Doctoral thesis</h2>
+
+        <p>
+            My Oxford DPhil (PhD) thesis is the main research output presented here. It examines the climate-crisis idea
+            not only as a scientific description but also as a political and cultural formation. It defends the
+            hypothesis that
+            the ecological turn in society and academia responds, in part, to a perceived bankruptcy of liberalism.
+
+        </p>
+
+        <p>
+            A page at this site dedicated to the thesis is forthcoming. A bibliographic record and the full text of the
+            thesis are
+            available at Oxford’s research repository – Oxford University Research Archive (ORA) –
+            via DOI
+            <a href="https://doi.org/10.5287/ora-4rjoobkvk">10.5287/ora-4rjoobkvk</a>.
+        </p>
+
+        <h2>Research themes</h2>
+
+        <ul>
+            <li>Religion, modernity, and secularisation</li>
+            <li>Political theology and meta-narratives</li>
+            <li>Climate crisis and the ecological turn</li>
+            <li>‘Religious atavism’ in Western cultural inheritances</li>
+            <li>Theory, design, and public intellectual infrastructure</li>
+        </ul>
+
+        <h2>Publications and review essays</h2>
+
+        <p>
+            My published writing includes academic book reviews and review essays
+            across topics of religion, politics, ecology, and contemporary theory.
+        </p>
+
+        <p>
+            See the site’s <a href="/publications/">publications page</a> for a current
+            bibliography and local reproductions.
+        </p>
+
+        <h2>Seminars</h2>
+
+        <p>
+            Separately from this site, I maintain a small space presenting content from seminars I have conducted.
+        </p>
+
+        <p>
+            Visit <a href="https://seminars.stevanveljkovic.com/">seminars.stevanveljkovic.com</a>.
+        </p>
+
+        <h2>Earlier academic work</h2>
+
+        <p>
+            My earlier academic work and teaching-related material may be added here where it helps add context to this
+            research page.
+        </p>
+    </article>
+</TextPageLayout>

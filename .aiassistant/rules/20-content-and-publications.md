@@ -50,15 +50,19 @@ control
 test#writings
 ```
 
-Trusted local HTML bridge fields are acceptable as trusted local migration bridge fields; long-term refactor deferred
-but desirable.
+Trusted local HTML bridge fields remain acceptable for migration; long-term refactor is deferred.
 
 ```yaml
 citationHtml
-bylineHtml
 reuseNoteHtml
 modificationNote
 publicationList.noteHtml
+```
+
+Trusted legacy/deprecated blocks are:
+
+```yaml
+bylineHtml
 ```
 
 Use `set:html` only for trusted local migration fields.

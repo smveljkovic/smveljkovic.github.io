@@ -34,7 +34,7 @@ find dist -maxdepth 5 -type f | sort
 find dist -name "sitemap*.xml" -print -exec cat {} \;
 ```
 
-Current observed generated pages are `/`, `/cv/`, `/publications/`, and four
+Current observed generated pages are `/`, `/cv/`, `/publications/`, `/pronunciation/`, and four
 review routes: `cosmic-connections`, `evolution-of-religions`,
 `godless-crusade`, and `hell-christian-ecology`. Drafted reviews may still
 appear bibliographically on `/publications/`; verify route and sitemap state

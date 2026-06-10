@@ -5,6 +5,9 @@ For durable decisions: DECISIONS.md
 For metadata registry: docs/metadata/master-values.md
 For operational AI rules: .aiassistant/rules/
 
+- Active repo project memory should remain compact and operational. Expanded/trimmed material in
+  `~/Projects/website-admin/project-memory-materials` is contextual background, not a co-equal canonical source.
+
 ## 1. Project status
 
 - Project: Stevan Veljkovic’s personal academic/professional Astro website, intended as a durable academic/research hub.
@@ -14,9 +17,18 @@ For operational AI rules: .aiassistant/rules/
 - Current working branch for Stage 4.0: `stage-4-0`
 - Production branch: `main` (`origin/main` deploys to Netlify)
 - Git remote `origin`: `https://github.com/smveljkovic/smveljkovic.github.io.git`
-- Stage 3 is complete.
-- Current phase: Stage 4.0 planning / core architecture and design foundation.
+- Current phase: Stage 4.1b research hub work within Stage 4.0 core architecture / design foundation.
 - Site is live at `https://stevanveljkovic.com/`.
+- Stage 4.1a shell v1 is live:
+   - global header
+   - footer
+   - stable primary/footer navigation
+   - `/pronunciation/` page
+   - homepage pronunciation link updated to `/pronunciation/`
+   - old external IPA Reader link removed
+   - inherited homepage nav/icon block removed/deferred
+   - link/focus/current-page behaviour tuned
+
 - Production host: Netlify, deploying from `origin/main`.
 - Netlify build settings:
   ```text
@@ -40,14 +52,17 @@ If the exact Node patch causes trouble, use `22`.
   ```
 - GitHub Pages deployment for the Astro site is retired; `public/CNAME` and `.github/workflows/deploy.yml` are no longer
   part of the active deployment model.
-- Latest observed `dist/` snapshot: static Astro site, 7 pages:
+- Expected generated/live route set before `/research/`: static Astro site, 8 pages:
    - `/`
    - `/cv/`
    - `/publications/`
+   - `/pronunciation/`
    - `/publications/reviews/cosmic-connections/`
    - `/publications/reviews/evolution-of-religions/`
    - `/publications/reviews/godless-crusade/`
    - `/publications/reviews/hell-christian-ecology/`
+- `Research` should remain absent from live primary navigation until `/research/` exists.
+
 - Current code has `challenging-modernity` and `christian-right-europe` drafted / withheld from page generation.
 - Withheld review image / material folders temporarily live at `~/Projects/website-admin/withheld-images-folders/`.
 
@@ -78,6 +93,7 @@ If the exact Node patch causes trouble, use `22`.
    - `src/pages/cv/index.astro` → `/cv/`
    - `src/pages/publications/index.astro` → `/publications/`
    - `src/pages/publications/reviews/[slug]/index.astro` → `/publications/reviews/<slug>/`
+   - `src/pages/pronunciation/index.astro` → `/pronunciation/`
 - Review pages are content-collection driven from `src/content/reviews/*.md`.
 - Current review route generates only non-draft reviews. Draft review pages are not generated locally unless temporarily
   made non-draft.
@@ -107,15 +123,14 @@ If the exact Node patch causes trouble, use `22`.
    - `src/lib/schema/person.ts`
    - `src/lib/schema/review.ts`
 
-   - Stage 4.1 site-shell work is expected to involve:
-      - `src/data/navigation.ts`
-      - `src/components/SiteHeader.astro`
-      - `src/components/SiteFooter.astro`
-      - `src/layouts/BaseLayout.astro`
-      - `src/styles/global.css`
-   - A basic global header exists locally. `Research` should remain absent/commented out in live primary navigation
-     until
-     `/research/` exists.
+- Stage 4.1a shell v1 is implemented/live and involved:
+   - `src/data/navigation.ts`
+   - `src/components/SiteHeader.astro`
+   - `src/components/SiteFooter.astro`
+   - `src/layouts/BaseLayout.astro`
+   - `src/pages/pronunciation/index.astro`
+   - `src/styles/global.css`
+- `Research` should remain absent/commented out in live primary navigation until `/research/` exists.
 
 ## 3. Content model, schema, and metadata
 
@@ -209,17 +224,21 @@ If the exact Node patch causes trouble, use `22`.
 ## 4. Design, typography, and layout decisions
 
 - Adapt the migrated visual identity going into Stage 4.0
-- Current homepage identity in code:
+- Current homepage identity in code remains sparse:
   ```text
   Stevan Veljkovic
   Theory and design,
   Oxford, England.
+  [pronunciation line linking to /pronunciation/]
   ```
-- Inherited / artefactual homepage nav labels:
-   - Contact
-   - Résumé
-   - Writing
-   - Seminars
+- `/pronunciation/` is the canonical local pronunciation page. V1 uses broad practical English guidance:
+  ```text
+  /ˈstɛv(ə)n ˈvɛl.kə.vɪk/
+  ```
+  The first syllable is `STEV`, not `STEEV`; do not describe it as pronounced like “Steven” or “Steve”. Use IPA `ɛ`,
+  not Greek `ε`.
+
+
 - Stage 4.1 primary navigation is settled as:
   ```text
   Stevan Veljkovic → /
@@ -369,9 +388,7 @@ If the exact Node patch causes trouble, use `22`.
 - Deployment is now Netlify, not GitHub Pages.
    - Netlify was chosen over Cloudflare Pages after test deployments because it gives a frictionless deploy workflow,
      real redirects, private-repo-capable deployment, and lower conceptual overhead.
-   - Cloudflare remains a possible future option, but is not needed now.
-      - Note: Cloudflare was found to be generally preferable on the basis of site style and feel.
-      - But site style and feel were determined to be immaterial to the present aims.
+   - Cloudflare remains plausible later, but current aims favour Netlify simplicity.
    - No Netlify Functions, SSR, adapter change, framework migration, or Cloudflare adapter configuration is intended.
 - Keep the apex domain as canonical despite Netlify’s recommendation to prefer `www` for optimal CDN behaviour.
 - Keep DNS hosted at Hover for now; do not move DNS to Netlify for the foreseeable future.
@@ -402,6 +419,14 @@ If the exact Node patch causes trouble, use `22`.
      ```
 
 ## 7. Known issues, cautions, and unresolved questions
+
+- Verify the old W3 validator image-path issue is gone or fix the offending reference:
+  ```text
+  /images/Asset 1.png
+  ```
+- For Netlify 404 spikes, likely bot-scanning paths returning `404` are not by themselves an incident. Investigate if
+  sensitive-looking paths return `200`, and keep `dist/`, `public/`, and the public repo free of secrets or
+  rights-sensitive unintended assets.
 
 - **T&F rights caution:** no Taylor & Francis Version-of-Record page should go
   live until T&F / CCC confirms permission. Current code has
@@ -455,29 +480,16 @@ If the exact Node patch causes trouble, use `22`.
 
 ## 8. Immediate next steps
 
-1. Continue Stage 4.1 shell work on `stage-4-0`.
-2. Finish “4.1a shell v1” before merging to `main`:
-   * header;
-   * footer;
-   * stable primary and secondary navigation;
-   * no broken links;
-   * no `Research` primary-nav link until `/research/` exists;
-   * narrow/mobile layout;
-   * active/current-page state;
-   * accessible markup and visible keyboard focus.
-3. Implement footer links:
-   ```text
-   Contact / ORCID / Google Scholar / GitHub / Pronunciation / Seminars
-   ```
-4. Create `/research/` as a compact hub.
-5. Once `/research/` exists, add `Research → /research/` to primary nav.
-6. Add only a short Seminars bridge on `/research/` if it fits naturally.
-7. Then implement the thesis page:
+1. Continue Stage 4.1b work on `stage-4-0`: create `/research/` as a compact hub.
+2. Once `/research/` exists, add `Research → /research/` to primary nav.
+3. Add only a short Seminars bridge on `/research/` if it fits naturally.
+4. Then implement the thesis page:
    ```text
    /research/doctoral-thesis/religious-atavism-climate-crisis/
    ```
-8. Before merging any Stage 4.0 increment to `main`, run:
+5. Before merging any Stage 4.0 increment to `main`, run:
    ```bash
+   npx astro sync
    npx astro check
    npm run build
    npm run preview
@@ -487,12 +499,16 @@ If the exact Node patch causes trouble, use `22`.
    /
    /cv/
    /publications/
+   /pronunciation/
    /publications/reviews/cosmic-connections/
    /publications/reviews/evolution-of-religions/
    /publications/reviews/godless-crusade/
    /publications/reviews/hell-christian-ecology/
    /research/   once created
    ```
+6. Confirm sitemap includes `/pronunciation/` and still excludes `/research/` until that page exists.
+7. Verify/fix the old W3 image-path issue if still present.
+8. Update the `hell-christian-ecology` publication citation to use the `doi.org` address.
 
 ## 9. Details that should not be lost
 

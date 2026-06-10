@@ -15,12 +15,11 @@ export const primaryNav: NavItem[] = [
         href: "/publications/",
         match: ["/publications/"],
     },
-    /* awaiting implementation
-        {
-            label: "Research",
-            href: "/research/",
-            match: ["/research/"],
-        },*/
+    {
+        label: "Research",
+        href: "/research/",
+        match: ["/research/"],
+    },
 ];
 
 export const footerLinks: NavItem[] = [

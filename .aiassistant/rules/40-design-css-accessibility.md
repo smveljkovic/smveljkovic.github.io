@@ -4,9 +4,6 @@ apply: always
 
 # Design, CSS, And Accessibility
 
-Inherited / artefactual homepage labels: Contact, Résumé, Writing, Seminars.
-Do not treat these as current primary navigation.
-
 Stage 4.1 primary nav:
 Stevan Veljkovic -> /
 CV -> /cv/
@@ -58,25 +55,13 @@ Homepage identity currently shown in code:
 Stevan Veljkovic
 Theory and design,
 Oxford, England.
+[pronunciation: /ˈstɛv(ə)n ˈvɛl.kə.vɪk/]
 ```
 
-Historical/inherited homepage navigation labels and targets:
-
-```text
-Contact  -> mailto derived from site.email
-Résumé   -> /cv/
-Writing  -> /publications/
-Seminars -> https://seminars.stevanveljkovic.com/
-```
+- `pronunciation` text links to /pronunciation/ page
+- in transcription guidance use IPA ɛ, not Greek ε
 
 Current canonical `site.email` is `stevan@stevanveljkovic.com`.
-
-Pronunciation link and display:
-
-```text
-https://ipa-reader.com/?text=stεv(%C9%99)n&voice=Brian
-/ˈstεv(ə)n ˈvεlˌkəːvɪk/
-```
 
 Use:
 

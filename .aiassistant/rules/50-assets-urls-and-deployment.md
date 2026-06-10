@@ -46,9 +46,8 @@ Temporarily removed withheld-review materials currently live at:
 ~/Projects/website-admin/withheld-images-folders/
 ```
 
-Active caution: code still references `/images/headshot-1200x630.png` in places,
-while the selected public tree shows `.JPG`. Verify generated output and fix the
-broken side during Stage 4.0 verification/cleanup.
+Possible mismatch: inspect whether code/generated output references .png while public tree has .JPG. Verify generated
+output and fix the broken side during Stage 4.0 verification/cleanup.
 
 Preferred review image convention:
 

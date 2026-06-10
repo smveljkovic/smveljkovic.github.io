@@ -22,38 +22,7 @@ here onward.
 - `stage-4-0` = Stage 4.0 integration branch.
 - Merge only coherent public release units.
 
-## 1. Stage 4.1 Site Shell
-
-1. **Finish 4.1a shell v1 before deployment**
-   - header;
-   - footer;
-   - stable primary and secondary navigation;
-   - no broken links;
-   - no `Research` primary-nav link until `/research/` exists;
-   - desktop and narrow/mobile layout;
-   - active/current-page state;
-   - accessible markup;
-   - visible keyboard focus.
-
-2. **Use settled primary navigation**
-   ```text
-   Stevan Veljkovic → /
-   CV → /cv/
-   Publications → /publications/
-   Research → /research/   only once /research/ exists
-   ```
-
-3. **Implement footer / secondary navigation**
-   ```text
-   Contact → mailto:stevan@stevanveljkovic.com
-   ORCID → https://orcid.org/0000-0002-2599-3227
-   Google Scholar → https://scholar.google.com/citations?user=e42TN4UAAAAJ
-   GitHub → https://github.com/smveljkovic
-   Pronunciation → /pronunciation/
-   Seminars → https://seminars.stevanveljkovic.com/
-   ```
-
-## 2. Stage 4.1b Research Hub And Later Stage 4 Work
+## 1. Stage 4.1b Research Hub And Later Stage 4 Work
 
 1. **Create `/research/` as a compact hub**
    - It should be a map/signposting page, not an essay or manifesto.
@@ -75,8 +44,12 @@ here onward.
    ```text
    /research/doctoral-thesis/religious-atavism-climate-crisis/
    ```
+   - Primary thesis ID:
+     ```text
+     https://doi.org/10.5287/ora-4rjoobkvk
+     ```
 
-## 3. Continuing Verification Pass
+## 2. Continuing Verification Pass
 
 1. **Run project checks**
    ```bash
@@ -90,23 +63,25 @@ here onward.
 
    Inspect before merging a Stage 4.0 release unit to `main`:
 
-     ```text
-     /
-     /cv/
-     /publications/
-     /publications/reviews/cosmic-connections/
-     /publications/reviews/evolution-of-religions/
-     /publications/reviews/godless-crusade/
-     /publications/reviews/hell-christian-ecology/
-     /research/   once created
-     ```
+   ```text
+   /
+   /cv/
+   /publications/
+   /pronunciation/
+   /publications/reviews/cosmic-connections/
+   /publications/reviews/evolution-of-religions/
+   /publications/reviews/godless-crusade/
+   /publications/reviews/hell-christian-ecology/
+   /research/   once created
+   ```
 
 2. **Confirm generated route set**
-   - Current observed `dist/` snapshot contains 7 pages:
+   - Expected generated/live route set before `/research/` contains 8 pages:
      ```text
      /
      /cv/
      /publications/
+     /pronunciation/
      /publications/reviews/cosmic-connections/
      /publications/reviews/evolution-of-religions/
      /publications/reviews/godless-crusade/
@@ -122,8 +97,8 @@ here onward.
    find dist -name "sitemap*.xml" -print -exec cat {} \;
    ```
 
-   Confirm only intended live canonical pages appear. Current expected sitemap
-   entries are the seven generated routes above.
+   Confirm only intended live canonical pages appear. Current expected sitemap entries are the eight generated routes
+   above. Confirm `/pronunciation/` is included and `/research/` remains absent until implemented.
 
 4. **Verify generated-page asset references**
    - PDFs.
@@ -160,6 +135,11 @@ here onward.
      ```
 
 6. **Validate HTML / accessibility basics**
+   - Verify the old invalid image path issue is gone or fix the offending reference if still present:
+       ```text
+       /images/Asset 1.png
+       ```
+   - Footer navigation should not reuse `aria-label="Primary"`; use a separate label such as `Footer` or `Secondary`.
    - Use:
      ```text
      https://validator.w3.org/
@@ -171,7 +151,7 @@ here onward.
      ```
    - Internal CV links should not use `target="_blank"`.
 
-## 4. Content And Metadata Cleanup
+## 3. Content And Metadata Cleanup
 
 1. **Fix schema / frontmatter mismatches where fields are meant to matter**
    - Check any frontmatter keys not declared in `src/content.config.ts`.
@@ -209,21 +189,12 @@ here onward.
      gtag("config", "G-7VMGXMNZZ0")
      ```
    - Fine if matching, but not DRY.
+6. **Update `hell-christian-ecology` citation DOI URL**
+   - Update the `/publications/` citation for `hell-christian-ecology` to use the `doi.org` address.
+7. **Check link contrast, especially blue/purple on the dark background**
+   - but do not keep tuning link styles unless a real contrast or usability issue is found.
 
-## 5. Deployment, DNS, And Legacy URLs
+## 4. Deployment, DNS, And Legacy URLs
 
 Before release, verify Netlify deploy, apex/www redirects, sitemap, and forced legacy redirects.
 
-## 6. Later Stage 4.0 Work
-
-1. **Thesis page**
-   - Thesis page is in Stage 4.0 scope.
-   - Do not create, link, advertise, sitemap, or schema-link the route until the page exists.
-   - Route settled:
-     ```text
-     /research/doctoral-thesis/religious-atavism-climate-crisis/
-     ```
-   - Primary thesis ID:
-     ```text
-     https://doi.org/10.5287/ora-4rjoobkvk
-      ```

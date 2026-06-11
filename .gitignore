@@ -6,3 +6,4 @@ _notes/
 /node_modules/
 /.DS_Store
 /website-web-resources/.DS_Store
+.idea/

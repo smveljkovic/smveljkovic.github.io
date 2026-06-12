@@ -591,4 +591,29 @@ If the exact Node patch causes trouble, use `22`.
   ~/Projects/website-admin/stage-4/plan-mission-note.md
   ```
 
+## 10. Recent additions for disaggregation
+
+### SEO / page-description strategy
+
+- Distinguish ordinary SEO metadata from JSON-LD structured data.
+- Search-result snippet control primarily depends on `<meta name="description">`, page title, and
+  visible page content, not JSON-LD.
+- For canonical pages, prefer hand-authored page descriptions of roughly 130–170 characters where
+  possible.
+- Use specific, display-ready descriptions rather than generic strings such as “Research by Stevan
+  Veljkovic.”
+- The review pages and homepage already follow this more deliberate description strategy.
+- Apply the same strategy to `/research/`, `/pronunciation/`, `/cv/`, `/publications/`, and the
+  future thesis page.
+- It is acceptable for simple text pages not to have JSON-LD initially, provided title, canonical
+  URL, and meta description are present.
+
+### Metadata issue to verify
+
+- Checked Open Graph / Twitter image path.
+- Rendered metadata showed `/images/headshot-1200x630.png`, while the public tree may
+  contain `/images/headshot-1200x630.JPG`.
+- Verified live URL and updated `src/data/site.ts`
+- Renamed image file to match `.jpg` extension
+- Committed and pushed to main
 

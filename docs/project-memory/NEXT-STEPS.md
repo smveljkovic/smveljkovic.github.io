@@ -198,3 +198,10 @@ here onward.
 
 Before release, verify Netlify deploy, apex/www redirects, sitemap, and forced legacy redirects.
 
+## 5. Repository hygiene / archival cleanup
+
+- Later: review `smvsite-base` and old branches now that the Astro site deploys from `main` to
+  Netlify.
+- Decide whether to archive / remove obsolete branches, make the repo private, or add a clearer
+  README.
+- Confirm no old branch / deployment path is still serving public content before deleting anything.

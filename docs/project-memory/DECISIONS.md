@@ -443,4 +443,3 @@ as authoritative when they conflict with older notes.
 - **Trusted HTML migration is deferred.**  
   **Future question:** whether review bodies remain Markdown with raw HTML, move to MDX, or become more semantic
   Markdown.
-

@@ -2,7 +2,7 @@
 
 Last reviewed against `docs/project-memory/current.md`,
 `docs/project-memory/DECISIONS.md`, and `docs/project-memory/NEXT-STEPS.md` on
-2026-06-10.
+2026-06-15.
 
 This file is a human-readable metadata registry/checklist for
 `stevanveljkovic.com`. It is not automatically the code source of truth. When
@@ -75,6 +75,8 @@ https://stevanveljkovic.com/
 https://stevanveljkovic.com/cv/
 https://stevanveljkovic.com/publications/
 https://stevanveljkovic.com/publications/reviews/cosmic-connections/
+https://stevanveljkovic.com/pronunciation/
+https://stevanveljkovic.com/research/
 ```
 
 Use URL helpers instead of manual concatenation:
@@ -147,15 +149,18 @@ og:site_name
 
 ## 5. Stable JSON-LD Node IDs
 
-| Node                 | Canonical ID                                                       |
-|----------------------|--------------------------------------------------------------------|
-| Person               | `https://orcid.org/0000-0002-2599-3227`                            |
-| WebSite              | `https://stevanveljkovic.com/#website`                             |
-| Homepage WebPage     | `https://stevanveljkovic.com/#webpage`                             |
-| Publications WebPage | `https://stevanveljkovic.com/publications/#webpage`                |
-| CV WebPage           | `https://stevanveljkovic.com/cv/#webpage`                          |
-| Review WebPage       | `https://stevanveljkovic.com/publications/reviews/<slug>/#webpage` |
-| Local review node    | `https://stevanveljkovic.com/publications/reviews/<slug>/#review`  |
+| Node                 | Canonical ID                                                                                     |
+|----------------------|--------------------------------------------------------------------------------------------------|
+| Person               | `https://orcid.org/0000-0002-2599-3227`                                                          |
+| WebSite              | `https://stevanveljkovic.com/#website`                                                           |
+| Homepage WebPage     | `https://stevanveljkovic.com/#webpage`                                                           |
+| Publications WebPage | `https://stevanveljkovic.com/publications/#webpage`                                              |
+| CV WebPage           | `https://stevanveljkovic.com/cv/#webpage`                                                        |
+| Review WebPage       | `https://stevanveljkovic.com/publications/reviews/<slug>/#webpage`                               |
+| Local review node    | `https://stevanveljkovic.com/publications/reviews/<slug>/#review`                                |
+| Research WebPage     | `https://stevanveljkovic.com/research/#webpage`                                                  |
+| Thesis entity        | `https://doi.org/10.5287/ora-4rjoobkvk`                                                          |
+| Thesis WebPage       | `https://stevanveljkovic.com/research/doctoral-thesis/religious-atavism-climate-crisis/#webpage` |
 
 DOI URLs should be primary IDs for DOI-bearing works and published
 articles/reviews.
@@ -210,7 +215,19 @@ Homepage title-like metadata should not expand the site name beyond
 | Person `@id`  | `https://orcid.org/0000-0002-2599-3227`   |
 | PDF path      | `/cv/veljkovic-cv.pdf`                    |
 
-Do not link CV schema to a non-existent local thesis page.
+Do not link CV schema to the local thesis page until that page exists.
+
+### Research
+
+| Field         | Current value / rule                            |
+|---------------|-------------------------------------------------|
+| Route         | `/research/`                                    |
+| Canonical URL | `https://stevanveljkovic.com/research/`         |
+| `<title>`     | `Research \| Stevan Veljkovic`                  |
+| WebPage `@id` | `https://stevanveljkovic.com/research/#webpage` |
+| `og:type`     | `website`                                       |
+
+Current description in `pageMeta.ts` is generic and tracked for cleanup.
 
 ## 7. Review Page Metadata
 
@@ -356,9 +373,10 @@ It may still appear as a bibliographic DOI item on `/publications/`.
 
 [^*]: All values to be regarded as provisional whilst review is excluded pending rights clarity.
 
-## 8. Thesis Metadata in Stage 4.0
+## 8. Thesis Metadata for Stage 4.2
 
-Do not add a thesis page to sitemap or schema until it exists.
+Do not add the thesis page to sitemap or schema until it exists. Current generated/live route count before the thesis
+page is 9; once implemented, expected route count becomes 10.
 
 | Field                             | Current value                                                                                |
 |-----------------------------------|----------------------------------------------------------------------------------------------|
@@ -369,6 +387,15 @@ Do not add a thesis page to sitemap or schema until it exists.
 | Oxford Research Archive local pid | `pubs:1624720`                                                                               |
 | Title                             | `Religious atavism and the climate crisis, with reference to Taylor and Rorty on liberalism` |
 | Type                              | `Thesis`                                                                                     |
+| Author                            | `Stevan Veljkovic`                                                                           |
+| Institution                       | `University of Oxford`                                                                       |
+| Degree                            | `DPhil / PhD`                                                                                |
+| Year                              | `2023`                                                                                       |
+| Deposit date                      | `2024-02-11`                                                                                 |
+| Copyright year                    | `2023`                                                                                       |
+| Licence                           | `CC BY 4.0`                                                                                  |
+| Supervisors                       | `Friederike Otto`; `Johannes Zachhuber`                                                      |
+| Examiners                         | `Douglas Hedley`; `Gavin Flood`                                                              |
 
 Local thesis route:
 `/research/doctoral-thesis/religious-atavism-climate-crisis/`
@@ -382,9 +409,23 @@ ARK rule:
 - do not use the ARK as the primary `@id`;
 - do not use the ARK as `sameAs` while the DOI exists.
 
+Abstract source rule:
+
+- use ORA / DOI metadata as the abstract source for v1;
+- do not describe the abstract as transcribed from the PDF unless the PDF text is used and checked directly.
+
+Local PDF rule:
+
+- local thesis PDF may be hosted under CC BY 4.0 if verified;
+- choose a stable path/filename;
+- verify generated/live link before release.
+
 Do not automatically set thesis `datePublished` to a deposit date without first
 deciding whether it means award date, completion/submission date, repository
 deposit date, DOI publication date, or repository availability date.
+
+Current expected generated/live route set before the thesis page contains 9 pages, including `/research/`. Once
+`/research/doctoral-thesis/religious-atavism-climate-crisis/` is implemented, expected route count becomes 10.
 
 ## 9. Date, Pagination, And Issue Rules
 
@@ -497,7 +538,7 @@ operational values:
 | Only Cosmic Connections and Christian Right as generated review pages | Superseded; six review routes exist; four currently build; two are excluded.                                                                 |
 | Godless, Hell, Challenging Modernity as merely planned draft pages    | Superseded; content files exist, but christian-right-europe and challenging-modernity routes are currently excluded pending rights clarity.  |
 | `src/content/publication-items/phd-thesis.md`                         | Current thesis publication item is `religious-atavism-climate-crisis.md`.                                                                    |
-| Thesis page as immediate Stage 3 task                                 | settled route; implementation pending.                                                                                                       |
+| Thesis page as immediate Stage 3 task                                 | Superseded; thesis page is active Stage 4.2 work with settled route and implementation pending.                                              |
 
 ## 13. Other naming decisions
 

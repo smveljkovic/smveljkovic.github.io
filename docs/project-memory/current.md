@@ -17,7 +17,7 @@ For operational AI rules: .aiassistant/rules/
 - Current working branch for Stage 4.0: `stage-4-0`
 - Production branch: `main` (`origin/main` deploys to Netlify)
 - Git remote `origin`: `https://github.com/smveljkovic/smveljkovic.github.io.git`
-- Current phase: Stage 4.1b research hub work within Stage 4.0 core architecture / design foundation.
+- Current phase: Stage 4.2 thesis page v1 within Stage 4.0 core architecture / design foundation.
 - Site is live at `https://stevanveljkovic.com/`.
 - Stage 4.1a shell v1 is live:
    - global header
@@ -28,7 +28,12 @@ For operational AI rules: .aiassistant/rules/
    - old external IPA Reader link removed
    - inherited homepage nav/icon block removed/deferred
    - link/focus/current-page behaviour tuned
-
+- Stage 4.1b research hub v1 is complete/live:
+   - `/research/` exists as a compact research/signposting hub.
+   - `Research → /research/` is live in primary navigation.
+   - The generated sitemap/route set now includes `/research/`.
+   - `main` contains the Stage 4.1b release and is deployed on Netlify.
+   - `stage-4-0` has been updated from `main` and left clean.
 - Production host: Netlify, deploying from `origin/main`.
 - Netlify build settings:
   ```text
@@ -52,16 +57,17 @@ If the exact Node patch causes trouble, use `22`.
   ```
 - GitHub Pages deployment for the Astro site is retired; `public/CNAME` and `.github/workflows/deploy.yml` are no longer
   part of the active deployment model.
-- Expected generated/live route set before `/research/`: static Astro site, 8 pages:
+- Expected generated/live route set before the thesis page: static Astro site, 9 pages:
    - `/`
    - `/cv/`
    - `/publications/`
    - `/pronunciation/`
+   - `/research/`
    - `/publications/reviews/cosmic-connections/`
    - `/publications/reviews/evolution-of-religions/`
    - `/publications/reviews/godless-crusade/`
    - `/publications/reviews/hell-christian-ecology/`
-- `Research` should remain absent from live primary navigation until `/research/` exists.
+- Once the thesis page is implemented, expected generated/live route count becomes 10.
 
 - Current code has `challenging-modernity` and `christian-right-europe` drafted / withheld from page generation.
 - Withheld review image / material folders temporarily live at `~/Projects/website-admin/withheld-images-folders/`.
@@ -130,7 +136,13 @@ If the exact Node patch causes trouble, use `22`.
    - `src/layouts/BaseLayout.astro`
    - `src/pages/pronunciation/index.astro`
    - `src/styles/global.css`
-- `Research` should remain absent/commented out in live primary navigation until `/research/` exists.
+- Stage 4.1b research hub v1 is implemented/live and involved:
+   - `src/pages/research/`
+   - `src/data/navigation.ts`
+   - `src/data/pageMeta.ts`
+   - `src/pages/index.astro`
+   - `src/styles/global.css`
+- `Research → /research/` is now live in primary navigation because `/research/` exists.
 
 ## 3. Content model, schema, and metadata
 
@@ -228,6 +240,11 @@ If the exact Node patch causes trouble, use `22`.
    - `reuseNoteHtml`
    - `modificationNote`
    - `publicationList.noteHtml`
+- Current canonical social image asset/URL:
+  ```text
+  /images/headshot-1200x630.jpg
+  ```
+  Home/CV JSON-LD should still be checked for stale `.png` references.
 
 ## 4. Design, typography, and layout decisions
 
@@ -247,14 +264,13 @@ If the exact Node patch causes trouble, use `22`.
   not Greek `ε`.
 
 
-- Stage 4.1 primary navigation is settled as:
+- Stage 4.1 primary navigation is implemented/live as:
   ```text
   Stevan Veljkovic → /
   CV → /cv/
   Publications → /publications/
   Research → /research/
   ```
-- `Research` must not be exposed in live primary navigation until `/research/` exists.
 - Avoid primary-nav `Contact` unless a real `/contact/` page exists.
 - Avoid putting `Seminars` in primary navigation for now.
 
@@ -484,38 +500,46 @@ If the exact Node patch causes trouble, use `22`.
   ```
 - Keep the redirects forced (`301!`) while physical legacy files remain, because otherwise Netlify may serve existing
   files with `200`.
+- `/research/` currently uses CSS-generated section numbering. This is acceptable for now, but if stricter
+  accessibility is needed later, use explicit markup, e.g. an `aria-hidden` number span.
+- Minor typography cautions remain:
+   - homepage pronunciation brackets may be optically imperfect;
+   - Meta Serif roman/italic boundaries can show awkward spacing in some phrases.
+     Treat these as bounded micro-fixes only if they recur or become visibly distracting.
 
 ## 8. Immediate next steps
 
-1. Continue Stage 4.1b work on `stage-4-0`: create `/research/` as a compact hub.
-2. Once `/research/` exists, add `Research → /research/` to primary nav.
-3. Add only a short Seminars bridge on `/research/` if it fits naturally.
-4. Then implement the thesis page:
+1. Implement the Stage 4.2 thesis page:
    ```text
    /research/doctoral-thesis/religious-atavism-climate-crisis/
    ```
-5. Before merging any Stage 4.0 increment to `main`, run:
+2. Build the page from a factual thesis metadata inventory and a modest content structure:
+   - title / metadata block;
+   - short authored “About this thesis” overview;
+   - abstract;
+   - citation;
+   - resources;
+   - identifiers;
+   - supervision and examination;
+   - licence / PDF availability.
+3. Add an authored, snippet-length `pageMeta` description for the thesis page.
+4. If hosting the local thesis PDF, choose a stable path/filename, confirm CC BY 4.0 permission, and verify the
+   generated/live link.
+5. Add thesis-page JSON-LD after the page content is settled:
+   - `WebPage` with `mainEntity` thesis;
+   - DOI URL as primary thesis `@id`;
+   - ARK and ORA identifiers;
+   - date-only values.
+6. Once the thesis page exists, link it from `/research/`.
+7. Continue page-description cleanup and stale `.png` JSON-LD checks.
+8. Before merging any Stage 4.0 increment to `main`, run:
    ```bash
    npx astro sync
    npx astro check
    npm run build
    npm run preview
    ```
-   Inspect:
-   ```text
-   /
-   /cv/
-   /publications/
-   /pronunciation/
-   /publications/reviews/cosmic-connections/
-   /publications/reviews/evolution-of-religions/
-   /publications/reviews/godless-crusade/
-   /publications/reviews/hell-christian-ecology/
-   /research/   once created
-   ```
-6. Confirm sitemap includes `/pronunciation/` and still excludes `/research/` until that page exists.
-7. Verify/fix the old W3 image-path issue if still present.
-8. Update the `hell-christian-ecology` publication citation to use the `doi.org` address.
+   Inspect the 9 current routes plus the thesis page once implemented.
 
 ## 9. Details that should not be lost
 
@@ -593,6 +617,39 @@ If the exact Node patch causes trouble, use `22`.
   Oxford Research Archive pubs id: 1624720
   Oxford Research Archive local pid: pubs:1624720
   ```
+- Thesis title:
+  ```text
+  Religious atavism and the climate crisis, with reference to Taylor and Rorty on liberalism
+  ```
+
+- Formal thesis citation:
+  ```text
+  Veljkovic, Stevan. ‘Religious atavism and the climate crisis, with reference to Taylor and Rorty on liberalism.’ PhD thesis, University of Oxford, 2023. https://doi.org/10.5287/ora-4rjoobkvk.
+  ```
+
+- Thesis metadata for Stage 4.2:
+  ```text
+  Author: Stevan Veljkovic
+  Institution: University of Oxford
+  Degree: DPhil / PhD
+  Year: 2023
+  Deposit date: 2024-02-11
+  Copyright year: 2023
+  Licence: CC BY 4.0
+  DOI: https://doi.org/10.5287/ora-4rjoobkvk
+  ORA URL: https://ora.ox.ac.uk/objects/uuid:7aff13dc-075e-4c17-bee9-5adfc1b2fcf4
+  ARK: ark:/29072/ora_7aff13dc075e4c17bee95adfc1b2fcf4
+  ORA pubs id: 1624720
+  ORA local pid: pubs:1624720
+  Supervisors: Friederike Otto; Johannes Zachhuber
+  Examiners: Douglas Hedley; Gavin Flood
+  ```
+
+- Thesis abstract handling:
+   - Use the Oxford Research Archive / DOI metadata version of the abstract on the local thesis page.
+   - Do not describe the abstract as transcribed from the PDF unless the PDF text is being used and checked directly.
+   - Treat ORA as the stable source for thesis-page metadata unless a later correction changes the public record.
+
 - Stage 4.0 mission / planning note lives outside the repo:
   ```text
   ~/Projects/website-admin/stage-4/plan-mission-note.md

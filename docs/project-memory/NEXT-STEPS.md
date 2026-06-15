@@ -22,35 +22,63 @@ here onward.
 - `stage-4-0` = Stage 4.0 integration branch.
 - Merge only coherent public release units.
 
-## 1. Stage 4.1b Research Hub And Later Stage 4 Work
+## 1. Stage 4.2 Thesis Page V1
 
-1. **Create `/research/` as a compact hub**
-   - It should be a map/signposting page, not an essay or manifesto.
-   - Give the doctoral thesis pride of place.
-   - Separate outputs from themes.
-   - Do not apologise for lack of conventional research articles.
-   - Keep v1 modest.
-
-2. **Expose Research in primary nav only after `/research/` exists**
-   ```text
-   Research → /research/
-   ```
-
-3. **Add a short Seminars bridge only if it fits naturally**
-   - Keep `https://seminars.stevanveljkovic.com/` separate.
-   - Do not import seminar PDFs/assets into the main Astro site during Stage 4.1.
-
-4. **Then implement the thesis page**
+1. **Implement the thesis page**
    ```text
    /research/doctoral-thesis/religious-atavism-climate-crisis/
    ```
-   - Primary thesis ID:
-     ```text
-     https://doi.org/10.5287/ora-4rjoobkvk
-     ```
-5. **Do various metadata clean-up and refinements**
-   - Implement specific hand-authored meta descriptions on all pages, not generic
-     strings like `Research by Stevan Veljkovic.`
+
+2. **Use the gathered thesis metadata**
+   - title;
+   - DOI;
+   - ORA URL;
+   - ARK;
+   - ORA IDs;
+   - deposit date;
+   - copyright year;
+   - CC BY 4.0 licence;
+   - citation;
+   - supervisors;
+   - examiners;
+   - PDF/download policy.
+
+3. **Use the agreed thesis page structure**
+   - title / metadata block;
+   - short authored “About this thesis” overview;
+   - abstract;
+   - citation;
+   - resources;
+   - identifiers;
+   - supervision and examination;
+   - licence / PDF availability.
+
+4. **Use the ORA / DOI metadata abstract**
+   - Use ORA / DOI metadata as the abstract source for v1.
+   - Do not describe the abstract as transcribed from the PDF unless the PDF text is used and checked directly.
+
+5. **Add thesis-page SEO metadata**
+   - Add an authored, snippet-length `pageMeta` description.
+   - Avoid generic descriptions.
+
+6. **Add the local thesis PDF only if hosting is verified**
+   - Choose a stable path/filename.
+   - Confirm CC BY 4.0 permission.
+   - Verify the generated/live link.
+
+7. **Add thesis-page JSON-LD**
+   - `WebPage` with `mainEntity` thesis.
+   - DOI URL as primary thesis `@id`.
+   - Include ARK and ORA identifiers.
+   - Use date-only values.
+   - Validate rendered page source.
+
+8. **Link the thesis page from `/research/` only once implemented**
+
+9. **Continue metadata polish**
+   - Improve generic page descriptions for `/research/`, `/pronunciation/`, `/cv/`, and `/publications/`.
+   - Confirm `<meta name="description">` renders.
+   - Check stale `.png` JSON-LD references.
 
 ## 2. Continuing Verification Pass
 
@@ -67,41 +95,41 @@ here onward.
    Inspect before merging a Stage 4.0 release unit to `main`:
 
    ```text
-   /
-   /cv/
-   /publications/
-   /pronunciation/
-   /publications/reviews/cosmic-connections/
-   /publications/reviews/evolution-of-religions/
-   /publications/reviews/godless-crusade/
-   /publications/reviews/hell-christian-ecology/
-   /research/   once created
+     /
+     /cv/
+     /publications/
+     /pronunciation/
+     /research/
+     /publications/reviews/cosmic-connections/
+     /publications/reviews/evolution-of-religions/
+     /publications/reviews/godless-crusade/
+     /publications/reviews/hell-christian-ecology/
+     /research/doctoral-thesis/religious-atavism-climate-crisis/   once implemented
    ```
 
 2. **Confirm generated route set**
-   - Expected generated/live route set before `/research/` contains 8 pages:
+   - Expected generated/live route set before the thesis page contains 9 pages:
      ```text
      /
      /cv/
      /publications/
      /pronunciation/
+     /research/
      /publications/reviews/cosmic-connections/
      /publications/reviews/evolution-of-religions/
      /publications/reviews/godless-crusade/
      /publications/reviews/hell-christian-ecology/
      ```
+   - Once `/research/doctoral-thesis/religious-atavism-climate-crisis/` is implemented, expected route count becomes 10.
    - If any drafted review is intentionally made live, update the expected generated route set and sitemap accordingly.
-   - Once `/research/` is created, update the expected generated route set, sitemap checks, and primary navigation.
-   - Do not expect or link the thesis route until `/research/doctoral-thesis/religious-atavism-climate-crisis/` is
-     implemented.
 
 3. **Inspect generated sitemap**
    ```bash
    find dist -name "sitemap*.xml" -print -exec cat {} \;
    ```
 
-   Confirm only intended live canonical pages appear. Current expected sitemap entries are the eight generated routes
-   above. Confirm `/pronunciation/` is included and `/research/` remains absent until implemented.
+   Confirm only intended live canonical pages appear. Current expected sitemap entries are the nine generated routes
+   above. Once the thesis page is implemented, confirm it appears and the route count becomes 10.
 
 4. **Verify generated-page asset references**
    - PDFs.
@@ -207,8 +235,8 @@ Before release, verify Netlify deploy, apex/www redirects, sitemap, and forced l
 
 ## 5. Repository hygiene / archival cleanup
 
-- Later: review `smvsite-base` and old branches now that the Astro site deploys from `main` to
-  Netlify.
-- Decide whether to archive / remove obsolete branches, make the repo private, or add a clearer
-  README.
+- Initial `smvsite-base` `testing` branch cleanup is resolved.
+- Later: review `smvsite-base` and old branches now that the Astro site deploys from `main` to Netlify.
+- Decide whether the old/base working copy and obsolete branches still serve a purpose, whether to archive/remove
+  branches, make the repo private, or add a clearer README.
 - Confirm no old branch / deployment path is still serving public content before deleting anything.

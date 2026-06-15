@@ -17,7 +17,7 @@ as authoritative when they conflict with older notes.
   **Route:** `/research/doctoral-thesis/religious-atavism-climate-crisis/`  
   **Slug:** `religious-atavism-climate-crisis`  
   **Rule:** Do not link the route until the page is actually implemented.  
-  **Status:** Decided; implementation pending.
+  **Status:** Decided; implementation active.
 
 - **Use Astro as the site framework.**  
   **Rationale:** Static-first, Netlify-friendly, content collections,
@@ -50,6 +50,12 @@ as authoritative when they conflict with older notes.
 - **Use Astro 6 loader-style content collections.**  
   **Decision:** Use `defineCollection`, `glob` from `astro/loaders`, and `z` from `astro/zod`.  
   **Status:** Final.
+
+- **Use the thesis DOI as the primary scholarly identifier / schema `@id`.**  
+  **ID:** `https://doi.org/10.5287/ora-4rjoobkvk`  
+  **Implications:** The local thesis page may have its own `WebPage` node, but the thesis entity itself should use the
+  DOI URL as its primary scholarly identifier. Include ARK and ORA IDs as secondary identifiers where useful.  
+  **Status:** Decided for Stage 4.2.
 
 ## 2. Content Collections And Publications Page
 
@@ -184,6 +190,12 @@ as authoritative when they conflict with older notes.
   meta description are present.
   **Status:** Current metadata-writing rule.
 
+- **Build the thesis page around factual metadata plus a short authored overview.**  
+  **Route:** `/research/doctoral-thesis/religious-atavism-climate-crisis/`  
+  **Structure:** title / metadata block; short authored “About this thesis” overview; abstract; citation; resources;
+  identifiers; supervision and examination; licence / PDF availability.  
+  **Status:** Decided for Stage 4.2 v1.
+
 ## 4. Review-Specific Decisions
 
 - **Cosmic Connections is a distinct local Author's Original Manuscript.**  
@@ -300,7 +312,7 @@ as authoritative when they conflict with older notes.
   **Decision:** Keep `https://seminars.stevanveljkovic.com/` separate for now; expose it in footer / secondary nav;
   optionally add a short Seminars card/section on `/research/`; do not import seminar PDFs/assets into the main Astro
   site during Stage 4.1.  
-  **Status:** Current.
+  **Status:** Implemented / current.
 
 - **Use forced Netlify redirects for legacy URLs.**  
   **Decision:** Use `301!` rules in `public/_redirects` while old compatibility files still exist.  
@@ -331,6 +343,11 @@ as authoritative when they conflict with older notes.
   low-probability risks once an informed judgment has been made.
   **Status:** Final working rule.
 
+- **Local thesis PDF may be hosted under CC BY 4.0 if verified.**  
+  **Decision:** The local thesis PDF may be made available under CC BY 4.0, using a stable public path/filename.  
+  **Caution:** Verify the file and generated/live link before release.  
+  **Status:** Permitted; implementation pending.
+
 ## 6. Design, Accessibility, and Content-Rendering Decisions
 
 - **Treat the current 4.1a link/focus/current-page styling as acceptable unless a real issue appears.**  
@@ -348,7 +365,7 @@ as authoritative when they conflict with older notes.
 - **Research page should be a compact hub, not an apology or manifesto.**  
   **Principles:** Do not apologise for lack of conventional research articles; do not overclaim; separate outputs from
   themes; give the doctoral thesis pride of place; keep the first version modest.  
-  **Status:** Current for `/research/` v1.
+  **Status:** Implemented/live for Stage 4.1b; keep future edits compact.
 
 - **Stage 4.1 primary navigation is settled.**  
   **Items:**
@@ -358,8 +375,8 @@ as authoritative when they conflict with older notes.
   Publications → /publications/
   Research → /research/
   ```
-  **Rule:** `Research` should not appear live until `/research/` exists.  
-  **Status:** Decided for Stage 4.1.
+  **Rule:** `Research` is now live because `/research/` exists.  
+  **Status:** Implemented/live for Stage 4.1b.
 
 - **Stage 4.1 footer / secondary navigation is settled.**  
   **Items:**
@@ -404,6 +421,14 @@ as authoritative when they conflict with older notes.
   full redesign; complete CSS refactor; multiple experimental UI features.  
   **Principle:** Touch the broader vision, but do not try to realise all of it.  
   **Status:** Final / current for Stage 4.0 planning.
+
+- **Use the ORA / DOI metadata abstract for the local thesis page.**  
+  **Decision:** Use the Oxford Research Archive / DOI metadata version of the thesis abstract as the source text for the
+  local thesis page.  
+  **Implementation rule:** Do not describe the abstract as transcribed from the PDF unless the PDF text is being used
+  and checked directly.
+  **Rationale:** ORA is the public institutional DOI metadata record and is the most stable source for page metadata.
+  **Status:** Decided for Stage 4.2.
 
 ## 7. Deferred Decisions
 

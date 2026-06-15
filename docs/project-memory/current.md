@@ -182,6 +182,14 @@ If the exact Node patch causes trouble, use `22`.
    - Use date-only values unless a real meaningful time is known.
    - Do not invent noon / midnight datetimes.
    - Validate rendered page-source JSON-LD, not TypeScript literals.
+   - SEO metadata and JSON-LD serve different purposes:
+      - search-result snippets are primarily influenced by `<meta name="description">`, page title, and visible page
+        content;
+      - JSON-LD should describe page/entity relationships, not compensate for weak page descriptions.
+   - Canonical pages should have hand-authored, display-ready meta descriptions where practical, roughly 130-170
+     characters.
+   - Avoid generic descriptions such as `Research by Stevan Veljkovic.`
+   - Simple text pages may launch without JSON-LD if title, canonical URL, and meta description are present.
 - Journal review model:
   ```text
   local WebPage
@@ -319,7 +327,7 @@ If the exact Node patch causes trouble, use `22`.
    - `public/favicon.ico`
    - `public/favicon.svg`
    - `public/site.webmanifest`
-   - `public/images/headshot-1200x630.JPG`
+   - `public/images/headshot-1200x630.jpg`
    - `public/publications/reviews/cosmic-connections/veljkovic-review-cosmic-connections.pdf`
    - `public/publications/reviews/hell-christian-ecology/veljkovic-review-hell-christian-ecology.pdf`
 - Important missing / unchecked asset issue:
@@ -442,10 +450,9 @@ If the exact Node patch causes trouble, use `22`.
 - Current canonical contact email in code is `stevan@stevanveljkovic.com`.
   Homepage and review intro use `site.email`; `bylineHtml` is deprecated; manuscript-specific bylines are historical and
   may contain now-defunct `stevan.veljkovic@theology.ox.ac.uk` address.
-- Possible OG image mismatch:
-   - public tree has `/images/headshot-1200x630.JPG`
-   - older notes expected `/images/headshot-1200x630.png`
-   - inspect `src/data/site.ts` and generated page source for broken image URLs.
+- Remaining headshot metadata cleanup:
+   - `site.image` and the public file now use `/images/headshot-1200x630.jpg`;
+   - home/CV JSON-LD schema still needs checking for stale `.png` references.
 - Latest selected public tree confirms review PDFs for Cosmic and Hell only.
   Godless currently has no local PDF; drafted / withheld Christian Right and Challenging Modernity PDF / image assets
   are not in `public/`.
@@ -590,30 +597,4 @@ If the exact Node patch causes trouble, use `22`.
   ```text
   ~/Projects/website-admin/stage-4/plan-mission-note.md
   ```
-
-## 10. Recent additions for disaggregation
-
-### SEO / page-description strategy
-
-- Distinguish ordinary SEO metadata from JSON-LD structured data.
-- Search-result snippet control primarily depends on `<meta name="description">`, page title, and
-  visible page content, not JSON-LD.
-- For canonical pages, prefer hand-authored page descriptions of roughly 130–170 characters where
-  possible.
-- Use specific, display-ready descriptions rather than generic strings such as “Research by Stevan
-  Veljkovic.”
-- The review pages and homepage already follow this more deliberate description strategy.
-- Apply the same strategy to `/research/`, `/pronunciation/`, `/cv/`, `/publications/`, and the
-  future thesis page.
-- It is acceptable for simple text pages not to have JSON-LD initially, provided title, canonical
-  URL, and meta description are present.
-
-### Metadata issue to verify
-
-- Checked Open Graph / Twitter image path.
-- Rendered metadata showed `/images/headshot-1200x630.png`, while the public tree may
-  contain `/images/headshot-1200x630.JPG`.
-- Verified live URL and updated `src/data/site.ts`
-- Renamed image file to match `.jpg` extension
-- Committed and pushed to main
 

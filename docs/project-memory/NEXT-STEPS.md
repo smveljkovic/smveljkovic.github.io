@@ -48,6 +48,9 @@ here onward.
      ```text
      https://doi.org/10.5287/ora-4rjoobkvk
      ```
+5. **Do various metadata clean-up and refinements**
+   - Implement specific hand-authored meta descriptions on all pages, not generic
+     strings like `Research by Stevan Veljkovic.`
 
 ## 2. Continuing Verification Pass
 
@@ -168,16 +171,15 @@ here onward.
    - `challenging-modernity` citation issue-year is 2025, but list year/sort
      date may follow first-online publication in 2024.
 
-3. **Check headshot / OG image path**
-   - Current selected public tree has:
+3. **Clean remaining headshot JSON-LD image references**
+   - `site.image` and the public file now use:
      ```text
-     /images/headshot-1200x630.JPG
+     /images/headshot-1200x630.jpg
      ```
-   - Older notes expected:
+   - Update home/CV schema references still pointing at:
      ```text
      /images/headshot-1200x630.png
      ```
-   - Inspect `src/data/site.ts` and generated page source for broken image URLs.
 
 4. **Remove accidental macOS files if tracked**
    - `.DS_Store` files are present in source/public tree.
@@ -193,6 +195,11 @@ here onward.
    - Update the `/publications/` citation for `hell-christian-ecology` to use the `doi.org` address.
 7. **Check link contrast, especially blue/purple on the dark background**
    - but do not keep tuning link styles unless a real contrast or usability issue is found.
+8. **Improve page descriptions**
+   - Replace generic descriptions in `src/data/pageMeta.ts` for `/cv/`, `/pronunciation/`,
+     `/publications/`, and `/research/`.
+   - Prefer hand-authored, display-ready descriptions around 130-170 characters where
+     practical.
 
 ## 4. Deployment, DNS, And Legacy URLs
 

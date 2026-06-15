@@ -51,7 +51,6 @@ currently conflicts. Do not treat them as settled canonical values until fixed.
 | Topic                  | Current conflict / uncertainty                                                                                                                                                                              | Action                                                                                                                                                        |
 |------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Contact email          | There was previously inconsistency amongst different instances, but the canonical version is now `stevan@stevanveljkovic.com`; all instances should populate from site.ts and nothing should be hard-coded. | Verify that there’s now alignment of `site.ts`, homepage, review intro, JSON-LD, page metadata, and any footer/contact copy, and that no hard-coding remains. |
-| Default/headshot image | Selected public tree has `/images/headshot-1200x630.JPG`; `site.ts`, home schema, CV schema, and older metadata mention `/images/headshot-1200x630.png`.                                                    | Inspect generated output and make code/assets agree.                                                                                                          |
 | Public identity phrase | Older notes used `Theory and editing`; current homepage code and `site.ts` use `Theory and design`.                                                                                                         | Confirm desired wording before launch; current operational value is `Theory and design`.                                                                      |
 | Sort/date metadata     | `godless-crusade` uses `publicationList.sortDate: "2023-01-01"`; other review sort/year choices may be placeholder-like.                                                                                    | Verify and clean sort/date metadata.                                                                                                                          |
 | Hell issue date/PDF    | `hell-christian-ecology` has issue date `2024-10-03` and a PDF path, but memory says both need verification.                                                                                                | Verify sometime before Stage 4.4.                                                                                                                             |
@@ -94,7 +93,7 @@ Avoid:
 
 because this can create double slashes.
 
-## 4. Title And Open Graph Rules
+## 4. Titles, Descriptions, And Open Graph Rules
 
 ### HTML `<title>`
 
@@ -103,6 +102,21 @@ because this can create double slashes.
 | Homepage               | `Stevan Veljkovic`                                          |
 | Ordinary internal page | `{Page name} \| Stevan Veljkovic`                           |
 | Review page            | `Review of {Reviewed work short title} \| Stevan Veljkovic` |
+
+### Meta Descriptions
+
+Canonical pages should use specific, hand-authored meta descriptions where practical, roughly 130-170 characters.
+
+Search snippets are primarily influenced by `<meta name="description">`, page title, and visible page content. JSON-LD
+should not be treated as a substitute for page descriptions.
+
+Avoid generic strings such as:
+
+```text
+Research by Stevan Veljkovic.
+Pronunciation of Stevan Veljkovic.
+Curriculum vitae of Stevan Veljkovic.
+```
 
 ### Site And Person Names
 
@@ -122,14 +136,14 @@ og:site_name
 
 ### Open Graph Defaults
 
-| Field                         | Current value / rule                                                       |
-|-------------------------------|----------------------------------------------------------------------------|
-| `og:site_name`                | `Stevan Veljkovic`                                                         |
-| Default language/locale basis | `en-GB`                                                                    |
-| Homepage `og:type`            | `website`                                                                  |
-| Ordinary page `og:type`       | `website` unless `article` is appropriate                                  |
-| Review page `og:type`         | `article`                                                                  |
-| Default `og:image`            | See staging area: `.png` code references conflict with `.JPG` public file. |
+| Field                         | Current value / rule                      |
+|-------------------------------|-------------------------------------------|
+| `og:site_name`                | `Stevan Veljkovic`                        |
+| Default language/locale basis | `en-GB`                                   |
+| Homepage `og:type`            | `website`                                 |
+| Ordinary page `og:type`       | `website` unless `article` is appropriate |
+| Review page `og:type`         | `article`                                 |
+| Default `og:image`            | `/images/headshot-1200x630.jpg`           |
 
 ## 5. Stable JSON-LD Node IDs
 
@@ -479,7 +493,7 @@ operational values:
 |-----------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------|
 | `Theory and editing`                                                  | Superseded by current code value `Theory and design`; pending final wording confirmation.                                                    |
 | `hello@stevanveljkovic.com` as canonical email                        | Settled, with stevan@stevanveljkovic.com as new value and all instances populated from site.ts (no hard-coding), pending final verification. |
-| `/images/headshot-1200x630.png` as definitely valid asset             | Code references it, but selected public tree shows `/images/headshot-1200x630.JPG`; fix needed.                                              |
+| `/images/headshot-1200x630.png` as default headshot/social image      | Superseded by `/images/headshot-1200x630.jpg`; remaining `.png` schema references are tracked as cleanup work.                               |
 | Only Cosmic Connections and Christian Right as generated review pages | Superseded; six review routes exist; four currently build; two are excluded.                                                                 |
 | Godless, Hell, Challenging Modernity as merely planned draft pages    | Superseded; content files exist, but christian-right-europe and challenging-modernity routes are currently excluded pending rights clarity.  |
 | `src/content/publication-items/phd-thesis.md`                         | Current thesis publication item is `religious-atavism-climate-crisis.md`.                                                                    |

@@ -176,6 +176,14 @@ as authoritative when they conflict with older notes.
 - **Validate rendered page-source JSON-LD, not TypeScript literals.**  
   **Status:** Final.
 
+- **Treat page descriptions as ordinary SEO metadata, not JSON-LD.**  
+  **Decision:** Canonical pages should use hand-authored, display-ready
+  `<meta name="description">` values where practical, roughly 130-170 characters.
+  **Implications:** Avoid generic descriptions such as `Research by Stevan Veljkovic.`
+  JSON-LD may be omitted from simple text pages initially if title, canonical URL, and
+  meta description are present.
+  **Status:** Current metadata-writing rule.
+
 ## 4. Review-Specific Decisions
 
 - **Cosmic Connections is a distinct local Author's Original Manuscript.**  

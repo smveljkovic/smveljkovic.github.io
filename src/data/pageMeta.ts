@@ -36,4 +36,12 @@ export const pageMeta = {
         path: "/research/",
         ogType: "website",
     },
+
+    thesis: {
+        title: "Religious atavism and the climate crisis",
+        description:
+            "Stevan Veljkovic’s Oxford DPhil thesis, arguing that the climate crisis paradigm emerges from Western civilizational malaise, with full text and citation details.",
+        path: "/research/doctoral-thesis/religious-atavism-climate-crisis/",
+        ogType: "article",
+    },
 } as const;

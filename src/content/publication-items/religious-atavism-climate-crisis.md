@@ -20,8 +20,8 @@ url: "https://doi.org/10.5287/ora-4rjoobkvk"
 identifiers:
   - propertyID: "ARK"
     value: "ark:/29072/ora_7aff13dc075e4c17bee95adfc1b2fcf4"
-  - propertyID: "Oxford Research Archive pubs id"
+  - propertyID: "Oxford University Research Archive pubs id"
     value: "1624720"
-  - propertyID: "Oxford Research Archive local pid"
+  - propertyID: "Oxford University Research Archive local pid"
     value: "pubs:1624720"
 ---

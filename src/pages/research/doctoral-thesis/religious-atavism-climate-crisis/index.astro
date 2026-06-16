@@ -1,0 +1,180 @@
+---
+import TextPageLayout from "../../../../layouts/TextPageLayout.astro";
+import {pageMeta} from "../../../../data/pageMeta";
+import {thesis} from "../../../../data/thesis";
+import {createThesisSchema} from "../../../../data/schema/thesis/createThesisSchema";
+
+const meta = pageMeta.thesis;
+const jsonLd = createThesisSchema(thesis, meta);
+
+const longDateFormatter = new Intl.DateTimeFormat("en-GB", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+    timeZone: "UTC",
+});
+
+const doiIdentifier = thesis.identifiers.find(
+    (identifier) => identifier.propertyID === "DOI"
+);
+
+const archivalIdentifiers = thesis.identifiers.filter(
+    (identifier) => identifier.propertyID !== "DOI"
+);
+
+function longDate(date: string) {
+    const [year, month, day] = date.split("-").map(Number);
+    return longDateFormatter.format(new Date(Date.UTC(year, month - 1, day)));
+}
+---
+
+<TextPageLayout
+        title={meta.title}
+        description={meta.description}
+        canonicalPath={meta.path}
+        ogType="article"
+        jsonLd={jsonLd}
+>
+
+    <article class="research-page thesis-page">
+        <header class="thesis-page__header">
+            <p class="eyebrow">doctoral thesis</p>
+            <h1>{thesis.title}</h1>
+
+            <p>
+                By {thesis.author.name}.<br/>
+                {thesis.degree} thesis, {thesis.institution.name}, {thesis.dates.citationYear}.<br/>
+                Held by the {thesis.repository.name} ({thesis.repository.shortName}).<br/>
+                Deposited on {longDate(thesis.dates.deposited)}.<br/>
+                Licensed under <a href={thesis.rights.licenceUrl}>{thesis.rights.licence}</a>.
+            </p>
+
+            <nav class="thesis-page__actions" aria-label="Thesis resources">
+                <a href={thesis.pdfPath}>PDF</a>
+                <a href={thesis.doiUrl}>DOI</a>
+                <a href={thesis.repository.url}>
+                    {thesis.repository.shortName}
+                </a>
+            </nav>
+        </header>
+        <section>
+            <h2>About this thesis</h2>
+            <p>
+                This doctoral thesis examines the concept of climate crisis in relation to
+                postsecular accounts of liberal modernity, with particular reference to
+                Charles Taylor and Richard Rorty.
+            </p>
+        </section>
+        <section>
+            <h2>Abstract</h2>
+
+            {thesis.abstract.map((paragraph) => (
+                    <p>{paragraph}</p>
+            ))}
+        </section>
+
+        <section>
+            <h2>Citation</h2>
+
+            <p class="thesis-page__citation">
+                {thesis.citation.author}. ‘{thesis.citation.title}.’
+                {thesis.citation.type}, {thesis.citation.institution}, {thesis.citation.year}.
+                <a href={thesis.doiUrl}>{thesis.doiUrl}</a>.
+            </p>
+        </section>
+
+        <section>
+            <h2>Resources</h2>
+            <ul class="thesis-page__resources">
+                <li>
+                    <span>PDF full text</span>
+                    <a class="thesis-page__resource-pill" href={thesis.pdfPath}>pdf</a>
+                </li>
+                <li>
+                    <span>Repository record in {thesis.repository.shortName}</span>
+                    <a class="thesis-page__resource-pill" href={thesis.repository.recordUrl}>
+                        {thesis.repository.shortName.toLowerCase()}
+                    </a>
+                </li>
+                <li>
+                    <span>DOI: {thesis.doi}</span>
+                    <a class="thesis-page__resource-pill" href={thesis.doiUrl}>doi</a>
+                </li>
+                <li>
+                    <span>Licence: {thesis.rights.licence}</span>
+                    <a class="thesis-page__resource-pill" href={thesis.rights.licenceUrl}>
+                        licence
+                    </a>
+                </li>
+            </ul>
+            <p>
+                The DOI currently resolves to the {thesis.repository.shortName} record.
+                The PDF is made available here under a {thesis.rights.licence} licence.
+            </p>
+        </section>
+
+        <section>
+            <h2>Identifiers</h2>
+
+            {doiIdentifier && (
+                    <dl class="thesis-page__identifiers">
+                        <dt>{doiIdentifier.label}</dt>
+                        <dd>
+                            {"href" in doiIdentifier && doiIdentifier.href ? (
+                                    <a href={doiIdentifier.href}>{doiIdentifier.value}</a>
+                            ) : (
+                                doiIdentifier.value
+                            )}
+                        </dd>
+                    </dl>
+            )}
+
+            <details class="thesis-page__details">
+                <summary>Repository and archival identifiers</summary>
+
+                <dl class="thesis-page__identifiers">
+                    {archivalIdentifiers.map((identifier) => (
+                            <>
+                                <dt>{identifier.label}</dt>
+                                <dd>{identifier.value}</dd>
+                            </>
+                    ))}
+                </dl>
+            </details>
+        </section>
+
+        <section>
+            <h2>Supervision and examination</h2>
+
+            <div class="thesis-page__people">
+                <section class="thesis-page__people-group">
+                    <h3>Supervisors</h3>
+                    <ul>
+                        {thesis.supervisors.map((person) => (
+                                <li>{person.name}</li>
+                        ))}
+                    </ul>
+                </section>
+
+                <section class="thesis-page__people-group">
+                    <h3>Examiners</h3>
+                    <ul>
+                        {thesis.examiners.map((person) => (
+                                <li>{person.name}</li>
+                        ))}
+                    </ul>
+                </section>
+            </div>
+        </section>
+
+        {thesis.textualNotes.length > 0 && (
+                <section>
+                    <h2>Textual note</h2>
+
+                    {thesis.textualNotes.map((note) => (
+                            <p>{note}</p>
+                    ))}
+                </section>
+        )}
+    </article>
+</TextPageLayout>

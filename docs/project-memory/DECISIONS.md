@@ -196,6 +196,50 @@ as authoritative when they conflict with older notes.
   identifiers; supervision and examination; licence / PDF availability.  
   **Status:** Decided for Stage 4.2 v1.
 
+- **Use distinct short and formal thesis titles.**  
+  **Short title for page/browser/link contexts:** `Religious atavism and the climate crisis`  
+  **Formal title:** `Religious atavism and the climate crisis, with reference to Taylor and Rorty on liberalism`  
+  **Rule:** Use the formal title for the visible thesis title, formal citation, and thesis entity. Use the short title
+  where a compact page/browser/link title is needed.  
+  **Browser title:** `Religious atavism and the climate crisis | Stevan Veljkovic`  
+  **Status:** Decided for Stage 4.2.
+
+- **Use ORA deposit/public availability date as thesis `datePublished`.**  
+  **Rules:** citation year `2023`; copyright year `2023`; `datePublished: 2024-02-11`; `dateCreated: 2023`, or
+  `2023-04-21` if a precise submission date is wanted.  
+  **Caution:** Do not use accidental `2026-02-11` for thesis `datePublished`.  
+  **Status:** Decided for Stage 4.2.
+
+- **Use Oxford University Research Archive naming.**  
+  **Rule:** The full repository name is `Oxford University Research Archive`, not `Oxford Research Archive`. First
+  mention may be “the Oxford University Research Archive (ORA)”; later references should use `ORA`. Avoid “the ORA”
+  when ORA stands alone, though “the ORA record” is fine.  
+  **Status:** Decided.
+
+- **Include thesis authorship in the top metadata block.**  
+  **Decision:** The thesis metadata block should include `By Stevan Veljkovic`; the site header alone is not enough for
+  authorship of the thesis work.  
+  **Preferred Stage 4.2 block:**
+  ```text
+  By Stevan Veljkovic.
+  DPhil thesis, University of Oxford, 2023.
+  Held in Oxford University Research Archive (ORA).
+  Deposited on 11 February 2024.
+  Licensed under CC BY 4.0.
+  ```  
+  **Status:** Decided for Stage 4.2 v1.
+
+- **Keep faculty/college details out of the Stage 4.2 top metadata block.**  
+  **Decision:** Do not add Faculty of Theology and Religion / St Cross College to the top metadata block for v1. If
+  included later, place them lower down as “Institutional details” with documentary wording.  
+  **Status:** Decided for Stage 4.2 v1.
+
+- **Preserve authorial voice in public-facing thesis copy.**  
+  **Decision:** Do not smooth thesis copy into generic keyword prose. Frame it as a theoretical account of the climate
+  crisis paradigm, explain “religious atavism” clearly, and preserve the primary focus on Taylor and Rorty with
+  secondary reference to Latour, Schmitt, and Illich.  
+  **Status:** Decided for Stage 4.2.
+
 ## 4. Review-Specific Decisions
 
 - **Cosmic Connections is a distinct local Author's Original Manuscript.**  
@@ -415,12 +459,19 @@ as authoritative when they conflict with older notes.
   **Status:** Final for Stage 4.0; long-term refactor deferred.
 
 - **Stage 4.0 is a constrained core architecture / design foundation phase.**  
-  **In scope:** thesis page; expanded / web-native CV page; header / navigation/footer; first-pass design foundation;
-  constrained light / dark mode; one review-page reading aid; seminars bridge.  
+  **In scope:** thesis page; expanded / web-native CV page; header / navigation/footer; seminars bridge.  
   **Deferred:** full thesis HTML edition; full seminars reconstruction; blog launch; broad React / Vue experimentation;
-  full redesign; complete CSS refactor; multiple experimental UI features.  
+  full redesign; complete CSS refactor; multiple experimental UI features; first-pass design foundation;
+  constrained light / dark mode; one review-page reading aid.  
   **Principle:** Touch the broader vision, but do not try to realise all of it.  
   **Status:** Final / current for Stage 4.0 planning.
+
+- **Stage 4.0 has reached the 30-hour scope-review checkpoint.**  
+  **Status:** Active review point.  
+  **Current recommendation:** commit to Stage 4.2 thesis page v1, validation, and close-out; make Stage 4.3 CV v1
+  conditional on time/energy; treat withheld-review work as triage only; defer full design foundation, light/dark
+  mode, review reading aid, and publications/reviews refinements unless separately re-scoped.  
+  **Review needed:** Confirm whether this recommendation is now the official Stage 4.0 rescope.
 
 - **Use the ORA / DOI metadata abstract for the local thesis page.**  
   **Decision:** Use the Oxford Research Archive / DOI metadata version of the thesis abstract as the source text for the
@@ -428,6 +479,11 @@ as authoritative when they conflict with older notes.
   **Implementation rule:** Do not describe the abstract as transcribed from the PDF unless the PDF text is being used
   and checked directly.
   **Rationale:** ORA is the public institutional DOI metadata record and is the most stable source for page metadata.
+  **Status:** Decided for Stage 4.2.
+
+- **Do not broaden thesis-page visual fixes into a whole-site frame/border pass now.**  
+  **Decision:** Thesis-page border/frame refinements may be made locally, but broader text-page border/frame
+  consistency is deferred to a later design pass.  
   **Status:** Decided for Stage 4.2.
 
 ## 7. Deferred Decisions

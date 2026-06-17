@@ -6,7 +6,8 @@ For metadata registry: docs/metadata/master-values.md
 For operational AI rules: .aiassistant/rules/
 
 - Active repo project memory should remain compact and operational. Expanded/trimmed material in
-  `~/Projects/website-admin/project-memory-materials` is contextual background, not a co-equal canonical source.
+  `~/Projects/website-admin/project-memory-materials` or `~/Projects/website-admin/stage-4-0/` is contextual background,
+  not a co-equal canonical source.
 
 ## 1. Project status
 
@@ -17,17 +18,12 @@ For operational AI rules: .aiassistant/rules/
 - Current working branch for Stage 4.0: `stage-4-0`
 - Production branch: `main` (`origin/main` deploys to Netlify)
 - Git remote `origin`: `https://github.com/smveljkovic/smveljkovic.github.io.git`
-- Current phase: Stage 4.2 thesis page v1 within Stage 4.0 core architecture / design foundation.
+- Current phase: Stage 4.2 thesis page v1 release polish within Stage 4.0.
+- Stage 4.2 thesis page is substantially implemented / near release at:
+  `/research/doctoral-thesis/religious-atavism-climate-crisis/`
+  but no merge to `main` or Netlify production deployment has been confirmed.
+- Remaining Stage 4.2 work should be treated as a release checklist, not an open-ended writing / design exercise.
 - Site is live at `https://stevanveljkovic.com/`.
-- Stage 4.1a shell v1 is live:
-   - global header
-   - footer
-   - stable primary/footer navigation
-   - `/pronunciation/` page
-   - homepage pronunciation link updated to `/pronunciation/`
-   - old external IPA Reader link removed
-   - inherited homepage nav/icon block removed/deferred
-   - link/focus/current-page behaviour tuned
 - Stage 4.1b research hub v1 is complete/live:
    - `/research/` exists as a compact research/signposting hub.
    - `Research → /research/` is live in primary navigation.
@@ -78,6 +74,16 @@ If the exact Node patch causes trouble, use `22`.
   Mandatory scope review: 30 hours
   Re-scope / stop-and-decide threshold: 55 hours
   ```
+
+- Stage 4.0 has reached the mandatory 30-hour scope-review checkpoint.
+- Before expanding further Stage 4 work, make and record an explicit scope decision.
+- Current recommended rescope:
+   - committed: Stage 4.2 thesis page v1, validation, and close-out;
+   - conditional: bounded Stage 4.3 CV v1 if time/energy remains;
+   - optional triage only: withheld-review rights/status;
+   - defer unless separately re-scoped: full design foundation, light/dark mode, review reading aid, and
+     publications/reviews refinements.
+
 - Project-memory maintenance should not consume more than roughly 10–15% of Stage 4.0 work from here onward.
 
 ## 2. Current implementation / architecture
@@ -129,13 +135,19 @@ If the exact Node patch causes trouble, use `22`.
    - `src/lib/schema/person.ts`
    - `src/lib/schema/review.ts`
 
-- Stage 4.1a shell v1 is implemented/live and involved:
-   - `src/data/navigation.ts`
-   - `src/components/SiteHeader.astro`
-   - `src/components/SiteFooter.astro`
-   - `src/layouts/BaseLayout.astro`
-   - `src/pages/pronunciation/index.astro`
+- Stage 4.2 thesis page work currently involves:
+   - `src/pages/research/doctoral-thesis/religious-atavism-climate-crisis/index.astro`
+   - `src/data/thesis`
+   - `src/data/schema/thesis/createThesisSchema`
+   - `src/data/pageMeta.ts`
    - `src/styles/global.css`
+   - `/research/` thesis link
+   - `/publications/` thesis entry check
+- Thesis page structure now includes or is intended to include: thesis header and metadata block; resource actions;
+  “About the thesis”; abstract; citation; resources; identifiers / technical identifiers; supervision and
+  examination; thesis JSON-LD.
+- Thesis-specific visual polish is considered tolerable and shippable after light polish, not final design.
+
 - Stage 4.1b research hub v1 is implemented/live and involved:
    - `src/pages/research/`
    - `src/data/navigation.ts`
@@ -153,6 +165,17 @@ If the exact Node patch causes trouble, use `22`.
   import { glob } from "astro/loaders";
   import { z } from "astro/zod";
   ```
+
+- Thesis page schema:
+   - use `createThesisSchema(thesis, meta)`;
+   - `WebPage.mainEntity` should point to the DOI thesis node;
+   - thesis `@id` should be the DOI URL;
+   - `Person.@id` remains ORCID;
+   - do not emit `@id` arrays;
+   - use date-only values;
+   - include `isAccessibleForFree: true` if the PDF/resource is freely available and verified;
+   - validate rendered page-source JSON-LD.
+
 - Collections:
    - `reviews`
    - `publicationItems`
@@ -346,6 +369,7 @@ If the exact Node patch causes trouble, use `22`.
    - `public/images/headshot-1200x630.jpg`
    - `public/publications/reviews/cosmic-connections/veljkovic-review-cosmic-connections.pdf`
    - `public/publications/reviews/hell-christian-ecology/veljkovic-review-hell-christian-ecology.pdf`
+   - `public/research/doctoral-research/climate-crisis-religious-atavism/veljkovic-dphil-theis.pdf`
 - Important missing / unchecked asset issue:
    - latest selected public tree does **not** show PDFs for `christian-right-europe`, `godless-crusade`, or
      `challenging-modernity`.
@@ -444,18 +468,13 @@ If the exact Node patch causes trouble, use `22`.
 
 ## 7. Known issues, cautions, and unresolved questions
 
-- Verify the old W3 validator image-path issue is gone or fix the offending reference:
-  ```text
-  /images/Asset 1.png
-  ```
 - For Netlify 404 spikes, likely bot-scanning paths returning `404` are not by themselves an incident. Investigate if
   sensitive-looking paths return `200`, and keep `dist/`, `public/`, and the public repo free of secrets or
   rights-sensitive unintended assets.
 
-- **T&F rights caution:** no Taylor & Francis Version-of-Record page should go
-  live until T&F / CCC confirms permission. Current code has
-  `challenging-modernity` withheld; keep it absent from routes, sitemap, and
-  public assets unless that decision changes.
+- **T&F rights caution:** no Taylor & Francis Version-of-Record page should go live until T&F / CCC confirms permission.
+  Current code has `challenging-modernity` withheld; keep it absent from routes, sitemap, and public assets unless that
+  decision changes.
 - `godless-crusade` AM is acceptable in principle under T&F author-reuse policy, but still needs final verification for:
    - exact visible AM wording
    - Goodhart correction note
@@ -509,37 +528,42 @@ If the exact Node patch causes trouble, use `22`.
 
 ## 8. Immediate next steps
 
-1. Implement the Stage 4.2 thesis page:
+1. Finish Stage 4.2 thesis page release blockers:
+   - final thesis copy;
+   - top metadata block;
+   - About section;
+   - meta description;
+   - short-title handling;
+   - date/schema choices;
+   - PDF asset/path verification;
+   - `/research/` link;
+   - `/publications/` thesis entry check;
+   - rendered JSON-LD validation;
+   - mobile sanity check.
+
+2. Verify local thesis PDF if hosted:
    ```text
-   /research/doctoral-thesis/religious-atavism-climate-crisis/
+   public/research/doctoral-thesis/religious-atavism-climate-crisis/veljkovic-dphil-thesis.pdf
    ```
-2. Build the page from a factual thesis metadata inventory and a modest content structure:
-   - title / metadata block;
-   - short authored “About this thesis” overview;
-   - abstract;
-   - citation;
-   - resources;
-   - identifiers;
-   - supervision and examination;
-   - licence / PDF availability.
-3. Add an authored, snippet-length `pageMeta` description for the thesis page.
-4. If hosting the local thesis PDF, choose a stable path/filename, confirm CC BY 4.0 permission, and verify the
-   generated/live link.
-5. Add thesis-page JSON-LD after the page content is settled:
-   - `WebPage` with `mainEntity` thesis;
-   - DOI URL as primary thesis `@id`;
-   - ARK and ORA identifiers;
-   - date-only values.
-6. Once the thesis page exists, link it from `/research/`.
-7. Continue page-description cleanup and stale `.png` JSON-LD checks.
-8. Before merging any Stage 4.0 increment to `main`, run:
+   and confirm generated/live URL returns `200`.
+3. Run:
    ```bash
    npx astro sync
    npx astro check
    npm run build
    npm run preview
    ```
-   Inspect the 9 current routes plus the thesis page once implemented.
+4. Inspect at least:
+   ```text
+   /
+   /research/
+   /research/doctoral-thesis/religious-atavism-climate-crisis/
+   /publications/
+   /pronunciation/
+   ```
+5. Confirm generated route set and sitemap: thesis page generated; expected route count becomes 10; drafted/withheld
+   reviews remain absent.
+6. Complete and record the 30-hour Stage 4.0 scope decision before resuming expanded Stage 4 work.
 
 ## 9. Details that should not be lost
 
@@ -599,7 +623,7 @@ If the exact Node patch causes trouble, use `22`.
   ```text
   religious-atavism-climate-crisis
   ```
-- Thesis route is settled but should not be linked until implemented:
+- Thesis route is linked and implemented:
   ```text
   /research/doctoral-thesis/religious-atavism-climate-crisis/
   ```
@@ -614,8 +638,8 @@ If the exact Node patch causes trouble, use `22`.
 - Thesis secondary identifiers:
   ```text
   ARK: ark:/29072/ora_7aff13dc075e4c17bee95adfc1b2fcf4
-  Oxford Research Archive pubs id: 1624720
-  Oxford Research Archive local pid: pubs:1624720
+  Oxford University Research Archive pubs id: 1624720
+  Oxford University Research Archive local pid: pubs:1624720
   ```
 - Thesis title:
   ```text
@@ -646,7 +670,7 @@ If the exact Node patch causes trouble, use `22`.
   ```
 
 - Thesis abstract handling:
-   - Use the Oxford Research Archive / DOI metadata version of the abstract on the local thesis page.
+   - Use the Oxford University Research Archive / DOI metadata version of the abstract on the local thesis page.
    - Do not describe the abstract as transcribed from the PDF unless the PDF text is being used and checked directly.
    - Treat ORA as the stable source for thesis-page metadata unless a later correction changes the public record.
 
@@ -654,3 +678,49 @@ If the exact Node patch causes trouble, use `22`.
   ```text
   ~/Projects/website-admin/stage-4/plan-mission-note.md
   ```
+
+- Thesis short title for page/browser/link contexts:
+  ```text
+  Religious atavism and the climate crisis
+  ```
+- Formal thesis title remains:
+  ```text
+  Religious atavism and the climate crisis, with reference to Taylor and Rorty on liberalism
+  ```
+  Use the formal title for the visible thesis title, citation, and thesis entity.
+
+- Thesis browser title:
+  ```text
+  Religious atavism and the climate crisis | Stevan Veljkovic
+  ```
+
+- Thesis date handling:
+   - citation year: `2023`;
+   - `copyrightYear`: `2023`;
+   - `datePublished`: `2024-02-11` using ORA deposit/public availability date;
+   - `dateCreated`: `2023` or, if a precise submission date is wanted, `2023-04-21`.
+   - Important: do not use accidental `2026-02-11` for `datePublished`.
+
+- Repository naming:
+   - full name: Oxford University Research Archive;
+   - first mention may be “the Oxford University Research Archive (ORA)”;
+   - later references should use `ORA`;
+   - avoid “the ORA” when ORA stands alone, though “the ORA record” is fine.
+
+- Thesis top metadata block should include the author name; the site header alone is not enough.
+- Preferred Stage 4.2 top metadata block:
+  ```text
+  By Stevan Veljkovic.
+  DPhil thesis, University of Oxford, 2023.
+  Held in the Oxford University Research Archive (ORA).
+  Deposited on 11 February 2024.
+  Licensed under CC BY 4.0.
+  ```
+- Do not add Faculty of Theology and Religion / St Cross College to the top metadata block for Stage 4.2 v1. If added
+  later, place lower down as “Institutional details” with documentary wording.
+- Public-facing thesis copy should preserve Stevan’s authorial voice and argumentative edge rather than smoothing into
+  generic keyword copy.
+- “About this thesis” should frame the work as a theoretical account of the climate crisis paradigm, not climate policy
+  or natural-science empirical research; explain “religious atavism” as the return, within secular crisis accounts, of
+  older religious/prophetic patterns of historical orientation; keep Taylor and Rorty primary, with Latour, Schmitt, and
+  Illich secondary.

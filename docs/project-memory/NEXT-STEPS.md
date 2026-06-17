@@ -13,6 +13,9 @@ Stage 4.0 budget:
   Re-scope / stop-and-decide threshold: 55 hours
   ```
 
+Stage 4.0 has reached the mandatory 30-hour scope-review checkpoint. Before expanding further Stage 4 work, make and
+record an explicit scope decision.
+
 Project-memory maintenance should remain bounded and should not consume more than roughly 10–15% of Stage 4.0 work from
 here onward.
 
@@ -22,65 +25,80 @@ here onward.
 - `stage-4-0` = Stage 4.0 integration branch.
 - Merge only coherent public release units.
 
-## 1. Stage 4.2 Thesis Page V1
+  ## 1. Stage 4.2 Thesis Page V1 Release Checklist
 
-1. **Implement the thesis page**
-   ```text
-   /research/doctoral-thesis/religious-atavism-climate-crisis/
-   ```
+   1. **Finish thesis page release blockers**
+      - final thesis copy;
+      - top metadata block;
+      - About section;
+      - meta description;
+      - short-title handling;
+      - date/schema choices;
+      - PDF asset/path verification;
+      - `/research/` link;
+      - `/publications/` thesis entry check;
+      - rendered JSON-LD validation;
+      - mobile sanity check.
 
-2. **Use the gathered thesis metadata**
-   - title;
-   - DOI;
-   - ORA URL;
-   - ARK;
-   - ORA IDs;
-   - deposit date;
-   - copyright year;
-   - CC BY 4.0 licence;
-   - citation;
-   - supervisors;
-   - examiners;
-   - PDF/download policy.
+   2. **Verify thesis PDF if hosted locally**
+      ```text
+      public/research/doctoral-thesis/religious-atavism-climate-crisis/veljkovic-dphil-thesis.pdf
+      ```
+      Confirm the generated/live URL returns `200`.
 
-3. **Use the agreed thesis page structure**
-   - title / metadata block;
-   - short authored “About this thesis” overview;
-   - abstract;
-   - citation;
-   - resources;
-   - identifiers;
-   - supervision and examination;
-   - licence / PDF availability.
+   3. **Validate rendered thesis JSON-LD**
+      - `WebPage.mainEntity` points to the DOI thesis node;
+      - thesis `@id` is DOI URL;
+      - `Person.@id` remains ORCID;
+      - no `@id` arrays;
+      - date-only values only;
+      - `encoding.contentUrl` resolves if emitted;
+      - include / confirm `isAccessibleForFree: true` where appropriate.
 
-4. **Use the ORA / DOI metadata abstract**
-   - Use ORA / DOI metadata as the abstract source for v1.
-   - Do not describe the abstract as transcribed from the PDF unless the PDF text is used and checked directly.
+   4. **Confirm generated route set and sitemap**
+      - thesis page generated;
+      - expected route count becomes 10;
+      - drafted/withheld reviews remain absent.
 
-5. **Add thesis-page SEO metadata**
-   - Add an authored, snippet-length `pageMeta` description.
-   - Avoid generic descriptions.
+   5. **Run project checks**
+      ```bash
+      npx astro sync
+      npx astro check
+      npm run build
+      npm run preview
+      ```
 
-6. **Add the local thesis PDF only if hosting is verified**
-   - Choose a stable path/filename.
-   - Confirm CC BY 4.0 permission.
-   - Verify the generated/live link.
+   6. **Inspect at least**
+      ```text
+      /
+      /research/
+      /research/doctoral-thesis/religious-atavism-climate-crisis/
+      /publications/
+      /pronunciation/
+      ```
 
-7. **Add thesis-page JSON-LD**
-   - `WebPage` with `mainEntity` thesis.
-   - DOI URL as primary thesis `@id`.
-   - Include ARK and ORA identifiers.
-   - Use date-only values.
-   - Validate rendered page source.
+   7. **Deploy Stage 4.2 only as a coherent release unit**
+      - merge to `main` only after checks pass;
+      - confirm Netlify production deployment;
+      - confirm live route and PDF/resource links.
 
-8. **Link the thesis page from `/research/` only once implemented**
+## 2. Stage 4.0 30-Hour Scope Decision
 
-9. **Continue metadata polish**
-   - Improve generic page descriptions for `/research/`, `/pronunciation/`, `/cv/`, and `/publications/`.
-   - Confirm `<meta name="description">` renders.
-   - Check stale `.png` JSON-LD references.
+1. **Complete and record the 30-hour scope decision before expanding Stage 4 work**
 
-## 2. Continuing Verification Pass
+2. **Current recommended rescope**
+   - committed: Stage 4.2 thesis page v1, validation, and close-out;
+   - conditional: bounded Stage 4.3 CV v1 after Stage 4.2 deploys;
+   - optional triage only: withheld reviews rights/status;
+   - defer unless separately re-scoped: full design foundation, light/dark mode, review reading aid, and
+     publications/reviews refinements.
+
+3. **If Stage 4.2 deploys with enough time remaining**
+   - decide whether to do a bounded Stage 4.3 CV v1.
+
+4. **Move or defer Stage 4.4–4.6 material unless separately re-scoped.**
+
+## 3. Continuing Verification Pass
 
 1. **Run project checks**
    ```bash
@@ -182,7 +200,7 @@ here onward.
      ```
    - Internal CV links should not use `target="_blank"`.
 
-## 3. Content And Metadata Cleanup
+## 4. Content And Metadata Cleanup
 
 1. **Fix schema / frontmatter mismatches where fields are meant to matter**
    - Check any frontmatter keys not declared in `src/content.config.ts`.
@@ -229,11 +247,11 @@ here onward.
    - Prefer hand-authored, display-ready descriptions around 130-170 characters where
      practical.
 
-## 4. Deployment, DNS, And Legacy URLs
+## 5. Deployment, DNS, And Legacy URLs
 
 Before release, verify Netlify deploy, apex/www redirects, sitemap, and forced legacy redirects.
 
-## 5. Repository hygiene / archival cleanup
+## 6. Repository hygiene / archival cleanup
 
 - Initial `smvsite-base` `testing` branch cleanup is resolved.
 - Later: review `smvsite-base` and old branches now that the Astro site deploys from `main` to Netlify.

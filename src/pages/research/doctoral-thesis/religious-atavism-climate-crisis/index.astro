@@ -44,7 +44,7 @@ function longDate(date: string) {
             <p>
                 By {thesis.author.name}.<br/>
                 {thesis.degree} thesis, {thesis.institution.name}, {thesis.dates.citationYear}.<br/>
-                Held by the {thesis.repository.name} ({thesis.repository.shortName}).<br/>
+                Held in the {thesis.repository.name} ({thesis.repository.shortName}).<br/>
                 Deposited on {longDate(thesis.dates.deposited)}.<br/>
                 Licensed under <a href={thesis.rights.licenceUrl}>{thesis.rights.licence}</a>.
             </p>
@@ -58,11 +58,21 @@ function longDate(date: string) {
             </nav>
         </header>
         <section>
-            <h2>About this thesis</h2>
+            <h2>About the thesis</h2>
             <p>
-                This doctoral thesis examines the concept of climate crisis in relation to
-                postsecular accounts of liberal modernity, with particular reference to
-                Charles Taylor and Richard Rorty.
+                This doctoral thesis is a theoretical account of the climate crisis paradigm rather than a work of
+                climate policy or empirical research in the natural sciences. It argues that the idea of climate
+                crisis is shaped by inherited anxieties of Western modernity and its discontents.
+            </p>
+
+            <p>
+                By ‘religious atavism’, the thesis refers to a return – within ostensibly secular accounts of
+                crisis and emergency – of religious and prophetic patterns of historical orientation: the sense that
+                history has a direction, that the present is a moment of judgment, that liberal modernity stands
+                in need of rupture or renewal, and that personal and collective deliverance depends on right
+                discernment of the times. The argument is developed chiefly through philosophers Charles
+                Taylor and Richard Rorty, with secondary reference to figures such as Bruno Latour,
+                Carl Schmitt, and Ivan Illich.
             </p>
         </section>
         <section>

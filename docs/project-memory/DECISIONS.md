@@ -17,7 +17,7 @@ as authoritative when they conflict with older notes.
   **Route:** `/research/doctoral-thesis/religious-atavism-climate-crisis/`  
   **Slug:** `religious-atavism-climate-crisis`  
   **Rule:** Do not link the route until the page is actually implemented.  
-  **Status:** Decided; implementation pending.
+  **Status:** Decided; implementation active.
 
 - **Use Astro as the site framework.**  
   **Rationale:** Static-first, Netlify-friendly, content collections,
@@ -50,6 +50,12 @@ as authoritative when they conflict with older notes.
 - **Use Astro 6 loader-style content collections.**  
   **Decision:** Use `defineCollection`, `glob` from `astro/loaders`, and `z` from `astro/zod`.  
   **Status:** Final.
+
+- **Use the thesis DOI as the primary scholarly identifier / schema `@id`.**  
+  **ID:** `https://doi.org/10.5287/ora-4rjoobkvk`  
+  **Implications:** The local thesis page may have its own `WebPage` node, but the thesis entity itself should use the
+  DOI URL as its primary scholarly identifier. Include ARK and ORA IDs as secondary identifiers where useful.  
+  **Status:** Decided for Stage 4.2.
 
 ## 2. Content Collections And Publications Page
 
@@ -176,6 +182,64 @@ as authoritative when they conflict with older notes.
 - **Validate rendered page-source JSON-LD, not TypeScript literals.**  
   **Status:** Final.
 
+- **Treat page descriptions as ordinary SEO metadata, not JSON-LD.**  
+  **Decision:** Canonical pages should use hand-authored, display-ready
+  `<meta name="description">` values where practical, roughly 130-170 characters.
+  **Implications:** Avoid generic descriptions such as `Research by Stevan Veljkovic.`
+  JSON-LD may be omitted from simple text pages initially if title, canonical URL, and
+  meta description are present.
+  **Status:** Current metadata-writing rule.
+
+- **Build the thesis page around factual metadata plus a short authored overview.**  
+  **Route:** `/research/doctoral-thesis/religious-atavism-climate-crisis/`  
+  **Structure:** title / metadata block; short authored “About this thesis” overview; abstract; citation; resources;
+  identifiers; supervision and examination; licence / PDF availability.  
+  **Status:** Decided for Stage 4.2 v1.
+
+- **Use distinct short and formal thesis titles.**  
+  **Short title for page/browser/link contexts:** `Religious atavism and the climate crisis`  
+  **Formal title:** `Religious atavism and the climate crisis, with reference to Taylor and Rorty on liberalism`  
+  **Rule:** Use the formal title for the visible thesis title, formal citation, and thesis entity. Use the short title
+  where a compact page/browser/link title is needed.  
+  **Browser title:** `Religious atavism and the climate crisis | Stevan Veljkovic`  
+  **Status:** Decided for Stage 4.2.
+
+- **Use ORA deposit/public availability date as thesis `datePublished`.**  
+  **Rules:** citation year `2023`; copyright year `2023`; `datePublished: 2024-02-11`; `dateCreated: 2023`, or
+  `2023-04-21` if a precise submission date is wanted.  
+  **Caution:** Do not use accidental `2026-02-11` for thesis `datePublished`.  
+  **Status:** Decided for Stage 4.2.
+
+- **Use Oxford University Research Archive naming.**  
+  **Rule:** The full repository name is `Oxford University Research Archive`, not `Oxford Research Archive`. First
+  mention may be “the Oxford University Research Archive (ORA)”; later references should use `ORA`. Avoid “the ORA”
+  when ORA stands alone, though “the ORA record” is fine.  
+  **Status:** Decided.
+
+- **Include thesis authorship in the top metadata block.**  
+  **Decision:** The thesis metadata block should include `By Stevan Veljkovic`; the site header alone is not enough for
+  authorship of the thesis work.  
+  **Preferred Stage 4.2 block:**
+  ```text
+  By Stevan Veljkovic.
+  DPhil thesis, University of Oxford, 2023.
+  Held in Oxford University Research Archive (ORA).
+  Deposited on 11 February 2024.
+  Licensed under CC BY 4.0.
+  ```  
+  **Status:** Decided for Stage 4.2 v1.
+
+- **Keep faculty/college details out of the Stage 4.2 top metadata block.**  
+  **Decision:** Do not add Faculty of Theology and Religion / St Cross College to the top metadata block for v1. If
+  included later, place them lower down as “Institutional details” with documentary wording.  
+  **Status:** Decided for Stage 4.2 v1.
+
+- **Preserve authorial voice in public-facing thesis copy.**  
+  **Decision:** Do not smooth thesis copy into generic keyword prose. Frame it as a theoretical account of the climate
+  crisis paradigm, explain “religious atavism” clearly, and preserve the primary focus on Taylor and Rorty with
+  secondary reference to Latour, Schmitt, and Illich.  
+  **Status:** Decided for Stage 4.2.
+
 ## 4. Review-Specific Decisions
 
 - **Cosmic Connections is a distinct local Author's Original Manuscript.**  
@@ -292,7 +356,7 @@ as authoritative when they conflict with older notes.
   **Decision:** Keep `https://seminars.stevanveljkovic.com/` separate for now; expose it in footer / secondary nav;
   optionally add a short Seminars card/section on `/research/`; do not import seminar PDFs/assets into the main Astro
   site during Stage 4.1.  
-  **Status:** Current.
+  **Status:** Implemented / current.
 
 - **Use forced Netlify redirects for legacy URLs.**  
   **Decision:** Use `301!` rules in `public/_redirects` while old compatibility files still exist.  
@@ -323,6 +387,11 @@ as authoritative when they conflict with older notes.
   low-probability risks once an informed judgment has been made.
   **Status:** Final working rule.
 
+- **Local thesis PDF may be hosted under CC BY 4.0 if verified.**  
+  **Decision:** The local thesis PDF may be made available under CC BY 4.0, using a stable public path/filename.  
+  **Caution:** Verify the file and generated/live link before release.  
+  **Status:** Permitted; implementation pending.
+
 ## 6. Design, Accessibility, and Content-Rendering Decisions
 
 - **Treat the current 4.1a link/focus/current-page styling as acceptable unless a real issue appears.**  
@@ -340,7 +409,7 @@ as authoritative when they conflict with older notes.
 - **Research page should be a compact hub, not an apology or manifesto.**  
   **Principles:** Do not apologise for lack of conventional research articles; do not overclaim; separate outputs from
   themes; give the doctoral thesis pride of place; keep the first version modest.  
-  **Status:** Current for `/research/` v1.
+  **Status:** Implemented/live for Stage 4.1b; keep future edits compact.
 
 - **Stage 4.1 primary navigation is settled.**  
   **Items:**
@@ -350,8 +419,8 @@ as authoritative when they conflict with older notes.
   Publications → /publications/
   Research → /research/
   ```
-  **Rule:** `Research` should not appear live until `/research/` exists.  
-  **Status:** Decided for Stage 4.1.
+  **Rule:** `Research` is now live because `/research/` exists.  
+  **Status:** Implemented/live for Stage 4.1b.
 
 - **Stage 4.1 footer / secondary navigation is settled.**  
   **Items:**
@@ -390,12 +459,32 @@ as authoritative when they conflict with older notes.
   **Status:** Final for Stage 4.0; long-term refactor deferred.
 
 - **Stage 4.0 is a constrained core architecture / design foundation phase.**  
-  **In scope:** thesis page; expanded / web-native CV page; header / navigation/footer; first-pass design foundation;
-  constrained light / dark mode; one review-page reading aid; seminars bridge.  
+  **In scope:** thesis page; expanded / web-native CV page; header / navigation/footer; seminars bridge.  
   **Deferred:** full thesis HTML edition; full seminars reconstruction; blog launch; broad React / Vue experimentation;
-  full redesign; complete CSS refactor; multiple experimental UI features.  
+  full redesign; complete CSS refactor; multiple experimental UI features; first-pass design foundation;
+  constrained light / dark mode; one review-page reading aid.  
   **Principle:** Touch the broader vision, but do not try to realise all of it.  
   **Status:** Final / current for Stage 4.0 planning.
+
+- **Stage 4.0 has reached the 30-hour scope-review checkpoint.**  
+  **Status:** Active review point.  
+  **Current recommendation:** commit to Stage 4.2 thesis page v1, validation, and close-out; make Stage 4.3 CV v1
+  conditional on time/energy; treat withheld-review work as triage only; defer full design foundation, light/dark
+  mode, review reading aid, and publications/reviews refinements unless separately re-scoped.  
+  **Review needed:** Confirm whether this recommendation is now the official Stage 4.0 rescope.
+
+- **Use the ORA / DOI metadata abstract for the local thesis page.**  
+  **Decision:** Use the Oxford Research Archive / DOI metadata version of the thesis abstract as the source text for the
+  local thesis page.  
+  **Implementation rule:** Do not describe the abstract as transcribed from the PDF unless the PDF text is being used
+  and checked directly.
+  **Rationale:** ORA is the public institutional DOI metadata record and is the most stable source for page metadata.
+  **Status:** Decided for Stage 4.2.
+
+- **Do not broaden thesis-page visual fixes into a whole-site frame/border pass now.**  
+  **Decision:** Thesis-page border/frame refinements may be made locally, but broader text-page border/frame
+  consistency is deferred to a later design pass.  
+  **Status:** Decided for Stage 4.2.
 
 ## 7. Deferred Decisions
 
@@ -410,4 +499,3 @@ as authoritative when they conflict with older notes.
 - **Trusted HTML migration is deferred.**  
   **Future question:** whether review bodies remain Markdown with raw HTML, move to MDX, or become more semantic
   Markdown.
-

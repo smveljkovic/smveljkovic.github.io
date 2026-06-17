@@ -2,7 +2,7 @@
 
 Last reviewed against `docs/project-memory/current.md`,
 `docs/project-memory/DECISIONS.md`, and `docs/project-memory/NEXT-STEPS.md` on
-2026-06-10.
+2026-06-15.
 
 This file is a human-readable metadata registry/checklist for
 `stevanveljkovic.com`. It is not automatically the code source of truth. When
@@ -51,7 +51,6 @@ currently conflicts. Do not treat them as settled canonical values until fixed.
 | Topic                  | Current conflict / uncertainty                                                                                                                                                                              | Action                                                                                                                                                        |
 |------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Contact email          | There was previously inconsistency amongst different instances, but the canonical version is now `stevan@stevanveljkovic.com`; all instances should populate from site.ts and nothing should be hard-coded. | Verify that there’s now alignment of `site.ts`, homepage, review intro, JSON-LD, page metadata, and any footer/contact copy, and that no hard-coding remains. |
-| Default/headshot image | Selected public tree has `/images/headshot-1200x630.JPG`; `site.ts`, home schema, CV schema, and older metadata mention `/images/headshot-1200x630.png`.                                                    | Inspect generated output and make code/assets agree.                                                                                                          |
 | Public identity phrase | Older notes used `Theory and editing`; current homepage code and `site.ts` use `Theory and design`.                                                                                                         | Confirm desired wording before launch; current operational value is `Theory and design`.                                                                      |
 | Sort/date metadata     | `godless-crusade` uses `publicationList.sortDate: "2023-01-01"`; other review sort/year choices may be placeholder-like.                                                                                    | Verify and clean sort/date metadata.                                                                                                                          |
 | Hell issue date/PDF    | `hell-christian-ecology` has issue date `2024-10-03` and a PDF path, but memory says both need verification.                                                                                                | Verify sometime before Stage 4.4.                                                                                                                             |
@@ -76,6 +75,8 @@ https://stevanveljkovic.com/
 https://stevanveljkovic.com/cv/
 https://stevanveljkovic.com/publications/
 https://stevanveljkovic.com/publications/reviews/cosmic-connections/
+https://stevanveljkovic.com/pronunciation/
+https://stevanveljkovic.com/research/
 ```
 
 Use URL helpers instead of manual concatenation:
@@ -94,7 +95,7 @@ Avoid:
 
 because this can create double slashes.
 
-## 4. Title And Open Graph Rules
+## 4. Titles, Descriptions, And Open Graph Rules
 
 ### HTML `<title>`
 
@@ -103,6 +104,21 @@ because this can create double slashes.
 | Homepage               | `Stevan Veljkovic`                                          |
 | Ordinary internal page | `{Page name} \| Stevan Veljkovic`                           |
 | Review page            | `Review of {Reviewed work short title} \| Stevan Veljkovic` |
+
+### Meta Descriptions
+
+Canonical pages should use specific, hand-authored meta descriptions where practical, roughly 130-170 characters.
+
+Search snippets are primarily influenced by `<meta name="description">`, page title, and visible page content. JSON-LD
+should not be treated as a substitute for page descriptions.
+
+Avoid generic strings such as:
+
+```text
+Research by Stevan Veljkovic.
+Pronunciation of Stevan Veljkovic.
+Curriculum vitae of Stevan Veljkovic.
+```
 
 ### Site And Person Names
 
@@ -122,26 +138,29 @@ og:site_name
 
 ### Open Graph Defaults
 
-| Field                         | Current value / rule                                                       |
-|-------------------------------|----------------------------------------------------------------------------|
-| `og:site_name`                | `Stevan Veljkovic`                                                         |
-| Default language/locale basis | `en-GB`                                                                    |
-| Homepage `og:type`            | `website`                                                                  |
-| Ordinary page `og:type`       | `website` unless `article` is appropriate                                  |
-| Review page `og:type`         | `article`                                                                  |
-| Default `og:image`            | See staging area: `.png` code references conflict with `.JPG` public file. |
+| Field                         | Current value / rule                      |
+|-------------------------------|-------------------------------------------|
+| `og:site_name`                | `Stevan Veljkovic`                        |
+| Default language/locale basis | `en-GB`                                   |
+| Homepage `og:type`            | `website`                                 |
+| Ordinary page `og:type`       | `website` unless `article` is appropriate |
+| Review page `og:type`         | `article`                                 |
+| Default `og:image`            | `/images/headshot-1200x630.jpg`           |
 
 ## 5. Stable JSON-LD Node IDs
 
-| Node                 | Canonical ID                                                       |
-|----------------------|--------------------------------------------------------------------|
-| Person               | `https://orcid.org/0000-0002-2599-3227`                            |
-| WebSite              | `https://stevanveljkovic.com/#website`                             |
-| Homepage WebPage     | `https://stevanveljkovic.com/#webpage`                             |
-| Publications WebPage | `https://stevanveljkovic.com/publications/#webpage`                |
-| CV WebPage           | `https://stevanveljkovic.com/cv/#webpage`                          |
-| Review WebPage       | `https://stevanveljkovic.com/publications/reviews/<slug>/#webpage` |
-| Local review node    | `https://stevanveljkovic.com/publications/reviews/<slug>/#review`  |
+| Node                 | Canonical ID                                                                                     |
+|----------------------|--------------------------------------------------------------------------------------------------|
+| Person               | `https://orcid.org/0000-0002-2599-3227`                                                          |
+| WebSite              | `https://stevanveljkovic.com/#website`                                                           |
+| Homepage WebPage     | `https://stevanveljkovic.com/#webpage`                                                           |
+| Publications WebPage | `https://stevanveljkovic.com/publications/#webpage`                                              |
+| CV WebPage           | `https://stevanveljkovic.com/cv/#webpage`                                                        |
+| Review WebPage       | `https://stevanveljkovic.com/publications/reviews/<slug>/#webpage`                               |
+| Local review node    | `https://stevanveljkovic.com/publications/reviews/<slug>/#review`                                |
+| Research WebPage     | `https://stevanveljkovic.com/research/#webpage`                                                  |
+| Thesis entity        | `https://doi.org/10.5287/ora-4rjoobkvk`                                                          |
+| Thesis WebPage       | `https://stevanveljkovic.com/research/doctoral-thesis/religious-atavism-climate-crisis/#webpage` |
 
 DOI URLs should be primary IDs for DOI-bearing works and published
 articles/reviews.
@@ -196,7 +215,19 @@ Homepage title-like metadata should not expand the site name beyond
 | Person `@id`  | `https://orcid.org/0000-0002-2599-3227`   |
 | PDF path      | `/cv/veljkovic-cv.pdf`                    |
 
-Do not link CV schema to a non-existent local thesis page.
+Do not link CV schema to the local thesis page until that page exists.
+
+### Research
+
+| Field         | Current value / rule                            |
+|---------------|-------------------------------------------------|
+| Route         | `/research/`                                    |
+| Canonical URL | `https://stevanveljkovic.com/research/`         |
+| `<title>`     | `Research \| Stevan Veljkovic`                  |
+| WebPage `@id` | `https://stevanveljkovic.com/research/#webpage` |
+| `og:type`     | `website`                                       |
+
+Current description in `pageMeta.ts` is generic and tracked for cleanup.
 
 ## 7. Review Page Metadata
 
@@ -342,9 +373,10 @@ It may still appear as a bibliographic DOI item on `/publications/`.
 
 [^*]: All values to be regarded as provisional whilst review is excluded pending rights clarity.
 
-## 8. Thesis Metadata in Stage 4.0
+## 8. Thesis Metadata for Stage 4.2
 
-Do not add a thesis page to sitemap or schema until it exists.
+Do not add the thesis page to sitemap or schema until it exists. Current generated/live route count before the thesis
+page is 9; once implemented, expected route count becomes 10.
 
 | Field                             | Current value                                                                                |
 |-----------------------------------|----------------------------------------------------------------------------------------------|
@@ -355,6 +387,15 @@ Do not add a thesis page to sitemap or schema until it exists.
 | Oxford Research Archive local pid | `pubs:1624720`                                                                               |
 | Title                             | `Religious atavism and the climate crisis, with reference to Taylor and Rorty on liberalism` |
 | Type                              | `Thesis`                                                                                     |
+| Author                            | `Stevan Veljkovic`                                                                           |
+| Institution                       | `University of Oxford`                                                                       |
+| Degree                            | `DPhil / PhD`                                                                                |
+| Year                              | `2023`                                                                                       |
+| Deposit date                      | `2024-02-11`                                                                                 |
+| Copyright year                    | `2023`                                                                                       |
+| Licence                           | `CC BY 4.0`                                                                                  |
+| Supervisors                       | `Friederike Otto`; `Johannes Zachhuber`                                                      |
+| Examiners                         | `Douglas Hedley`; `Gavin Flood`                                                              |
 
 Local thesis route:
 `/research/doctoral-thesis/religious-atavism-climate-crisis/`
@@ -368,9 +409,23 @@ ARK rule:
 - do not use the ARK as the primary `@id`;
 - do not use the ARK as `sameAs` while the DOI exists.
 
+Abstract source rule:
+
+- use ORA / DOI metadata as the abstract source for v1;
+- do not describe the abstract as transcribed from the PDF unless the PDF text is used and checked directly.
+
+Local PDF rule:
+
+- local thesis PDF may be hosted under CC BY 4.0 if verified;
+- choose a stable path/filename;
+- verify generated/live link before release.
+
 Do not automatically set thesis `datePublished` to a deposit date without first
 deciding whether it means award date, completion/submission date, repository
 deposit date, DOI publication date, or repository availability date.
+
+Current expected generated/live route set before the thesis page contains 9 pages, including `/research/`. Once
+`/research/doctoral-thesis/religious-atavism-climate-crisis/` is implemented, expected route count becomes 10.
 
 ## 9. Date, Pagination, And Issue Rules
 
@@ -479,11 +534,11 @@ operational values:
 |-----------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------|
 | `Theory and editing`                                                  | Superseded by current code value `Theory and design`; pending final wording confirmation.                                                    |
 | `hello@stevanveljkovic.com` as canonical email                        | Settled, with stevan@stevanveljkovic.com as new value and all instances populated from site.ts (no hard-coding), pending final verification. |
-| `/images/headshot-1200x630.png` as definitely valid asset             | Code references it, but selected public tree shows `/images/headshot-1200x630.JPG`; fix needed.                                              |
+| `/images/headshot-1200x630.png` as default headshot/social image      | Superseded by `/images/headshot-1200x630.jpg`; remaining `.png` schema references are tracked as cleanup work.                               |
 | Only Cosmic Connections and Christian Right as generated review pages | Superseded; six review routes exist; four currently build; two are excluded.                                                                 |
 | Godless, Hell, Challenging Modernity as merely planned draft pages    | Superseded; content files exist, but christian-right-europe and challenging-modernity routes are currently excluded pending rights clarity.  |
 | `src/content/publication-items/phd-thesis.md`                         | Current thesis publication item is `religious-atavism-climate-crisis.md`.                                                                    |
-| Thesis page as immediate Stage 3 task                                 | settled route; implementation pending.                                                                                                       |
+| Thesis page as immediate Stage 3 task                                 | Superseded; thesis page is active Stage 4.2 work with settled route and implementation pending.                                              |
 
 ## 13. Other naming decisions
 

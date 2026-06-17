@@ -30,7 +30,7 @@ to avoid double slashes.
 Current selected public tree includes:
 
 ```text
-public/images/headshot-1200x630.JPG
+public/images/headshot-1200x630.jpg
 public/publications/reviews/cosmic-connections/veljkovic-review-cosmic-connections.pdf
 public/publications/reviews/hell-christian-ecology/veljkovic-review-hell-christian-ecology.pdf
 ```
@@ -46,8 +46,7 @@ Temporarily removed withheld-review materials currently live at:
 ~/Projects/website-admin/withheld-images-folders/
 ```
 
-Possible mismatch: inspect whether code/generated output references .png while public tree has .JPG. Verify generated
-output and fix the broken side during Stage 4.0 verification/cleanup.
+Remaining cleanup: check home/CV JSON-LD for stale `/images/headshot-1200x630.png` references.
 
 Preferred review image convention:
 
@@ -98,3 +97,6 @@ https://stevanveljkovic.com/sitemap-index.xml
 
 `https://www.stevanveljkovic.com/` should redirect permanently to the apex
 domain.
+
+Local thesis PDF may be hosted only after confirming CC BY 4.0 permission, choosing a stable path/filename, and
+verifying the generated/live link.

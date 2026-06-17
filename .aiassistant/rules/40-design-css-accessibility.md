@@ -4,11 +4,11 @@ apply: always
 
 # Design, CSS, And Accessibility
 
-Stage 4.1 primary nav:
+Stage 4.1 primary nav is implemented/live:
 Stevan Veljkovic -> /
 CV -> /cv/
 Publications -> /publications/
-Research -> /research/ only after `/research/` exists.
+Research -> /research/
 
 Preserve the custom visual identity. Do not replace the site with generic academic-theme styling.
 

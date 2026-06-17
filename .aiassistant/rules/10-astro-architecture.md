@@ -25,6 +25,7 @@ src/pages/cv/index.astro                          ->  /cv/
 src/pages/publications/index.astro                ->  /publications/
 src/pages/publications/reviews/[slug]/index.astro ->  /publications/reviews/<slug>/
 src/pages/pronunciation/index.astro               ->  /pronunciation/
+src/pages/research/index.astro                    ->  /research/
 ```
 
 Review pages are generated from `src/content/reviews/*.md` through the dynamic
@@ -43,18 +44,21 @@ godless-crusade.md
 hell-christian-ecology.md
 ```
 
-Current observed `dist/` output has 8 pages:
+Current expected generated/live output before the thesis page has 9 pages:
 
 ```text
 /
 /cv/
 /publications/
+/pronunciation/
+/research/
 /publications/reviews/cosmic-connections/
 /publications/reviews/evolution-of-religions/
 /publications/reviews/godless-crusade/
 /publications/reviews/hell-christian-ecology/
-/pronunciation/
 ```
+
+Once `/research/doctoral-thesis/religious-atavism-climate-crisis/` is implemented, expected route count becomes 10.
 
 `challenging-modernity` and `christian-right-europe` are currently
 drafted/withheld from page generation. Verify the generated route set and

@@ -32,8 +32,8 @@ Priority when sources conflict:
 3. `docs/project-memory/NEXT-STEPS.md`.
 4. `docs/project-memory/DECISIONS.md`.
 5. Newest relevant file in `docs/project-memory/deltas/`.
-6. `.aiassistant/rules/*.md`.
-7. `docs/metadata/master-values.md` for metadata registry values.
+6. `docs/metadata/master-values.md` for metadata registry values.
+7. `.aiassistant/rules/*.md` for operational extracts.
 8. `docs/project-memory/archive/`.
 9. Older generated summaries, raw logs, and chat-derived material.
 

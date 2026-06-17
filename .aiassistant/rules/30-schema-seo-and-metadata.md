@@ -7,6 +7,17 @@ apply: always
 Preserve scholarly metadata carefully. Validate rendered page-source JSON-LD,
 not TypeScript object literals.
 
+Distinguish ordinary SEO metadata from JSON-LD. Search snippets depend mainly on
+`<meta name="description">`, page title, and visible page content. Prefer
+specific, hand-authored descriptions for canonical pages; avoid generic strings
+such as `Research by Stevan Veljkovic.`
+
+The thesis entity should use `https://doi.org/10.5287/ora-4rjoobkvk` as its primary scholarly `@id`; ARK and ORA IDs may
+be secondary identifiers.
+
+Once implemented, the thesis page should use `WebPage` with `mainEntity` thesis. Use date-only values and validate
+rendered page-source JSON-LD.
+
 Canonical `Person.@id`:
 
 ```text

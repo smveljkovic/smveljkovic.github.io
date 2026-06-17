@@ -38,6 +38,11 @@ The thesis remains bibliography-only until the local thesis page is implemented.
 Settled route: `/research/doctoral-thesis/religious-atavism-climate-crisis/`.
 Do not create, link, advertise, sitemap, or schema-link the local route until the page exists.
 
+For thesis page v1, use ORA / DOI metadata as the abstract source. Do not describe the abstract as transcribed from the
+PDF unless the PDF text is used and checked directly.
+
+Local thesis PDF may be added only if hosting is verified under CC BY 4.0 and the generated/live link is checked.
+
 The publications page should preserve the grouped bibliography style and legacy
 classes, including:
 

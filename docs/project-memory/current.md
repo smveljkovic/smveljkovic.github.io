@@ -6,7 +6,8 @@ For metadata registry: docs/metadata/master-values.md
 For operational AI rules: .aiassistant/rules/
 
 - Active repo project memory should remain compact and operational. Expanded/trimmed material in
-  `~/Projects/website-admin/project-memory-materials` is contextual background, not a co-equal canonical source.
+  `~/Projects/website-admin/project-memory-materials` or `~/Projects/website-admin/stage-4-0/` is contextual background,
+  not a co-equal canonical source.
 
 ## 1. Project status
 
@@ -17,18 +18,18 @@ For operational AI rules: .aiassistant/rules/
 - Current working branch for Stage 4.0: `stage-4-0`
 - Production branch: `main` (`origin/main` deploys to Netlify)
 - Git remote `origin`: `https://github.com/smveljkovic/smveljkovic.github.io.git`
-- Current phase: Stage 4.1b research hub work within Stage 4.0 core architecture / design foundation.
+- Current phase: Stage 4.2 thesis page v1 release polish within Stage 4.0.
+- Stage 4.2 thesis page is substantially implemented / near release at:
+  `/research/doctoral-thesis/religious-atavism-climate-crisis/`
+  but no merge to `main` or Netlify production deployment has been confirmed.
+- Remaining Stage 4.2 work should be treated as a release checklist, not an open-ended writing / design exercise.
 - Site is live at `https://stevanveljkovic.com/`.
-- Stage 4.1a shell v1 is live:
-   - global header
-   - footer
-   - stable primary/footer navigation
-   - `/pronunciation/` page
-   - homepage pronunciation link updated to `/pronunciation/`
-   - old external IPA Reader link removed
-   - inherited homepage nav/icon block removed/deferred
-   - link/focus/current-page behaviour tuned
-
+- Stage 4.1b research hub v1 is complete/live:
+   - `/research/` exists as a compact research/signposting hub.
+   - `Research → /research/` is live in primary navigation.
+   - The generated sitemap/route set now includes `/research/`.
+   - `main` contains the Stage 4.1b release and is deployed on Netlify.
+   - `stage-4-0` has been updated from `main` and left clean.
 - Production host: Netlify, deploying from `origin/main`.
 - Netlify build settings:
   ```text
@@ -52,16 +53,17 @@ If the exact Node patch causes trouble, use `22`.
   ```
 - GitHub Pages deployment for the Astro site is retired; `public/CNAME` and `.github/workflows/deploy.yml` are no longer
   part of the active deployment model.
-- Expected generated/live route set before `/research/`: static Astro site, 8 pages:
+- Expected generated/live route set before the thesis page: static Astro site, 9 pages:
    - `/`
    - `/cv/`
    - `/publications/`
    - `/pronunciation/`
+   - `/research/`
    - `/publications/reviews/cosmic-connections/`
    - `/publications/reviews/evolution-of-religions/`
    - `/publications/reviews/godless-crusade/`
    - `/publications/reviews/hell-christian-ecology/`
-- `Research` should remain absent from live primary navigation until `/research/` exists.
+- Once the thesis page is implemented, expected generated/live route count becomes 10.
 
 - Current code has `challenging-modernity` and `christian-right-europe` drafted / withheld from page generation.
 - Withheld review image / material folders temporarily live at `~/Projects/website-admin/withheld-images-folders/`.
@@ -72,6 +74,16 @@ If the exact Node patch causes trouble, use `22`.
   Mandatory scope review: 30 hours
   Re-scope / stop-and-decide threshold: 55 hours
   ```
+
+- Stage 4.0 has reached the mandatory 30-hour scope-review checkpoint.
+- Before expanding further Stage 4 work, make and record an explicit scope decision.
+- Current recommended rescope:
+   - committed: Stage 4.2 thesis page v1, validation, and close-out;
+   - conditional: bounded Stage 4.3 CV v1 if time/energy remains;
+   - optional triage only: withheld-review rights/status;
+   - defer unless separately re-scoped: full design foundation, light/dark mode, review reading aid, and
+     publications/reviews refinements.
+
 - Project-memory maintenance should not consume more than roughly 10–15% of Stage 4.0 work from here onward.
 
 ## 2. Current implementation / architecture
@@ -123,14 +135,26 @@ If the exact Node patch causes trouble, use `22`.
    - `src/lib/schema/person.ts`
    - `src/lib/schema/review.ts`
 
-- Stage 4.1a shell v1 is implemented/live and involved:
-   - `src/data/navigation.ts`
-   - `src/components/SiteHeader.astro`
-   - `src/components/SiteFooter.astro`
-   - `src/layouts/BaseLayout.astro`
-   - `src/pages/pronunciation/index.astro`
+- Stage 4.2 thesis page work currently involves:
+   - `src/pages/research/doctoral-thesis/religious-atavism-climate-crisis/index.astro`
+   - `src/data/thesis`
+   - `src/data/schema/thesis/createThesisSchema`
+   - `src/data/pageMeta.ts`
    - `src/styles/global.css`
-- `Research` should remain absent/commented out in live primary navigation until `/research/` exists.
+   - `/research/` thesis link
+   - `/publications/` thesis entry check
+- Thesis page structure now includes or is intended to include: thesis header and metadata block; resource actions;
+  “About the thesis”; abstract; citation; resources; identifiers / technical identifiers; supervision and
+  examination; thesis JSON-LD.
+- Thesis-specific visual polish is considered tolerable and shippable after light polish, not final design.
+
+- Stage 4.1b research hub v1 is implemented/live and involved:
+   - `src/pages/research/`
+   - `src/data/navigation.ts`
+   - `src/data/pageMeta.ts`
+   - `src/pages/index.astro`
+   - `src/styles/global.css`
+- `Research → /research/` is now live in primary navigation because `/research/` exists.
 
 ## 3. Content model, schema, and metadata
 
@@ -141,6 +165,17 @@ If the exact Node patch causes trouble, use `22`.
   import { glob } from "astro/loaders";
   import { z } from "astro/zod";
   ```
+
+- Thesis page schema:
+   - use `createThesisSchema(thesis, meta)`;
+   - `WebPage.mainEntity` should point to the DOI thesis node;
+   - thesis `@id` should be the DOI URL;
+   - `Person.@id` remains ORCID;
+   - do not emit `@id` arrays;
+   - use date-only values;
+   - include `isAccessibleForFree: true` if the PDF/resource is freely available and verified;
+   - validate rendered page-source JSON-LD.
+
 - Collections:
    - `reviews`
    - `publicationItems`
@@ -182,6 +217,14 @@ If the exact Node patch causes trouble, use `22`.
    - Use date-only values unless a real meaningful time is known.
    - Do not invent noon / midnight datetimes.
    - Validate rendered page-source JSON-LD, not TypeScript literals.
+   - SEO metadata and JSON-LD serve different purposes:
+      - search-result snippets are primarily influenced by `<meta name="description">`, page title, and visible page
+        content;
+      - JSON-LD should describe page/entity relationships, not compensate for weak page descriptions.
+   - Canonical pages should have hand-authored, display-ready meta descriptions where practical, roughly 130-170
+     characters.
+   - Avoid generic descriptions such as `Research by Stevan Veljkovic.`
+   - Simple text pages may launch without JSON-LD if title, canonical URL, and meta description are present.
 - Journal review model:
   ```text
   local WebPage
@@ -220,6 +263,11 @@ If the exact Node patch causes trouble, use `22`.
    - `reuseNoteHtml`
    - `modificationNote`
    - `publicationList.noteHtml`
+- Current canonical social image asset/URL:
+  ```text
+  /images/headshot-1200x630.jpg
+  ```
+  Home/CV JSON-LD should still be checked for stale `.png` references.
 
 ## 4. Design, typography, and layout decisions
 
@@ -239,14 +287,13 @@ If the exact Node patch causes trouble, use `22`.
   not Greek `ε`.
 
 
-- Stage 4.1 primary navigation is settled as:
+- Stage 4.1 primary navigation is implemented/live as:
   ```text
   Stevan Veljkovic → /
   CV → /cv/
   Publications → /publications/
   Research → /research/
   ```
-- `Research` must not be exposed in live primary navigation until `/research/` exists.
 - Avoid primary-nav `Contact` unless a real `/contact/` page exists.
 - Avoid putting `Seminars` in primary navigation for now.
 
@@ -319,9 +366,10 @@ If the exact Node patch causes trouble, use `22`.
    - `public/favicon.ico`
    - `public/favicon.svg`
    - `public/site.webmanifest`
-   - `public/images/headshot-1200x630.JPG`
+   - `public/images/headshot-1200x630.jpg`
    - `public/publications/reviews/cosmic-connections/veljkovic-review-cosmic-connections.pdf`
    - `public/publications/reviews/hell-christian-ecology/veljkovic-review-hell-christian-ecology.pdf`
+   - `public/research/doctoral-research/climate-crisis-religious-atavism/veljkovic-dphil-theis.pdf`
 - Important missing / unchecked asset issue:
    - latest selected public tree does **not** show PDFs for `christian-right-europe`, `godless-crusade`, or
      `challenging-modernity`.
@@ -420,18 +468,13 @@ If the exact Node patch causes trouble, use `22`.
 
 ## 7. Known issues, cautions, and unresolved questions
 
-- Verify the old W3 validator image-path issue is gone or fix the offending reference:
-  ```text
-  /images/Asset 1.png
-  ```
 - For Netlify 404 spikes, likely bot-scanning paths returning `404` are not by themselves an incident. Investigate if
   sensitive-looking paths return `200`, and keep `dist/`, `public/`, and the public repo free of secrets or
   rights-sensitive unintended assets.
 
-- **T&F rights caution:** no Taylor & Francis Version-of-Record page should go
-  live until T&F / CCC confirms permission. Current code has
-  `challenging-modernity` withheld; keep it absent from routes, sitemap, and
-  public assets unless that decision changes.
+- **T&F rights caution:** no Taylor & Francis Version-of-Record page should go live until T&F / CCC confirms permission.
+  Current code has `challenging-modernity` withheld; keep it absent from routes, sitemap, and public assets unless that
+  decision changes.
 - `godless-crusade` AM is acceptable in principle under T&F author-reuse policy, but still needs final verification for:
    - exact visible AM wording
    - Goodhart correction note
@@ -442,10 +485,9 @@ If the exact Node patch causes trouble, use `22`.
 - Current canonical contact email in code is `stevan@stevanveljkovic.com`.
   Homepage and review intro use `site.email`; `bylineHtml` is deprecated; manuscript-specific bylines are historical and
   may contain now-defunct `stevan.veljkovic@theology.ox.ac.uk` address.
-- Possible OG image mismatch:
-   - public tree has `/images/headshot-1200x630.JPG`
-   - older notes expected `/images/headshot-1200x630.png`
-   - inspect `src/data/site.ts` and generated page source for broken image URLs.
+- Remaining headshot metadata cleanup:
+   - `site.image` and the public file now use `/images/headshot-1200x630.jpg`;
+   - home/CV JSON-LD schema still needs checking for stale `.png` references.
 - Latest selected public tree confirms review PDFs for Cosmic and Hell only.
   Godless currently has no local PDF; drafted / withheld Christian Right and Challenging Modernity PDF / image assets
   are not in `public/`.
@@ -477,38 +519,51 @@ If the exact Node patch causes trouble, use `22`.
   ```
 - Keep the redirects forced (`301!`) while physical legacy files remain, because otherwise Netlify may serve existing
   files with `200`.
+- `/research/` currently uses CSS-generated section numbering. This is acceptable for now, but if stricter
+  accessibility is needed later, use explicit markup, e.g. an `aria-hidden` number span.
+- Minor typography cautions remain:
+   - homepage pronunciation brackets may be optically imperfect;
+   - Meta Serif roman/italic boundaries can show awkward spacing in some phrases.
+     Treat these as bounded micro-fixes only if they recur or become visibly distracting.
 
 ## 8. Immediate next steps
 
-1. Continue Stage 4.1b work on `stage-4-0`: create `/research/` as a compact hub.
-2. Once `/research/` exists, add `Research → /research/` to primary nav.
-3. Add only a short Seminars bridge on `/research/` if it fits naturally.
-4. Then implement the thesis page:
+1. Finish Stage 4.2 thesis page release blockers:
+   - final thesis copy;
+   - top metadata block;
+   - About section;
+   - meta description;
+   - short-title handling;
+   - date/schema choices;
+   - PDF asset/path verification;
+   - `/research/` link;
+   - `/publications/` thesis entry check;
+   - rendered JSON-LD validation;
+   - mobile sanity check.
+
+2. Verify local thesis PDF if hosted:
    ```text
-   /research/doctoral-thesis/religious-atavism-climate-crisis/
+   public/research/doctoral-thesis/religious-atavism-climate-crisis/veljkovic-dphil-thesis.pdf
    ```
-5. Before merging any Stage 4.0 increment to `main`, run:
+   and confirm generated/live URL returns `200`.
+3. Run:
    ```bash
    npx astro sync
    npx astro check
    npm run build
    npm run preview
    ```
-   Inspect:
+4. Inspect at least:
    ```text
    /
-   /cv/
+   /research/
+   /research/doctoral-thesis/religious-atavism-climate-crisis/
    /publications/
    /pronunciation/
-   /publications/reviews/cosmic-connections/
-   /publications/reviews/evolution-of-religions/
-   /publications/reviews/godless-crusade/
-   /publications/reviews/hell-christian-ecology/
-   /research/   once created
    ```
-6. Confirm sitemap includes `/pronunciation/` and still excludes `/research/` until that page exists.
-7. Verify/fix the old W3 image-path issue if still present.
-8. Update the `hell-christian-ecology` publication citation to use the `doi.org` address.
+5. Confirm generated route set and sitemap: thesis page generated; expected route count becomes 10; drafted/withheld
+   reviews remain absent.
+6. Complete and record the 30-hour Stage 4.0 scope decision before resuming expanded Stage 4 work.
 
 ## 9. Details that should not be lost
 
@@ -568,7 +623,7 @@ If the exact Node patch causes trouble, use `22`.
   ```text
   religious-atavism-climate-crisis
   ```
-- Thesis route is settled but should not be linked until implemented:
+- Thesis route is linked and implemented:
   ```text
   /research/doctoral-thesis/religious-atavism-climate-crisis/
   ```
@@ -583,37 +638,89 @@ If the exact Node patch causes trouble, use `22`.
 - Thesis secondary identifiers:
   ```text
   ARK: ark:/29072/ora_7aff13dc075e4c17bee95adfc1b2fcf4
-  Oxford Research Archive pubs id: 1624720
-  Oxford Research Archive local pid: pubs:1624720
+  Oxford University Research Archive pubs id: 1624720
+  Oxford University Research Archive local pid: pubs:1624720
   ```
+- Thesis title:
+  ```text
+  Religious atavism and the climate crisis, with reference to Taylor and Rorty on liberalism
+  ```
+
+- Formal thesis citation:
+  ```text
+  Veljkovic, Stevan. ‘Religious atavism and the climate crisis, with reference to Taylor and Rorty on liberalism.’ PhD thesis, University of Oxford, 2023. https://doi.org/10.5287/ora-4rjoobkvk.
+  ```
+
+- Thesis metadata for Stage 4.2:
+  ```text
+  Author: Stevan Veljkovic
+  Institution: University of Oxford
+  Degree: DPhil / PhD
+  Year: 2023
+  Deposit date: 2024-02-11
+  Copyright year: 2023
+  Licence: CC BY 4.0
+  DOI: https://doi.org/10.5287/ora-4rjoobkvk
+  ORA URL: https://ora.ox.ac.uk/objects/uuid:7aff13dc-075e-4c17-bee9-5adfc1b2fcf4
+  ARK: ark:/29072/ora_7aff13dc075e4c17bee95adfc1b2fcf4
+  ORA pubs id: 1624720
+  ORA local pid: pubs:1624720
+  Supervisors: Friederike Otto; Johannes Zachhuber
+  Examiners: Douglas Hedley; Gavin Flood
+  ```
+
+- Thesis abstract handling:
+   - Use the Oxford University Research Archive / DOI metadata version of the abstract on the local thesis page.
+   - Do not describe the abstract as transcribed from the PDF unless the PDF text is being used and checked directly.
+   - Treat ORA as the stable source for thesis-page metadata unless a later correction changes the public record.
+
 - Stage 4.0 mission / planning note lives outside the repo:
   ```text
   ~/Projects/website-admin/stage-4/plan-mission-note.md
   ```
 
-## 10. Recent additions for disaggregation
+- Thesis short title for page/browser/link contexts:
+  ```text
+  Religious atavism and the climate crisis
+  ```
+- Formal thesis title remains:
+  ```text
+  Religious atavism and the climate crisis, with reference to Taylor and Rorty on liberalism
+  ```
+  Use the formal title for the visible thesis title, citation, and thesis entity.
 
-### SEO / page-description strategy
+- Thesis browser title:
+  ```text
+  Religious atavism and the climate crisis | Stevan Veljkovic
+  ```
 
-- Distinguish ordinary SEO metadata from JSON-LD structured data.
-- Search-result snippet control primarily depends on `<meta name="description">`, page title, and
-  visible page content, not JSON-LD.
-- For canonical pages, prefer hand-authored page descriptions of roughly 130–170 characters where
-  possible.
-- Use specific, display-ready descriptions rather than generic strings such as “Research by Stevan
-  Veljkovic.”
-- The review pages and homepage already follow this more deliberate description strategy.
-- Apply the same strategy to `/research/`, `/pronunciation/`, `/cv/`, `/publications/`, and the
-  future thesis page.
-- It is acceptable for simple text pages not to have JSON-LD initially, provided title, canonical
-  URL, and meta description are present.
+- Thesis date handling:
+   - citation year: `2023`;
+   - `copyrightYear`: `2023`;
+   - `datePublished`: `2024-02-11` using ORA deposit/public availability date;
+   - `dateCreated`: `2023` or, if a precise submission date is wanted, `2023-04-21`.
+   - Important: do not use accidental `2026-02-11` for `datePublished`.
 
-### Metadata issue to verify
+- Repository naming:
+   - full name: Oxford University Research Archive;
+   - first mention may be “the Oxford University Research Archive (ORA)”;
+   - later references should use `ORA`;
+   - avoid “the ORA” when ORA stands alone, though “the ORA record” is fine.
 
-- Checked Open Graph / Twitter image path.
-- Rendered metadata showed `/images/headshot-1200x630.png`, while the public tree may
-  contain `/images/headshot-1200x630.JPG`.
-- Verified live URL and updated `src/data/site.ts`
-- Renamed image file to match `.jpg` extension
-- Committed and pushed to main
-
+- Thesis top metadata block should include the author name; the site header alone is not enough.
+- Preferred Stage 4.2 top metadata block:
+  ```text
+  By Stevan Veljkovic.
+  DPhil thesis, University of Oxford, 2023.
+  Held in the Oxford University Research Archive (ORA).
+  Deposited on 11 February 2024.
+  Licensed under CC BY 4.0.
+  ```
+- Do not add Faculty of Theology and Religion / St Cross College to the top metadata block for Stage 4.2 v1. If added
+  later, place lower down as “Institutional details” with documentary wording.
+- Public-facing thesis copy should preserve Stevan’s authorial voice and argumentative edge rather than smoothing into
+  generic keyword copy.
+- “About this thesis” should frame the work as a theoretical account of the climate crisis paradigm, not climate policy
+  or natural-science empirical research; explain “religious atavism” as the return, within secular crisis accounts, of
+  older religious/prophetic patterns of historical orientation; keep Taylor and Rorty primary, with Latour, Schmitt, and
+  Illich secondary.

@@ -13,6 +13,9 @@ Stage 4.0 budget:
   Re-scope / stop-and-decide threshold: 55 hours
   ```
 
+Stage 4.0 has reached the mandatory 30-hour scope-review checkpoint. Before expanding further Stage 4 work, make and
+record an explicit scope decision.
+
 Project-memory maintenance should remain bounded and should not consume more than roughly 10–15% of Stage 4.0 work from
 here onward.
 
@@ -22,34 +25,80 @@ here onward.
 - `stage-4-0` = Stage 4.0 integration branch.
 - Merge only coherent public release units.
 
-## 1. Stage 4.1b Research Hub And Later Stage 4 Work
+  ## 1. Stage 4.2 Thesis Page V1 Release Checklist
 
-1. **Create `/research/` as a compact hub**
-   - It should be a map/signposting page, not an essay or manifesto.
-   - Give the doctoral thesis pride of place.
-   - Separate outputs from themes.
-   - Do not apologise for lack of conventional research articles.
-   - Keep v1 modest.
+   1. **Finish thesis page release blockers**
+      - final thesis copy;
+      - top metadata block;
+      - About section;
+      - meta description;
+      - short-title handling;
+      - date/schema choices;
+      - PDF asset/path verification;
+      - `/research/` link;
+      - `/publications/` thesis entry check;
+      - rendered JSON-LD validation;
+      - mobile sanity check.
 
-2. **Expose Research in primary nav only after `/research/` exists**
-   ```text
-   Research → /research/
-   ```
+   2. **Verify thesis PDF if hosted locally**
+      ```text
+      public/research/doctoral-thesis/religious-atavism-climate-crisis/veljkovic-dphil-thesis.pdf
+      ```
+      Confirm the generated/live URL returns `200`.
 
-3. **Add a short Seminars bridge only if it fits naturally**
-   - Keep `https://seminars.stevanveljkovic.com/` separate.
-   - Do not import seminar PDFs/assets into the main Astro site during Stage 4.1.
+   3. **Validate rendered thesis JSON-LD**
+      - `WebPage.mainEntity` points to the DOI thesis node;
+      - thesis `@id` is DOI URL;
+      - `Person.@id` remains ORCID;
+      - no `@id` arrays;
+      - date-only values only;
+      - `encoding.contentUrl` resolves if emitted;
+      - include / confirm `isAccessibleForFree: true` where appropriate.
 
-4. **Then implement the thesis page**
-   ```text
-   /research/doctoral-thesis/religious-atavism-climate-crisis/
-   ```
-   - Primary thesis ID:
-     ```text
-     https://doi.org/10.5287/ora-4rjoobkvk
-     ```
+   4. **Confirm generated route set and sitemap**
+      - thesis page generated;
+      - expected route count becomes 10;
+      - drafted/withheld reviews remain absent.
 
-## 2. Continuing Verification Pass
+   5. **Run project checks**
+      ```bash
+      npx astro sync
+      npx astro check
+      npm run build
+      npm run preview
+      ```
+
+   6. **Inspect at least**
+      ```text
+      /
+      /research/
+      /research/doctoral-thesis/religious-atavism-climate-crisis/
+      /publications/
+      /pronunciation/
+      ```
+
+   7. **Deploy Stage 4.2 only as a coherent release unit**
+      - merge to `main` only after checks pass;
+      - confirm Netlify production deployment;
+      - confirm live route and PDF/resource links.
+
+## 2. Stage 4.0 30-Hour Scope Decision
+
+1. **Complete and record the 30-hour scope decision before expanding Stage 4 work**
+
+2. **Current recommended rescope**
+   - committed: Stage 4.2 thesis page v1, validation, and close-out;
+   - conditional: bounded Stage 4.3 CV v1 after Stage 4.2 deploys;
+   - optional triage only: withheld reviews rights/status;
+   - defer unless separately re-scoped: full design foundation, light/dark mode, review reading aid, and
+     publications/reviews refinements.
+
+3. **If Stage 4.2 deploys with enough time remaining**
+   - decide whether to do a bounded Stage 4.3 CV v1.
+
+4. **Move or defer Stage 4.4–4.6 material unless separately re-scoped.**
+
+## 3. Continuing Verification Pass
 
 1. **Run project checks**
    ```bash
@@ -64,41 +113,41 @@ here onward.
    Inspect before merging a Stage 4.0 release unit to `main`:
 
    ```text
-   /
-   /cv/
-   /publications/
-   /pronunciation/
-   /publications/reviews/cosmic-connections/
-   /publications/reviews/evolution-of-religions/
-   /publications/reviews/godless-crusade/
-   /publications/reviews/hell-christian-ecology/
-   /research/   once created
+     /
+     /cv/
+     /publications/
+     /pronunciation/
+     /research/
+     /publications/reviews/cosmic-connections/
+     /publications/reviews/evolution-of-religions/
+     /publications/reviews/godless-crusade/
+     /publications/reviews/hell-christian-ecology/
+     /research/doctoral-thesis/religious-atavism-climate-crisis/   once implemented
    ```
 
 2. **Confirm generated route set**
-   - Expected generated/live route set before `/research/` contains 8 pages:
+   - Expected generated/live route set before the thesis page contains 9 pages:
      ```text
      /
      /cv/
      /publications/
      /pronunciation/
+     /research/
      /publications/reviews/cosmic-connections/
      /publications/reviews/evolution-of-religions/
      /publications/reviews/godless-crusade/
      /publications/reviews/hell-christian-ecology/
      ```
+   - Once `/research/doctoral-thesis/religious-atavism-climate-crisis/` is implemented, expected route count becomes 10.
    - If any drafted review is intentionally made live, update the expected generated route set and sitemap accordingly.
-   - Once `/research/` is created, update the expected generated route set, sitemap checks, and primary navigation.
-   - Do not expect or link the thesis route until `/research/doctoral-thesis/religious-atavism-climate-crisis/` is
-     implemented.
 
 3. **Inspect generated sitemap**
    ```bash
    find dist -name "sitemap*.xml" -print -exec cat {} \;
    ```
 
-   Confirm only intended live canonical pages appear. Current expected sitemap entries are the eight generated routes
-   above. Confirm `/pronunciation/` is included and `/research/` remains absent until implemented.
+   Confirm only intended live canonical pages appear. Current expected sitemap entries are the nine generated routes
+   above. Once the thesis page is implemented, confirm it appears and the route count becomes 10.
 
 4. **Verify generated-page asset references**
    - PDFs.
@@ -151,7 +200,7 @@ here onward.
      ```
    - Internal CV links should not use `target="_blank"`.
 
-## 3. Content And Metadata Cleanup
+## 4. Content And Metadata Cleanup
 
 1. **Fix schema / frontmatter mismatches where fields are meant to matter**
    - Check any frontmatter keys not declared in `src/content.config.ts`.
@@ -168,16 +217,15 @@ here onward.
    - `challenging-modernity` citation issue-year is 2025, but list year/sort
      date may follow first-online publication in 2024.
 
-3. **Check headshot / OG image path**
-   - Current selected public tree has:
+3. **Clean remaining headshot JSON-LD image references**
+   - `site.image` and the public file now use:
      ```text
-     /images/headshot-1200x630.JPG
+     /images/headshot-1200x630.jpg
      ```
-   - Older notes expected:
+   - Update home/CV schema references still pointing at:
      ```text
      /images/headshot-1200x630.png
      ```
-   - Inspect `src/data/site.ts` and generated page source for broken image URLs.
 
 4. **Remove accidental macOS files if tracked**
    - `.DS_Store` files are present in source/public tree.
@@ -193,15 +241,20 @@ here onward.
    - Update the `/publications/` citation for `hell-christian-ecology` to use the `doi.org` address.
 7. **Check link contrast, especially blue/purple on the dark background**
    - but do not keep tuning link styles unless a real contrast or usability issue is found.
+8. **Improve page descriptions**
+   - Replace generic descriptions in `src/data/pageMeta.ts` for `/cv/`, `/pronunciation/`,
+     `/publications/`, and `/research/`.
+   - Prefer hand-authored, display-ready descriptions around 130-170 characters where
+     practical.
 
-## 4. Deployment, DNS, And Legacy URLs
+## 5. Deployment, DNS, And Legacy URLs
 
 Before release, verify Netlify deploy, apex/www redirects, sitemap, and forced legacy redirects.
 
-## 5. Repository hygiene / archival cleanup
+## 6. Repository hygiene / archival cleanup
 
-- Later: review `smvsite-base` and old branches now that the Astro site deploys from `main` to
-  Netlify.
-- Decide whether to archive / remove obsolete branches, make the repo private, or add a clearer
-  README.
+- Initial `smvsite-base` `testing` branch cleanup is resolved.
+- Later: review `smvsite-base` and old branches now that the Astro site deploys from `main` to Netlify.
+- Decide whether the old/base working copy and obsolete branches still serve a purpose, whether to archive/remove
+  branches, make the repo private, or add a clearer README.
 - Confirm no old branch / deployment path is still serving public content before deleting anything.

@@ -34,14 +34,21 @@ hell-christian-ecology.md
 religious-atavism-climate-crisis.md
 ```
 
-The thesis remains bibliography-only until the local thesis page is implemented.
-Settled route: `/research/doctoral-thesis/religious-atavism-climate-crisis/`.
-Do not create, link, advertise, sitemap, or schema-link the local route until the page exists.
+The thesis page exists and is linked in the working tree at
+`/research/doctoral-thesis/religious-atavism-climate-crisis/`. Confirm build/generated output and live production state
+before release.
 
-For thesis page v1, use ORA / DOI metadata as the abstract source. Do not describe the abstract as transcribed from the
-PDF unless the PDF text is used and checked directly.
+For thesis page v1, use the Oxford University Research Archive / DOI metadata version of the abstract as the source. Do
+not describe the abstract as transcribed from the PDF unless the PDF text is used and checked directly.
 
-Local thesis PDF may be added only if hosting is verified under CC BY 4.0 and the generated/live link is checked.
+Local thesis PDF hosting is permitted under CC BY 4.0; verify the file path and generated/live link before release.
+
+```text
+public/research/doctoral-thesis/religious-atavism-climate-crisis/veljkovic-dphil-thesis.pdf
+```
+
+Preferred thesis identifier display: DOI visible in main metadata/resources; ARK and ORA IDs in an expandable
+“Repository and archival identifiers” section or equivalent.
 
 The publications page should preserve the grouped bibliography style and legacy
 classes, including:

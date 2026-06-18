@@ -20,12 +20,13 @@ integrations: [sitemap(), mdx()],
 Main route model:
 
 ```text
-src/pages/index.astro                             ->  /
-src/pages/cv/index.astro                          ->  /cv/
-src/pages/publications/index.astro                ->  /publications/
-src/pages/publications/reviews/[slug]/index.astro ->  /publications/reviews/<slug>/
-src/pages/pronunciation/index.astro               ->  /pronunciation/
-src/pages/research/index.astro                    ->  /research/
+src/pages/index.astro                                                        ->  /
+src/pages/cv/index.astro                                                     ->  /cv/
+src/pages/publications/index.astro                                           ->  /publications/
+src/pages/publications/reviews/[slug]/index.astro                            ->  /publications/reviews/<slug>/
+src/pages/pronunciation/index.astro                                          ->  /pronunciation/
+src/pages/research/index.astro                                               ->  /research/
+src/pages/research/doctoral-thesis/religious-atavism-climate-crisis/index.astro -> /research/doctoral-thesis/religious-atavism-climate-crisis/
 ```
 
 Review pages are generated from `src/content/reviews/*.md` through the dynamic
@@ -44,7 +45,7 @@ godless-crusade.md
 hell-christian-ecology.md
 ```
 
-Current expected generated/live output before the thesis page has 9 pages:
+Current confirmed production/generated output before Stage 4.2 thesis release has 9 pages:
 
 ```text
 /
@@ -58,7 +59,8 @@ Current expected generated/live output before the thesis page has 9 pages:
 /publications/reviews/hell-christian-ecology/
 ```
 
-Once `/research/doctoral-thesis/religious-atavism-climate-crisis/` is implemented, expected route count becomes 10.
+The thesis page exists in the working tree. Production may remain the 9-route set until Stage 4.2 is merged/deployed;
+the Stage 4.2 build should include the thesis page and 10 routes.
 
 `challenging-modernity` and `christian-right-europe` are currently
 drafted/withheld from page generation. Verify the generated route set and

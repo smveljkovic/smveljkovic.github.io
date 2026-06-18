@@ -19,9 +19,13 @@ For operational AI rules: .aiassistant/rules/
 - Production branch: `main` (`origin/main` deploys to Netlify)
 - Git remote `origin`: `https://github.com/smveljkovic/smveljkovic.github.io.git`
 - Current phase: Stage 4.2 thesis page v1 release polish within Stage 4.0.
-- Stage 4.2 thesis page is substantially implemented / near release at:
+- Stage 4.2 thesis page is implemented in the working tree at:
   `/research/doctoral-thesis/religious-atavism-climate-crisis/`
-  but no merge to `main` or Netlify production deployment has been confirmed.
+- Stage 4.2 state should distinguish:
+   - working-tree implementation: present;
+   - build/generated output: unconfirmed;
+   - production deployment/live state: unconfirmed.
+- No merge to `main` or Netlify production deployment has been confirmed.
 - Remaining Stage 4.2 work should be treated as a release checklist, not an open-ended writing / design exercise.
 - Site is live at `https://stevanveljkovic.com/`.
 - Stage 4.1b research hub v1 is complete/live:
@@ -53,7 +57,7 @@ If the exact Node patch causes trouble, use `22`.
   ```
 - GitHub Pages deployment for the Astro site is retired; `public/CNAME` and `.github/workflows/deploy.yml` are no longer
   part of the active deployment model.
-- Expected generated/live route set before the thesis page: static Astro site, 9 pages:
+- Current confirmed production/generated route set before Stage 4.2 thesis release: static Astro site, 9 pages:
    - `/`
    - `/cv/`
    - `/publications/`
@@ -63,7 +67,7 @@ If the exact Node patch causes trouble, use `22`.
    - `/publications/reviews/evolution-of-religions/`
    - `/publications/reviews/godless-crusade/`
    - `/publications/reviews/hell-christian-ecology/`
-- Once the thesis page is implemented, expected generated/live route count becomes 10.
+- In the current thesis-page working tree, confirm build output contains 10 generated routes.
 
 - Current code has `challenging-modernity` and `christian-right-europe` drafted / withheld from page generation.
 - Withheld review image / material folders temporarily live at `~/Projects/website-admin/withheld-images-folders/`.
@@ -77,7 +81,7 @@ If the exact Node patch causes trouble, use `22`.
 
 - Stage 4.0 has reached the mandatory 30-hour scope-review checkpoint.
 - Before expanding further Stage 4 work, make and record an explicit scope decision.
-- Current recommended rescope:
+- Current recommended rescope, pending explicit Stevan confirmation:
    - committed: Stage 4.2 thesis page v1, validation, and close-out;
    - conditional: bounded Stage 4.3 CV v1 if time/energy remains;
    - optional triage only: withheld-review rights/status;
@@ -135,14 +139,16 @@ If the exact Node patch causes trouble, use `22`.
    - `src/lib/schema/person.ts`
    - `src/lib/schema/review.ts`
 
-- Stage 4.2 thesis page work currently involves:
+- Stage 4.2 thesis page working-tree implementation currently involves:
    - `src/pages/research/doctoral-thesis/religious-atavism-climate-crisis/index.astro`
-   - `src/data/thesis`
+   - `src/data/thesis.ts`
    - `src/data/schema/thesis/createThesisSchema`
    - `src/data/pageMeta.ts`
    - `src/styles/global.css`
-   - `/research/` thesis link
+   - `/research/` thesis link, currently present in the working tree; confirm generated and live state before release
    - `/publications/` thesis entry check
+- `src/data/thesis.ts` and `createThesisSchema(thesis, meta)` exist and are used in the working tree, but rendered
+  thesis JSON-LD remains unvalidated.
 - Thesis page structure now includes or is intended to include: thesis header and metadata block; resource actions;
   “About the thesis”; abstract; citation; resources; identifiers / technical identifiers; supervision and
   examination; thesis JSON-LD.
@@ -369,7 +375,7 @@ If the exact Node patch causes trouble, use `22`.
    - `public/images/headshot-1200x630.jpg`
    - `public/publications/reviews/cosmic-connections/veljkovic-review-cosmic-connections.pdf`
    - `public/publications/reviews/hell-christian-ecology/veljkovic-review-hell-christian-ecology.pdf`
-   - `public/research/doctoral-research/climate-crisis-religious-atavism/veljkovic-dphil-theis.pdf`
+   - `public/research/doctoral-thesis/religious-atavism-climate-crisis/veljkovic-dphil-thesis.pdf`
 - Important missing / unchecked asset issue:
    - latest selected public tree does **not** show PDFs for `christian-right-europe`, `godless-crusade`, or
      `challenging-modernity`.
@@ -536,7 +542,7 @@ If the exact Node patch causes trouble, use `22`.
    - short-title handling;
    - date/schema choices;
    - PDF asset/path verification;
-   - `/research/` link;
+   - confirm `/research/` thesis link is present, correct, and appropriate for release;
    - `/publications/` thesis entry check;
    - rendered JSON-LD validation;
    - mobile sanity check.
@@ -561,8 +567,9 @@ If the exact Node patch causes trouble, use `22`.
    /publications/
    /pronunciation/
    ```
-5. Confirm generated route set and sitemap: thesis page generated; expected route count becomes 10; drafted/withheld
-   reviews remain absent.
+5. Confirm generated route set and sitemap for the current thesis-page working tree: thesis page generated; expected
+   build route count becomes 10; drafted/withheld reviews remain absent. Production sitemap may remain the 9-route set
+   until Stage 4.2 is merged and deployed.
 6. Complete and record the 30-hour Stage 4.0 scope decision before resuming expanded Stage 4 work.
 
 ## 9. Details that should not be lost
@@ -623,7 +630,8 @@ If the exact Node patch causes trouble, use `22`.
   ```text
   religious-atavism-climate-crisis
   ```
-- Thesis route is linked and implemented:
+- Thesis route is linked and implemented in the working tree; build/generated output and live production state remain
+  unconfirmed:
   ```text
   /research/doctoral-thesis/religious-atavism-climate-crisis/
   ```
@@ -641,6 +649,9 @@ If the exact Node patch causes trouble, use `22`.
   Oxford University Research Archive pubs id: 1624720
   Oxford University Research Archive local pid: pubs:1624720
   ```
+   - Identifier display pattern: DOI visible in the main thesis metadata/resources; ARK and ORA IDs belong in an
+     expandable
+     “Repository and archival identifiers” section or equivalent.
 - Thesis title:
   ```text
   Religious atavism and the climate crisis, with reference to Taylor and Rorty on liberalism
@@ -698,8 +709,8 @@ If the exact Node patch causes trouble, use `22`.
    - citation year: `2023`;
    - `copyrightYear`: `2023`;
    - `datePublished`: `2024-02-11` using ORA deposit/public availability date;
-   - `dateCreated`: `2023` or, if a precise submission date is wanted, `2023-04-21`.
-   - Important: do not use accidental `2026-02-11` for `datePublished`.
+   - current implementation uses `dateCreated: "2023"`;
+   - open decision: whether to use precise submission date `2023-04-21`.
 
 - Repository naming:
    - full name: Oxford University Research Archive;

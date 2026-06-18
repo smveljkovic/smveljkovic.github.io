@@ -33,6 +33,7 @@ Current selected public tree includes:
 public/images/headshot-1200x630.jpg
 public/publications/reviews/cosmic-connections/veljkovic-review-cosmic-connections.pdf
 public/publications/reviews/hell-christian-ecology/veljkovic-review-hell-christian-ecology.pdf
+public/research/doctoral-thesis/religious-atavism-climate-crisis/veljkovic-dphil-thesis.pdf
 ```
 
 If a file is in `public/`, it is public. Astro copies `public/` directly into
@@ -98,5 +99,5 @@ https://stevanveljkovic.com/sitemap-index.xml
 `https://www.stevanveljkovic.com/` should redirect permanently to the apex
 domain.
 
-Local thesis PDF may be hosted only after confirming CC BY 4.0 permission, choosing a stable path/filename, and
-verifying the generated/live link.
+Local thesis PDF hosting is permitted under CC BY 4.0 at the stable path above. Verify the generated/live link before
+Stage 4.2 release.

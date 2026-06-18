@@ -35,7 +35,7 @@ here onward.
       - short-title handling;
       - date/schema choices;
       - PDF asset/path verification;
-      - `/research/` link;
+      - confirm `/research/` thesis link is present, correct, and appropriate for release;
       - `/publications/` thesis entry check;
       - rendered JSON-LD validation;
       - mobile sanity check.
@@ -57,7 +57,7 @@ here onward.
 
    4. **Confirm generated route set and sitemap**
       - thesis page generated;
-      - expected route count becomes 10;
+      - for the current thesis-page working tree, confirm expected route count becomes 10 after build;
       - drafted/withheld reviews remain absent.
 
    5. **Run project checks**
@@ -86,7 +86,7 @@ here onward.
 
 1. **Complete and record the 30-hour scope decision before expanding Stage 4 work**
 
-2. **Current recommended rescope**
+2. **Current recommended rescope, pending explicit confirmation**
    - committed: Stage 4.2 thesis page v1, validation, and close-out;
    - conditional: bounded Stage 4.3 CV v1 after Stage 4.2 deploys;
    - optional triage only: withheld reviews rights/status;
@@ -122,11 +122,13 @@ here onward.
      /publications/reviews/evolution-of-religions/
      /publications/reviews/godless-crusade/
      /publications/reviews/hell-christian-ecology/
-     /research/doctoral-thesis/religious-atavism-climate-crisis/   once implemented
+     /research/doctoral-thesis/religious-atavism-climate-crisis/   current working tree; verify build/live state
    ```
 
 2. **Confirm generated route set**
-   - Expected generated/live route set before the thesis page contains 9 pages:
+   - Current expected production sitemap may remain the 9-route set until Stage 4.2 is merged/deployed.
+   - For the current thesis-page working tree, confirm build output contains 10 generated routes including
+     `/research/doctoral-thesis/religious-atavism-climate-crisis/`.
      ```text
      /
      /cv/
@@ -138,7 +140,7 @@ here onward.
      /publications/reviews/godless-crusade/
      /publications/reviews/hell-christian-ecology/
      ```
-   - Once `/research/doctoral-thesis/religious-atavism-climate-crisis/` is implemented, expected route count becomes 10.
+   - For the current thesis-page working tree, confirm the generated route count is 10.
    - If any drafted review is intentionally made live, update the expected generated route set and sitemap accordingly.
 
 3. **Inspect generated sitemap**
@@ -146,8 +148,8 @@ here onward.
    find dist -name "sitemap*.xml" -print -exec cat {} \;
    ```
 
-   Confirm only intended live canonical pages appear. Current expected sitemap entries are the nine generated routes
-   above. Once the thesis page is implemented, confirm it appears and the route count becomes 10.
+   Confirm only intended live canonical pages appear. Production may remain the 9-route set until Stage 4.2 is
+   merged/deployed; the Stage 4.2 build should include the thesis page and 10 routes.
 
 4. **Verify generated-page asset references**
    - PDFs.

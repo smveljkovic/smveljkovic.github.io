@@ -34,9 +34,10 @@ find dist -maxdepth 5 -type f | sort
 find dist -name "sitemap*.xml" -print -exec cat {} \;
 ```
 
-Current expected generated pages before the thesis page are `/`, `/cv/`, `/publications/`, `/pronunciation/`,
-`/research/`, and four review routes: `cosmic-connections`, `evolution-of-religions`, `godless-crusade`, and
-`hell-christian-ecology`. Once the thesis page is implemented, expected route count becomes 10.
+Current confirmed production/generated pages before Stage 4.2 thesis release are `/`, `/cv/`, `/publications/`,
+`/pronunciation/`, `/research/`, and four review routes: `cosmic-connections`, `evolution-of-religions`,
+`godless-crusade`, and `hell-christian-ecology`. For the current thesis-page working tree, confirm the build contains 10
+generated routes.
 
 Drafted reviews may still appear bibliographically on `/publications/`; verify route and sitemap state from the current
 build.

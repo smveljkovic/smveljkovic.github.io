@@ -16,8 +16,11 @@ as authoritative when they conflict with older notes.
 - **Use the settled thesis route under `/research/`.**  
   **Route:** `/research/doctoral-thesis/religious-atavism-climate-crisis/`  
   **Slug:** `religious-atavism-climate-crisis`  
-  **Rule:** Do not link the route until the page is actually implemented.  
-  **Status:** Decided; implementation active.
+  **Rule:** Do not link the route until the page is actually implemented.
+  **Current state:** Implemented and linked in the working tree; confirm build/generated output and live production
+  state
+  before release.
+  **Status:** Decided; working-tree implementation present.
 
 - **Use Astro as the site framework.**  
   **Rationale:** Static-first, Netlify-friendly, content collections,
@@ -56,6 +59,11 @@ as authoritative when they conflict with older notes.
   **Implications:** The local thesis page may have its own `WebPage` node, but the thesis entity itself should use the
   DOI URL as its primary scholarly identifier. Include ARK and ORA IDs as secondary identifiers where useful.  
   **Status:** Decided for Stage 4.2.
+- **Use the thesis data/schema working-tree implementation, pending rendered validation.**  
+  **Current state:** `src/data/thesis.ts` and `createThesisSchema(thesis, meta)` exist and are used in the working
+  tree.  
+  **Still required:** validate rendered page-source JSON-LD before release.  
+  **Status:** Working-tree implementation present; validation pending.
 
 ## 2. Content Collections And Publications Page
 
@@ -205,9 +213,9 @@ as authoritative when they conflict with older notes.
   **Status:** Decided for Stage 4.2.
 
 - **Use ORA deposit/public availability date as thesis `datePublished`.**  
-  **Rules:** citation year `2023`; copyright year `2023`; `datePublished: 2024-02-11`; `dateCreated: 2023`, or
-  `2023-04-21` if a precise submission date is wanted.  
-  **Caution:** Do not use accidental `2026-02-11` for thesis `datePublished`.  
+  **Rules:** citation year `2023`; copyright year `2023`; `datePublished: 2024-02-11`; current implementation uses
+  `dateCreated: "2023"`.
+  **Open decision:** whether to use precise submission date `2023-04-21`.
   **Status:** Decided for Stage 4.2.
 
 - **Use Oxford University Research Archive naming.**  
@@ -223,7 +231,7 @@ as authoritative when they conflict with older notes.
   ```text
   By Stevan Veljkovic.
   DPhil thesis, University of Oxford, 2023.
-  Held in Oxford University Research Archive (ORA).
+  Held in the Oxford University Research Archive (ORA).
   Deposited on 11 February 2024.
   Licensed under CC BY 4.0.
   ```  
@@ -390,7 +398,7 @@ as authoritative when they conflict with older notes.
 - **Local thesis PDF may be hosted under CC BY 4.0 if verified.**  
   **Decision:** The local thesis PDF may be made available under CC BY 4.0, using a stable public path/filename.  
   **Caution:** Verify the file and generated/live link before release.  
-  **Status:** Permitted; implementation pending.
+  **Status:** Permitted; working-tree implementation present; generated/live link verification pending.
 
 ## 6. Design, Accessibility, and Content-Rendering Decisions
 
@@ -464,18 +472,19 @@ as authoritative when they conflict with older notes.
   full redesign; complete CSS refactor; multiple experimental UI features; first-pass design foundation;
   constrained light / dark mode; one review-page reading aid.  
   **Principle:** Touch the broader vision, but do not try to realise all of it.  
-  **Status:** Final / current for Stage 4.0 planning.
+  **Status:** Pre-30-hour planning baseline; subject to active scope-review decision.
 
 - **Stage 4.0 has reached the 30-hour scope-review checkpoint.**  
   **Status:** Active review point.  
   **Current recommendation:** commit to Stage 4.2 thesis page v1, validation, and close-out; make Stage 4.3 CV v1
   conditional on time/energy; treat withheld-review work as triage only; defer full design foundation, light/dark
-  mode, review reading aid, and publications/reviews refinements unless separately re-scoped.  
-  **Review needed:** Confirm whether this recommendation is now the official Stage 4.0 rescope.
+  mode, review reading aid, and publications/reviews refinements unless separately re-scoped.
+  **Review needed:** Pending explicit Stevan confirmation before treating this as the official Stage 4.0 rescope.
 
 - **Use the ORA / DOI metadata abstract for the local thesis page.**  
-  **Decision:** Use the Oxford Research Archive / DOI metadata version of the thesis abstract as the source text for the
-  local thesis page.  
+  **Decision:** Use the Oxford University Research Archive / DOI metadata version of the thesis abstract as the source
+  text for the
+  local thesis page.
   **Implementation rule:** Do not describe the abstract as transcribed from the PDF unless the PDF text is being used
   and checked directly.
   **Rationale:** ORA is the public institutional DOI metadata record and is the most stable source for page metadata.

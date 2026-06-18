@@ -79,8 +79,8 @@ Accessibility constraints:
 Known Safari / homepage issue: if `h1.Name` is invisible because of black text on
 dark background, use a targeted color fix rather than a CSS rewrite.
 
-Avoid typography / layout rabbit holes during Stage 4.0 verification/cleanup. The inherited
-margin-counter / year-marker layout may be revisited in Stage 4.0.
+Avoid typography / layout rabbit holes during Stage 4.0 verification/cleanup. Defer broader design foundation,
+light/dark mode, review reading aid, and publications/reviews refinements unless separately re-scoped.
 
 ## Note on text-block width
 

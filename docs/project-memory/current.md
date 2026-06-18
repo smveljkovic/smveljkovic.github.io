@@ -34,29 +34,12 @@ For operational AI rules: .aiassistant/rules/
    - The generated sitemap/route set now includes `/research/`.
    - `main` contains the Stage 4.1b release and is deployed on Netlify.
    - `stage-4-0` has been updated from `main` and left clean.
-- Production host: Netlify, deploying from `origin/main`.
-- Netlify build settings:
-  ```text
-  Build command: npm run build
-  Publish directory: dist
-  Production branch: main
-  NODE_VERSION = 22.12.0
-  ```
 
-If the exact Node patch causes trouble, use `22`.
+- Production deploys from `origin/main` to Netlify using `npm run build` and `dist`; Node should be `22.12.0` or `22`.
+- Apex domain is canonical. `www` redirects permanently to the apex domain.
+- DNS remains at Hover. The seminars subdomain remains separate and hosted through GitHub Pages.
+- GitHub Pages deployment for the Astro site is retired.
 
-- `https://www.stevanveljkovic.com/` redirects permanently to the apex domain.
-- DNS remains hosted at Hover for now.
-- Apex DNS currently uses Netlify’s Hover fallback A record:
-  ```text
-  stevanveljkovic.com A 75.2.60.5
-  ```
-- `seminars.stevanveljkovic.com` remains separate and hosted via GitHub Pages:
-  ```text
-  CNAME seminars smveljkovic.github.io
-  ```
-- GitHub Pages deployment for the Astro site is retired; `public/CNAME` and `.github/workflows/deploy.yml` are no longer
-  part of the active deployment model.
 - Current confirmed production/generated route set before Stage 4.2 thesis release: static Astro site, 9 pages:
    - `/`
    - `/cv/`
@@ -215,22 +198,7 @@ If the exact Node patch causes trouble, use `22`.
    - `modificationNote`
    - `publicationList`
    - `localSchemaTypes`
-- Important schema conventions:
-   - Canonical `Person.@id`: `https://orcid.org/0000-0002-2599-3227`
-   - DOI URLs are stable IDs for DOI-identified works.
-   - No `@id` should become an array.
-   - JSON-LD belongs on canonical pages, not redirect stubs.
-   - Use date-only values unless a real meaningful time is known.
-   - Do not invent noon / midnight datetimes.
-   - Validate rendered page-source JSON-LD, not TypeScript literals.
-   - SEO metadata and JSON-LD serve different purposes:
-      - search-result snippets are primarily influenced by `<meta name="description">`, page title, and visible page
-        content;
-      - JSON-LD should describe page/entity relationships, not compensate for weak page descriptions.
-   - Canonical pages should have hand-authored, display-ready meta descriptions where practical, roughly 130-170
-     characters.
-   - Avoid generic descriptions such as `Research by Stevan Veljkovic.`
-   - Simple text pages may launch without JSON-LD if title, canonical URL, and meta description are present.
+
 - Journal review model:
   ```text
   local WebPage
@@ -284,33 +252,6 @@ If the exact Node patch causes trouble, use `22`.
   Theory and design,
   Oxford, England.
   [pronunciation line linking to /pronunciation/]
-  ```
-- `/pronunciation/` is the canonical local pronunciation page. V1 uses broad practical English guidance:
-  ```text
-  /ˈstɛv(ə)n ˈvɛl.kə.vɪk/
-  ```
-  The first syllable is `STEV`, not `STEEV`; do not describe it as pronounced like “Steven” or “Steve”. Use IPA `ɛ`,
-  not Greek `ε`.
-
-
-- Stage 4.1 primary navigation is implemented/live as:
-  ```text
-  Stevan Veljkovic → /
-  CV → /cv/
-  Publications → /publications/
-  Research → /research/
-  ```
-- Avoid primary-nav `Contact` unless a real `/contact/` page exists.
-- Avoid putting `Seminars` in primary navigation for now.
-
-- Stage 4.1 footer / secondary navigation is settled as:
-  ```text
-  Contact → mailto:stevan@stevanveljkovic.com
-  ORCID → https://orcid.org/0000-0002-2599-3227
-  Google Scholar → https://scholar.google.com/citations?user=e42TN4UAAAAJ
-  GitHub → https://github.com/smveljkovic
-  Pronunciation → /pronunciation/
-  Seminars → https://seminars.stevanveljkovic.com/
   ```
 
 - Homepage contact uses `site.email`; current canonical code value is `stevan@stevanveljkovic.com`.
@@ -534,204 +475,23 @@ If the exact Node patch causes trouble, use `22`.
 
 ## 8. Immediate next steps
 
-1. Finish Stage 4.2 thesis page release blockers:
-   - final thesis copy;
-   - top metadata block;
-   - About section;
-   - meta description;
-   - short-title handling;
-   - date/schema choices;
-   - PDF asset/path verification;
-   - confirm `/research/` thesis link is present, correct, and appropriate for release;
-   - `/publications/` thesis entry check;
-   - rendered JSON-LD validation;
-   - mobile sanity check.
+See NEXT-STEPS.md; immediate focus is Stage 4.2 thesis release validation and the 30-hour scope decision
 
-2. Verify local thesis PDF if hosted:
-   ```text
-   public/research/doctoral-thesis/religious-atavism-climate-crisis/veljkovic-dphil-thesis.pdf
-   ```
-   and confirm generated/live URL returns `200`.
-3. Run:
-   ```bash
-   npx astro sync
-   npx astro check
-   npm run build
-   npm run preview
-   ```
-4. Inspect at least:
-   ```text
-   /
-   /research/
-   /research/doctoral-thesis/religious-atavism-climate-crisis/
-   /publications/
-   /pronunciation/
-   ```
-5. Confirm generated route set and sitemap for the current thesis-page working tree: thesis page generated; expected
-   build route count becomes 10; drafted/withheld reviews remain absent. Production sitemap may remain the 9-route set
-   until Stage 4.2 is merged and deployed.
-6. Complete and record the 30-hour Stage 4.0 scope decision before resuming expanded Stage 4 work.
+## 9. Material brought in from other memory docs 2026-06-18
 
-## 9. Details that should not be lost
+- **Use the thesis data/schema working-tree implementation, pending rendered validation.**  
+  **Current state:** `src/data/thesis.ts` and `createThesisSchema(thesis, meta)` exist and are used in the working
+  tree.  
+  **Still required:** validate rendered page-source JSON-LD before release.  
+  **Status:** Working-tree implementation present; validation pending.
 
-- Minimal `/research/` structure:
-  ```text
-  Research
-  - Doctoral thesis
-  - Research themes
-  - Earlier academic work
-  - Publications and review essays
-  - Seminars
-  ```
+## 10. Do not lose
 
-- Core identifiers:
-  ```text
-  ORCID: https://orcid.org/0000-0002-2599-3227
-  Google Scholar: https://scholar.google.com/citations?user=e42TN4UAAAAJ
-  GitHub: https://github.com/smveljkovic
-  ```
-- Canonical structured-data `Person.@id`:
-  ```text
-  https://orcid.org/0000-0002-2599-3227
-  ```
-- Title rules:
-   - homepage `<title>`: `Stevan Veljkovic`
-   - ordinary pages: `{Page name} | Stevan Veljkovic`
-   - review pages: `Review of {Reviewed work short title} | Stevan Veljkovic`
-- `WebSite.name`, `Person.name`, and `og:site_name` should be `Stevan Veljkovic`.
-- Descriptive phrases belong in descriptions / copy / schema descriptions, not in canonical site name.
-- Use URL helpers, not manual concatenation, for absolute URLs and node IDs.
-- Do not use the rejected / conflated OpenAlex profile.
-- Real OpenAlex profile URL is now known and may be used.
-- For DOI-identified journal reviews:
-   - article / review `datePublished` = publisher-recognised first publication date, usually first online.
-   - `PublicationIssue.datePublished` = issue date / month / year where known.
-   - do not emit non-standard `firstPublishedOnline`; map it to Schema.org `datePublished`.
-- Do not emit `PublicationIssue.name` merely as the issue number. Use `issueNumber` for numbers; only emit `name` for
-  real issue labels.
-- Issue cover images belong on `PublicationIssue` only when they are issue-specific covers.
-- Local review node ID pattern:
-  ```text
-  https://stevanveljkovic.com/publications/reviews/<slug>/#review
-  ```
-- WebPage node ID pattern:
-  ```text
-  https://stevanveljkovic.com/publications/reviews/<slug>/#webpage
-  ```
-- WebSite node ID:
-  ```text
-  https://stevanveljkovic.com/#website
-  ```
-- For local reproductions / manuscripts, do not use `sameAs` with the DOI / publisher page unless truly identical.
-  Prefer `isBasedOn` and / or `citation`.
-
-- `/research/` is now intended as a compact research hub.
-- Thesis slug is settled:
-  ```text
-  religious-atavism-climate-crisis
-  ```
-- Thesis route is linked and implemented in the working tree; build/generated output and live production state remain
-  unconfirmed:
-  ```text
-  /research/doctoral-thesis/religious-atavism-climate-crisis/
-  ```
-- `/research/` should function as a map/signposting hub, not an essay or manifesto.
-- Give the doctoral thesis pride of place; do not apologise for lack of conventional research articles; do not
-  overclaim; separate outputs from themes.
-
-- Thesis DOI is primary ID:
-  ```text
-  https://doi.org/10.5287/ora-4rjoobkvk
-  ```
-- Thesis secondary identifiers:
-  ```text
-  ARK: ark:/29072/ora_7aff13dc075e4c17bee95adfc1b2fcf4
-  Oxford University Research Archive pubs id: 1624720
-  Oxford University Research Archive local pid: pubs:1624720
-  ```
-   - Identifier display pattern: DOI visible in the main thesis metadata/resources; ARK and ORA IDs belong in an
-     expandable
-     “Repository and archival identifiers” section or equivalent.
-- Thesis title:
-  ```text
-  Religious atavism and the climate crisis, with reference to Taylor and Rorty on liberalism
-  ```
-
-- Formal thesis citation:
-  ```text
-  Veljkovic, Stevan. ‘Religious atavism and the climate crisis, with reference to Taylor and Rorty on liberalism.’ PhD thesis, University of Oxford, 2023. https://doi.org/10.5287/ora-4rjoobkvk.
-  ```
-
-- Thesis metadata for Stage 4.2:
-  ```text
-  Author: Stevan Veljkovic
-  Institution: University of Oxford
-  Degree: DPhil / PhD
-  Year: 2023
-  Deposit date: 2024-02-11
-  Copyright year: 2023
-  Licence: CC BY 4.0
-  DOI: https://doi.org/10.5287/ora-4rjoobkvk
-  ORA URL: https://ora.ox.ac.uk/objects/uuid:7aff13dc-075e-4c17-bee9-5adfc1b2fcf4
-  ARK: ark:/29072/ora_7aff13dc075e4c17bee95adfc1b2fcf4
-  ORA pubs id: 1624720
-  ORA local pid: pubs:1624720
-  Supervisors: Friederike Otto; Johannes Zachhuber
-  Examiners: Douglas Hedley; Gavin Flood
-  ```
-
-- Thesis abstract handling:
-   - Use the Oxford University Research Archive / DOI metadata version of the abstract on the local thesis page.
-   - Do not describe the abstract as transcribed from the PDF unless the PDF text is being used and checked directly.
-   - Treat ORA as the stable source for thesis-page metadata unless a later correction changes the public record.
-
-- Stage 4.0 mission / planning note lives outside the repo:
-  ```text
-  ~/Projects/website-admin/stage-4/plan-mission-note.md
-  ```
-
-- Thesis short title for page/browser/link contexts:
-  ```text
-  Religious atavism and the climate crisis
-  ```
-- Formal thesis title remains:
-  ```text
-  Religious atavism and the climate crisis, with reference to Taylor and Rorty on liberalism
-  ```
-  Use the formal title for the visible thesis title, citation, and thesis entity.
-
-- Thesis browser title:
-  ```text
-  Religious atavism and the climate crisis | Stevan Veljkovic
-  ```
-
-- Thesis date handling:
-   - citation year: `2023`;
-   - `copyrightYear`: `2023`;
-   - `datePublished`: `2024-02-11` using ORA deposit/public availability date;
-   - current implementation uses `dateCreated: "2023"`;
-   - open decision: whether to use precise submission date `2023-04-21`.
-
-- Repository naming:
-   - full name: Oxford University Research Archive;
-   - first mention may be “the Oxford University Research Archive (ORA)”;
-   - later references should use `ORA`;
-   - avoid “the ORA” when ORA stands alone, though “the ORA record” is fine.
-
-- Thesis top metadata block should include the author name; the site header alone is not enough.
-- Preferred Stage 4.2 top metadata block:
-  ```text
-  By Stevan Veljkovic.
-  DPhil thesis, University of Oxford, 2023.
-  Held in the Oxford University Research Archive (ORA).
-  Deposited on 11 February 2024.
-  Licensed under CC BY 4.0.
-  ```
-- Do not add Faculty of Theology and Religion / St Cross College to the top metadata block for Stage 4.2 v1. If added
-  later, place lower down as “Institutional details” with documentary wording.
-- Public-facing thesis copy should preserve Stevan’s authorial voice and argumentative edge rather than smoothing into
-  generic keyword copy.
-- “About this thesis” should frame the work as a theoretical account of the climate crisis paradigm, not climate policy
-  or natural-science empirical research; explain “religious atavism” as the return, within secular crisis accounts, of
-  older religious/prophetic patterns of historical orientation; keep Taylor and Rorty primary, with Latour, Schmitt, and
-  Illich secondary.
+- For stable metadata values, identifiers, title rules, node IDs, review-specific metadata, thesis metadata, asset
+  rules, sitemap rules, and superseded values, use `docs/metadata/master-values.md`.
+- For durable architectural/schema/design/deployment decisions, use `DECISIONS.md`.
+- For runnable release work, use `NEXT-STEPS.md`.
+- Critical current thesis facts: route `/research/doctoral-thesis/religious-atavism-climate-crisis/`; DOI
+  `https://doi.org/10.5287/ora-4rjoobkvk`; formal title
+  `Religious atavism and the climate crisis, with reference to Taylor and Rorty on liberalism`; build/live state
+  unconfirmed.

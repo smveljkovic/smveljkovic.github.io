@@ -22,361 +22,121 @@ as authoritative when they conflict with older notes.
   before release.
   **Status:** Decided; working-tree implementation present.
 
-- **Use Astro as the site framework.**  
-  **Rationale:** Static-first, Netlify-friendly, content collections,
-  Markdown/MDX, clean URLs, build-time SEO/JSON-LD, and possible future islands.  
-  **Status:** Final.
-
-- **Preserve core aspects of the current visual identity going into Stage 4.0.**  
-  **Rationale:** The site is a durable academic/research hub, not a generic portfolio.  
-  **Implications:** Keep work on full theme and redesign achievable and constrained. Preserve legacy classes unless a
-  targeted fix is needed.  
-  **Status:** Current for Stage 4.0.
-
-- **Canonical production domain is `https://stevanveljkovic.com/`.**  
-  **Implications:** Astro `site`, canonical links, sitemap, and JSON-LD should use the apex domain.  
-  **Status:** Final.
-
-- **Use clean trailing-slash URLs.**  
-  **Examples:** `/publications/`, `/cv/`, `/publications/reviews/cosmic-connections/`.  
-  **Status:** Final.
-
-- **Generate review pages from Markdown content collections.**  
-  **Decision:** Use `src/pages/publications/reviews/[slug]/index.astro` with `src/content/reviews/*.md`.  
-  **Implications:** Adding a review should require Markdown plus public assets, not a new `.astro` route.  
-  **Status:** Final architecture.
-
-- **Do not keep static per-review pages under `src/pages`.**  
-  **Rationale:** Static routes mask dynamic routes.  
-  **Status:** Final.
-
-- **Use Astro 6 loader-style content collections.**  
-  **Decision:** Use `defineCollection`, `glob` from `astro/loaders`, and `z` from `astro/zod`.  
-  **Status:** Final.
+- **Platform baseline:** Use Astro, clean trailing-slash URLs, Astro 6 loader-style content collections, and
+  Markdown-driven dynamic review routes. Do not keep static per-review pages under `src/pages`.
 
 - **Use the thesis DOI as the primary scholarly identifier / schema `@id`.**  
   **ID:** `https://doi.org/10.5287/ora-4rjoobkvk`  
   **Implications:** The local thesis page may have its own `WebPage` node, but the thesis entity itself should use the
   DOI URL as its primary scholarly identifier. Include ARK and ORA IDs as secondary identifiers where useful.  
   **Status:** Decided for Stage 4.2.
-- **Use the thesis data/schema working-tree implementation, pending rendered validation.**  
-  **Current state:** `src/data/thesis.ts` and `createThesisSchema(thesis, meta)` exist and are used in the working
-  tree.  
-  **Still required:** validate rendered page-source JSON-LD before release.  
-  **Status:** Working-tree implementation present; validation pending.
 
 ## 2. Content Collections And Publications Page
 
-- **Use `reviews` for review records, with `draft:true` gating page generation.**  
-  **Decision:** Review records live in `src/content/reviews/`; non-draft records
-  generate full review pages, while drafted records may still generate
-  bibliography entries when `publicationList.include !== false`.  
-  **Status:** Final.
+- **Publication content model:** Use `reviews` for review records and `publicationItems` for list-only bibliography
+  records. Non-draft reviews generate pages; drafted reviews may still appear as bibliography entries when
+  `publicationList.include !== false`. Duplicate/list-only review records are drafted except the thesis item to avoid
+  duplicate list/schema entries.
 
-- **Use `publicationItems` for list-only bibliography records.**  
-  **Decision:** `/publications/` combines review records and list-only items.  
-  **Current detail:** Duplicate / list-only review records exist but are drafted
-  except the thesis item, to avoid duplicate publication-list / schema entries.  
-  **Status:** Implemented/current.
+- **Publications schema:** `/publications/` should remain `CollectionPage -> ItemList -> ListItem[]`. Richer JSON-LD,
+  such as reviewed-book nodes, license modelling, and external WebPage nodes, is deferred unless needed.
 
-- **`/publications/` JSON-LD should remain `CollectionPage` plus `ItemList`.**  
-  **Model:**
-  ```text
-  CollectionPage
-    mainEntity -> ItemList
-      itemListElement -> ListItem[]
-  ```
-  **Status:** Implemented/current.
-
-- **Richer `/publications/` JSON-LD is deferred.**  
-  **Deferred examples:** reviewed-book nodes, license/copyright-holder modelling,
-  external WebPage nodes.  
-  **Status:** Deferred; do not over-model before launch unless necessary.
-
-- **Publications page should preserve grouped bibliography style.**  
-  **Implications:** Keep year grouping, `BibEntry`, `counter_bib`,
-  `test#writings`, note lines, and citation formatting where possible.  
-  **Status:** Final for Stage 4.0.
+- **Bibliography style:** Preserve grouped bibliography style, year grouping, `BibEntry`, `counter_bib`,
+  `test#writings`, note lines, and citation formatting where possible.
 
 ## 3. Structured Data And Schema Decisions
 
-- **Use ORCID as canonical `Person.@id`.**  
-  **ID:** `https://orcid.org/0000-0002-2599-3227`  
-  **Status:** Final.
+- **Canonical identity IDs:** Use ORCID as canonical `Person.@id`: `https://orcid.org/0000-0002-2599-3227`. Reject the
+  conflated OpenAlex profile `https://openalex.org/A5056034517`; the current OpenAlex profile is
+  `https://openalex.org/authors/A5115945824`.
 
-- **Reject the conflated OpenAlex profile as `sameAs`.**  
-  **Rejected:** `https://openalex.org/A5056034517`  
-  **Status:** Final.
+- **Scholarly IDs:** Use DOI URLs as primary `@id`s for DOI-bearing works, articles, reviews, and the thesis. Keep local
+  manuscripts/pages distinct from DOI-published versions; prefer `isBasedOn` and/or `citation`, not false `sameAs`.
 
-- **Use the fresh and true OpenAlex profile as one canonical identity source.**
-  **Verified:** `https://openalex.org/authors/A5115945824`
-  **Status:** Current.
+- **Schema factories:** Active review pages use `createReviewSchema(review)`. Homepage and CV schemas remain manual
+  one-off schemas: homepage as `AboutPage`, CV as `ProfilePage`, with the CV PDF as `MediaObject`.
 
-- **Use DOI URLs as primary scholarly `@id`s where available.**  
-  **Implications:** Publisher pages can be `url` or `sameAs`, but DOI URLs
-  identify DOI-bearing books / articles / reviews.  
-  **Status:** Final.
+- **Education/affiliation modelling:** Use dated `Role` nodes for education/affiliation periods. Do not use credential
+  `startDate`/`endDate`, `Person.dissertation`, or `OrganizationRole.worksFor`.
 
-- **Keep local manuscripts / pages distinct from DOI-published articles.**  
-  **Implications:** Do not use false `sameAs`; use `isBasedOn` and/or `citation`
-  where appropriate.  
-  **Status:** Final.
+- **Journal review graph:** Local review pages use `WebPage -> local #review -> reviewed Book`; the local review links
+  to the DOI/published review using `isBasedOn`/`citation`; the DOI/published review links to
+  `PublicationIssue -> PublicationVolume -> Periodical`.
 
-- **Use the reusable review schema factory for active review pages.**  
-  **Decision:** Dynamic review pages call `createReviewSchema(review)`.  
-  **Status:** Final/current.
+- **LSE Review of Books model:** `evolution-of-religions` uses a blog/post container model: published LSE post as
+  `BlogPosting/Review`, local reproduction as `Article/Review`, with no invented journal, volume, issue, pagination, or
+  fake issue images.
 
-- **Homepage and CV schemas remain manual one-off schemas.**  
-  **Decision:** Homepage uses `homeSchema`; CV uses `cvSchema`.  
-  **Status:** Final.
+- **Dates and pagination:** `publishedReview.datePublished` means publisher-recognised first publication date, usually
+  first online. `PublicationIssue.datePublished` means issue date/month/year where known. Do not emit non-standard
+  `firstPublishedOnline`; map it to Schema.org `datePublished`. Article/review pagination belongs on the article/review
+  node, not the issue, unless whole-issue pagination is verified.
 
-- **Homepage schema is `AboutPage`; CV schema is `ProfilePage`.**  
-  **CV PDF:** model as `MediaObject`.  
-  **Status:** Final.
+- **Issue naming:** Do not emit `PublicationIssue.name` merely as an issue number. Use `issueNumber` for numbers; use
+  `name` only for real publisher-supplied issue labels.
 
-- **Use dated `Role` nodes for education/affiliation periods.**  
-  **Do not use:** credential `startDate`/`endDate`,
-  `Person.dissertation`, or `OrganizationRole.worksFor`.  
-  **Status:** Final.
+- **JSON-LD rendering and validation:** Render JSON-LD with unescaped inline script HTML using
+  `set:html={JSON.stringify(data, null, 2)}`. Validate rendered page-source JSON-LD, not TypeScript literals.
 
-- **Review-page graph is now decided.**
+- **SEO descriptions:** Treat page descriptions as ordinary SEO metadata, not JSON-LD. Canonical pages should use
+  hand-authored display-ready descriptions where practical, roughly 130-170 characters. Simple text pages may launch
+  without JSON-LD if title, canonical URL, and meta description are present.
+
+- **Thesis page model:** Build the thesis page around factual metadata plus a short authored overview: title/metadata
+  block, “About this thesis”, abstract, citation, resources, identifiers, supervision/examination, licence/PDF
+  availability.
+
+- **Thesis titles and dates:** Use the formal thesis title for visible title, citation, and thesis entity; use
+  `Religious atavism and the climate crisis` for browser/link contexts. Use citation year `2023`, copyright year `2023`,
+  and `datePublished: 2024-02-11`; whether to use precise `dateCreated: 2023-04-21` remains open.
+
+- **ORA naming:** Use `Oxford University Research Archive`; first mention may be
   ```text
-  local WebPage
-    mainEntity -> local #review
-    about -> reviewed Book
-
-  local #review
-    itemReviewed -> reviewed Book
-    isBasedOn/citation -> DOI/published review
-
-  DOI/published review
-    itemReviewed -> reviewed Book
-    isPartOf -> PublicationIssue -> PublicationVolume -> Periodical
+  Oxford University Research Archive (ORA)
   ```
-  **Status:** Current decision.
+   - later references `ORA`. Avoid “the ORA” except in phrases like “the ORA record”.
 
-- **LSE Review of Books uses a blog / post container model.**  
-  **For `evolution-of-religions`:**
-  ```text
-  BlogPosting / Review
-    isPartOf -> Blog: LSE Review of Books
-      isPartOf -> WebSite: LSE Blogs
-  ```
-  **Do not invent:** journal, volume, issue, or fake issue images.  
-  **Status:** Final for this review.
-
-- **Pagination belongs on the published article / review node.**  
-  **Fields:** `pagination`, `pageStart`, `pageEnd`.  
-  **Issue-level pagination:** only for whole-issue pagination and only if verified.
-  **Status:** Final.
-
-- **Article / review date convention is decided.**  
-  **Rule:** `publishedReview.datePublished` means the publisher-recognised first publication date, normally first
-  online.  
-  **Internal helper:** `firstPublishedOnline` may be used internally and should map to Schema.org `datePublished`; do
-  not emit a non-standard `firstPublishedOnline`.  
-  **Issue rule:** `PublicationIssue.datePublished` means issue date / month / year where known.  
-  **Status:** Final.
-
-- **Do not emit `PublicationIssue.name` merely as an issue number.**  
-  **Use:** `issueNumber` for numbers.  
-  **Use `name` only for:** real publisher-supplied issue labels.  
-  **Status:** Final.
-
-- **Render JSON-LD with unescaped inline script HTML.**  
-  **Pattern:** `<script is:inline type="application/ld+json" set:html={JSON.stringify(data, null, 2)}>`  
-  **Status:** Final.
-
-- **Validate rendered page-source JSON-LD, not TypeScript literals.**  
-  **Status:** Final.
-
-- **Treat page descriptions as ordinary SEO metadata, not JSON-LD.**  
-  **Decision:** Canonical pages should use hand-authored, display-ready
-  `<meta name="description">` values where practical, roughly 130-170 characters.
-  **Implications:** Avoid generic descriptions such as `Research by Stevan Veljkovic.`
-  JSON-LD may be omitted from simple text pages initially if title, canonical URL, and
-  meta description are present.
-  **Status:** Current metadata-writing rule.
-
-- **Build the thesis page around factual metadata plus a short authored overview.**  
-  **Route:** `/research/doctoral-thesis/religious-atavism-climate-crisis/`  
-  **Structure:** title / metadata block; short authored “About this thesis” overview; abstract; citation; resources;
-  identifiers; supervision and examination; licence / PDF availability.  
-  **Status:** Decided for Stage 4.2 v1.
-
-- **Use distinct short and formal thesis titles.**  
-  **Short title for page/browser/link contexts:** `Religious atavism and the climate crisis`  
-  **Formal title:** `Religious atavism and the climate crisis, with reference to Taylor and Rorty on liberalism`  
-  **Rule:** Use the formal title for the visible thesis title, formal citation, and thesis entity. Use the short title
-  where a compact page/browser/link title is needed.  
-  **Browser title:** `Religious atavism and the climate crisis | Stevan Veljkovic`  
-  **Status:** Decided for Stage 4.2.
-
-- **Use ORA deposit/public availability date as thesis `datePublished`.**  
-  **Rules:** citation year `2023`; copyright year `2023`; `datePublished: 2024-02-11`; current implementation uses
-  `dateCreated: "2023"`.
-  **Open decision:** whether to use precise submission date `2023-04-21`.
-  **Status:** Decided for Stage 4.2.
-
-- **Use Oxford University Research Archive naming.**  
-  **Rule:** The full repository name is `Oxford University Research Archive`, not `Oxford Research Archive`. First
-  mention may be “the Oxford University Research Archive (ORA)”; later references should use `ORA`. Avoid “the ORA”
-  when ORA stands alone, though “the ORA record” is fine.  
-  **Status:** Decided.
-
-- **Include thesis authorship in the top metadata block.**  
-  **Decision:** The thesis metadata block should include `By Stevan Veljkovic`; the site header alone is not enough for
-  authorship of the thesis work.  
-  **Preferred Stage 4.2 block:**
-  ```text
-  By Stevan Veljkovic.
-  DPhil thesis, University of Oxford, 2023.
-  Held in the Oxford University Research Archive (ORA).
-  Deposited on 11 February 2024.
-  Licensed under CC BY 4.0.
-  ```  
-  **Status:** Decided for Stage 4.2 v1.
-
-- **Keep faculty/college details out of the Stage 4.2 top metadata block.**  
-  **Decision:** Do not add Faculty of Theology and Religion / St Cross College to the top metadata block for v1. If
-  included later, place them lower down as “Institutional details” with documentary wording.  
-  **Status:** Decided for Stage 4.2 v1.
-
-- **Preserve authorial voice in public-facing thesis copy.**  
-  **Decision:** Do not smooth thesis copy into generic keyword prose. Frame it as a theoretical account of the climate
-  crisis paradigm, explain “religious atavism” clearly, and preserve the primary focus on Taylor and Rorty with
-  secondary reference to Latour, Schmitt, and Illich.  
-  **Status:** Decided for Stage 4.2.
+- **Thesis top metadata:** Include `By Stevan Veljkovic`; do not add Faculty of Theology and Religion / St Cross College
+  to the top metadata block for v1. Preserve Stevan’s authorial voice in public-facing thesis copy.
 
 ## 4. Review-Specific Decisions
 
-- **Cosmic Connections is a distinct local Author's Original Manuscript.**  
-  **Implications:** It is not `sameAs` the DOI article; use `isBasedOn` and/or
-  `citation`.  
-  **Status:** Final.
+- **Cosmic Connections:** Treat the local version as a distinct Author's Original Manuscript, not `sameAs` the DOI
+  article; use `isBasedOn` and/or `citation`.
 
-- **Christian Right uses `editor`, not `author`, for Gionathan Lo Mascolo.**  
-  **Also:** `csaf039` is article ID, not pagination. Issue date is month
-  precision in frontmatter: `2025-07`.  
-  **Status:** Final/current.
+- **Christian Right:** Use `editor`, not `author`, for Gionathan Lo Mascolo. `csaf039` is article ID, not pagination.
+  Issue date has month precision: `2025-07`.
 
-- **Evolution of Religions is complete.**  
-  **Model:** published LSE post as `BlogPosting/Review`; local reproduction as
-  `Article/Review`.  
-  **Status:** Final for Stage 4.0.
+- **Evolution of Religions:** Model the published LSE post as `BlogPosting/Review` and the local reproduction as
+  `Article/Review`.
 
-- **Hell model is settled, but minor citation/metadata checks remain.**  
-  **Known:** DOI review `https://doi.org/10.1558/jsrnc.30282`; reviewed book DOI
-  `https://doi.org/10.7312/mort21470`; license CC BY-NC-ND 4.0.
-  **Status:** Ongoing for Stage 4.0.
+- **Hell:** Model is settled, but minor citation/metadata checks remain. Known values: DOI review
+  `https://doi.org/10.1558/jsrnc.30282`; reviewed book DOI `https://doi.org/10.7312/mort21470`; license CC BY-NC-ND 4.0.
 
-- **Godless Crusade should be an Accepted Manuscript locally.**  
-  **Not:** Version of Record.  
-  **Known:** published review DOI
-  `https://doi.org/10.1080/09637494.2023.2260684`; reviewed book DOI
-  `https://doi.org/10.1017/9781009262125`; journal volume 51, issue `4–5`;
-  article/review pagination `491–492`, `491`, `492`.  
-  **Still check:** T&F AM wording, Goodhart correction note, version / text
-  accuracy, schema, sitemap, and absence of VoR PDF/text.  
-  **Status:** Active unresolved checks.
+- **Godless Crusade:** Treat the local version as an Accepted Manuscript, not Version of Record. Known values: published
+  review DOI `https://doi.org/10.1080/09637494.2023.2260684`; reviewed book DOI `https://doi.org/10.1017/9781009262125`;
+  journal volume 51, issue `4–5`; pagination `491–492`. Still check T&F AM wording, Goodhart correction note,
+  text/version accuracy, schema, sitemap, and absence of VoR PDF/text.
 
-- **Challenging Modernity must be withheld unless rights are clarified.**  
-  **Known:** current code has it drafted / withheld; local version is a Taylor &
-  Francis Version-of-Record reproduction.  
-  **Decision:** keep withheld unless CCC/T&F permission is confirmed.
-  **Status:** Active caution.
+- **Challenging Modernity:** Keep withheld unless CCC/T&F permission is confirmed. Current local version is a Taylor &
+  Francis Version-of-Record reproduction.
 
 ## 5. Assets, URLs, and Deployment
 
-- **Make Stage 4 project-memory updates through the Stage 4 integration branch.**  
-  **Decision:** Project-memory updates for Stage 4 work should normally be made on `stage-4-0` and reach `main` through
-  coherent release merges, not by separately editing `main`.  
-  **Exception:** urgent production-only corrections.  
-  **Status:** Current workflow.
+- **Stage 4 workflow and deployment:** Use `stage-4-0` as the Stage 4 integration branch and `main` as production.
+  Netlify deploys from `origin/main` with `npm run build` and publishes `dist`. Merge only coherent public release
+  units.
 
-- **Treat `main` as production.**  
-  **Reason:** Netlify deploys from `origin/main`.  
-  **Workflow:** Use `stage-4-0` as the Stage 4.0 work/integration branch; merge to `main` only for coherent public
-  release units.  
-  **Status:** Current.
+- **Canonical host and DNS:** Keep `https://stevanveljkovic.com/` as canonical despite Netlify’s `www` recommendation.
+  Keep DNS hosted at Hover for now; current apex A record is `75.2.60.5`. Revisit DNS only if performance evidence
+  justifies it.
 
-- **Use root-relative public asset and internal URLs.**  
-  **Examples:** `/cv/veljkovic-cv.pdf`,
-  `/images/publications/reviews/<slug>/reviewed-work/cover.jpg`.  
-  **Status:** Final.
+- **Seminars bridge:** Keep `https://seminars.stevanveljkovic.com/` separate for now; expose it in footer/secondary nav;
+  do not import seminar PDFs/assets into the main Astro site during Stage 4.1.
 
-- **Preferred review image convention is:**
-  ```text
-  public/images/publications/reviews/<slug>/
-    reviewed-work/cover.jpg
-    issue/cover.jpg
-    periodical/poster.jpg
-    periodical/banner.jpg
-    article/image.jpg
-    page/social-card.jpg
-  ```
-  **Attachment rule:** reviewed-work image -> reviewed work; issue cover ->
-  `PublicationIssue`; periodical images -> `Periodical`; article image ->
-  article / post / review only if rights are clear; page / social-card -> local page
-  or Open Graph.  
-  **Status:** Final convention.
-
-- **Only actual / generated pages should appear in the sitemap.**  
-  **Caution:** A generated page still needs to be intended live; rights-blocked
-  routes should be drafted or otherwise excluded.  
-  **Status:** Final.
-
-- **Do not use post-build pruning for draft review assets.**  
-  **Decision:** `public/` should contain only files definitely intended to be
-  public.  
-  **Implications:** `draft:true` controls page generation only; Astro still
-  copies static files under `public/` into `dist/`.  
-  **Status:** Final.
-
-- **Use canonical publication-version labels.**  
-  **Labels:** Author's Original Manuscript (AOM), Accepted Manuscript (AM),
-  Version of Record (VoR), and Published web article.  
-  **Implications:** Use `Published web article` for edited web-outlet / blog-series cases such as
-  `evolution-of-religions`; do not call these VoR unless the
-  publisher uses that terminology.  
-  **Status:** Final.
-
-- **Use Netlify as the production deployment host.**  
-  **Rationale:** Frictionless deploy workflow, real redirects, private-repo-capable deployment, and lower conceptual
-  overhead than Cloudflare.  
-  **Implications:** Netlify builds from `main` with `npm run build` and publishes `dist`.
-  **Status:** Final/current.
-
-- **Keep the apex domain canonical.**  
-  **Decision:** Use `https://stevanveljkovic.com/` as canonical despite Netlify’s recommendation to prefer `www` for
-  optimal CDN behaviour.  
-  **Status:** Final/current.
-
-- **Keep DNS hosted at Hover for now.**  
-  **Decision:** Do not move DNS to Netlify for the foreseeable future. Accept Netlify’s Hover fallback A-record setup
-  for now.  
-  **Current apex A record:** `75.2.60.5`  
-  **Revisit if:** Evidence of performance problems emerges. One possible future route is Cloudflare DNS while continuing
-  to host on Netlify.  
-  **Status:** Final/current.
-
-- **Bridge to Seminars; do not migrate it in Stage 4.1.**  
-  **Decision:** Keep `https://seminars.stevanveljkovic.com/` separate for now; expose it in footer / secondary nav;
-  optionally add a short Seminars card/section on `/research/`; do not import seminar PDFs/assets into the main Astro
-  site during Stage 4.1.  
-  **Status:** Implemented / current.
-
-- **Use forced Netlify redirects for legacy URLs.**  
-  **Decision:** Use `301!` rules in `public/_redirects` while old compatibility files still exist.  
-  **Rationale:** Without forced redirects, Netlify may serve an existing physical legacy file with `200`.  
-  **Current rules:**
-  ```text
-  /writing.html /publications/ 301!
-  /writing/ReviewCosmicConnectionsV2.html /publications/reviews/cosmic-connections/ 301!
-  /writing/ReviewCosmicConnectionsV2.pdf /publications/reviews/cosmic-connections/veljkovic-review-cosmic-connections.pdf 301!
-  /itinerary.pdf /cv/veljkovic-cv.pdf 301!
-  ```
-  **Status:** Final/current.
+- **Forced Netlify redirects:** Use `301!` rules in `public/_redirects` while old compatibility files still exist,
+  otherwise Netlify may serve a physical legacy file with `200`. Current rules cover `/writing.html`, Cosmic Connections
+  legacy HTML/PDF, and `/itinerary.pdf`.
 
 - **Cloudflare is not needed now.**  
   **Decision:** Netlify was chosen over Cloudflare Pages after testing. Cloudflare remains a possible future option,
@@ -406,65 +166,19 @@ as authoritative when they conflict with older notes.
   **Decision:** Do not continue link-style tuning without an observed contrast, accessibility, or usability problem.  
   **Status:** Current.
 
-- **Use a local canonical pronunciation page.**  
-  **Route:** `/pronunciation/`  
-  **Decision:** The homepage pronunciation line should link to the local page, not an external IPA Reader service.  
-  **V1 transcription:** `/ˈstɛv(ə)n ˈvɛl.kə.vɪk/`  
-  **Guidance:** Broad practical English guidance; first syllable is `STEV`, not `STEEV`, and not pronounced like
-  “Steven” or “Steve”. Use IPA `ɛ`, not Greek `ε`.  
-  **Status:** Implemented/current.
+- **Navigation and shell:** Stage 4.1 primary nav is `Stevan Veljkovic`, `CV`, `Publications`, `Research`;
+  footer/secondary nav is Contact, ORCID, Google Scholar, GitHub, Pronunciation, Seminars. Header should remain simple,
+  accessible, Astro/CSS-led, and no-JavaScript for the first pass.
 
-- **Research page should be a compact hub, not an apology or manifesto.**  
-  **Principles:** Do not apologise for lack of conventional research articles; do not overclaim; separate outputs from
-  themes; give the doctoral thesis pride of place; keep the first version modest.  
-  **Status:** Implemented/live for Stage 4.1b; keep future edits compact.
+- **Pronunciation page:** `/pronunciation/` is canonical. V1 transcription: `/ˈstɛv(ə)n ˈvɛl.kə.vɪk/`; first syllable is
+  `STEV`, not `STEEV`, and not pronounced like “Steven” or “Steve”.
 
-- **Stage 4.1 primary navigation is settled.**  
-  **Items:**
-  ```text
-  Stevan Veljkovic → /
-  CV → /cv/
-  Publications → /publications/
-  Research → /research/
-  ```
-  **Rule:** `Research` is now live because `/research/` exists.  
-  **Status:** Implemented/live for Stage 4.1b.
+- **Research page:** Keep `/research/` compact: not an apology or manifesto; do not overclaim; separate outputs from
+  themes; give the thesis pride of place.
 
-- **Stage 4.1 footer / secondary navigation is settled.**  
-  **Items:**
-  ```text
-  Contact → mailto:stevan@stevanveljkovic.com
-  ORCID → https://orcid.org/0000-0002-2599-3227
-  Google Scholar → https://scholar.google.com/citations?user=e42TN4UAAAAJ
-  GitHub → https://github.com/smveljkovic
-  Pronunciation → /pronunciation/
-  Seminars → https://seminars.stevanveljkovic.com/
-  ```
-
-  **Status:** Decided for Stage 4.1.
-
-- **First-pass header should be simple, accessible, and Astro/CSS-led.**  
-  **Decision:** Implement header/navigation in Astro/CSS/browser iteration, not by starting in Figma or Adobe tools. Use
-  a no-JavaScript responsive layout; no hamburger menu for the first pass.  
-  **Implications:** Header, homepage masthead, and page heading remain conceptually distinct.  
-  **Status:** Current for Stage 4.1.
-
-
-- **Accessibility fixes should be preserved.**  
-  **Rules:** Internal CV link should not use `_blank`; decorative icons should
-  have `alt="" aria-hidden="true"`; `_blank` links need `rel`; homepage nav list
-  should remain valid list markup.  
-  **Status:** Final.
-
-- **Use JavaScript / animation sparingly.**  
-  **Rationale:** Core content should remain static, durable, and accessible.  
-  **Status:** Final.
-
-- **Trusted HTML bridge fields are acceptable for migration.**  
-  **Fields:** `citationHtml`, `bylineHtml`, `reuseNoteHtml`,
-  `modificationNote`, `publicationList.noteHtml`.  
-  **Rationale:** Preserve legacy citation formatting while semantic modelling improves.  
-  **Status:** Final for Stage 4.0; long-term refactor deferred.
+- **Accessibility and rendering:** Preserve basic accessibility fixes: no unnecessary `_blank`; `_blank` links need
+  `rel`; decorative icons use `alt="" aria-hidden="true"`; homepage nav remains valid list markup. Use
+  JavaScript/animation sparingly. Trusted HTML bridge fields remain acceptable for migration.
 
 - **Stage 4.0 is a constrained core architecture / design foundation phase.**  
   **In scope:** thesis page; expanded / web-native CV page; header / navigation/footer; seminars bridge.  

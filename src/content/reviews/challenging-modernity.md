@@ -1,12 +1,12 @@
 ---
-draft: true
+draft: false
 slug: "challenging-modernity"
 
 title: "Review of Challenging Modernity"
 shortTitle: "Challenging Modernity"
 pageHeading: "Review of Challenging Modernity"
 seoTitle: "Review of Challenging Modernity"
-description: "The spirit of Robert Bellah’s era-defining research lives on in this deeply felt compilation of Bellah disciples, writes Stevan Veljkovic."
+description: "The spirit of Robert Bellah’s era-defining research lives on in this deeply felt compilation by Bellah disciples, writes Stevan Veljkovic."
 
 datePublished: "2024-10-08"
 canonicalPath: "/publications/reviews/challenging-modernity/"
@@ -14,7 +14,7 @@ canonicalPath: "/publications/reviews/challenging-modernity/"
 reviewer:
   name: "Stevan Veljkovic"
   orcid: "https://orcid.org/0000-0002-2599-3227"
-  
+
 reviewedWork:
   type: "Book"
   title: "Challenging Modernity"
@@ -58,21 +58,21 @@ publishedReview:
     - "https://www.tandfonline.com/doi/full/10.1080/09637494.2024.2408091/"
   datePublished: "2024-10-08"
   firstPublishedOnline: "2024-10-08"
-  
+
   pagination: "440–441"
   pageStart: "440"
   pageEnd: "441"
-  
+
   publisher:
     name: "Taylor & Francis Group"
     url: "https://www.tandfonline.com/"
     sameAs:
-    - "https://taylorandfrancis.com/"
-    - "https://www.informa.com/divisions/taylor-and-francis/"
+      - "https://taylorandfrancis.com/"
+      - "https://www.informa.com/divisions/taylor-and-francis/"
     parentOrganization:
       name: "Informa UK Limited"
       url: "https://www.informa.com/"
-    
+
   periodical:
     name: "Religion, State and Society"
     url: "https://www.tandfonline.com/journals/crss20/"
@@ -82,8 +82,8 @@ publishedReview:
       name: "Taylor & Francis Group"
       url: "https://www.tandfonline.com/"
       sameAs:
-      - "https://taylorandfrancis.com/"
-      - "https://www.informa.com/divisions/taylor-and-francis/"
+        - "https://taylorandfrancis.com/"
+        - "https://www.informa.com/divisions/taylor-and-francis/"
       parentOrganization:
         name: "Informa UK Limited"
         url: "https://www.informa.com/"
@@ -100,10 +100,8 @@ publishedReview:
       - "Manoela Carpenedo"
       - "Paul Freston"
     image: "/images/publications/reviews/challenging-modernity/issue/cover.jpg"
-    
-showFirstPublishedOnlineNote: true
 
-reuseNoteHtml: "Reprinted by permission of Informa UK Limited, trading as Taylor & Francis Group, <a href='https://www.tandfonline.com/'>www.tandfonline.com</a>."
+showFirstPublishedOnlineNote: true
 
 rights:
   copyrightYear: 2024
@@ -113,9 +111,14 @@ rights:
     id: "https://orcid.org/0000-0002-2599-3227"
     orcid: "https://orcid.org/0000-0002-2599-3227"
   permissionStatement: "Reprinted by permission of Informa UK Limited, trading as Taylor & Francis Group, www.tandfonline.com."
-    
-version: "Reproduction of the Version of Record"
-openingVersionNote: "Version of Record"
+#  license:
+#    name: "Copyright Clearance Center license"
+#    url: "https://marketplace.copyright.com/rs-ui-web/mp/license/1d83d52e-c58b-4c18-9c3b-ed489fa108f4/95ff5867-8e49-4ac5-80f4-20d01cdab894"
+
+reuseNoteHtml: "Reprinted by permission of Informa UK Limited, trading as Taylor & Francis Group, <a href='https://www.tandfonline.com/'>www.tandfonline.com</a>."
+
+version: "Accepted Manuscript"
+openingVersionNote: "Accepted Manuscript (AM)"
 
 image: "/images/publications/reviews/challenging-modernity/reviewed-work/cover.jpg"
 
@@ -126,13 +129,16 @@ Madsen, William M. Sullivan, Ann Swidler, and Steven M. Tipton. <i>Religion,
 State and Society</i> 53, no. 4 (2025): 440–41. <a
 href="https://doi.org/10.1080/09637494.2024.2408091">https://doi.org/10.1080/09637494.2024.2408091</a>.'
 
+modificationNote: "Editorial note: The original AM text in one place misstated the publication year of Robert Bellah’s <i>Religion in Human Evolution</i> as 2013; that instance has been corrected here to 2011."
+
 publicationList:
   year: 2024
   sortDate: "2024-10-08"
   order: 10
 ---
+
  <p class="title" style="padding-left: 0; text-indent: 0">
-      <span style="font-weight:bolder;">Challenging Modernity</span>, by Robert Bellah, edited and with introduction and conclusion by Richard Madsen, William M. Sullivan, Ann Swidler, and Steven M. Tipton, New York, Columbia University Press, 2024, 371 pp., $32.00/£28.00 (paperback), ISBN 9780231214896
+      <span style="font-style:italic;">Challenging Modernity</span>, by Robert Bellah, edited and with introduction and conclusion by Richard Madsen, William M. Sullivan, Ann Swidler, and Steven M. Tipton, New York: Columbia University Press, 2024, 371 pp., $32.00 / £28.00 (paperback), ISBN 9780231214896
 </p>
 
 <p class="counter" id="1">[&#8239;1&#8239;]</p>
@@ -141,12 +147,12 @@ publicationList:
 </p>
 
 <p class="counter">[&#8239;2&#8239;]</p>
-  
-<p class="review_par">It is common sense that talk of modernity requires some historical framework in which to juxtapose it to alternatives or precursors. Here, as in <i>Religion in Human Evolution</i>, much rests on the idea (nominally credited to the German philosopher Karl Jaspers [1883–1969]) that the period around 500 BCE provides such a framework: this is the hypothesis of the Axial Age, on the grounds of which Bellah and his interlocutors distinguish between ‘Axial’ (modern) and ‘pre-Axial’ institutions and habits of mind. The Axial movements – exemplified by philosophy in ancient Greece and the prophets of post-captivity Judaism – all shared interlinked traits, such as de-emphasising particularity and community, and valorising universality and personal autonomy. These are the origins, according to the theory, of the liberal-democratic sensus communis that is instinctively referred to as modernity.</p> 
+
+<p class="review_par">It is commonsense that talk of modernity requires some historical framework in which to juxtapose it to alternatives or precursors. Here, as in <i>Religion in Human Evolution</i>, much rests on the idea (nominally credited to the German philosopher Karl Jaspers [1883–1969]&thinsp;) that the period around 500 BCE provides such a framework: this is the hypothesis of the Axial Age, on the grounds of which Bellah and his interlocutors distinguish between ‘Axial’ (modern) and ‘pre-Axial’ institutions and habits of mind. The Axial movements – exemplified by philosophy in ancient Greece and the prophets of post-captivity Judaism – all shared interlinked traits, such as de-emphasising particularity and community, and valorising universality and personal autonomy. These are the origins, according to the theory, of the liberal-democratic <i>sensus communis</i> that is instinctively referred to as modernity.</p> 
 
 <p class="counter">[&#8239;3&#8239;]</p>
 
-<p class="review_par">The through line of <i>Challenging Modernity</i> is a supposition that global modernity, in its contradictions and shortcomings, is now facing the limitations of the Axial paradigm. Historian Kyle Harper sums up the problem in his reference to ‘Axial Age morality in the Anthropocene’ (56). As the driving force behind the pre-eminent institutions and mindsets of the contemporary West, have Axial tendencies left the world too dominated by individualism for there ever to be collective action in the face of problems like climate change? Do interlinked global crises show, in the words of German sociologist Hartmut Rosa, ‘the project of modernity [. . .] turning against itself?’ (67).
+<p class="review_par">The through line of <i>Challenging Modernity</i> is a supposition that global modernity, in its contradictions and shortcomings, is now facing the limitations of the Axial paradigm. Historian Kyle Harper sums up the problem in his reference to ‘Axial Age morality in the Anthropocene’ (56). As the driving force behind the pre-eminent institutions and mindsets of the contemporary West, have Axial tendencies left the world too dominated by individualism for there ever to be collective action in the face of problems like climate change? Do interlinked global crises show, in the words of German sociologist Hartmut Rosa, ‘the project of modernity&nbsp;.&nbsp;.&nbsp;.&nbsp;turning against itself?’ (67).
 </p>
 
 <p class="counter">[&#8239;4&#8239;]</p>
@@ -158,25 +164,13 @@ publicationList:
 </p>
 
 <p class="counter">[&#8239;6&#8239;]</p>
-<p class="review_par">Challenging Modernity sometimes takes a break from its theses. Bellah’s ‘Prologue in Heaven (or Hell) to the Modern Project’ (a play on the opening of Goethe’s <i>Faust</i>) is a self-assured survey of western history that proceeds through pairs of ‘theorists’ and ‘poets’, from Moses and Plato to Max Weber and Leo Tolstoy. A response by philosopher Ana Marta González, making play with Bellah’s penchant for binary oppositions, is an extended comment on the ‘cultural division of labor between theory and narrative’ characteristic of Axial societies (175). These essays are salutary reading in their own right. In what is perhaps the standout chapter, German sociologist Hans Joas presents a rigorous prehistory of some Weberian theory that quickly passes over the editors’ moral preoccupations. With his focus on Weber, Joas subtly critiques the collection’s premise – were not all the present questions about modernity already at play in Weber’s time? But it is a live and legitimate question whether climate and its concomitant issues have not differentiated late modernity from its proximate precursors. As Bellah puts the matter, ‘[Weber] could not know of the slow but now almost certain ecological catastrophe that we face, something whose consequences dwarf the worst crimes of World War II’ (157). Bellah upholds his brand, staking out provocative positions with an avuncular mien.</p>
+<p class="review_par"><i>Challenging Modernity</i> sometimes takes a break from its theses. Bellah’s ‘Prologue in Heaven (or Hell) to the Modern Project’ (a play on the opening of Goethe’s <i>Faust</i>) is a self-assured survey of Western history that proceeds through pairs of ‘theorists’ and ‘poets’, from Moses and Plato to Max Weber and Leo Tolstoy. A response by philosopher Ana Marta González, making play with Bellah’s penchant for binary oppositions, is an extended comment on the ‘cultural division of labor between theory and narrative’ characteristic of Axial societies (175). These essays are salutary reading in their own right. In what is perhaps the standout chapter, German sociologist Hans Joas presents a rigorous prehistory of some Weberian theory that quickly passes over the editors’ moral preoccupations. With his focus on Weber, Joas subtly critiques the collection’s premise – were not all the present questions about modernity already at play in Weber’s time? But it is a live and legitimate question whether climate and its concomitant issues have not differentiated late modernity from its proximate precursors. As Bellah puts the matter, ‘[Weber] could not know of the slow but now almost certain ecological catastrophe that we face, something whose consequences dwarf the worst crimes of World War II’ (157). Bellah upholds his brand, staking out provocative positions with an avuncular mien.</p>
 
 <p class="counter">[&#8239;7&#8239;]</p>
 <p class="review_par">Challenging Modernity will excite readers who share the editors’ vision of human history at an inflexion point. But for such a rich set of perspectives, the collection shows a curious lack of curiosity on certain topics. There is a didactic undertone throughout, in part because the contributors were invited to end their essays with moral reflection. Strathern’s chapter on divine kingship, for instance, is a dazzling piece of scholarship that changes register in its final paragraphs. ‘To speak so simply of science and truth may once have seemed slightly gauche in a scholarly context. But the climate crisis demands that we are more serious about such things’ (222). Does greater seriousness of purpose recommend simplification? How one inclines on this question is probably a good litmus test for how one will rate this volume.</p>
 
-<p class="review_par" style="font-weight: bolder; justify-self: left; text-align: left">Reference</p>
-<p class="review_par" style="padding-left: 2em; text-indent: -2em">Bellah, R. 2011. <i>Religion in Human Evolution: From the Paleolithic to the Axial Age</i>. Cambridge, MA: Harvard
+<p class="review_par">Reference</p>
+<p class="review_par">Bellah, R. 2011. <i>Religion in Human Evolution: From the Paleolithic to the Axial Age</i>. Cambridge, MA: Harvard
 University Press.</p>
 
-<p class="review_par" style="justify-self: end; text-align: end; padding: 0 1.5rem 1.5rem 0;">Stevan Veljkovic<br><i>University of Oxford, UK</i><br>stevan.veljkovic@theology.ox.ac.uk<br><a
-    id="cy-effective-orcid-url"
-    class="underline"
-     href="https://orcid.org/0000-0002-2599-3227"
-     target="orcid.widget"
-     rel="me noopener noreferrer"
-     style="vertical-align: top">
-     <img
-        src="https://orcid.org/sites/default/files/images/orcid_16x16.png"
-        style="width: 1em; margin-inline-start: 0.5em"
-        alt="ORCID iD icon"/>
-      https://orcid.org/0000-0002-2599-3227
-    </a></p>
+<p class="review_par" style="justify-self: end; text-align: end; padding: 0 1.5rem 1.5rem 0;">Stevan Veljkovic<br>Faculty of Theology and Religion<br>University of Oxford, UK<br>stevan.veljkovic@theology.ox.ac.uk</p>

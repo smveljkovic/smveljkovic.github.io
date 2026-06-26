@@ -15,8 +15,12 @@ such as `Research by Stevan Veljkovic.`
 The thesis entity should use `https://doi.org/10.5287/ora-4rjoobkvk` as its primary scholarly `@id`; ARK and ORA IDs may
 be secondary identifiers.
 
-Once implemented, the thesis page should use `WebPage` with `mainEntity` thesis. Use date-only values and validate
-rendered page-source JSON-LD.
+The working-tree thesis page uses `src/data/thesis.ts` and `createThesisSchema(thesis, meta)`. The page should use
+`WebPage` with `mainEntity` pointing to the DOI thesis node. Use date-only values and validate rendered page-source
+JSON-LD before release.
+
+Current thesis date handling: `datePublished: "2024-02-11"`; current implementation uses `dateCreated: "2023"`; precise
+`dateCreated: "2023-04-21"` remains an open editorial decision.
 
 Canonical `Person.@id`:
 

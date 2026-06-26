@@ -2,7 +2,7 @@
 
 Last reviewed against `docs/project-memory/current.md`,
 `docs/project-memory/DECISIONS.md`, and `docs/project-memory/NEXT-STEPS.md` on
-2026-06-15.
+2026-06-18.
 
 This file is a human-readable metadata registry/checklist for
 `stevanveljkovic.com`. It is not automatically the code source of truth. When
@@ -77,6 +77,7 @@ https://stevanveljkovic.com/publications/
 https://stevanveljkovic.com/publications/reviews/cosmic-connections/
 https://stevanveljkovic.com/pronunciation/
 https://stevanveljkovic.com/research/
+https://stevanveljkovic.com/research/doctoral-thesis/religious-atavism-climate-crisis/
 ```
 
 Use URL helpers instead of manual concatenation:
@@ -215,7 +216,8 @@ Homepage title-like metadata should not expand the site name beyond
 | Person `@id`  | `https://orcid.org/0000-0002-2599-3227`   |
 | PDF path      | `/cv/veljkovic-cv.pdf`                    |
 
-Do not link CV schema to the local thesis page until that page exists.
+The local thesis page exists in the working tree; do not link CV schema to it unless the generated route and release
+intent are confirmed.
 
 ### Research
 
@@ -375,57 +377,62 @@ It may still appear as a bibliographic DOI item on `/publications/`.
 
 ## 8. Thesis Metadata for Stage 4.2
 
-Do not add the thesis page to sitemap or schema until it exists. Current generated/live route count before the thesis
-page is 9; once implemented, expected route count becomes 10.
+The thesis page exists in the working tree at
+`/research/doctoral-thesis/religious-atavism-climate-crisis/`. Build/generated output and production/live deployment
+remain
+unconfirmed. Production may remain the 9-route set until Stage 4.2 is merged/deployed; the Stage 4.2 build should
+include
+the thesis page and 10 routes.
 
-| Field                             | Current value                                                                                |
-|-----------------------------------|----------------------------------------------------------------------------------------------|
-| Primary thesis ID                 | `https://doi.org/10.5287/ora-4rjoobkvk`                                                      |
-| DOI                               | `10.5287/ora-4rjoobkvk`                                                                      |
-| ARK                               | `ark:/29072/ora_7aff13dc075e4c17bee95adfc1b2fcf4`                                            |
-| Oxford Research Archive pubs id   | `1624720`                                                                                    |
-| Oxford Research Archive local pid | `pubs:1624720`                                                                               |
-| Title                             | `Religious atavism and the climate crisis, with reference to Taylor and Rorty on liberalism` |
-| Type                              | `Thesis`                                                                                     |
-| Author                            | `Stevan Veljkovic`                                                                           |
-| Institution                       | `University of Oxford`                                                                       |
-| Degree                            | `DPhil / PhD`                                                                                |
-| Year                              | `2023`                                                                                       |
-| Deposit date                      | `2024-02-11`                                                                                 |
-| Copyright year                    | `2023`                                                                                       |
-| Licence                           | `CC BY 4.0`                                                                                  |
-| Supervisors                       | `Friederike Otto`; `Johannes Zachhuber`                                                      |
-| Examiners                         | `Douglas Hedley`; `Gavin Flood`                                                              |
+| Field                                      | Current value / rule                                                                          |
+|--------------------------------------------|-----------------------------------------------------------------------------------------------|
+| Working-tree route                         | `/research/doctoral-thesis/religious-atavism-climate-crisis/`                                 |
+| Local page source                          | `src/pages/research/doctoral-thesis/religious-atavism-climate-crisis/index.astro`             |
+| Thesis data                                | `src/data/thesis.ts`                                                                          |
+| Thesis schema factory                      | `createThesisSchema(thesis, meta)`                                                           |
+| Rendered JSON-LD                           | Pending validation                                                                            |
+| Primary thesis ID / schema `@id`           | `https://doi.org/10.5287/ora-4rjoobkvk`                                                       |
+| DOI                                        | `10.5287/ora-4rjoobkvk`                                                                       |
+| ARK                                        | `ark:/29072/ora_7aff13dc075e4c17bee95adfc1b2fcf4`                                             |
+| Oxford University Research Archive pubs id | `1624720`                                                                                     |
+| Oxford University Research Archive local pid | `pubs:1624720`                                                                               |
+| Title                                      | `Religious atavism and the climate crisis, with reference to Taylor and Rorty on liberalism`  |
+| Short title                                | `Religious atavism and the climate crisis`                                                    |
+| Type                                       | `Thesis`                                                                                      |
+| Author                                     | `Stevan Veljkovic`                                                                            |
+| Institution                                | `University of Oxford`                                                                        |
+| Degree                                     | `DPhil / PhD`                                                                                 |
+| Year / citation year                       | `2023`                                                                                        |
+| `datePublished`                            | `2024-02-11` using ORA deposit/public availability date                                       |
+| `dateCreated`                              | Current implementation uses `2023`; precise `2023-04-21` remains an open editorial decision   |
+| Copyright year                             | `2023`                                                                                        |
+| Licence                                    | `CC BY 4.0`                                                                                   |
+| Local PDF path                             | `public/research/doctoral-thesis/religious-atavism-climate-crisis/veljkovic-dphil-thesis.pdf` |
+| Supervisors                                | `Friederike Otto`; `Johannes Zachhuber`                                                       |
+| Examiners                                  | `Douglas Hedley`; `Gavin Flood`                                                               |
 
-Local thesis route:
-`/research/doctoral-thesis/religious-atavism-climate-crisis/`
+Identifier display rule:
 
-Local slug:
-`religious-atavism-climate-crisis`
+- DOI visible in main thesis metadata/resources;
+- ARK and ORA IDs in expandable “Repository and archival identifiers” section or equivalent.
 
-ARK rule:
+Repository naming rule:
 
-- include ARK as a secondary `PropertyValue` identifier where useful;
-- do not use the ARK as the primary `@id`;
-- do not use the ARK as `sameAs` while the DOI exists.
+- full name: `Oxford University Research Archive`;
+- first mention may be “the Oxford University Research Archive (ORA)”;
+- later references should use `ORA`;
+- avoid “the ORA” when ORA stands alone, though “the ORA record” is fine.
 
 Abstract source rule:
 
-- use ORA / DOI metadata as the abstract source for v1;
+- use the Oxford University Research Archive / DOI metadata version of the abstract as the source for v1;
 - do not describe the abstract as transcribed from the PDF unless the PDF text is used and checked directly.
 
 Local PDF rule:
 
-- local thesis PDF may be hosted under CC BY 4.0 if verified;
-- choose a stable path/filename;
+- local thesis PDF hosting is permitted under CC BY 4.0;
+- use the stable path above;
 - verify generated/live link before release.
-
-Do not automatically set thesis `datePublished` to a deposit date without first
-deciding whether it means award date, completion/submission date, repository
-deposit date, DOI publication date, or repository availability date.
-
-Current expected generated/live route set before the thesis page contains 9 pages, including `/research/`. Once
-`/research/doctoral-thesis/religious-atavism-climate-crisis/` is implemented, expected route count becomes 10.
 
 ## 9. Date, Pagination, And Issue Rules
 
@@ -535,10 +542,10 @@ operational values:
 | `Theory and editing`                                                  | Superseded by current code value `Theory and design`; pending final wording confirmation.                                                    |
 | `hello@stevanveljkovic.com` as canonical email                        | Settled, with stevan@stevanveljkovic.com as new value and all instances populated from site.ts (no hard-coding), pending final verification. |
 | `/images/headshot-1200x630.png` as default headshot/social image      | Superseded by `/images/headshot-1200x630.jpg`; remaining `.png` schema references are tracked as cleanup work.                               |
-| Only Cosmic Connections and Christian Right as generated review pages | Superseded; six review routes exist; four currently build; two are excluded.                                                                 |
+| Only Cosmic Connections and Christian Right as generated review pages | Superseded; six review content files exist; four review routes currently build; two are excluded.                                            |
 | Godless, Hell, Challenging Modernity as merely planned draft pages    | Superseded; content files exist, but christian-right-europe and challenging-modernity routes are currently excluded pending rights clarity.  |
 | `src/content/publication-items/phd-thesis.md`                         | Current thesis publication item is `religious-atavism-climate-crisis.md`.                                                                    |
-| Thesis page as immediate Stage 3 task                                 | Superseded; thesis page is active Stage 4.2 work with settled route and implementation pending.                                              |
+| Thesis page as immediate Stage 3 task                                 | Superseded; thesis page is Stage 4.2 working-tree implemented, with build/generated output and production/live state pending verification.   |
 
 ## 13. Other naming decisions
 

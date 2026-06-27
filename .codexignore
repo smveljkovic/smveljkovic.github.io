@@ -1,0 +1,33 @@
+# ==============================================================================
+# JETBRAINS AI ASSISTANT & CODEX IGNORE RULES
+# ==============================================================================
+
+# 1. System Directories & Hidden OS Files
+.git/
+.DS_Store
+Thumbs.db
+
+# 2. Package Managers & Environment Files
+node_modules/
+.npm/
+.pnpm-store/
+.env
+.env.*
+
+# 3. Astro Framework & Build Output Folders
+.astro/
+dist/
+build/
+out/
+
+# 4. Monolithic Lockfiles (Massive Token Sinks)
+package-lock.json
+pnpm-lock.yaml
+yarn.lock
+bun.lockb
+
+# 5. Type Generation & Large Config Arrays
+*.d.ts
+.eslintrc*
+.prettierrc*
+tsconfig.json

@@ -31,6 +31,7 @@ const rightsSchema = z.object({
         name: z.string(),
         fullName: z.string().optional(),
         url: z.url(),
+        scope: z.enum(["work", "local"]).default("work"),
     }).optional(),
 
     copyrightYear: z.number().optional(),

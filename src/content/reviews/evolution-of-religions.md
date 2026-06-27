@@ -93,6 +93,7 @@ publicationList:
   sortDate: "2024-07-18"
   order: 10
 ---
+
 <p class="title review_standfirst"><em>In</em> <strong>The Evolution of Religions</strong><em>, Lance Grande applies evolutionary biology to trace the genealogy of world religions. Despite numerous misapprehensions, errors of fact and an incomplete bibliography that compromise the work, Grande’s unique, bold approach merits attention for its fresh perspective on religious history and interfaith understanding, writes</em> <strong>Stevan Veljkovic</strong><em>.</em></p>
 <hr class="review_rule">
 <p class="title review_source_book">

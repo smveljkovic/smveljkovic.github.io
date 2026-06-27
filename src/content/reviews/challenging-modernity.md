@@ -111,9 +111,10 @@ rights:
     id: "https://orcid.org/0000-0002-2599-3227"
     orcid: "https://orcid.org/0000-0002-2599-3227"
   permissionStatement: "Reprinted by permission of Informa UK Limited, trading as Taylor & Francis Group, www.tandfonline.com."
-#  license:
-#    name: "Copyright Clearance Center license"
-#    url: "https://marketplace.copyright.com/rs-ui-web/mp/license/1d83d52e-c58b-4c18-9c3b-ed489fa108f4/95ff5867-8e49-4ac5-80f4-20d01cdab894"
+  license:
+    name: "Taylor & Francis License Agreement"
+    url: "https://marketplace.copyright.com/rs-ui-web/mp/license/1d83d52e-c58b-4c18-9c3b-ed489fa108f4/95ff5867-8e49-4ac5-80f4-20d01cdab894"
+    scope: "local"
 
 reuseNoteHtml: "Reprinted by permission of Informa UK Limited, trading as Taylor & Francis Group, <a href='https://www.tandfonline.com/'>www.tandfonline.com</a>."
 

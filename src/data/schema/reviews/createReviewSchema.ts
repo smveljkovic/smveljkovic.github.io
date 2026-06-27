@@ -1,9 +1,10 @@
 import type {CollectionEntry} from "astro:content";
-import { absoluteUrl, site, nodeId, siteId } from "../../site";
+import {absoluteUrl, nodeId, site, siteId} from "../../site";
 import {doiUrl, normalizeDoi} from "../../../lib/doi";
 
 type PersonLike = | string | { name: string; alternateName?: string; url?: string; orcid?: string; sameAs?: string[]; };
 type OrganizationLike = | string | { name: string; url?: string };
+type ReviewLicense = NonNullable<NonNullable<ReviewData["rights"]>["license"]>;
 
 function uniqueStrings(values: Array<string | undefined>): string[] {
     return [...new Set(values.filter(Boolean) as string[])];
@@ -225,6 +226,17 @@ function compactObject(object: Record<string, unknown>) {
     );
 }
 
+function schemaLicense(license: ReviewLicense | undefined) {
+    if (!license) return undefined;
+
+    return compactObject({
+        "@type": "CreativeWork",
+        name: license.fullName ?? license.name,
+        alternateName: license.fullName ? license.name : undefined,
+        url: license.url,
+    });
+}
+
 function absoluteUrlIfLocal(url: string): string {
     if (url.startsWith("http://") || url.startsWith("https://")) {
         return url;
@@ -375,6 +387,7 @@ export function createReviewSchema(review: ReviewData) {
             "@type": "Person",
             name: site.author,
             url: absoluteUrl("/"),
+            sameAs: [site.orcid, site.scholar, site.github],
             identifier: {
                 "@type": "PropertyValue",
                 propertyID: "ORCID",
@@ -440,7 +453,9 @@ export function createReviewSchema(review: ReviewData) {
                 : undefined,
             author: {"@id": site.orcid},
             publisher: schemaOrganization(review.publishedReview.publisher),
-            license: review.rights?.license?.url,
+            license: review.rights?.license?.scope === "work"
+                ? schemaLicense(review.rights.license)
+                : undefined,
             copyrightYear: review.rights?.copyrightYear,
             copyrightHolder: schemaCopyrightHolder(review.rights?.copyrightHolder),
             datePublished: dateValue(
@@ -472,7 +487,7 @@ export function createReviewSchema(review: ReviewData) {
             itemReviewed: {"@id": reviewedWorkId},
             isBasedOn: publishedReviewId ? {"@id": publishedReviewId} : undefined,
             citation: publishedReviewId ? {"@id": publishedReviewId} : undefined,
-            license: review.rights?.license?.url,
+            license: schemaLicense(review.rights?.license),
             copyrightYear: review.rights?.copyrightYear,
             copyrightHolder: schemaCopyrightHolder(review.rights?.copyrightHolder),
             datePublished: dateValue(review.datePublished),

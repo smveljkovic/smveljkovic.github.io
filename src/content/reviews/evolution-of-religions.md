@@ -18,7 +18,7 @@ canonicalPath: "/publications/reviews/evolution-of-religions/"
 reviewer:
   name: "Stevan Veljkovic"
   orcid: "https://orcid.org/0000-0002-2599-3227"
-  
+
 reviewedWork:
   type: "Book"
   title: "The Evolution of Religions: A History of Related Traditions"
@@ -39,7 +39,7 @@ reviewedWork:
     - "9780231212304"
     - "9780231559317"
   image: "/images/publications/reviews/evolution-of-religions/reviewed-work/cover.jpg"
-  
+
 publishedReview:
   type: "BlogPosting"
   schemaTypes:
@@ -49,18 +49,18 @@ publishedReview:
   url: "https://blogs.lse.ac.uk/lsereviewofbooks/2024/07/18/book-review-the-evolution-of-religions-lance-grande/"
   datePublished: "2024-07-18"
   firstPublishedOnline: "2024-07-18"
-  
+
   blog:
     name: "LSE Review of Books"
     url: "https://blogs.lse.ac.uk/lsereviewofbooks/"
     parentSite:
       name: "LSE Blogs"
       url: "https://blogs.lse.ac.uk/"
-      
+
   publisher:
     name: "London School of Economics and Political Science"
     url: "https://www.lse.ac.uk"
-    
+
   license: "https://creativecommons.org/licenses/by/4.0/"
   copyrightYear: 2024
 
@@ -117,7 +117,7 @@ publicationList:
 
   <p class="counter">[&#8239;6&#8239;]</p>
 <p class="review_par">Although the book initially gives an impression of meticulousness through its attractive physical form – folio in full colour – a closer look reveals that whatever care went into its design was not matched by its editing. Typos of every description may be found throughout each chapter (eg, “Tower of Babble” [186]); the massacred editor of <i>Charlie Hebdo</i>, Stéphane Charbonnier, is referred to as “Stephanie” [483]). A more serious issue are the many absurdities and infelicities of expression, such as where, for instance, Grande tells us that “<i>atheist</i> was coined well before the fifth century BCE as a derogatory term for Christians and other monotheists” (518) (there obviously were no Christians in the fifth century BCE). Indeed, <i>Evolution of Religions</i> is sadly teeming with solecisms, misapprehensions, and errors of fact. Moreover, one would have thought that Grande’s phylogenetic method might be of use in particular for avoiding anachronism in religious history. Yet, it’s as if Grande’s method actually inserts a kind of teleological bias, such that, for instance, Grande refers to something called “Roman Catholicism” existing from the birth of Christianity, or to “Anglicanism” as having been a coherent idea from 1534 onwards (366–68).</p>
-  
+
 <p class="counter">[&#8239;7&#8239;]</p>
 <p class="review_par">Grande concludes with a discussion of how the findings of his enterprise might promote interfaith understanding. In doing so he conjoins scholarly aims to extra-scientific ones, and it might reasonably be wondered whether Grande doesn’t end up implicitly defending a hierarchy of religions – even whilst stating the very opposite intention. Readers of Grande could be forgiven for taking away the lesson that at the apex of religions stand Unitarianism and the Bahai’i faith, which are singled out again and again as exemplars of inclusiveness and ecumenism. In his valorisation of all things pluralist, Grande almost seems to suggest another form of progressionism. Grande makes no secret of what he regards to be spiritually salutary: “The blind, unquestioning faith that sometimes comes with Organized Religion has often been used by people in power to justify tribalistic hypernationalism, aggressive expansionism, and cultural subjugation” (503). Such statements, leaving to one side any question of their accuracy, sit awkwardly alongside Grande’s scholarship.</p>
 

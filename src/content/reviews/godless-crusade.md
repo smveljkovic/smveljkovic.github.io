@@ -15,7 +15,7 @@ canonicalPath: "/publications/reviews/godless-crusade/"
 reviewer:
   name: "Stevan Veljkovic"
   orcid: "https://orcid.org/0000-0002-2599-3227"
-  
+
 reviewedWork:
   type: "Book"
   title: "The Godless Crusade: Religion, Populism and Right-Wing Identity Politics in the West"
@@ -34,7 +34,7 @@ reviewedWork:
     - "9781009262125"
     - "1009262122"
   image: "/images/publications/reviews/godless-crusade/reviewed-work/cover.jpg"
-  
+
 publishedReview:
   title: "The godless crusade: religion, populism and right-wing identity politics in the West"
   subtitle: "by Tobias Cremer, Cambridge, Cambridge University Press, 2023, 335 pp., £29.99 (paperback), ISBN 978-1-009-26214-9"
@@ -44,7 +44,7 @@ publishedReview:
     - "https://www.tandfonline.com/doi/full/10.1080/09637494.2023.2260684"
   datePublished: "2023-12-14"
   firstPublishedOnline: "2023-12-14"
-  
+
   pagination: "491–492"
   pageStart: "491"
   pageEnd: "492"
@@ -58,7 +58,7 @@ publishedReview:
     parentOrganization:
       name: "Informa UK Limited"
       url: "https://www.informa.com/"
-      
+
   periodical:
     name: "Religion, State and Society"
     url: "https://www.tandfonline.com/journals/crss20/"
@@ -73,7 +73,7 @@ publishedReview:
       parentOrganization:
         name: "Informa UK Limited"
         url: "https://www.informa.com/"
-        
+
   volume:
     number: "51"
   issue:
@@ -90,7 +90,7 @@ publishedReview:
       - "Daniel Nilsson DeHanas"
       - "Marat Shterin"
     image: "/images/publications/reviews/godless-crusade/issue/cover.jpg"
-    
+
 showFirstPublishedOnlineNote: true
 
 version: "Accepted Manuscript"

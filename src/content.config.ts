@@ -1,6 +1,6 @@
-import { defineCollection } from "astro:content";
-import { glob } from "astro/loaders";
-import { z } from "astro/zod";
+import {defineCollection} from "astro:content";
+import {glob} from "astro/loaders";
+import {z} from "astro/zod";
 
 const personLikeSchema = z.union([
     z.string(),
@@ -13,7 +13,7 @@ const personLikeSchema = z.union([
     }),
 ]);
 
-const personOrPeopleLikeSchema = z.union ([
+const personOrPeopleLikeSchema = z.union([
     personLikeSchema,
     z.array(personLikeSchema),
 ])
@@ -45,13 +45,13 @@ const rightsSchema = z.object({
 }).optional();
 
 const hrefSchema = z.string().refine(
-  (value) =>
-    value.startsWith("/") ||
-    value.startsWith("http://") ||
-    value.startsWith("https://"),
-  {
-    message: "Expected a root-relative path or an absolute http(s) URL",
-  }
+    (value) =>
+        value.startsWith("/") ||
+        value.startsWith("http://") ||
+        value.startsWith("https://"),
+    {
+        message: "Expected a root-relative path or an absolute http(s) URL",
+    }
 );
 
 const publicationListSchema = z.object({
@@ -97,135 +97,135 @@ const publicationIdentifierSchema = z.object({
 });
 
 const reviews = defineCollection({
-  loader: glob({
-    base: "./src/content/reviews",
-    pattern: "**/*.md",
-  }),
-
-  schema: z.object({
-    draft: z.boolean().default(false),
-
-    title: z.string(),
-    shortTitle: z.string(),
-    seoTitle: z.string().optional(),
-    version: z.string().optional(),
-    slug: z.string(),
-
-    description: z.string(),
-    pageHeading: z.string().optional(),
-    schemaName: z.string().optional(),
-    schemaHeadline: z.string().optional(),
-    localSchemaTypes: z.array(z.string()).optional(),
-
-    dateCreated: z.string().optional(),
-    datePublished: z.string(),
-    dateModified: z.string().optional(),
-
-    canonicalPath: z.string(),
-
-    pdf: z.string().optional(),
-    image: z.string().optional(),
-
-    reviewer: z.object({
-      name: z.string(),
-      orcid: z.url(),
+    loader: glob({
+        base: "./src/content/reviews",
+        pattern: "**/*.md",
     }),
 
-    reviewDek: z
-      .object({
-          workTitle: z.string(),
-          creatorRole: z.enum(["author", "editor"]).default("author"),
-          creatorName: z.string(),
-      })
-      .optional(),
-
-    reviewedWork: z.object({
-      type: z.literal("Book"),
-      title: z.string(),
-      shortTitle: z.string().optional(),
-      author: personOrPeopleLikeSchema.optional(),
-      editor: personOrPeopleLikeSchema.optional(),
-      contributor: personOrPeopleLikeSchema.optional(),
-      publisher: organizationLikeSchema.optional(),
-      place: z.string().optional(),
-      year: z.string().optional(),
-      isbn: z.array(z.string()).optional(),
-      doi: z.string().optional(),
-      url: z.url().optional(),
-      sameAs: z.array(z.url()).optional(),
-      image: z.string().optional(),
-    }),
-
-    publishedReview: z.object({
-        type: z.enum(["BlogPosting", "ScholarlyArticle"]).optional(),
-        schemaTypes: z.array(z.enum(["BlogPosting", "Review", "ScholarlyArticle"])).optional(),
+    schema: z.object({
+        draft: z.boolean().default(false),
 
         title: z.string(),
-        shortTitle: z.string().optional(),
-        doi: z.string().optional(),
-        url: z.url().optional(),
-        sameAs: z.array(z.url()).optional(),
-        image: z.url().optional(),
+        shortTitle: z.string(),
+        seoTitle: z.string().optional(),
+        version: z.string().optional(),
+        slug: z.string(),
+
+        description: z.string(),
+        pageHeading: z.string().optional(),
+        schemaName: z.string().optional(),
+        schemaHeadline: z.string().optional(),
+        localSchemaTypes: z.array(z.string()).optional(),
+
+        dateCreated: z.string().optional(),
         datePublished: z.string(),
-        firstPublishedOnline: z.string().optional(),
-        publicationStatus: z.string().optional(),
-        publisher: organizationLikeSchema.optional(),
+        dateModified: z.string().optional(),
 
-        periodical: periodicalSchema.optional(),
-        blog: z.object({
+        canonicalPath: z.string(),
+
+        pdf: z.string().optional(),
+        image: z.string().optional(),
+
+        reviewer: z.object({
             name: z.string(),
-            url: z.url(),
-            parentSite: z.object({
+            orcid: z.url(),
+        }),
+
+        reviewDek: z
+            .object({
+                workTitle: z.string(),
+                creatorRole: z.enum(["author", "editor"]).default("author"),
+                creatorName: z.string(),
+            })
+            .optional(),
+
+        reviewedWork: z.object({
+            type: z.literal("Book"),
+            title: z.string(),
+            shortTitle: z.string().optional(),
+            author: personOrPeopleLikeSchema.optional(),
+            editor: personOrPeopleLikeSchema.optional(),
+            contributor: personOrPeopleLikeSchema.optional(),
+            publisher: organizationLikeSchema.optional(),
+            place: z.string().optional(),
+            year: z.string().optional(),
+            isbn: z.array(z.string()).optional(),
+            doi: z.string().optional(),
+            url: z.url().optional(),
+            sameAs: z.array(z.url()).optional(),
+            image: z.string().optional(),
+        }),
+
+        publishedReview: z.object({
+            type: z.enum(["BlogPosting", "ScholarlyArticle"]).optional(),
+            schemaTypes: z.array(z.enum(["BlogPosting", "Review", "ScholarlyArticle"])).optional(),
+
+            title: z.string(),
+            shortTitle: z.string().optional(),
+            doi: z.string().optional(),
+            url: z.url().optional(),
+            sameAs: z.array(z.url()).optional(),
+            image: z.url().optional(),
+            datePublished: z.string(),
+            firstPublishedOnline: z.string().optional(),
+            publicationStatus: z.string().optional(),
+            publisher: organizationLikeSchema.optional(),
+
+            periodical: periodicalSchema.optional(),
+            blog: z.object({
                 name: z.string(),
-                url: z.string(),
+                url: z.url(),
+                parentSite: z.object({
+                    name: z.string(),
+                    url: z.string(),
+                }).optional(),
             }).optional(),
+            volume: publicationVolumeSchema,
+            issue: publicationIssueSchema,
+            articleId: z.string().optional(),
+            pagination: z.string().optional(),
+            pageStart: z.string().optional(),
+            pageEnd: z.string().optional(),
         }).optional(),
-        volume: publicationVolumeSchema,
-        issue: publicationIssueSchema,
-        articleId: z.string().optional(),
-        pagination: z.string().optional(),
-        pageStart: z.string().optional(),
-        pageEnd: z.string().optional(),
-    }).optional(),
 
 
-    citationHtml: z.string(),
+        citationHtml: z.string(),
 
-    publicationList: publicationListSchema,
+        publicationList: publicationListSchema,
 
-    doi: z.string().optional(),
-    url: hrefSchema.optional(),
-    firstPublishedOnline: z.string().optional(),
-    openingVersionNote: z.string().optional(),
-    introOpeningText: z.string().optional(),
-    firstPublishedNoteLabel: z.string().optional(),
-    showFirstPublishedOnlineNote: z.boolean().optional(),
+        doi: z.string().optional(),
+        url: hrefSchema.optional(),
+        firstPublishedOnline: z.string().optional(),
+        openingVersionNote: z.string().optional(),
+        introOpeningText: z.string().optional(),
+        firstPublishedNoteLabel: z.string().optional(),
+        showFirstPublishedOnlineNote: z.boolean().optional(),
 
-    rights: rightsSchema.optional(),
-    reuseNoteHtml: z.string().optional(),
-    modificationNote: z.string().optional(),
+        rights: rightsSchema.optional(),
+        reuseNoteHtml: z.string().optional(),
+        modificationNote: z.string().optional(),
 
-/*  I’m not sure about getting rid of these . . .
+        /*  I’m not sure about getting rid of these . . .
 
-    periodical: periodicalSchema.optional(),
-    volume: publicationVolumeSchema,
-    issue: publicationIssueSchema,
-    articleId: z.string().optional(),
-    pagination: z.string().optional(),
-    pageStart: z.string().optional(),
-    pageEnd: z.string().optional(),
-*/
+            periodical: periodicalSchema.optional(),
+            volume: publicationVolumeSchema,
+            issue: publicationIssueSchema,
+            articleId: z.string().optional(),
+            pagination: z.string().optional(),
+            pageStart: z.string().optional(),
+            pageEnd: z.string().optional(),
+        */
 
-    searchMeta: z
-      .object({
-        reviewers: z.string().optional(),
-        authors: z.string().optional(),
-        title: z.string().optional(),
-      })
-      .optional(),
+        searchMeta: z
+            .object({
+                reviewers: z.string().optional(),
+                authors: z.string().optional(),
+                title: z.string().optional(),
+            })
+            .optional(),
 
-    bylineHtml: z.string().optional(),
-  }),
+        bylineHtml: z.string().optional(),
+    }),
 });
 
 const publicationItems = defineCollection({

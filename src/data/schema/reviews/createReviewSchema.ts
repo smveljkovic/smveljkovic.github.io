@@ -1,8 +1,8 @@
-import type { CollectionEntry } from "astro:content";
+import type {CollectionEntry} from "astro:content";
 import { absoluteUrl, site, nodeId, siteId } from "../../site";
-import { doiUrl, normalizeDoi } from "../../../lib/doi";
+import {doiUrl, normalizeDoi} from "../../../lib/doi";
 
-type PersonLike = | string | { name: string; alternateName?: string; url?: string; orcid?: string; sameAs?: string[];};
+type PersonLike = | string | { name: string; alternateName?: string; url?: string; orcid?: string; sameAs?: string[]; };
 type OrganizationLike = | string | { name: string; url?: string };
 
 function uniqueStrings(values: Array<string | undefined>): string[] {
@@ -44,9 +44,9 @@ function blogContainerIds(review: ReviewData) {
 }
 
 function publishedReviewContainerReference(review: ReviewData) {
-    const { blogId } = blogContainerIds(review);
+    const {blogId} = blogContainerIds(review);
 
-    if (blogId) return { "@id": blogId };
+    if (blogId) return {"@id": blogId};
 
     return mostSpecificPublicationContainerReference(review);
 }
@@ -57,7 +57,7 @@ function createBlogContainerNodes(review: ReviewData) {
 
     if (!blog) return [];
 
-    const { blogId, parentSiteId } = blogContainerIds(review);
+    const {blogId, parentSiteId} = blogContainerIds(review);
 
     const blogNode =
         blogId &&
@@ -66,7 +66,7 @@ function createBlogContainerNodes(review: ReviewData) {
             "@type": "Blog",
             name: blog.name,
             url: blog.url,
-            isPartOf: parentSiteId ? { "@id": parentSiteId } : undefined,
+            isPartOf: parentSiteId ? {"@id": parentSiteId} : undefined,
             publisher: schemaOrganization(publishedReview.publisher),
         });
 
@@ -167,7 +167,7 @@ function schemaCopyrightHolder(
     const id = holder.id ?? holder.orcid;
 
     if (id) {
-        return { "@id": id };
+        return {"@id": id};
     }
 
     return compactObject({
@@ -261,19 +261,19 @@ function mostSpecificPublicationContainerReference(review: ReviewData) {
     const publishedReview = review.publishedReview;
     if (!publishedReview?.periodical) return undefined;
 
-    const { periodicalId, volumeId, issueId } = publicationContainerIds(review);
+    const {periodicalId, volumeId, issueId} = publicationContainerIds(review);
 
-    if (publishedReview.issue) return { "@id": issueId };
-    if (publishedReview.volume) return { "@id": volumeId };
+    if (publishedReview.issue) return {"@id": issueId};
+    if (publishedReview.volume) return {"@id": volumeId};
 
-    return { "@id": periodicalId };
+    return {"@id": periodicalId};
 }
 
 function createPublicationContainerNodes(review: ReviewData) {
     const publishedReview = review.publishedReview;
     if (!publishedReview?.periodical) return [];
 
-    const { periodicalId, volumeId, issueId } = publicationContainerIds(review);
+    const {periodicalId, volumeId, issueId} = publicationContainerIds(review);
     const periodical = publishedReview.periodical;
 
     const periodicalNode = compactObject({
@@ -293,7 +293,7 @@ function createPublicationContainerNodes(review: ReviewData) {
             "@type": "PublicationVolume",
             volumeNumber: publishedReview.volume.number,
             url: publishedReview.volume.url,
-            isPartOf: { "@id": periodicalId },
+            isPartOf: {"@id": periodicalId},
         });
 
     const issueNode =
@@ -310,8 +310,8 @@ function createPublicationContainerNodes(review: ReviewData) {
                 : undefined,
             editor: schemaPeople(publishedReview.issue?.editor),
             isPartOf: publishedReview.volume
-                ? { "@id": volumeId }
-                : { "@id": periodicalId },
+                ? {"@id": volumeId}
+                : {"@id": periodicalId},
         });
 
     return compactArray([periodicalNode, volumeNode, issueNode]);
@@ -389,7 +389,7 @@ export function createReviewSchema(review: ReviewData) {
             url: absoluteUrl("/"),
             name: site.siteName,
             inLanguage: site.language,
-            publisher: { "@id": site.orcid },
+            publisher: {"@id": site.orcid},
         }),
 
         compactObject({
@@ -399,11 +399,11 @@ export function createReviewSchema(review: ReviewData) {
             name: localReviewName,
             description: review.description,
             inLanguage: site.language,
-            isPartOf: { "@id": websiteId },
-            author: { "@id": site.orcid },
-            publisher: { "@id": site.orcid },
-            about: { "@id": reviewedWorkId },
-            mainEntity: { "@id": localReviewId },
+            isPartOf: {"@id": websiteId},
+            author: {"@id": site.orcid},
+            publisher: {"@id": site.orcid},
+            about: {"@id": reviewedWorkId},
+            mainEntity: {"@id": localReviewId},
         }),
 
         compactObject({
@@ -438,7 +438,7 @@ export function createReviewSchema(review: ReviewData) {
             image: review.publishedReview.image
                 ? absoluteUrlIfLocal(review.publishedReview.image)
                 : undefined,
-            author: { "@id": site.orcid },
+            author: {"@id": site.orcid},
             publisher: schemaOrganization(review.publishedReview.publisher),
             license: review.rights?.license?.url,
             copyrightYear: review.rights?.copyrightYear,
@@ -450,7 +450,7 @@ export function createReviewSchema(review: ReviewData) {
             pagination: review.publishedReview.pagination,
             pageStart: review.publishedReview.pageStart,
             pageEnd: review.publishedReview.pageEnd,
-            itemReviewed: { "@id": reviewedWorkId },
+            itemReviewed: {"@id": reviewedWorkId},
             isPartOf: publishedReviewContainerReference(review),
             identifier: publishedReviewIdentifiers(review),
         }),
@@ -458,20 +458,20 @@ export function createReviewSchema(review: ReviewData) {
         ...createPublicationContainerNodes(review),
         ...createBlogContainerNodes(review),
 
-            compactObject({
+        compactObject({
             "@id": localReviewId,
             "@type": localReviewSchemaTypes(review),
             url: reviewPageUrl,
-            mainEntityOfPage: { "@id": reviewWebPageId },
+            mainEntityOfPage: {"@id": reviewWebPageId},
             headline: localReviewHeadline,
             name: localReviewName,
             description: review.description,
             version: reviewVersion,
             inLanguage: site.language,
-            author: { "@id": site.orcid },
-            itemReviewed: { "@id": reviewedWorkId },
-            isBasedOn: publishedReviewId ? { "@id": publishedReviewId } : undefined,
-            citation: publishedReviewId ? { "@id": publishedReviewId } : undefined,
+            author: {"@id": site.orcid},
+            itemReviewed: {"@id": reviewedWorkId},
+            isBasedOn: publishedReviewId ? {"@id": publishedReviewId} : undefined,
+            citation: publishedReviewId ? {"@id": publishedReviewId} : undefined,
             license: review.rights?.license?.url,
             copyrightYear: review.rights?.copyrightYear,
             copyrightHolder: schemaCopyrightHolder(review.rights?.copyrightHolder),

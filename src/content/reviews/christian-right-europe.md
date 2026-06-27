@@ -102,6 +102,10 @@ rights:
     name: "Stevan Veljkovic"
     id: "https://orcid.org/0000-0002-2599-3227"
     orcid: "https://orcid.org/0000-0002-2599-3227"
+  license:
+    name: "Oxford University Press License"
+    url: "https://s100.copyright.com/CustomerAdmin/PLF.jsp?ref=23668cca-b86f-4d5c-87ae-c2bdd9b7512e"
+    scope: "local"
 
 version: "Reproduction of the Version of Record"
 openingVersionNote: "Version of Record"

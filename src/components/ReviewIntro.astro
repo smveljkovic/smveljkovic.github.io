@@ -37,11 +37,23 @@ review.rights?.copyrightHolder?.name
 
 const shouldGroupReuseWithRights = Boolean(review.rights?.license) || review.version === "Reproduction of the Version of Record";
 
-const rightsParagraphHtml = [
+const isInlineModificationNote = Boolean(
+    review.modificationNote?.startsWith(" ")
+);
+
+const standaloneModificationNote = review.modificationNote && !isInlineModificationNote
+    ? review.modificationNote
+    : null;
+
+const groupedReuseAndRightsHtml = [
     shouldGroupReuseWithRights ? review.reuseNoteHtml : null,
-    review.modificationNote,
-    copyrightNotice,
+    isInlineModificationNote ? review.modificationNote : null,
+    !standaloneModificationNote ? copyrightNotice : null,
 ].filter(Boolean).join(" ");
+
+const standaloneCopyrightHtml = standaloneModificationNote
+    ? copyrightNotice
+    : null;
 
 const isPublishedBlogPost =
     review.publishedReview?.type === "BlogPosting" ||
@@ -91,11 +103,27 @@ const firstPublishedNoteLabel =
                 <p class="intro" set:html={review.reuseNoteHtml}/>
         )}
 
-        {rightsParagraphHtml && (
+        {groupedReuseAndRightsHtml && (
+                <p
+                        class="intro"
+                        style={!standaloneModificationNote && !standaloneCopyrightHtml ? "padding-bottom: 0" : undefined}
+                        set:html={groupedReuseAndRightsHtml}
+                />
+        )}
+
+        {standaloneModificationNote && (
+                <p
+                        class="intro"
+                        style={!standaloneCopyrightHtml ? "padding-bottom: 0" : undefined}
+                        set:html={standaloneModificationNote}
+                />
+        )}
+
+        {standaloneCopyrightHtml && (
                 <p
                         class="intro"
                         style="padding-bottom: 0"
-                        set:html={rightsParagraphHtml}
+                        set:html={standaloneCopyrightHtml}
                 />
         )}
     </div>

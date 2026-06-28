@@ -2,7 +2,7 @@
 
 Last reviewed against `docs/project-memory/current.md`,
 `docs/project-memory/DECISIONS.md`, and `docs/project-memory/NEXT-STEPS.md` on
-2026-06-18.
+2026-06-27.
 
 This file is a human-readable metadata registry/checklist for
 `stevanveljkovic.com`. It is not automatically the code source of truth. When
@@ -259,6 +259,8 @@ Current live/generated review routes:
 /publications/reviews/evolution-of-religions/
 /publications/reviews/godless-crusade/
 /publications/reviews/hell-christian-ecology/
+/publications/reviews/challenging-modernity/
+/publications/reviews/christian-right-europe/
 ```
 
 `challenging-modernity` exists but is rights-blocked; it is withheld until T&F / CCC permission is clarified.
@@ -291,26 +293,24 @@ Review JSON-LD should distinguish:
 Do not use `sameAs` between the local review/manuscript and the DOI article.
 Use `isBasedOn` and/or `citation`.
 
-### Christian Right[^*]
+### Christian Right
 
-| Field                        | Current value                                                                       |
-|------------------------------|-------------------------------------------------------------------------------------|
-| Eventual route; not current  | `/publications/reviews/christian-right-europe/`                                     |
-| WebPage `@id`                | `https://stevanveljkovic.com/publications/reviews/christian-right-europe/#webpage`  |
-| Local review `@id`           | `https://stevanveljkovic.com/publications/reviews/christian-right-europe/#review`   |
-| DOI review `@id`             | `https://doi.org/10.1093/jcs/csaf039`                                               |
-| Reviewed book DOI            | `https://doi.org/10.1515/9783839460382`                                             |
-| Periodical                   | `Journal of Church and State`                                                       |
-| Volume                       | `67`                                                                                |
-| Issue                        | `3`                                                                                 |
-| Article ID                   | `csaf039`                                                                           |
-| Issue date precision         | Month precision: `2025-07`                                                          |
-| PDF; provisional, not public | `/publications/reviews/christian-right-europe/veljkovic-christian-right-europe.pdf` |
+| Field                | Current value                                                                              |
+|----------------------|--------------------------------------------------------------------------------------------|
+| Route                | `/publications/reviews/christian-right-europe/`                                            |
+| WebPage `@id`        | `https://stevanveljkovic.com/publications/reviews/christian-right-europe/#webpage`         |
+| Local review `@id`   | `https://stevanveljkovic.com/publications/reviews/christian-right-europe/#review`          |
+| DOI review `@id`     | `https://doi.org/10.1093/jcs/csaf039`                                                      |
+| Reviewed book DOI    | `https://doi.org/10.1515/9783839460382`                                                    |
+| Periodical           | `Journal of Church and State`                                                              |
+| Volume               | `67`                                                                                       |
+| Issue                | `3`                                                                                        |
+| Article ID           | `csaf039`                                                                                  |
+| Issue date precision | Month precision: `2025-07`                                                                 |
+| Local PDF            | None currently confirmed in `public/`; source frontmatter has a commented provisional path |
 
 The reviewed edited volume should use `editor`, not an author value containing
 `(ed.)`. `csaf039` is article ID, not pagination.
-
-[^*]: All values to be regarded as provisional whilst review is excluded pending rights clarity.
 
 ### Evolution Of Religions
 
@@ -360,56 +360,51 @@ the Goodhart correction note visible if the local AM text corrects the AM error.
 
 If using generic JSRNC visual assets, attach them to `Periodical`, not `PublicationIssue`.
 
-### Challenging Modernity[^*]
+### Challenging Modernity
 
 | Field                | Current value / rule                            |
 |----------------------|-------------------------------------------------|
 | Route                | `/publications/reviews/challenging-modernity/`  |
-| Rights status        | Active launch blocker                           |
+| Rights status        | Resolved; local page generated                  |
 | Local version        | Taylor & Francis Version-of-Record reproduction |
 | Published review DOI | `https://doi.org/10.1080/09637494.2024.2408091` |
 | Reviewed book DOI    | `https://doi.org/10.7312/bell21488`             |
 
-Must be drafted/withheld before launch unless T&F/CCC permission is clarified.
-It may still appear as a bibliographic DOI item on `/publications/`.
-
-[^*]: All values to be regarded as provisional whilst review is excluded pending rights clarity.
+Do not describe the local version as a Taylor & Francis Version-of-Record reproduction.
 
 ## 8. Thesis Metadata for Stage 4.2
 
 The thesis page exists in the working tree at
-`/research/doctoral-thesis/religious-atavism-climate-crisis/`. Build/generated output and production/live deployment
-remain
-unconfirmed. Production may remain the 9-route set until Stage 4.2 is merged/deployed; the Stage 4.2 build should
-include
-the thesis page and 10 routes.
+`/research/doctoral-thesis/religious-atavism-climate-crisis/`. Existing `dist/`
+output contains the thesis page and 12 generated HTML pages. Fresh build output
+and live production deployment still need verification before release.
 
-| Field                                      | Current value / rule                                                                          |
-|--------------------------------------------|-----------------------------------------------------------------------------------------------|
-| Working-tree route                         | `/research/doctoral-thesis/religious-atavism-climate-crisis/`                                 |
-| Local page source                          | `src/pages/research/doctoral-thesis/religious-atavism-climate-crisis/index.astro`             |
-| Thesis data                                | `src/data/thesis.ts`                                                                          |
-| Thesis schema factory                      | `createThesisSchema(thesis, meta)`                                                           |
-| Rendered JSON-LD                           | Pending validation                                                                            |
-| Primary thesis ID / schema `@id`           | `https://doi.org/10.5287/ora-4rjoobkvk`                                                       |
-| DOI                                        | `10.5287/ora-4rjoobkvk`                                                                       |
-| ARK                                        | `ark:/29072/ora_7aff13dc075e4c17bee95adfc1b2fcf4`                                             |
-| Oxford University Research Archive pubs id | `1624720`                                                                                     |
-| Oxford University Research Archive local pid | `pubs:1624720`                                                                               |
-| Title                                      | `Religious atavism and the climate crisis, with reference to Taylor and Rorty on liberalism`  |
-| Short title                                | `Religious atavism and the climate crisis`                                                    |
-| Type                                       | `Thesis`                                                                                      |
-| Author                                     | `Stevan Veljkovic`                                                                            |
-| Institution                                | `University of Oxford`                                                                        |
-| Degree                                     | `DPhil / PhD`                                                                                 |
-| Year / citation year                       | `2023`                                                                                        |
-| `datePublished`                            | `2024-02-11` using ORA deposit/public availability date                                       |
-| `dateCreated`                              | Current implementation uses `2023`; precise `2023-04-21` remains an open editorial decision   |
-| Copyright year                             | `2023`                                                                                        |
-| Licence                                    | `CC BY 4.0`                                                                                   |
-| Local PDF path                             | `public/research/doctoral-thesis/religious-atavism-climate-crisis/veljkovic-dphil-thesis.pdf` |
-| Supervisors                                | `Friederike Otto`; `Johannes Zachhuber`                                                       |
-| Examiners                                  | `Douglas Hedley`; `Gavin Flood`                                                               |
+| Field                                        | Current value / rule                                                                              |
+|----------------------------------------------|---------------------------------------------------------------------------------------------------|
+| Working-tree route                           | `/research/doctoral-thesis/religious-atavism-climate-crisis/`                                     |
+| Local page source                            | `src/pages/research/doctoral-thesis/religious-atavism-climate-crisis/index.astro`                 |
+| Thesis data                                  | `src/data/thesis.ts`                                                                              |
+| Thesis schema factory                        | `createThesisSchema(thesis, meta)`                                                                |
+| Rendered JSON-LD                             | Existing implementation generated and was validated; revalidate rendered output after fresh build |
+| Primary thesis ID / schema `@id`             | `https://doi.org/10.5287/ora-4rjoobkvk`                                                           |
+| DOI                                          | `10.5287/ora-4rjoobkvk`                                                                           |
+| ARK                                          | `ark:/29072/ora_7aff13dc075e4c17bee95adfc1b2fcf4`                                                 |
+| Oxford University Research Archive pubs id   | `1624720`                                                                                         |
+| Oxford University Research Archive local pid | `pubs:1624720`                                                                                    |
+| Title                                        | `Religious atavism and the climate crisis, with reference to Taylor and Rorty on liberalism`      |
+| Short title                                  | `Religious atavism and the climate crisis`                                                        |
+| Type                                         | `Thesis`                                                                                          |
+| Author                                       | `Stevan Veljkovic`                                                                                |
+| Institution                                  | `University of Oxford`                                                                            |
+| Degree                                       | `DPhil / PhD`                                                                                     |
+| Year / citation year                         | `2023`                                                                                            |
+| `datePublished`                              | `2024-02-11` using ORA deposit/public availability date                                           |
+| `dateCreated`                                | Current implementation uses `2023`; precise `2023-04-21` remains an open editorial decision       |
+| Copyright year                               | `2023`                                                                                            |
+| Licence                                      | `CC BY 4.0`                                                                                       |
+| Local PDF path                               | `public/research/doctoral-thesis/religious-atavism-climate-crisis/veljkovic-dphil-thesis.pdf`     |
+| Supervisors                                  | `Friederike Otto`; `Johannes Zachhuber`                                                           |
+| Examiners                                    | `Douglas Hedley`; `Gavin Flood`                                                                   |
 
 Identifier display rule:
 
@@ -516,7 +511,8 @@ public/publications/reviews/<slug>/veljkovic-review-<slug>.pdf
 
 ## 11. Sitemap And Redirect Rules
 
-The sitemap should include only actual generated, non-draft canonical pages that are intended to be live.
+The sitemap should include actual generated, non-draft canonical pages intended to be live. Generated output currently
+includes six review pages plus the thesis page in local `dist`; production/live state still needs deployment validation.
 
 Generated does not automatically mean launch-ready. Rights-blocked routes should be drafted or otherwise excluded before
 launch.
@@ -542,10 +538,10 @@ operational values:
 | `Theory and editing`                                                  | Superseded by current code value `Theory and design`; pending final wording confirmation.                                                    |
 | `hello@stevanveljkovic.com` as canonical email                        | Settled, with stevan@stevanveljkovic.com as new value and all instances populated from site.ts (no hard-coding), pending final verification. |
 | `/images/headshot-1200x630.png` as default headshot/social image      | Superseded by `/images/headshot-1200x630.jpg`; remaining `.png` schema references are tracked as cleanup work.                               |
-| Only Cosmic Connections and Christian Right as generated review pages | Superseded; six review content files exist; four review routes currently build; two are excluded.                                            |
-| Godless, Hell, Challenging Modernity as merely planned draft pages    | Superseded; content files exist, but christian-right-europe and challenging-modernity routes are currently excluded pending rights clarity.  |
+| Only Cosmic Connections and Christian Right as generated review pages | Superseded; six review content files exist and six review routes now generate locally.                                                       |
+| Godless, Hell, Challenging Modernity as merely planned draft pages    | Superseded; six review routes now generate locally, with production / live state subject to deployment validation.                           |
 | `src/content/publication-items/phd-thesis.md`                         | Current thesis publication item is `religious-atavism-climate-crisis.md`.                                                                    |
-| Thesis page as immediate Stage 3 task                                 | Superseded; thesis page is Stage 4.2 working-tree implemented, with build/generated output and production/live state pending verification.   |
+| Thesis page as immediate Stage 3 task                                 | Superseded; thesis page is Stage 4.2 working-tree implemented, existing `dist/` includes it, and live production state remains pending verification.   |
 
 ## 13. Other naming decisions
 

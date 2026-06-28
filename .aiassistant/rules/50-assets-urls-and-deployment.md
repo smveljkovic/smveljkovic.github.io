@@ -41,11 +41,8 @@ If a file is in `public/`, it is public. Astro copies `public/` directly into
 PDFs, images, or other assets. Do not put rights-uncertain publication assets in
 `public/`.
 
-Temporarily removed withheld-review materials currently live at:
-
-```text
-~/Projects/website-admin/withheld-images-folders/
-```
+Review image/material folders have been moved out of
+`~/Projects/website-admin/withheld-images-folders/` and into `public/`.
 
 Remaining cleanup: check home/CV JSON-LD for stale `/images/headshot-1200x630.png` references.
 
@@ -75,9 +72,9 @@ Preferred future PDF convention is:
 public/publications/reviews/<slug>/veljkovic-review-<slug>.pdf
 ```
 
-Verify generated-page asset references during Stage 4.0 verification/cleanup. Keep
-drafted / withheld `christian-right-europe` and `challenging-modernity` assets out
-of `public/` unless rights / publication decisions change.
+Verify generated-page asset references during Stage 4.0 verification/cleanup. Review PDFs are currently confirmed in
+`public/` for Cosmic Connections and Hell only; do not assume PDFs exist for `christian-right-europe`,
+`godless-crusade`, or `challenging-modernity`.
 
 - Netlify is production host;
 - builds from origin/main;
@@ -99,5 +96,5 @@ https://stevanveljkovic.com/sitemap-index.xml
 `https://www.stevanveljkovic.com/` should redirect permanently to the apex
 domain.
 
-Local thesis PDF hosting is permitted under CC BY 4.0 at the stable path above. Verify the generated/live link before
-Stage 4.2 release.
+Local thesis PDF hosting is permitted under CC BY 4.0 at the stable path above. Existing `dist/` includes the thesis
+route; verify fresh build and live link before release.

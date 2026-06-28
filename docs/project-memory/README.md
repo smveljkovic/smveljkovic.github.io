@@ -8,7 +8,7 @@ chat transcripts.
 
 When sources conflict, use this order:
 
-1. Current source code and rendered build output.
+1. Current source code, rendered build output, and freshly verified live output where deployment state is at issue.
 2. `docs/project-memory/current.md`.
 3. `docs/project-memory/NEXT-STEPS.md`.
 4. `docs/project-memory/DECISIONS.md`.

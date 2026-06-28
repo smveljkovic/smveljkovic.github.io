@@ -18,15 +18,10 @@ For operational AI rules: .aiassistant/rules/
 - Current working branch for Stage 4.0: `stage-4-0`
 - Production branch: `main` (`origin/main` deploys to Netlify)
 - Git remote `origin`: `https://github.com/smveljkovic/smveljkovic.github.io.git`
-- Current phase: Stage 4.2 thesis page v1 release polish within Stage 4.0.
+- Current phase: Stage 4.3: creating a proper web CV page.
 - Stage 4.2 thesis page is implemented in the working tree at:
   `/research/doctoral-thesis/religious-atavism-climate-crisis/`
-- Stage 4.2 state should distinguish:
-   - working-tree implementation: present;
-   - build/generated output: unconfirmed;
-   - production deployment/live state: unconfirmed.
 - No merge to `main` or Netlify production deployment has been confirmed.
-- Remaining Stage 4.2 work should be treated as a release checklist, not an open-ended writing / design exercise.
 - Site is live at `https://stevanveljkovic.com/`.
 - Stage 4.1b research hub v1 is complete/live:
    - `/research/` exists as a compact research/signposting hub.
@@ -40,7 +35,7 @@ For operational AI rules: .aiassistant/rules/
 - DNS remains at Hover. The seminars subdomain remains separate and hosted through GitHub Pages.
 - GitHub Pages deployment for the Astro site is retired.
 
-- Current confirmed production/generated route set before Stage 4.2 thesis release: static Astro site, 9 pages:
+- Current local/generated route set at start of Stage 4.3 work: static Astro site, 12 pages:
    - `/`
    - `/cv/`
    - `/publications/`
@@ -50,10 +45,16 @@ For operational AI rules: .aiassistant/rules/
    - `/publications/reviews/evolution-of-religions/`
    - `/publications/reviews/godless-crusade/`
    - `/publications/reviews/hell-christian-ecology/`
-- In the current thesis-page working tree, confirm build output contains 10 generated routes.
+   - `/publications/reviews/challenging-modernity/`
+   - `/publications/reviews/christian-right-europe/`
+   - `/research/doctoral-thesis/religious-atavism-climate-crisis/`
+- Existing `dist/` output contains 12 generated HTML pages, including the thesis page at the settled `doctoral-thesis`
+  route; fresh build and live production state remain to be confirmed.
 
-- Current code has `challenging-modernity` and `christian-right-europe` drafted / withheld from page generation.
-- Withheld review image / material folders temporarily live at `~/Projects/website-admin/withheld-images-folders/`.
+- `challenging-modernity` and `christian-right-europe` rights issues have been resolved and their pages made live.
+   - Lingering references in project memory to unresolved rights issues must be updated.
+- review image / material folders have been moved out of `~/Projects/website-admin/withheld-images-folders/` and into
+  `/public/`.
 
 - Stage 4.0 time budget:
   ```text
@@ -63,13 +64,11 @@ For operational AI rules: .aiassistant/rules/
   ```
 
 - Stage 4.0 has reached the mandatory 30-hour scope-review checkpoint.
-- Before expanding further Stage 4 work, make and record an explicit scope decision.
-- Current recommended rescope, pending explicit Stevan confirmation:
-   - committed: Stage 4.2 thesis page v1, validation, and close-out;
-   - conditional: bounded Stage 4.3 CV v1 if time/energy remains;
-   - optional triage only: withheld-review rights/status;
-   - defer unless separately re-scoped: full design foundation, light/dark mode, review reading aid, and
-     publications/reviews refinements.
+- Decision reached on stage 4.0 rescope:
+   - bounded Stage 4.3 CV v1;
+   - bounded triage;
+   - defer full design foundation, light/dark mode, review reading aid, and
+     publications / reviews refinements.
 
 - Project-memory maintenance should not consume more than roughly 10–15% of Stage 4.0 work from here onward.
 
@@ -77,9 +76,9 @@ For operational AI rules: .aiassistant/rules/
 
 - Framework: Astro. Framework should be set for the foreseeable future. Significant design work remains to be done.
 - `package.json`:
-   - `astro: ^6.3.1`
-   - `@astrojs/sitemap: ^3.7.2`
-   - `@astrojs/mdx: ^5.0.6`
+   - `astro: ^7.0.3`
+   - `@astrojs/sitemap: ^3.7.3`
+   - `@astrojs/mdx: ^7.0.0`
    - `@astrojs/check: ^0.9.9`
    - `typescript: ^6.0.3`
    - Node engine: `>=22.12.0`
@@ -93,6 +92,9 @@ For operational AI rules: .aiassistant/rules/
    - `src/pages/publications/index.astro` → `/publications/`
    - `src/pages/publications/reviews/[slug]/index.astro` → `/publications/reviews/<slug>/`
    - `src/pages/pronunciation/index.astro` → `/pronunciation/`
+   - `src/pages/research/index.astro` → `/research/`
+   - `src/pages/research/doctoral-thesis/religious-atavism-climate-crisis/index.astro` →
+     `/research/doctoral-thesis/religious-atavism-climate-crisis/`
 - Review pages are content-collection driven from `src/content/reviews/*.md`.
 - Current review route generates only non-draft reviews. Draft review pages are not generated locally unless temporarily
   made non-draft.
@@ -122,20 +124,18 @@ For operational AI rules: .aiassistant/rules/
    - `src/lib/schema/person.ts`
    - `src/lib/schema/review.ts`
 
-- Stage 4.2 thesis page working-tree implementation currently involves:
+- Stage 4.2 thesis page working-tree implementation involves:
    - `src/pages/research/doctoral-thesis/religious-atavism-climate-crisis/index.astro`
    - `src/data/thesis.ts`
    - `src/data/schema/thesis/createThesisSchema`
    - `src/data/pageMeta.ts`
    - `src/styles/global.css`
-   - `/research/` thesis link, currently present in the working tree; confirm generated and live state before release
-   - `/publications/` thesis entry check
-- `src/data/thesis.ts` and `createThesisSchema(thesis, meta)` exist and are used in the working tree, but rendered
-  thesis JSON-LD remains unvalidated.
-- Thesis page structure now includes or is intended to include: thesis header and metadata block; resource actions;
-  “About the thesis”; abstract; citation; resources; identifiers / technical identifiers; supervision and
-  examination; thesis JSON-LD.
-- Thesis-specific visual polish is considered tolerable and shippable after light polish, not final design.
+   - `/research/` thesis link, currently live
+   - `/publications/` thesis entry
+- `src/data/thesis.ts` and `createThesisSchema(thesis, meta)` generated validated JSON-LD
+- Thesis page structure now includes: thesis header and metadata block; resource actions;
+  “About the thesis”; abstract; citation; resources; identifiers / technical identifiers; supervision and examination;
+  thesis JSON-LD.
 
 - Stage 4.1b research hub v1 is implemented/live and involved:
    - `src/pages/research/`
@@ -148,7 +148,7 @@ For operational AI rules: .aiassistant/rules/
 ## 3. Content model, schema, and metadata
 
 - Content config: `src/content.config.ts`
-- Astro 6 loader pattern is current:
+- Astro 7 loader pattern is current:
   ```ts
   import { defineCollection } from "astro:content";
   import { glob } from "astro/loaders";
@@ -157,13 +157,12 @@ For operational AI rules: .aiassistant/rules/
 
 - Thesis page schema:
    - use `createThesisSchema(thesis, meta)`;
-   - `WebPage.mainEntity` should point to the DOI thesis node;
-   - thesis `@id` should be the DOI URL;
+   - `WebPage.mainEntity` points to the DOI thesis node;
+   - thesis `@id` is the DOI URL;
    - `Person.@id` remains ORCID;
    - do not emit `@id` arrays;
    - use date-only values;
-   - include `isAccessibleForFree: true` if the PDF/resource is freely available and verified;
-   - validate rendered page-source JSON-LD.
+   - includes `isAccessibleForFree: true` as the PDF/resource is freely available and verified.
 
 - Collections:
    - `reviews`
@@ -401,6 +400,8 @@ For operational AI rules: .aiassistant/rules/
    - Hell: In Search of a Christian Ecology
    - The Evolution of Religions
    - The Godless Crusade
+   - Challenging Modernity
+   - The Christian Right in Europe
 - Slug policy:
    - Do not rename existing slugs unless there is a real error.
    - Existing slugs:
@@ -419,25 +420,19 @@ For operational AI rules: .aiassistant/rules/
   sensitive-looking paths return `200`, and keep `dist/`, `public/`, and the public repo free of secrets or
   rights-sensitive unintended assets.
 
-- **T&F rights caution:** no Taylor & Francis Version-of-Record page should go live until T&F / CCC confirms permission.
-  Current code has `challenging-modernity` withheld; keep it absent from routes, sitemap, and public assets unless that
-  decision changes.
-- `godless-crusade` AM is acceptable in principle under T&F author-reuse policy, but still needs final verification for:
-   - exact visible AM wording
-   - Goodhart correction note
-   - text/version accuracy
-   - schema
-   - sitemap
-   - absence of VoR PDF / text
+- Taylor & Francis reviews use AM HTML versions and no PDFs, following reviews of rights basis.
+- OUP review uses HTML reproduction of the VoR but does not post a VoR PDF, following review of rights basis.
+- In future AM PDFs for both Taylor & Francis and OUP reviews should be considered.
+- Detailed rights assets and materials kept in `~/Projects/website-admin/rights/`.
+
 - Current canonical contact email in code is `stevan@stevanveljkovic.com`.
   Homepage and review intro use `site.email`; `bylineHtml` is deprecated; manuscript-specific bylines are historical and
   may contain now-defunct `stevan.veljkovic@theology.ox.ac.uk` address.
-- Remaining headshot metadata cleanup:
+- Headshot metadata:
    - `site.image` and the public file now use `/images/headshot-1200x630.jpg`;
    - home/CV JSON-LD schema still needs checking for stale `.png` references.
 - Latest selected public tree confirms review PDFs for Cosmic and Hell only.
-  Godless currently has no local PDF; drafted / withheld Christian Right and Challenging Modernity PDF / image assets
-  are not in `public/`.
+  Godless currently has no local PDF.
 - `hell-christian-ecology` unresolved checks:
    - whether version should be `Reproduction of the Version of Record`
    - whether first-published note should display
@@ -475,23 +470,11 @@ For operational AI rules: .aiassistant/rules/
 
 ## 8. Immediate next steps
 
-See NEXT-STEPS.md; immediate focus is Stage 4.2 thesis release validation and the 30-hour scope decision
+See NEXT-STEPS.md; immediate focus is Stage 4.3 creation of proper web CV page.
 
-## 9. Material brought in from other memory docs 2026-06-18
-
-- **Use the thesis data/schema working-tree implementation, pending rendered validation.**  
-  **Current state:** `src/data/thesis.ts` and `createThesisSchema(thesis, meta)` exist and are used in the working
-  tree.  
-  **Still required:** validate rendered page-source JSON-LD before release.  
-  **Status:** Working-tree implementation present; validation pending.
-
-## 10. Do not lose
+## 9. Do not lose
 
 - For stable metadata values, identifiers, title rules, node IDs, review-specific metadata, thesis metadata, asset
   rules, sitemap rules, and superseded values, use `docs/metadata/master-values.md`.
 - For durable architectural/schema/design/deployment decisions, use `DECISIONS.md`.
 - For runnable release work, use `NEXT-STEPS.md`.
-- Critical current thesis facts: route `/research/doctoral-thesis/religious-atavism-climate-crisis/`; DOI
-  `https://doi.org/10.5287/ora-4rjoobkvk`; formal title
-  `Religious atavism and the climate crisis, with reference to Taylor and Rorty on liberalism`; build/live state
-  unconfirmed.

@@ -30,7 +30,7 @@ const rightsSchema = z.object({
     license: z.object({
         name: z.string(),
         fullName: z.string().optional(),
-        url: z.url(),
+        url: z.url().optional(),
         scope: z.enum(["work", "local"]).default("work"),
     }).optional(),
 

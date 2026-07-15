@@ -27,7 +27,8 @@ for audit but are not automatically authoritative.
 
 Priority when sources conflict:
 
-1. Current source code and rendered build output.
+1. Current source code and freshly rendered build output; freshly verified live
+   output controls deployment-state claims.
 2. `docs/project-memory/current.md`.
 3. `docs/project-memory/NEXT-STEPS.md`.
 4. `docs/project-memory/DECISIONS.md`.
@@ -39,3 +40,8 @@ Priority when sources conflict:
 
 If `.aiassistant/rules/*.md` conflicts with the sources above, update the rule
 rather than preserving stale operational guidance.
+
+Treat branch positions, commit hashes, build results, route counts, and live
+deployment status as time-sensitive snapshots. Verify them before relying on or
+rewriting them, and state what was actually checked. Do not infer live state
+from local `dist/` or Git refs alone.

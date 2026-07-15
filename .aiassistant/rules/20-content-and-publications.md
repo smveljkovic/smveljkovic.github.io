@@ -18,8 +18,14 @@ src/content/publication-items/
 
 `/publications/` derives bibliography entries from review records where
 `publicationList.include !== false`, including drafted reviews. It adds local
-webpage/PDF links only for non-draft reviews. It also includes non-draft
-`publicationItems` whose IDs are not already represented by reviews.
+webpage links only for non-draft reviews with a configured canonical path, and
+PDF links only when `publicationList.pdfPath` is configured. It also includes
+non-draft `publicationItems` whose IDs are not already represented by reviews.
+Do not invent a local page or PDF resource to fill an absent link.
+
+`rights.license.url` is optional when permission rests on private
+correspondence rather than a public licence. Record the rights basis without
+inventing a URL.
 
 Duplicate/list-only review records are currently drafted except the thesis item
 to avoid duplicate publication-list/schema entries.
@@ -34,9 +40,8 @@ hell-christian-ecology.md
 religious-atavism-climate-crisis.md
 ```
 
-The thesis page exists, is linked in the working tree, and appears in existing `dist/` output at
-`/research/doctoral-thesis/religious-atavism-climate-crisis/`. Confirm fresh build/generated output and live production
-state before release.
+The thesis page is live at
+`/research/doctoral-thesis/religious-atavism-climate-crisis/`.
 
 For thesis page v1, use the Oxford University Research Archive / DOI metadata version of the abstract as the source. Do
 not describe the abstract as transcribed from the PDF unless the PDF text is used and checked directly.
@@ -103,3 +108,14 @@ Review-specific rules:
   of Record; verify AM wording, Goodhart correction note, assets, and schema.
 - `challenging-modernity`: rights issue resolved; local page is live/generated; local version is Accepted Manuscript,
   not Version of Record.
+- `progress-and-regression`: keep the formal published title `Progress and
+  Regression by Rahel Jaeggi (review)` in metadata and the literary heading
+  `“A path back” to the future` in the manuscript/body. The reviewed edition is
+  ISBN `9780674298019`, by Rahel Jaeggi and translated by Robert Savage. Do not
+  attach e-book/JSTOR DOIs that identify other manifestations. The local page
+  remains drafted; any eventual page or PDF may use only the permitted Accepted
+  Author Manuscript/final manuscript, not the Version of Record or publisher
+  PDF. Use this required credit: “Copyright © 2026 Johns Hopkins University
+  Press. This article first appeared in Theory & Event, Volume 29, Number 3,
+  July 2026. Published with permission by Johns Hopkins University Press.” Do
+  not invent a public licence URL.

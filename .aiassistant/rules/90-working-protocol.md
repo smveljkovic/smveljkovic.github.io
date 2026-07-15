@@ -34,13 +34,17 @@ find dist -maxdepth 5 -type f | sort
 find dist -name "sitemap*.xml" -print -exec cat {} \;
 ```
 
-Current local/generated pages at the start of Stage 4.3 are `/`, `/cv/`, `/publications/`, `/pronunciation/`,
-`/research/`, six review routes, and `/research/doctoral-thesis/religious-atavism-climate-crisis/`: 12 generated HTML
-pages in existing `dist/`. After fresh builds, verify route count, sitemap, and live production state rather than
-relying on memory.
+The current generated route baseline is `/`, `/cv/`, `/publications/`,
+`/pronunciation/`, `/research/`, six review routes, and
+`/research/doctoral-thesis/religious-atavism-climate-crisis/`: 12 HTML pages.
+After fresh builds, verify route count and sitemap rather than relying on this
+baseline. Verify production separately when deployment state matters.
 
 Drafted reviews may still appear bibliographically on `/publications/`; verify route and sitemap state from the current
 build.
+
+Do not commit, push, merge, or deploy unless the user explicitly requests the
+corresponding repository or deployment action.
 
 Validate rendered JSON-LD with:
 

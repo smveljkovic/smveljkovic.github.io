@@ -42,6 +42,11 @@ as authoritative when they conflict with older notes.
   reviewedWork/itemReviewed data for book-review items as a bounded remediation for Google structured-data complaints.
   Broader license modelling and external WebPage expansion remain deferred.
 
+- **Optional review metadata and resources:** `publishedReview.inLanguage` may override `site.language`; records without
+  an override retain the site-language fallback. `rights.license.url` is optional when permission is
+  correspondence-based, and publications-page webpage resources are optional. Do not invent a public licence URL or a
+  local page link.
+
 - **Bibliography style:** Preserve grouped bibliography style, year grouping, `BibEntry`, `counter_bib`,
   `test#writings`, note lines, and citation formatting where possible.
 
@@ -122,11 +127,24 @@ as authoritative when they conflict with older notes.
 - **Challenging Modernity:** Rights issue resolved; local page is live. Treat the local version as an Accepted
   Manuscript, not a Version of Record reproduction.
 
+- **Progress and Regression:** Use slug `progress-and-regression`. The formal published title is
+  `Progress and Regression by Rahel Jaeggi (review)`; keep `“A path back” to the future` as the manuscript/body heading
+  only. Model the reviewed edition as Rahel Jaeggi’s book translated by Robert Savage, ISBN `9780674298019`, with the
+  Harvard University Press catalogue URL `https://www.hup.harvard.edu/books/9780674298019` as its primary URL. Do not
+  attach the e-book or JSTOR DOIs to that reviewed-edition node because they identify alternate electronic
+  manifestations.  
+  The eventual local page may publish only the permitted Accepted Author Manuscript/final manuscript, not the Version
+  of Record or publisher PDF. Credit Johns Hopkins University Press using this required permission statement:
+  “Copyright © 2026 Johns Hopkins University Press. This article first appeared in Theory & Event, Volume 29, Number 3,
+  July 2026. Published with permission by Johns Hopkins University Press.” Do not invent a licence URL. Any future PDF
+  should be a locally hosted permitted AAM, not the Project MUSE verification URL or the questionable ORA-hosted file.
+
 ## 5. Assets, URLs, and Deployment
 
 - **Stage 4 workflow and deployment:** Use `stage-4-0` as the Stage 4 integration branch and `main` as production.
   Netlify deploys from `origin/main` with `npm run build` and publishes `dist`. Merge only coherent public release
-  units.
+  units. Repository-aware agents may inspect, edit, validate, and report, but must not commit, push, merge, or deploy
+  unless explicitly instructed.
 
 - **Canonical host and DNS:** Keep `https://stevanveljkovic.com/` as canonical despite Netlify’s `www` recommendation.
   Keep DNS hosted at Hover for now; current apex A record is `75.2.60.5`. Revisit DNS only if performance evidence
@@ -160,6 +178,9 @@ as authoritative when they conflict with older notes.
   **Decision:** The local thesis PDF may be made available under CC BY 4.0, using a stable public path/filename.  
   **Caution:** Verify the file and generated/live link before release.  
   **Status:** Permitted; working-tree implementation present; generated/live link verification pending.
+
+- **New JPEG asset extensions:** Prefer `.jpg` for new JPEG assets. Preserve appropriate existing PNG files and do not
+  perform a global format conversion.
 
 ## 6. Design, Accessibility, and Content-Rendering Decisions
 

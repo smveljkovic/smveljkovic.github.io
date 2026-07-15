@@ -22,6 +22,11 @@ If a lower-priority file contains useful information that conflicts with a
 higher-priority source, preserve it as uncertain/staged information rather than
 treating it as automatically current.
 
+Branch positions, commit hashes, build results, route counts, and deployment
+status are snapshots. Recheck them before using them to update memory. Local
+source, Git refs, generated `dist/`, pushed remote state, and live production
+are distinct facts; verification of one does not establish the others.
+
 ## Current Operational Files
 
 ### `current.md`
@@ -42,7 +47,8 @@ The active operational checklist. Its main purpose is to contain current work, a
 
 Chronological change notes after a current-memory baseline. Deltas are useful
 for tracing why a decision was made, but they may be superseded by `current.md`
-or `DECISIONS.md`.
+or `DECISIONS.md`. A delta should describe the state verified during that work,
+not act as a permanently current status file.
 
 ## Project Rules
 
@@ -66,6 +72,9 @@ Current rule files cover:
 ```
 
 `.aiassistant/rules/` should mark historical material explicitly rather than carrying it as active guidance.
+Avoid commit hashes and short-lived release status in rules unless they are
+essential to safe operation; keep that state in `current.md` and
+`NEXT-STEPS.md` instead.
 
 ## Metadata Registry
 
@@ -131,8 +140,13 @@ current code, `current.md`, `DECISIONS.md`, and `NEXT-STEPS.md`.
   staging/audit sections.
 - Move stale generated summaries and large historical files into `archive/`
   rather than letting them compete with current memory.
+- When closing a work unit, reconcile `current.md`, `DECISIONS.md`, and
+  `NEXT-STEPS.md`; add a delta for history; then update `.aiassistant/rules/`
+  only for durable operational changes.
+- Label unverified deployment or repository status explicitly. Do not convert
+  “generated locally,” “pushed,” “merged,” and “verified live” into synonyms.
 
-## Operational control
+## Operational Control
 
-- TODO items and project structure are managed in org-mode sub-trees as part of a GTD organisation system
-- `~/org/smvsite.org`
+TODO items and project structure are managed in org-mode subtrees as part of the
+GTD system in `~/org/smvsite.org`.

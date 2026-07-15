@@ -16,26 +16,31 @@ For operational AI rules: .aiassistant/rules/
 - Separate seminars site: `https://seminars.stevanveljkovic.com/`
 - Current local root: `/Users/stevan/Projects/smvsite-astro`
 - Current working branch for Stage 4.0: `stage-4-0`
+- `stage-4-0`, `main`, `origin/stage-4-0`, and `origin/main` are aligned at
+  `c1d52ac` (`Merge stage-4-0: update publications and review metadata`).
 - Production branch: `main` (`origin/main` deploys to Netlify)
 - Git remote `origin`: `https://github.com/smveljkovic/smveljkovic.github.io.git`
-- Current phase: Stage 4.3: creating a proper web CV page.
-- Stage 4.2 thesis page is implemented in the working tree at:
+- Current phase: verify the Netlify deployment and live output for the merged
+  `progress-and-regression` publications update, then resume bounded Stage 4.3 web-CV work.
+- Stage 4.2 thesis page is implemented and live at:
   `/research/doctoral-thesis/religious-atavism-climate-crisis/`
-- No merge to `main` or Netlify production deployment has been confirmed.
+- The thesis and all six existing non-draft review pages are live.
+- The `progress-and-regression` bibliography update has been merged to `main`
+  and the local remote-tracking refs show it on `origin/main`. Netlify deployment
+  and live verification of this update have not been confirmed.
 - Site is live at `https://stevanveljkovic.com/`.
 - Stage 4.1b research hub v1 is complete/live:
    - `/research/` exists as a compact research/signposting hub.
    - `Research → /research/` is live in primary navigation.
-   - The generated sitemap/route set now includes `/research/`.
+   - The generated sitemap/route set includes `/research/`.
    - `main` contains the Stage 4.1b release and is deployed on Netlify.
-   - `stage-4-0` has been updated from `main` and left clean.
 
 - Production deploys from `origin/main` to Netlify using `npm run build` and `dist`; Node should be `22.12.0` or `22`.
 - Apex domain is canonical. `www` redirects permanently to the apex domain.
 - DNS remains at Hover. The seminars subdomain remains separate and hosted through GitHub Pages.
 - GitHub Pages deployment for the Astro site is retired.
 
-- Current local/generated route set at start of Stage 4.3 work: static Astro site, 12 pages:
+- Current local/generated route set for the merged update: static Astro site, 12 pages:
    - `/`
    - `/cv/`
    - `/publications/`
@@ -48,12 +53,11 @@ For operational AI rules: .aiassistant/rules/
    - `/publications/reviews/challenging-modernity/`
    - `/publications/reviews/christian-right-europe/`
    - `/research/doctoral-thesis/religious-atavism-climate-crisis/`
-- Existing `dist/` output contains 12 generated HTML pages, including the thesis page at the settled `doctoral-thesis`
-  route; fresh build and live production state remain to be confirmed.
+- `npx astro check` and `npm run build` passed for the `progress-and-regression` update, with 12 generated pages.
+  The drafted review adds no route or sitemap entry.
 
 - `challenging-modernity` and `christian-right-europe` rights issues have been resolved and their pages made live.
-   - Lingering references in project memory to unresolved rights issues must be updated.
-- review image / material folders have been moved out of `~/Projects/website-admin/withheld-images-folders/` and into
+- Review image / material folders have been moved out of `~/Projects/website-admin/withheld-images-folders/` and into
   `/public/`.
 
 - Stage 4.0 time budget:
@@ -102,7 +106,7 @@ For operational AI rules: .aiassistant/rules/
 - `/publications/` derives:
    - review bibliography entries from `getCollection("reviews", ({ data }) => data.publicationList.include !== false)`,
      including drafted reviews;
-   - local webpage / PDF links only for non-draft reviews;
+   - configured local webpage / PDF links only for non-draft reviews, with the webpage resource optional;
    - list-only items from non-draft `publicationItems` whose IDs are not already represented by reviews.
 - `publication-items` includes duplicate / list-only review records, currently drafted except the thesis item, to avoid
   duplicate publication-list / schema entries.
@@ -124,16 +128,16 @@ For operational AI rules: .aiassistant/rules/
    - `src/lib/schema/person.ts`
    - `src/lib/schema/review.ts`
 
-- Stage 4.2 thesis page working-tree implementation involves:
+- Stage 4.2 thesis page implementation involves:
    - `src/pages/research/doctoral-thesis/religious-atavism-climate-crisis/index.astro`
    - `src/data/thesis.ts`
    - `src/data/schema/thesis/createThesisSchema`
    - `src/data/pageMeta.ts`
    - `src/styles/global.css`
-   - `/research/` thesis link, currently live
+   - `/research/` thesis link
    - `/publications/` thesis entry
-- `src/data/thesis.ts` and `createThesisSchema(thesis, meta)` generated validated JSON-LD
-- Thesis page structure now includes: thesis header and metadata block; resource actions;
+- `src/data/thesis.ts` and `createThesisSchema(thesis, meta)` generate validated JSON-LD.
+- Thesis page structure includes: thesis header and metadata block; resource actions;
   “About the thesis”; abstract; citation; resources; identifiers / technical identifiers; supervision and examination;
   thesis JSON-LD.
 
@@ -143,7 +147,7 @@ For operational AI rules: .aiassistant/rules/
    - `src/data/pageMeta.ts`
    - `src/pages/index.astro`
    - `src/styles/global.css`
-- `Research → /research/` is now live in primary navigation because `/research/` exists.
+- `Research → /research/` is live in primary navigation because `/research/` exists.
 
 ## 3. Content model, schema, and metadata
 
@@ -174,6 +178,7 @@ For operational AI rules: .aiassistant/rules/
    - `src/content/reviews/evolution-of-religions.md`
    - `src/content/reviews/godless-crusade.md`
    - `src/content/reviews/hell-christian-ecology.md`
+   - `src/content/reviews/progress-and-regression.md`
 - Current publication-item files:
    - `src/content/publication-items/challenging-modernity.md`
    - `src/content/publication-items/evolution-of-religions.md`
@@ -186,7 +191,11 @@ For operational AI rules: .aiassistant/rules/
     mainEntity → ItemList
       itemListElement → ListItem[]
   ```
-- Expected `/publications/` count from current live reviews plus thesis: 7.
+- Expected `/publications/` count on the current working branch: 8.
+- `progress-and-regression` is drafted but included in the bibliography:
+   - no local review route or sitemap entry is generated;
+   - no local webpage or PDF resource pill is displayed;
+   - its published-review DOI node emits `inLanguage: "en"`.
 - Current review metadata supports, among other fields:
    - `reviewedWork`
    - `publishedReview`
@@ -197,6 +206,9 @@ For operational AI rules: .aiassistant/rules/
    - `modificationNote`
    - `publicationList`
    - `localSchemaTypes`
+- `publishedReview.inLanguage` is optional and falls back to `site.language`.
+- `rights.license.url` is optional for rights based on private correspondence rather than a public licence.
+- The publications-page `webpage` resource is optional; do not invent a local page link.
 
 - Journal review model:
   ```text
@@ -287,7 +299,7 @@ For operational AI rules: .aiassistant/rules/
   ```
 - Repetitive review dek was removed / suppressed. Review h1s are editorial, not mechanically generated.
 - Review intro h1 currently uses `font-weight: 700`; the intro rule is commented out / not displayed.
-- `/publications/` has subtle small-caps resource pills for live review resources:
+- `/publications/` has subtle small-caps resource pills for available review resources:
    - current labels in code: `webpage`, `pdf`
 - Avoid typography / layout rabbit holes. If stable and not misleading, ship; deeper layout rethink
   belongs to Stage 4.
@@ -316,10 +328,12 @@ For operational AI rules: .aiassistant/rules/
    - `public/publications/reviews/cosmic-connections/veljkovic-review-cosmic-connections.pdf`
    - `public/publications/reviews/hell-christian-ecology/veljkovic-review-hell-christian-ecology.pdf`
    - `public/research/doctoral-thesis/religious-atavism-climate-crisis/veljkovic-dphil-thesis.pdf`
-- Important missing / unchecked asset issue:
-   - latest selected public tree does **not** show PDFs for `christian-right-europe`, `godless-crusade`, or
-     `challenging-modernity`.
-   - verify content references before making any withheld / draft review live.
+- New review assets are under:
+  ```text
+  public/images/publications/reviews/progress-and-regression/
+  ```
+- Local PDF availability varies by review and should follow the settled rights basis. Do not infer that a missing PDF
+  is an error or invent a resource link.
 - Preferred future PDF convention:
   ```text
   public/publications/reviews/<slug>/veljkovic-review-<slug>.pdf
@@ -412,6 +426,7 @@ For operational AI rules: .aiassistant/rules/
      challenging-modernity
      evolution-of-religions
      godless-crusade
+     progress-and-regression
      ```
 
 ## 7. Known issues, cautions, and unresolved questions
@@ -424,6 +439,9 @@ For operational AI rules: .aiassistant/rules/
 - OUP review uses HTML reproduction of the VoR but does not post a VoR PDF, following review of rights basis.
 - In future AM PDFs for both Taylor & Francis and OUP reviews should be considered.
 - Detailed rights assets and materials kept in `~/Projects/website-admin/rights/`.
+- `progress-and-regression` remains drafted. Its eventual local page may use the permitted Accepted Author
+  Manuscript/final manuscript, but not the Version of Record or publisher PDF; do not invent a public licence URL or use
+  the Project MUSE verification URL as a PDF resource.
 
 - Current canonical contact email in code is `stevan@stevanveljkovic.com`.
   Homepage and review intro use `site.email`; `bylineHtml` is deprecated; manuscript-specific bylines are historical and
@@ -470,7 +488,10 @@ For operational AI rules: .aiassistant/rules/
 
 ## 8. Immediate next steps
 
-See NEXT-STEPS.md; immediate focus is Stage 4.3 creation of proper web CV page.
+Immediate focus is verifying the Netlify deployment and live output for the
+merged `progress-and-regression` publications update, then resuming bounded
+Stage 4.3 creation of the proper web CV page. Use `NEXT-STEPS.md` for the broader
+operational checklist, but its release section still needs post-merge cleanup.
 
 ## 9. Do not lose
 

@@ -34,9 +34,9 @@ hell-christian-ecology.md
 religious-atavism-climate-crisis.md
 ```
 
-The thesis page exists and is linked in the working tree at
-`/research/doctoral-thesis/religious-atavism-climate-crisis/`. Confirm build/generated output and live production state
-before release.
+The thesis page exists, is linked in the working tree, and appears in existing `dist/` output at
+`/research/doctoral-thesis/religious-atavism-climate-crisis/`. Confirm fresh build/generated output and live production
+state before release.
 
 For thesis page v1, use the Oxford University Research Archive / DOI metadata version of the abstract as the source. Do
 not describe the abstract as transcribed from the PDF unless the PDF text is used and checked directly.
@@ -96,11 +96,10 @@ Review-specific rules:
   Manuscript, distinct from the DOI article; do not use `sameAs`.
 - `christian-right-europe`: reviewed work is an edited volume; use `editor`, not
   an author string with "(ed.)"; `csaf039` is article ID, not pagination.
-   - Must be withheld unless rights are clarified (with OUP).
 - `evolution-of-religions`: model the published LSE post as `BlogPosting /
   Review`; use `Published web article` as the publication-version label; do not
   invent journal/volume/issue metadata.
 - `godless-crusade`: local version should be an Accepted Manuscript, not Version
   of Record; verify AM wording, Goodhart correction note, assets, and schema.
-- `challenging-modernity`: T&F Version-of-Record reproduction; must be withheld
-  unless rights are clarified.
+- `challenging-modernity`: rights issue resolved; local page is live/generated; local version is Accepted Manuscript,
+  not Version of Record.

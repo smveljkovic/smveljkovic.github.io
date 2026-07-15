@@ -43,6 +43,7 @@ export interface PublicationSchemaItem {
     localPath?: string;
     datePublished?: string;
     firstPublishedOnline?: string;
+    inLanguage?: string;
     publisher?: OrganizationLike;
     blog?: BlogLike;
     identifiers?: PublicationIdentifier[];
@@ -364,7 +365,7 @@ export function createPublicationsSchema(items: PublicationSchemaItem[]) {
                 item.firstPublishedOnline ??
                 item.datePublished
             ),
-            inLanguage: site.language,
+            inLanguage: item.inLanguage ?? site.language,
             identifier: publicationIdentifiers(item),
             isPartOf: publicationContainerReference(item),
             pagination: item.pagination,

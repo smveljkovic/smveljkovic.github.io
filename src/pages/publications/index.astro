@@ -36,7 +36,7 @@ const reviewPublicationItems = reviews.map((entry) => {
                 label: "webpage",
             }
             : undefined,
-        isLocalPageLive && review.publicationList.pdfPath
+        review.publicationList.pdfPath
             ? {
                 href: review.publicationList.pdfPath,
                 label: "pdf",
@@ -70,6 +70,7 @@ const reviewPublicationItems = reviews.map((entry) => {
         localPath: isLocalPageLive ? review.canonicalPath : undefined,
         datePublished: review.publishedReview?.datePublished ?? review.datePublished,
         firstPublishedOnline: review.publishedReview?.firstPublishedOnline,
+        inLanguage: review.publishedReview?.inLanguage,
         publisher: review.publishedReview?.publisher,
         blog: review.publishedReview?.blog,
         periodical: review.publishedReview?.periodical,
@@ -155,7 +156,7 @@ const publicationsGroups = Array.from(
         <h1 class="BibHeading">Publications and PhD thesis</h1>
         <div>
             <div class="countercontrol">[&#8201;<a href="/">previous page</a>&#8201;]</div>
-            <div class="control">updated June 2026</div>
+            <div class="control">updated July 2026</div>
         </div>
     </div>
 

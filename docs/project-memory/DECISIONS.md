@@ -22,7 +22,7 @@ as authoritative when they conflict with older notes.
   before release.
   **Status:** Decided; working-tree implementation present.
 
-- **Platform baseline:** Use Astro, clean trailing-slash URLs, Astro 6 loader-style content collections, and
+- **Platform baseline:** Use Astro, clean trailing-slash URLs, Astro 7 loader-style content collections, and
   Markdown-driven dynamic review routes. Do not keep static per-review pages under `src/pages`.
 
 - **Use the thesis DOI as the primary scholarly identifier / schema `@id`.**  
@@ -38,8 +38,9 @@ as authoritative when they conflict with older notes.
   `publicationList.include !== false`. Duplicate/list-only review records are drafted except the thesis item to avoid
   duplicate list/schema entries.
 
-- **Publications schema:** `/publications/` should remain `CollectionPage -> ItemList -> ListItem[]`. Richer JSON-LD,
-  such as reviewed-book nodes, license modelling, and external WebPage nodes, is deferred unless needed.
+- **Publications schema:** `/publications/` should remain `CollectionPage -> ItemList -> ListItem[]`. Add
+  reviewedWork/itemReviewed data for book-review items as a bounded remediation for Google structured-data complaints.
+  Broader license modelling and external WebPage expansion remain deferred.
 
 - **Bibliography style:** Preserve grouped bibliography style, year grouping, `BibEntry`, `counter_bib`,
   `test#writings`, note lines, and citation formatting where possible.
@@ -118,8 +119,8 @@ as authoritative when they conflict with older notes.
   journal volume 51, issue `4–5`; pagination `491–492`. Still check T&F AM wording, Goodhart correction note,
   text/version accuracy, schema, sitemap, and absence of VoR PDF/text.
 
-- **Challenging Modernity:** Keep withheld unless CCC/T&F permission is confirmed. Current local version is a Taylor &
-  Francis Version-of-Record reproduction.
+- **Challenging Modernity:** Rights issue resolved; local page is live. Treat the local version as an Accepted
+  Manuscript, not a Version of Record reproduction.
 
 ## 5. Assets, URLs, and Deployment
 
@@ -188,12 +189,10 @@ as authoritative when they conflict with older notes.
   **Principle:** Touch the broader vision, but do not try to realise all of it.  
   **Status:** Pre-30-hour planning baseline; subject to active scope-review decision.
 
-- **Stage 4.0 has reached the 30-hour scope-review checkpoint.**  
-  **Status:** Active review point.  
-  **Current recommendation:** commit to Stage 4.2 thesis page v1, validation, and close-out; make Stage 4.3 CV v1
-  conditional on time/energy; treat withheld-review work as triage only; defer full design foundation, light/dark
-  mode, review reading aid, and publications/reviews refinements unless separately re-scoped.
-  **Review needed:** Pending explicit Stevan confirmation before treating this as the official Stage 4.0 rescope.
+- **Stage 4.0 has passed the 30-hour scope-review checkpoint.**  
+  **Decision:** Continue with bounded Stage 4.3 CV v1 and bounded triage; defer full design foundation, light/dark mode,
+  review reading aid, and publications/reviews refinements unless separately re-scoped.  
+  **Status:** Decided in Stage 4.0 rescope.
 
 - **Use the ORA / DOI metadata abstract for the local thesis page.**  
   **Decision:** Use the Oxford University Research Archive / DOI metadata version of the thesis abstract as the source
@@ -209,7 +208,37 @@ as authoritative when they conflict with older notes.
   consistency is deferred to a later design pass.  
   **Status:** Decided for Stage 4.2.
 
-## 7. Deferred Decisions
+## 7. Decisions from stage 4.0 rescope
+
+- **Defer stage 4.4: creating a design foundation**
+  **Decision:** The design foundation should be the core part of stage 5.0.
+
+- **Defer stage 4.5: creating a review-page reading aid**
+  **Decision:** The reading aid should be a secondary part of stage 5.0.
+
+- **Defer stage 4.6: doing publications / reviews refinements**
+  **Decision:** Components of the stage should be combined with other free-floating tasks to define a new stage.
+
+- **Do various tasks as part of stage 4.0 rescope**
+  **Decision:** The following tasks should be dealt with in the remaining course of stage 4.0.
+   - Remove accidental macOS files
+   - Review analytics script duplication
+   - Update `hell-christian-ecology` citation
+   - Add itemReviewed data to `publications` JSON-LD
+
+- **New subtree in org file**
+  **Decision:** A newly created, single subtree in the org file holds all deferred and collected items from which to
+  define and plan stage 5.0.
+
+- **Defer various tasks collected from `NEXT-STEPS.md`**
+  **Decision:** The following tasks should not be dealt with in the remainder of stage 4.0 but are important enough to
+  be actively remembered.
+   - Fix schema / frontmatter msimatches where fields are meant to matter
+   - Clean placeholder-like sorting / date metadata
+   - Check that there are no remaining headshot file issues
+   - Adjust page descriptioins to real Google search character limits
+
+## 8. Deferred Decisions
 
 - **Large CSS/layout rewrite is deferred.**  
   **Current approach:** targeted fixes only.  

@@ -9,7 +9,7 @@ seoTitle: "Review of Progress and Regression"
 description: "Jaeggi’s effort to reframe progress discourse would have fit more comfortably in a larger book, writes Stevan Veljkovic."
 
 datePublished: "2026-06-26"
-dateCreated: "2023-08-07"
+dateCreated: "2026-03-28"
 canonicalPath: "/publications/reviews/progress-and-regression/"
 
 reviewer:

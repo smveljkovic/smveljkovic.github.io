@@ -34,6 +34,7 @@ reviewedWork:
   image: "/images/publications/reviews/progress-and-regression/reviewed-work/cover.jpg"
 
 publishedReview:
+  inLanguage: "en"
   title: "Progress and Regression by Rahel Jaeggi (review)"
   doi: "10.1353/tae.2026.a993505"
   url: "https://doi.org/10.1353/tae.2026.a993505"

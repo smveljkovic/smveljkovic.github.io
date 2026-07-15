@@ -70,6 +70,7 @@ const reviewPublicationItems = reviews.map((entry) => {
         localPath: isLocalPageLive ? review.canonicalPath : undefined,
         datePublished: review.publishedReview?.datePublished ?? review.datePublished,
         firstPublishedOnline: review.publishedReview?.firstPublishedOnline,
+        inLanguage: review.publishedReview?.inLanguage,
         publisher: review.publishedReview?.publisher,
         blog: review.publishedReview?.blog,
         periodical: review.publishedReview?.periodical,

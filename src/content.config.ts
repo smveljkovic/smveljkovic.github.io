@@ -160,6 +160,10 @@ const reviews = defineCollection({
         publishedReview: z.object({
             type: z.enum(["BlogPosting", "ScholarlyArticle"]).optional(),
             schemaTypes: z.array(z.enum(["BlogPosting", "Review", "ScholarlyArticle"])).optional(),
+            inLanguage: z.string().regex(
+                /^[A-Za-z]{2,3}(?:-[A-Za-z0-9]{2,8})*$/,
+                "Expected a BCP 47 language tag"
+            ).optional(),
 
             title: z.string(),
             shortTitle: z.string().optional(),

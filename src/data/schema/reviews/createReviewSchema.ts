@@ -462,6 +462,7 @@ export function createReviewSchema(review: ReviewData) {
                 review.publishedReview.firstPublishedOnline ??
                 review.publishedReview.datePublished
             ),
+            inLanguage: review.publishedReview.inLanguage ?? site.language,
             pagination: review.publishedReview.pagination,
             pageStart: review.publishedReview.pageStart,
             pageEnd: review.publishedReview.pageEnd,

@@ -44,7 +44,8 @@ PDFs, images, or other assets. Do not put rights-uncertain publication assets in
 Review image/material folders have been moved out of
 `~/Projects/website-admin/withheld-images-folders/` and into `public/`.
 
-Remaining cleanup: check home/CV JSON-LD for stale `/images/headshot-1200x630.png` references.
+Prefer `.jpg` for new JPEG assets. Preserve appropriate existing PNG assets;
+do not perform a global format conversion.
 
 Preferred review image convention:
 
@@ -72,9 +73,10 @@ Preferred future PDF convention is:
 public/publications/reviews/<slug>/veljkovic-review-<slug>.pdf
 ```
 
-Verify generated-page asset references during Stage 4.0 verification/cleanup. Review PDFs are currently confirmed in
-`public/` for Cosmic Connections and Hell only; do not assume PDFs exist for `christian-right-europe`,
-`godless-crusade`, or `challenging-modernity`.
+Verify generated-page asset references during Stage 4.0 verification/cleanup.
+Local PDF availability varies by review and must follow its settled rights
+basis. A missing PDF is not automatically an error; do not invent a resource
+link.
 
 - Netlify is production host;
 - builds from origin/main;
@@ -84,6 +86,9 @@ Verify generated-page asset references during Stage 4.0 verification/cleanup. Re
 - legacy URLs use forced Netlify 301! rules in `public/_redirects`;
    - keep 301! while physical compatibility files remain;
 - seminars subdomain remains on GitHub Pages.
+
+Repository-aware assistants may inspect, edit, validate, and report. Do not
+commit, push, merge, or deploy unless the user explicitly asks for that action.
 
 The site is live at `https://stevanveljkovic.com/`.
 
@@ -96,5 +101,6 @@ https://stevanveljkovic.com/sitemap-index.xml
 `https://www.stevanveljkovic.com/` should redirect permanently to the apex
 domain.
 
-Local thesis PDF hosting is permitted under CC BY 4.0 at the stable path above. Existing `dist/` includes the thesis
-route; verify fresh build and live link before release.
+Local thesis PDF hosting is permitted under CC BY 4.0 at the stable path above;
+the thesis page and resource are live. Re-verify generated and live links after
+relevant changes.

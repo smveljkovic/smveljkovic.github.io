@@ -15,9 +15,9 @@ such as `Research by Stevan Veljkovic.`
 The thesis entity should use `https://doi.org/10.5287/ora-4rjoobkvk` as its primary scholarly `@id`; ARK and ORA IDs may
 be secondary identifiers.
 
-The working-tree thesis page uses `src/data/thesis.ts` and `createThesisSchema(thesis, meta)`. The page should use
-`WebPage` with `mainEntity` pointing to the DOI thesis node. Use date-only values and validate rendered page-source
-JSON-LD before release.
+The thesis page uses `src/data/thesis.ts` and `createThesisSchema(thesis, meta)`.
+It should use `WebPage` with `mainEntity` pointing to the DOI thesis node. Use
+date-only values and validate rendered page-source JSON-LD after changes.
 
 Current thesis date handling: `datePublished: "2024-02-11"`; current implementation uses `dateCreated: "2023"`; precise
 `dateCreated: "2023-04-21"` remains an open editorial decision.
@@ -70,6 +70,15 @@ CollectionPage
 For drafted/withheld reviews on `/publications/`, do not emit nonexistent local
 page IDs such as `/publications/reviews/<slug>/#review`. Prefer DOI/publisher
 IDs where available, otherwise stable `/publications/` fragment IDs.
+
+`publishedReview.inLanguage` is an optional BCP 47 override. Published-review
+nodes use it when present and otherwise fall back to `site.language`; local
+site/page entities continue to use `site.language`. Do not change all language
+tags merely to match one publication.
+
+If a published review's `isPartOf` points to an internal `PublicationIssue`
+fragment, emit a node with the exact same `@id`; never leave a dangling graph
+reference.
 
 Review schema should distinguish:
 

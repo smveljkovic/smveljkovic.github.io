@@ -35,8 +35,6 @@ review.rights?.copyrightHolder?.name
     ? `© ${review.rights.copyrightYear} ${preventFinalWordWidow(review.rights.copyrightHolder.name)}.`
     : null;
 
-const shouldGroupReuseWithRights = Boolean(review.rights?.license) || review.version === "Reproduction of the Version of Record";
-
 const isInlineModificationNote = Boolean(
     review.modificationNote?.startsWith(" ")
 );
@@ -46,7 +44,7 @@ const standaloneModificationNote = review.modificationNote && !isInlineModificat
     : null;
 
 const groupedReuseAndRightsHtml = [
-    shouldGroupReuseWithRights ? review.reuseNoteHtml : null,
+    review.reuseNoteHtml,
     isInlineModificationNote ? review.modificationNote : null,
     !standaloneModificationNote ? copyrightNotice : null,
 ].filter(Boolean).join(" ");
@@ -97,10 +95,6 @@ const firstPublishedNoteLabel =
                 <p class="intro intro_citation-note">
                     {firstPublishedNoteLabel} {formattedFirstPublishedOnline}.
                 </p>
-        )}
-
-        {review.reuseNoteHtml && !shouldGroupReuseWithRights && (
-                <p class="intro" set:html={review.reuseNoteHtml}/>
         )}
 
         {groupedReuseAndRightsHtml && (

@@ -43,11 +43,10 @@ cosmic-connections.md
 evolution-of-religions.md
 godless-crusade.md
 hell-christian-ecology.md
+progress-and-regression.md
 ```
 
-Current confirmed production/generated output before Stage 4.2 thesis release has 9 pages:
-
-Current local/generated output at the start of Stage 4.3 has 12 pages:
+The current generated route baseline has 12 pages:
 
 ```text
 /
@@ -64,9 +63,12 @@ Current local/generated output at the start of Stage 4.3 has 12 pages:
 /research/doctoral-thesis/religious-atavism-climate-crisis/
 ```
 
-Existing dist/ includes the thesis page and six review pages. Fresh build output, sitemap, and live production state
-still need verification before release/deployment close-out. challenging-modernity and christian-right-europe rights
-issues have been resolved and their pages are generated locally.
+The thesis page and six non-draft review pages are live. `progress-and-regression`
+is drafted: it may appear in the publications bibliography, but it must not
+generate a local route or sitemap entry until the local page is ready.
+
+Treat route counts as a verified baseline, not an invariant. After routing or
+draft-status changes, inspect fresh build output and the sitemap.
 
 Dynamic review routes should query only non-draft reviews:
 

@@ -59,5 +59,9 @@ Homepage and review intro should use `site.email`.
 - Individual review `bylineHtml` once contained manuscript-specific byline addresses;
   - This is now deprecated.
 
-Do not include the rejected / conflated OpenAlex profile in `sameAs`.
-- There is true OpenAlex profile: https://openalex.org/authors/A5115945824
+Do not include the rejected/conflated OpenAlex profile
+`https://openalex.org/A5056034517` in `sameAs`. The current OpenAlex profile is:
+
+```text
+https://openalex.org/authors/A5115945824
+```
